@@ -1,0 +1,45 @@
+<div class="row product-list">
+
+   <!--<div class="col-md-2 product-card">-->
+      <!--<div class="add-new">-->
+         <!--<div class="content">-->
+            <!--<div class="icon">-->
+               <!--<img ng-src="assets/img/theme/icon/other/plant.png">-->
+
+            <!--</div>-->
+            <!--<div class="new-product" ng-click="vm.addNewProduct()">Add New Product</div>-->
+         <!--</div>-->
+      <!--</div>-->
+   <!--</div>-->
+
+   <div class="col-md-2 product-card no-padding" ng-click="vm.addNewProduct()">
+      <div class="product">
+         <div class="content">
+            <div class="add-image">
+               <img ng-src="assets/img/icons/add.png">
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div ng-repeat="product in vm.allProducts" class="col-md-2 product-card no-padding">
+      <div class="product">
+         <div class="content">
+            <div class="new-product" ng-bind="product.name"></div>
+            <div class="prod-image">
+               <img ng-src="{{product.image | productPicture}}">
+            </div>
+            <div class="actionContainer">
+               <div class="action">
+                  View Details
+               </div>
+               <div class="action">
+                  Delete
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+</div>

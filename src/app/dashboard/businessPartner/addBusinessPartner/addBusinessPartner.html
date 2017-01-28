@@ -1,0 +1,89 @@
+<page-header heading="New Business Partner" sub-heading="Add"></page-header>
+<page-blue-container>
+      <div class="row">
+        <div class="col-xs-12">
+                <page-blue-container  class="no-border">
+                    <form name="vm.businessPartnerForm" novalidate>
+                        <div class="col-lg-12  marginLeft15">
+                            <div class="col-lg-12 tableHeading">
+                                <label>Basic Information</label>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label>Business Partner Name</label>
+                                <input name="bpName" class="form-control" type="text" ng-disabled="vm.viewMode" ng-required="true" placeholder='Please enter business partner name' ng-model="vm.businessPartner.general.bp_Name"/>
+                                <div ng-messages='vm.businessPartnerForm.bpName.$error'
+                                     ng-if='vm.businessPartnerForm.bpName.$dirty || vm.businessPartnerForm.$submitted'>
+                                    <div class="errorValidation" ng-message="required">Business partner name is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label>Website</label>
+                                <input name="website" type="text" class="form-control"  ng-disabled="vm.viewMode" placeholder='Enter website here (optional)' ng-model="vm.businessPartner.general.bp_website"/>
+
+                                <div ng-messages='vm.businessPartnerForm.website.$error'
+                                     ng-if='vm.businessPartnerForm.website.$dirty || vm.businessPartnerForm.$submitted'>
+                                    <div class="errorValidation" ng-message="url">Invalid web address provided.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12">
+                                <label class="col-sm-12 control-label">Business Partner Type</label>
+                                <div class="col-xs-12 col-md-6" ng-repeat="type in vm.possibleBPTypes">
+                                <input type="checkbox" class="bpChecks" ng-model="vm.businessPartner.general[type.model]">
+                                <p class="form-control-static">{{type.name}}</p>
+                            </div>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label class="col-sm-12 control-label">Contract Type</label>
+                                <div class="col-xs-12 col-md-6">
+                                    <input type="checkbox" class="bpChecks" ng-model="vm.businessPartner.general.bp_onDoniContract"><p class="form-control-static">Doni Contract</p>
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Origin</label>
+                                <selectize name="pOrigin" ng-required="true" placeholder='Please enter Country' config="vm.singleConfig" ng-model="vm.businessPartner.general.bp_country"></selectize>
+                                <ng-messages for="vm.businessPartnerForm.pOrigin.$error" ng-if='vm.businessPartnerForm.pOrigin.$dirty || vm.businessPartnerForm.$submitted'>
+                                    <div ng-message="required" class="errorValidation">Business Partner Origin is required.</div>
+                                </ng-messages>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label>Address</label>
+                                <textarea class="form-control" rows="5" ng-model="vm.businessPartner.general.bp_address" ></textarea>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label>Credibility Rating</label>
+                                <rzslider
+                                        rz-slider-model="vm.businessPartner.general.bp_credibilityIndex"
+                                        rz-slider-floor="0"
+                                        rz-slider-ceil="5">
+                                </rzslider>
+                            </div>
+
+                            <div class="form-group col-xs-12">
+                                <div>
+                                    <button ng-if="!vm.editMode" type="submit" class="btn btn-default submitBtn pull-right" ng-click="vm.saveBusinessPartner()">Add New Business Partner</button>
+                                    <button ng-if="vm.editMode" type="submit" class="btn btn-default submitBtn pull-right" ng-click="vm.updateBusinessPartner()">Update Business Partner</button>
+                                    <button ng-if="!vm.editMode" class="btn btn-default pull-left" ui-sref="^">Cancel</button>
+                                    <button ng-if="vm.editMode" class="btn btn-default pull-left" ui-sref="shell.businessPartner.view({id:vm.businessPartner.general.bp_ID})">Cancel</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </page-blue-container>
+        </div>
+    </div>
+</page-blue-container>
+
+<script type="text/ng-template" id="productTagInput">
+    <div>
+        <span ng-bind-html="$highlight($getDisplayText())"></span>
+
+        <span class="pull-right">
+            <span><b>Origin: </b>{{data.origin}}</span>
+            <span ng-if="data.quality!==null">, <b>Quality: </b>{{data.quality}}</span>
+        </span>
+    </div>
+</script>
+

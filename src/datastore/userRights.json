@@ -1,0 +1,20 @@
+{
+    "userRights":[
+        {
+            "domain": "transaction",
+            "rights": ["add", "edit", "delete", "view"]
+        },
+        {
+            "domain": "products",
+            "rights": ["add", "edit", "delete", "view"]
+        },
+        {
+            "domain": "business partner",
+            "rights": ["add", "edit", "delete", "view"]
+        },
+        {
+            "domain": "dashboard",
+            "rights": ["feeds", "recent transactions", "product sales comparision charts"]
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+.marginBottom10px{
+  margin-bottom: 10px;
+}
+
+.de-tabs{
+
+  ul{
+    background: $sidebar;
+    li{
+      color: $label-text;
+      &:active{
+        background: $primary;
+      }
+      &:hover{
+        background: $my-gray;
+      }
+    }
+  }
+  .panel-body{
+    .form-control{
+      background: $my-gray;
+    }
+  }
+  .panel-heading{
+    height: 40px;
+    .panel-title{
+      font-size: 12px;
+    }
+
+  }
+}
+

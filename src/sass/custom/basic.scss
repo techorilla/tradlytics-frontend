@@ -1,0 +1,48 @@
+.ng-messages{
+  color: #cccccc;
+  font-size: 10px;
+}
+
+.cropArea {
+  background: $sidebar;
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+}
+
+.errorValidation{
+  font-size: 11px;
+  color: $primary;
+  padding-top: 1px;
+}
+
+.wizard-containers{
+  padding-right: 20px;
+  padding-left: 20px;
+  .wizard-radio{
+    padding-bottom: 10px;
+    .radio-title{
+      font-weight: $font-bold;
+    }
+    label.custom-checkbox > input:checked + span:before, label.custom-radio > input:checked + span:before {
+      color: $primary;
+    }
+
+  }
+  .wiz-labels{
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    margin-top: 0;
+  }
+  .irs-single{
+    background: $primary !important;
+  }
+  .insideForm-heading{
+    font-size: 18px;
+    font-weight: bolder;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 16px;
+  }
+}

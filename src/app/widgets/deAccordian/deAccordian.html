@@ -1,0 +1,16 @@
+<div>
+    <uib-tabset class="de-tabs">
+        <uib-tab index="$index + 1" ng-repeat="tab in tabs" active="tab.active">
+            <uib-tab-heading uib-dropdown>
+                <a uib-dropdown-toggle style="cursor:pointer" ng-click="tabClicked($event, tab, null , $index)">
+                    {{tab.title}} <i ng-if="tab.hasAccordianDropDown" class="caret"></i>
+                </a>
+                <ul class="dropdown-menu" uib-dropdown-menu ng-if="tab.hasAccordianDropDown" >
+                    <li ng-repeat="subtab in tab.children"><a ng-click="tabClicked($event, subtab, tab, $index)">{{subtab.title}}</a></li>
+                </ul>
+            </uib-tab-heading>
+            <div ui-view="subContent">
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>

@@ -1,0 +1,20 @@
+{
+    "shipmentStatus": [
+        {"value":"1","text":"Not Shipped"},
+        {"value":"2","text":"Shipped"},
+        {"value":"3","text":"At Port"},
+        {"value":"4","text":"Cleared"}
+    ],
+    "transactionStatus":[
+        {"value":"1","text":"Not Shipped"},
+        {"value":"2","text":"Shipped"},
+        {"value":"3","text":"Arrived"},
+        {"value":"4","text":"Completed"},
+        {"value":"5","text":"Washout at Par"},
+        {"value":"6","text":"Washout at X"}
+    ],
+    "commissionType":[
+        {"value":"1","text":"Fixed"},
+        {"value":"2","text":"Percentage"}
+    ]
+}

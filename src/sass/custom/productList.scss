@@ -1,0 +1,56 @@
+.product-list{
+  padding: 10px 10px 10px 10px;
+  .product-card{
+    height: auto;
+    background: $auth-panel-background;
+    margin-right: 25px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 darken($my-gray, 10);
+    margin-top: 15px;
+
+    .product{
+      .content{
+        .actionContainer{
+          position: absolute;
+          bottom: 0px;
+          width: 100%;
+          .action{
+            width: 50%;
+            text-align: center;
+            font-size: 16px;
+            border: 2px solid rgba(204, 204, 204, 0.24);
+            padding: 10px;
+            float:left;
+            cursor: pointer;
+            &:hover{
+              background: $my-gray;
+            }
+          }
+        }
+
+        .new-product{
+          text-align: center;
+          height: 50px;
+          padding: 20px;
+          font-size: 20px;
+          position: absolute;
+          width:100%;
+        }
+        .prod-image, .add-image{
+          height: 200px;
+          width: 100%;
+          img{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .add-image{
+          cursor: pointer;
+          &:hover{
+            background: $gray;
+          }
+        }
+      }
+    }
+  }
+}

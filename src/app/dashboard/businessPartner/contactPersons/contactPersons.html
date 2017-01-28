@@ -1,0 +1,204 @@
+
+    <div class="col-lg-12  marginLeft15">
+        <div class="col-lg-12 tableHeading">
+            <label>Contact Person Information</label>
+            <label class="pull-right cursor-pointer" ng-click="vm.showBpContPerson = !vm.showBpContPerson">
+                <span ng-bind="vm.businessPartner.contPers.length + ' Contact Person(s)'"></span>
+                <i  class="fa" ng-class="{'fa-chevron-circle-down':vm.showBpContPerson,'fa-chevron-circle-right':!vm.showBpContPerson}"></i>
+            </label>
+        </div>
+
+        <div ng-show="vm.showBpContPerson" class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label ng-click="vm.addContactPerson()" class="cursor-pointer pull-right" ng-if="!vm.showContactPersonForm">
+                        <i class="fa fa-plus-circle orangeFont"></i>
+                        &nbsp;&nbsp;Add New Contact Person
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <page-blue-container ng-show="vm.showContactPersonForm && vm.showBpContPerson" class="col-lg-12" >
+            <form name="vm.contactPersonForm" novalidate>
+                <div class="col-lg-12 innerHeading">
+                    <label>New Contact Person Details</label>
+                    <button type="button" ng-click="vm.subContactPerson()" class="cursor-pointer pull-right transparentButton" ng-if="vm.showContactPersonForm">
+                        &nbsp;&nbsp;
+                        <i class="fa fa-times-circle redFont"></i>
+                        &nbsp;&nbsp;Cancel
+                    </button>
+                    <button  type="submit" ng-click="vm.saveContactPerson()" class="cursor-pointer pull-right border-right-gray transparentButton" ng-if="vm.showContactPersonForm">
+                        <i class="fa fa-database blueFont"></i>
+                        &nbsp;&nbsp;Save&nbsp;&nbsp;
+                    </button>
+                    <!--<label class="pull-right">-->
+                        <!--<i class="fa fa-trash deleteTrash" ng-click="vm.subContactPerson()"></i>-->
+                        <!--<button type="submit" class="transparentButton"><i class="fa fa-save saveButton" ng-click="vm.saveContactPerson()"></i></button>-->
+                        <!--&lt;!&ndash;&nbsp;&nbsp;&ndash;&gt;-->
+                        <!--&lt;!&ndash;<i class="fa fa-pencil editPen"></i>&ndash;&gt;-->
+                    <!--</label>-->
+                </div>
+                <div class="form-group col-lg-3 col-sm-12">
+                    <input type="checkbox" class="bpChecks"
+                           ng-model="vm.businessPartner.newContactPerson.bp_Cont_IsPrimary">
+                    <p class="form-control-static"><b>Is Primary Contact</b></p>
+                </div>
+                <div class="form-group col-lg-12 col-sm-12">
+                    <label>Full Name</label>
+                    <input class="form-control" type="text" name="cpName"
+                           ng-disabled="vm.viewMode" ng-required="true"
+                           placeholder='Please enter contact person full name'
+                           ng-pattern="/^(\D)+$/"
+                           ng-model="vm.businessPartner.newContactPerson.bp_Cont_fullName"/>
+                    <div ng-messages='vm.contactPersonForm.cpName.$error'
+                         ng-if='vm.contactPersonForm.cpName.$dirty || vm.contactPersonForm.$submitted'>
+                        <div class="errorValidation" ng-message="required">Contact person full name required</div>
+                        <div class="errorValidation" ng-message="pattern">Can only contain alphabets.</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-6 col-sm-12">
+                    <label>Designation</label>
+                    <input class="form-control" type="text" name="cpRole"
+                           ng-disabled="vm.viewMode"
+                           placeholder='Please enter contact person designation'
+                           ng-model="vm.businessPartner.newContactPerson.bp_Cont_designation"/>
+                    <!--<div ng-messages='vm.contactPersonForm.cpRole.$error'-->
+                         <!--ng-if='vm.contactPersonForm.cpRole.$dirty || vm.contactPersonForm.$submitted'>-->
+                        <!--<div class="errorValidation" ng-message="required">Contact person designation required</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="form-group col-lg-6 col-sm-12">
+                    <label>Contact Person Email</label>
+                    <input class="form-control" type="text" name="cpEmail"
+                           ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
+                           ng-disabled="vm.viewMode"
+                           placeholder='Please enter contact person full name'
+                           ng-model="vm.businessPartner.newContactPerson.bp_Cont_Email"/>
+                    <div ng-messages='vm.contactPersonForm.cpEmail.$error'
+                         ng-if='vm.contactPersonForm.cpEmail.$dirty || vm.contactPersonForm.$submitted'>
+                        <div class="errorValidation" ng-message="pattern">Invalid contact Person Email</div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-6 col-sm-12">
+                    <label>Primary Contact Number</label>
+                    <input class="form-control" type="text" name="cpPc1"
+                           ng-pattern="/^([0-9\(\)\/\+ \-]*)$/"
+                           ng-disabled="vm.viewMode" ng-required="false"
+                           placeholder='Please enter contact person primary contact number'
+                           ng-model="vm.businessPartner.newContactPerson.bp_Cont_PrimaryNumber"/>
+                    <div ng-messages='vm.contactPersonForm.cpPc1.$error'
+                         ng-if='vm.contactPersonForm.cpPc1.$dirty || vm.contactPersonForm.$submitted'>
+                        <div class="errorValidation" ng-message="required">Contact person primary contact number required</div>
+                        <div class="errorValidation" ng-message="pattern">Invalid contact number</div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-6 col-sm-12">
+                    <label>Secondary Contact Number</label>
+                    <input class="form-control" type="text"  name="cpPc2"
+                           ng-pattern="/^([0-9\(\)\/\+ \-]*)$/"
+                           ng-disabled="vm.viewMode" ng-required="false"
+                           placeholder='Please enter contact number secondary contact number'
+                           ng-model="vm.businessPartner.newContactPerson.bp_Cont_SecondryNumber"/>
+                    <div ng-messages='vm.contactPersonForm.$error'
+                         ng-if='vm.contactPersonForm.cpPc2.$dirty || vm.contactPersonForm.$submitted'>
+                        <div class="errorValidation" ng-message="pattern">Invalid contact number</div>
+                    </div>
+                </div>
+           </form>
+
+        </page-blue-container>
+
+        <div class="col-lg-12" ng-show="vm.showBpContPerson && (vm.businessPartner.contPers.length > 0)" >
+            <div class="dg-tablePanelBody">
+                <table class="table table-bordered dg-table">
+                    <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Primary Contact</th>
+                        <th>Designation</th>
+                        <th>Email</th>
+                        <th>Primary Contact</th>
+                        <th>Secondary Contact</th>
+                        <th class="actions">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="contPers in vm.businessPartner.contPers">
+                        <td ng-bind="contPers.bp_Cont_fullName"></td>
+                        <td ng-bind="contPers.bp_Cont_IsPrimary ? 'Yes' : 'No'"></td>
+                        <td ng-bind="contPers.bp_Cont_designation ? contPers.bp_Cont_designation : 'Not Entered'"></td>
+                        <td ng-bind="contPers.bp_Cont_Email ? contPers.bp_Cont_Email: 'Not Entered' "></td>
+                        <td ng-bind="contPers.bp_Cont_PrimaryNumber ? contPers.bp_Cont_PrimaryNumber : 'Not Entered'"></td>
+                        <td ng-bind="contPers.bp_Cont_SecondryNumber ? contPers.bp_Cont_SecondryNumber:'Not Entered' "></td>
+                        <td>
+                            <label ng-click="vm.deleteBusinessPartnerContact(vm.businessPartner.gen[0].bp_Name, contPers.bp_Cont_fullName, contPers.bp_cont_ID, $index)" class="cursor-pointer border-right-gray">
+                                <i class="fa fa-trash-o redFont"></i>
+                                Delete&nbsp;&nbsp;
+                            </label>
+                            <label  ng-click="vm.editBusinessPartnerContact($index)" class="cursor-pointer ">&nbsp;&nbsp;Edit
+                                <i class="fa fa-edit orangeFont"></i>&nbsp;&nbsp;
+                            </label>
+                        </td>
+                    </tr>
+                    <tr ng-show="vm.addingProduct">
+                        <td>
+                            <selectize ng-disabled="false"
+                                       config="vm.productConfig"
+                                       options='vm.productList'
+                                       placeholder="Select New Product"
+                                       ng-model="vm.newProduct">
+                            </selectize>
+                        </td>
+                        <td>
+                            <label ng-click="vm.saveBpProduct(vm.newProduct)" class="cursor-pointer">
+                                <i class="fa fa-database blueFont"></i>
+                                &nbsp;&nbsp;Save&nbsp;&nbsp;
+                            </label>
+                            <label ng-click="vm.cancel()" class="cursor-pointer">
+                                <i class="fa fa-times-circle redFont"></i>
+                                &nbsp;&nbsp;Cancel
+                            </label>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <!--<div class="col-lg-12" ng-repeat="contPers in vm.businessPartner.contPers">-->
+                <!--<div class="col-lg-12 innerHeading">-->
+                    <!--<label>Contact Person {{$index + 1}}</label>-->
+                    <!--<label class="pull-right">-->
+                        <!--<i class="fa fa-trash deleteTrash" ng-click="vm.deleteBusinessPartnerContact(vm.businessPartner.gen[0].bp_Name, contPers.bp_Cont_fullName, contPers.bp_cont_ID, $index)"></i>-->
+                    <!--</label>-->
+                <!--</div>-->
+                <!--<div class="form-group col-xs-12 col-lg-4">-->
+                    <!--<label>Contact Person Full Name</label>-->
+                    <!--<p>{{contPers.bp_Cont_fullName}}</p>-->
+                <!--</div>-->
+                <!--<div class="form-group col-xs-12 col-lg-4">-->
+                    <!--<label>Primary Contact</label>-->
+                    <!--<p><span ng-if="contPers.bp_Cont_IsPrimary">Yes</span><span ng-if="!contPers.bp_Cont_IsPrimary">No</span></p>-->
+                <!--</div>-->
+                <!--<div class="form-group col-xs-12 col-lg-4">-->
+                    <!--<label>Contact Person Designation</label>-->
+                    <!--<p>{{contPers.bp_Cont_designation}}</p>-->
+                <!--</div>-->
+                <!--<div class="form-group col-xs-12 col-lg-4 ">-->
+                    <!--<label>Contact Person Email</label>-->
+                    <!--<p>{{contPers.bp_Cont_Email}}</p>-->
+                <!--</div>-->
+
+                <!--<div class="form-group col-lg-4 col-sm-12">-->
+                    <!--<label>Primary Contact Number</label>-->
+                    <!--<p>{{contPers.bp_Cont_PrimaryNumber}}</p>-->
+                <!--</div>-->
+                <!--<div class="form-group col-lg-4 col-sm-12">-->
+                    <!--<label>Secondary Contact Number</label>-->
+                <!--</div>-->
+
+        <!--</div>-->
+    </div>

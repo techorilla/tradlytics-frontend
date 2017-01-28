@@ -1,0 +1,16 @@
+{
+    "status":[
+        {
+            "id":1,
+            "name":"Complete"
+        },
+        {
+            "id":2,
+            "name": "On Hold"
+        },
+        {
+            "id":3,
+            "name": "Canceled"
+        }
+    ]
+}

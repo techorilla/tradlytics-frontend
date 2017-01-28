@@ -1,0 +1,14 @@
+{
+    "contractTypes":[
+        {
+            "id":1,
+            "name":"Doni Contract",
+            "isChecked":false
+        },
+        {
+            "id": 2,
+            "name": "Own Contract",
+            "isChecked": false
+        }
+    ]
+}

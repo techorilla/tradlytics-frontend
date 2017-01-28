@@ -1,0 +1,11 @@
+<div class="dg-pageHeader">
+    <a ng-if="rootScope.goBack" ng-click="goToBack()" class="dg-backToLink"><i class="fa fa-chevron-circle-left"></i></a>
+    <div class="dg-pageHeaderTop clearfix">
+        <h1 class="dg-pageTitle"><span class="dg-pageMiniTitle">{{rootScope.headerSubTitle}}</span>{{rootScope.headerTitle}}</h1>
+        <ul class="dg-pageExtraLinks">
+            <li ui-sref="{{button.state}}" ng-repeat="button in rootScope.headerAnchor"><a>{{button.text}}</a></li>
+        </ul>
+    </div>
+
+</div>
+

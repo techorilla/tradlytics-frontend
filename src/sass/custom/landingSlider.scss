@@ -1,0 +1,357 @@
+
+/* NEW THEME IMPLEMENTATION ENDS here */
+/* Slider 2016 */
+
+.tp-homeSlider2016 {
+  position: relative;
+  height: 693px;
+}
+
+#contentMob section .story {
+  padding: 0 !important;
+}
+
+#story-home {
+  height: 693px !important;
+}
+
+.tp-homeSlider2016{
+  position: relative;
+  height: 693px;
+}
+
+.tp-homeSlider2016 .newSlide{
+  overflow:visible;
+}
+
+.tp-homeSlider2016 .homeSliderContent{
+  float:left;
+  padding:180px 0 0 0;
+  width:320px;
+}
+
+.tp-homeSlider2016 .sliderImgShadow{
+  -webkit-box-shadow: 14px 14px 30px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:    14px 14px 30px 0px rgba(0, 0, 0, 0.5);
+  box-shadow:         14px 14px 30px 0px rgba(0, 0, 0, 0.5);
+}
+
+.tp-homeSlider2016 .homeSliderContent h1{
+  font-size:48px;
+  text-transform: uppercase;
+  margin:0 0 30px 0;
+  color:white;
+  font-family: "proxima_novalight", "Raleway", Arial;
+  line-height: 60px;
+  font-weight: normal;
+}
+.tp-homeSlider2016 .homeSliderContent p{
+  font-size:24px;
+  color:white;
+  font-family: "proxima_novalight", "Raleway", Arial;
+  line-height:43px;
+  font-weight: normal;
+}
+
+.tp-homeSlider2016 .homeSliderArtwork{
+  padding:0 0 0 380px;
+}
+
+.tp-homeSlider2016 .sliderPagination{
+  margin:0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  left:0;
+  bottom:50px;
+}
+.tp-homeSlider2016 .sliderPagination li{
+  margin:0 7px;
+  display: inline-block;
+  width:12px;
+  height:12px;
+  background:rgba(255,255,255,0.15);
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.tp-homeSlider2016 .sliderPagination li.active{
+  background:#3eb8fe;
+}
+
+.tp-homeSlider2016 .slider2016Nav{
+  position:absolute;
+  bottom:140px;
+  left:20px;
+  width:116px;
+}
+
+.tp-homeSlider2016 .slider2016Nav a{
+  display: block;
+  width:13px;
+  height:24px;
+  position: absolute;
+  left:0;
+  top:0;
+  cursor:pointer;
+  background:url(images/slider2016-arrow.png) no-repeat left center;
+}
+
+.tp-homeSlider2016 .slider2016Nav #slideNavRight{
+  right:0;
+  background-position: right center;
+  left:auto;
+}
+
+.tp-homeSlider2016 .intro .homeSliderArtwork{
+  margin-top:-173px;
+  padding-left:490px;
+  position:relative;
+  left:-50px
+}
+
+.tp-homeSlider2016 .intro .homeSliderContent{
+  width:490px;
+}
+
+.tp-homeSlider2016 .conceptMvp .homeSliderArtwork{
+  margin-top:145px;
+}
+
+.tp-homeSlider2016 .staffAcceleration .homeSliderArtwork{
+  margin-top:110px;
+  margin-left:177px;
+}
+
+.tp-homeSlider2016 .enterpriseModern .homeSliderArtwork{
+  margin-top:110px;
+  margin-left:145px;
+}
+
+.tp-homeSlider2016 .mobileAcceleration .homeSliderArtwork{
+  margin-top:50px;
+  margin-left:120px;
+}
+
+.tp-homeSlider2016 .locationExperts .homeSliderArtwork{
+
+}
+
+.tp-homeSlider2016 .analyticsReporting .homeSliderArtwork{
+  margin-top:90px;
+  margin-left:90px;
+}
+
+.tp-homeSlider2016 .marketPlace .homeSliderArtwork{
+  margin-top:63px;
+  margin-left:80px;
+}
+
+.tp-homeSlider2016 .interactiveDigital .homeSliderArtwork{
+  margin-top:63px;
+  margin-left:80px;
+}
+
+.tp-homeSlider2016 .globalPresence .homeSliderArtwork{
+  margin-top:63px;
+}
+
+@media (max-width: 991px) and (min-width:768px){
+  .tp-homeSlider2016 .intro .homeSliderContent {
+    width: 480px;
+  }
+
+  .tp-homeSlider2016 .globalPresence .homeSliderArtwork {
+    margin-left: -58px;
+  }
+  .tp-homeSlider2016 .intro .homeSliderArtwork {
+    margin-left: -58px;
+    padding-left: 540px;
+    position: relative;
+    left: -70px;
+  }
+  .tp-homeSlider2016 .intro .homeSliderArtwork {
+    margin-left: -58px;
+  }
+  .tp-homeSlider2016 .conceptMvp .homeSliderArtwork {
+    margin-left: -58px;
+  }
+  .tp-homeSlider2016 .staffAcceleration .homeSliderArtwork{
+    margin-left: -10px;
+  }
+
+  .tp-homeSlider2016 .enterpriseModern .homeSliderArtwork{
+    margin-left:10px;
+  }
+
+  .tp-homeSlider2016 .mobileAcceleration .homeSliderArtwork{
+    margin-left:-10px;
+  }
+
+  .tp-homeSlider2016 .analyticsReporting .homeSliderArtwork{
+    margin-left:-30px;
+  }
+
+  .tp-homeSlider2016 .marketPlace .homeSliderArtwork{
+    margin-left:-58px;
+  }
+
+  .tp-homeSlider2016 .interactiveDigital .homeSliderArtwork{
+    margin-left:-58px;
+  }
+
+  .tp-homeSlider2016 .locationExperts .homeSliderArtwork{
+    margin-left: -60px;
+    position: relative;
+    left: -70px;
+  }
+}
+
+@media (max-width: 767px){
+
+  .tp-homeSlider2016 .slider2016Nav {
+    bottom: 32px;
+    width: 100%;
+    z-index: 1;
+    left:0;
+  }
+
+  .tp-homeSlider2016 .slider2016Nav a{
+    background-size:26px;
+    height:28px;
+  }
+
+  #story-home {
+    height: 620px !important;
+    padding-top:0 !important;
+  }
+
+  .tp-homeSlider2016 .sliderPagination{
+    position: absolute;
+    bottom:0;
+    background:black;
+    padding:2px 5px 5px 5px;
+    text-align: center;
+    width:calc(100% + 40px);
+    margin:0 0 0 -20px;
+  }
+  .tp-homeSlider2016 .sliderPagination li{
+    margin:0 7px;
+    display: inline-block;
+    width:10px;
+    height:10px;
+  }
+
+  .tp-homeSlider2016 .homeSliderContent h1 {
+    font-size: 30px;
+    line-height: 35px;
+    margin-bottom:15px;
+  }
+
+  .tp-homeSlider2016{
+    height: 620px !important;
+  }
+
+  .tp-homeSlider2016 .homeSliderContent {
+    float: none;
+    padding: 100px 0 0;
+    width: auto;
+  }
+
+  .tp-homeSlider2016 .homeSliderContent p {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .tp-homeSlider2016 .homeSliderArtwork {
+    margin-top: 20px !important;
+    padding:0 !important;
+    width:335px;
+  }
+  .tp-homeSlider2016 .homeSliderArtwork img{
+    width:100%;
+  }
+
+  .tp-homeSlider2016 .intro .homeSliderArtwork {
+    margin-left: 53px;
+    margin-top: -349px !important;
+    width: 700px;
+    position:static;
+  }
+
+  .tp-homeSlider2016 .marketPlace .homeSliderArtwork {
+    margin-left: -20px;
+    width: 530px;
+  }
+
+  .tp-homeSlider2016 .staffAcceleration .homeSliderArtwork {
+    margin-left: 0;
+  }
+
+  .tp-homeSlider2016 .mobileAcceleration .homeSliderArtwork {
+    margin-left: 0;
+    margin-top: 33px !important;
+    width: 353px;
+  }
+
+  .tp-homeSlider2016 .conceptMvp .homeSliderArtwork {
+    margin-left: -15px;
+    margin-top: 47px !important;
+    width: 525px;
+  }
+  .tp-homeSlider2016 .analyticsReporting .homeSliderArtwork {
+    margin-left: 0;
+    margin-top: 35px !important;
+    width: 390px;
+  }
+  .tp-homeSlider2016 .locationExperts .homeSliderArtwork {
+    margin-left: -23px;
+    margin-top: -10px !important;
+    width: 440px;
+  }
+  .tp-homeSlider2016 .enterpriseModern .homeSliderArtwork {
+    margin-left: 0;
+    margin-top: 50px !important;
+  }
+  .tp-homeSlider2016 .interactiveDigital .homeSliderArtwork {
+    margin-left: -15px;
+    margin-top: 0 !important;
+    width: 365px;
+  }
+  .tp-homeSlider2016 .globalPresence .homeSliderArtwork {
+    margin-left: -10px;
+    margin-top: 70px !important;
+    width: 360px;
+  }
+
+  #mainHeader.homeNavStickey {
+    min-height: 0 !important;
+  }
+
+  #mainHeader.homeNavStickey #mainNavWrap{
+    background:white;
+  }
+
+  #mainHeader.homeNavbar #mainNavWrap{
+    position:absolute;
+    background:none;
+  }
+
+  #mainHeader.homeNavbar #mainNavWrap .navbar-header > a.pull-left img{
+    display:none;
+  }
+  #mainHeader.homeNavbar #mainNavWrap .navbar-header > a.pull-left{
+    height: 34px;
+    width: 113px;
+    display:block;
+    background:url(images/10p_logo.png) no-repeat center/100%;
+  }
+  #mainHeader.homeNavbar #mainNavWrap .navbar-header .navbar-toggle .icon-bar {
+    background-color: white;
+  }
+  #nav{
+    display:none !important;
+  }
+}
+
+/* Slider 2016 */

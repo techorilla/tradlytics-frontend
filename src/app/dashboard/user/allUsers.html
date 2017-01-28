@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-12">
+        <div ba-panel ba-panel-title="System Users<br><small>Total {{vm.allUsers.length}} System Users</small>" ba-panel-class="with-scroll">
+            <div class="horizontal-scroll">
+                <table class="table" st-table="smartTableData">
+                    <thead>
+                        <tr class="sortable table-header">
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Designation</th>
+                            <th>Last Login</th>
+                            <th>Is Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in vm.allUsers">
+                            <td><a class="email-link">{{user.userName}}</a></td>
+                            <td>{{user.firstName + ' ' + user.lastName}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.designation}}</td>
+                            <td>{{user.lastLogin | date:vm.appFormats.Time}}</td>
+                            <td>{{user.active}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{vm.action}}</h3>
+</div>
+<div class="modal-body">
+    <div>Are you sure you want to {{vm.action.toLowerCase()}} {{vm.type.toLowerCase()}} <b>{{vm.name}}</b>?</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default submitBtn" type="button" ng-click="vm.ok()">{{vm.action}}</button>
+    <button class="btn btn-default" type="button" ng-click="vm.cancel()">Cancel</button>
+</div>

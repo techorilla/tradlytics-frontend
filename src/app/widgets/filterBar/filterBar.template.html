@@ -1,0 +1,34 @@
+<!--<div class="row" ng-show="datePickerNeeded">-->
+
+    <!--&lt;!&ndash;<input date-range-picker class="form-control date-picker" type="text" ng-model="datePicker" />&ndash;&gt;-->
+<!--</div>-->
+<div class="dg-filterPanel" ng-if="buyer || seller || product || bpTypes || country || tranSatatus">
+    <div class="row">
+        <div ng-if="datePickerNeeded" class="col-sm-6 col-sm-offset-6">
+            <div class="dg-datePicker">
+                <input type="daterange"
+                       opens="left"
+                       ng-change="datePickerChanged(datePicker)"
+                       format="{{appFormats.FullDate}}"
+                       ranges="ranges"
+                       max-date="maxDate"
+                       readonly="true"
+                       separator="{{seperator}}"
+                       class="form-control date-picker  dg-filterDropdown"
+                       ng-model="datePicker" />
+            </div>
+        </div>
+        <custom-filter on-selected-values-changed="onBuyersSelectedChanged({selectedList:selectedList})"
+                       ng-if="buyer" filter-type="{{appTabFilter.BP}}" filterSubType="{{appTabFilter.BUYER}}"></custom-filter>
+        <custom-filter on-selected-values-changed="onSellersSelectedChanged({selectedList:selectedList})"
+                       ng-if="seller"  filter-type="{{appTabFilter.BP}}" filterSubType="{{appTabFilter.SELLER}}"></custom-filter>
+        <custom-filter on-selected-values-changed="onProductsSelectedChanged({selectedList:selectedList})"
+                       ng-if="product" filter-type="{{appTabFilter.PRODUCTS}}"></custom-filter>
+        <custom-filter on-selected-values-changed="onBpTypesSelectedChanged({selectedList:selectedList})"
+                       ng-if="bpTypes" filter-type="{{appTabFilter.BP_TYPES}}"></custom-filter>
+        <custom-filter on-selected-values-changed="onCountrySelectedChanged({selectedList:selectedList})"
+                       ng-if="country" filter-type="{{appTabFilter.COUNTRY}}"></custom-filter>
+        <custom-filter on-selected-values-changed="onTranStatusSelectedChanged({selectedList:selectedList})"
+                       ng-if="tranStatus" filter-type="{{appTabFilter.TRANSACTION_STATUS}}"></custom-filter>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+.selectize-control{
+  .dropdownLabel{
+    color: $sidebar-text;
+  }
+  .dropdownCaption{
+    color: $bootstrap-panel-text
+  }
+  .selectize-input{
+    background-color: $input-background;
+    color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.5);
+    &.focus {
+      background-color: $input-background !important;
+      border-bottom-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  .selectize-dropdown{
+    background-color: $sidebar;
+    border-color: rgba(0, 0, 0, 0.5);
+    .selectize-dropdown-content{
+
+      .item{
+        background-color: $input-background !important;
+        &:hover{
+          background: $primary !important;
+          .dropdownLabel{
+            font-size: 12px;
+          }
+          .dropdownCaption{
+            color:#ffffff;
+          }
+        }
+      }
+    }
+  }
+}

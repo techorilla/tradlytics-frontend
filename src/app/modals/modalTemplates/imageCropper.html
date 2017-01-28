@@ -1,0 +1,38 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel" ng-bing="title">Image Cropper</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="cropArea">
+                <img-crop image="image" area-type="rectangle"
+                          area-init-size="{ w:cropper.cropWidth,h:cropper.cropHeight}"
+                          aspect-ratio="aspectRatio"
+                          result-blob="blob"
+                          result-image="croppedImage"
+                          result-array-image="croppedImages"
+                          result-image-size='resultImageSizes'
+                          rea-min-size="{w:100, h:100}"
+                          init-max-area="true">
+
+                </img-crop>
+            </div>
+            <!--<div>-->
+                <!--<div ng-repeat="croppedObject in croppedImages">-->
+                    <!--<div>Cropped Image #{{$index + 1}} (size : {{croppedObject.w}}x{{croppedObject.h}} ) in array:</div>-->
+                    <!--<div><img ng-src="{{croppedObject.dataURI}}" /></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button type="button"
+                class="btn btn-primary"
+                ng-click="saveImage()">Done</button>
+    </div>
+</div>
