@@ -20,12 +20,35 @@
         return {
             getUserProfile: getUserProfile,
             getAllUserProfile: getAllUserProfile,
+            addUserProfile: addUserProfile,
             updateUserProfile: updateUserProfile,
             addProfilePic: addProfilePic,
             updateProfilePic: updateProfilePic,
-            deleteProfilePic: deleteProfilePic
-
+            deleteProfilePic: deleteProfilePic,
+            getNewUserObj: getNewUserObj
         };
+
+
+
+        function getNewUserObj(){
+            return {
+                'profilePic': null,
+                'username': '',
+                'firstName': '',
+                'lastName': '',
+                'email': '',
+                'designationId': null,
+                'businessLocationId': null,
+                'notify': {
+                    'newTransaction': false,
+                    'shipmentArrival': false,
+                    'messages': false,
+                    'monthlyReports': false,
+                    'weeklyReports': false,
+                    'dailyReports': false
+                }
+            }
+        }
 
         function getUserProfile(id){
             return userAPI.customGET('',{
@@ -70,6 +93,10 @@
 
         function updateUserProfile(updatedUser){
             return userAPI.customPUT({user:updatedUser}, '');
+        }
+
+        function addUserProfile(newUser){
+            return userAPI.customPOST({user:newUser})
         }
     }
 

@@ -17,27 +17,101 @@
                     }
                 },
                 resolve: {
-                    'allProducts': function(product){
+                    'allProducts': function(product, loaderModal){
+                        loaderModal.open();
                         return product.getAllProductList().then(function(success){
+                            loaderModal.close();
                             return success.allProducts;
                         })
                     }
+                },
+                pageHeader:{
+                    subTitle: 'Manage',
+                    title:'Products'
                 }
 
             })
-            .state('dashboard.products.single', {
-                url: '/:id',
-                title:'Products',
-                pageHeader:{
-                    subTitle: 'Add New',
-                    title:'Product'
-                },
+            .state('dashboard.productsCategories', {
+                url: '/categories',
+                title:'Products Categories',
                 views: {
                     'content@dashboard':{
-                        templateUrl:'app/dashboard/products/detailProduct.html',
-                        controller:'DetailProduct as vm'
+                        templateUrl:'app/dashboard/products/productCategories.html',
+                        controller: 'ProductCategories as vm'
                     }
+                },
+                resolve: {
+                    'allCategories': function(product){
+                        return product.getAllProductCategories().then(function(success){
+                            return success.allCategories;
+                        })
+                    }
+                },
+                pageHeader:{
+                    subTitle: 'Manage',
+                    title:'Product Categories'
                 }
+
+            })
+            .state('dashboard.productsItems', {
+                url: '/productItems',
+                title:'Product Items',
+                views: {
+                    'content@dashboard':{
+                        templateUrl:'app/dashboard/products/productItems.html',
+                        controller: 'ProductItems as vm'
+                    }
+                },
+                resolve: {
+                    'allProductItems': function(product){
+                        return product.getAllProductItems().then(function(res){
+                            return res.data.productItems;
+                        })
+                    }
+                },
+                pageHeader:{
+                    subTitle: 'Manage',
+                    title:'Product Items'
+                }
+
+            })
+            .state('dashboard.productPriceAnalytics', {
+                url: '/productPrice/:productItemId',
+                title:'Product Price Report',
+                views:{
+                    'content@dashboard':{
+                        templateUrl:'app/dashboard/products/priceAnalytics.html',
+                        controller: 'ProductPriceAnalytics as vm'
+                    }
+                },
+                pageHeader:{
+                    subTitle: 'Product',
+                    title:'Price Report'
+                }
+
+            })
+
+            .state('dashboard.productKeywords', {
+                url: '/productKeywords',
+                title:'Product Keywords',
+                views:{
+                    'content@dashboard':{
+                        templateUrl:'app/dashboard/products/productKeyword.html',
+                        controller: 'ProductKeyword as vm'
+                    }
+                },
+                resolve: {
+                    allKeywords: function (product, apiEndPoints, crud) {
+                        return product.getAllKeywords().then(function(res){
+                            return res.data.keywords;
+                        });
+                    }
+                },
+                pageHeader:{
+                    subTitle: 'Manage',
+                    title:'Product Keywords'
+                }
+
             });
     }
 

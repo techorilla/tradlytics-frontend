@@ -7,7 +7,7 @@ html, body {
   height: 100%; }
 
 body {
-  font: 12px/16px "Roboto", sans-serif;
+  font: 12px/16px "Montserrat", sans-serif;
   color: #ffffff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -22,7 +22,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(46, 46, 46, 0.8);
+    background: rgba(46, 46, 46, 0);
     background-size: cover;
     will-change: transform;
     z-index: -1; }
@@ -47,7 +47,7 @@ body {
     outline: none;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
-    color: #E20A16;
+    color: #684D61;
     display: inline-block; }
     .page-not-found-modal a:hover {
-      color: #c00913; }
+      color: #584152; }

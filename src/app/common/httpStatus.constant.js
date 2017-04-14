@@ -29,7 +29,8 @@
   };
 
   var appConstants = {
-
+    STATIC_URL: 'http://tramodity.com/static/',
+    HOST: 'http://tramodity.com/'
   };
 
   var httpStatus = {
@@ -131,15 +132,18 @@
   };
 
   var appFormats = {
+    ShipmentMonth: 'MMMM, yyyy',
     Date: 'MMM dd, yyyy',
     FullDate: 'MMMM D, YYYY',
     DateAsFilter: 'date:"dd-MMM-yyyy"',
-    Time: 'HH:mm:ss MMM dd, yyyy',
+    Time: 'MMM dd, yyyy hh:mm a ',
     DBDate:'yyyy-MM-dd HH:mm:ss'
   };
 
   var appTabFilter = {
     PRODUCTS: 'Products',
+    PRODUCT_ITEMS: 'Product_Items',
+    PRICE_MARKET: 'Price_Market',
     BP: 'Business_Partner',
     BUYER: 'Buyer',
     SELLER: 'Seller',
@@ -151,7 +155,7 @@
     CONTRACT_TYPES: 'Contract_Types',
     COMMISSION_TYPES: 'Commission_Types',
     USERS: 'Users',
-    BP_TYPES: 'Business_Partner_Types'
+    BP_TYPES: 'business_type'
   };
 
   var appEvents = {
@@ -170,6 +174,7 @@
       .constant('appFormats',appFormats)
       .constant('appEvents', appEvents)
       .constant('appTabFilter', appTabFilter)
-      .constant('read', read);
+      .constant('read', read)
+      .constant('appConstants', appConstants);
 
 }());

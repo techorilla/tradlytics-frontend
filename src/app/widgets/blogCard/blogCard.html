@@ -1,0 +1,49 @@
+<div class="popular-app-img-container">
+  <div class="popular-app-img">
+    <img height="360" ng-src="{{imageUrl}}"/>
+  </div>
+  <div class="userPic">
+    <img ng-src="{{( userPic | profilePicture )}}">
+    <div class="name" ng-bind="author"></div>
+  </div>
+</div>
+<div class="buttons-bar">
+  <button class="btn btn-primary editable-table-button btn-xs"
+          ng-if="canEdit"
+          ng-click="edit(researchId)">Edit</button>
+  <button class="btn display-web editable-table-button btn-xs"
+          ng-if="canDelete"
+          ng-class="{'btn-danger': !displayWeb, 'btn-success': displayWeb}"
+          ng-click="changeWebDisplay(researchId)">Display On Website</button>
+  <button class="btn btn-warning editable-table-button btn-xs"
+          ng-if="canDelete"
+          ng-click="delete(researchId)">Delete</button>
+</div>
+
+<div class="status" ng-class="{'published': !isDraft}" ng-bind="(isDraft) ? 'Draft' : 'Published'">
+</div>
+
+<div class="popular-app-cost row">
+  <div class="col-xs-9" ng-bind="title">
+  </div>
+
+</div>
+<div class="popular-app-info row">
+  <div class="col-xs-3 text-left">
+    <div class="info-label">Created On</div>
+    <div class="info-text">{{ createdOn | date:appFormats.Date}}</div>
+  </div>
+  <div class="col-xs-3 text-center">
+    <div class="info-label">Read Time</div>
+    <div class="info-text">{{reads | number : fractionSize}}</div>
+  </div>
+  <div class="col-xs-3 text-right">
+    <div class="info-label">Comment</div>
+    <div class="info-text">{{comments | number : fractionSize}}</div>
+  </div>
+  <div class="col-xs-3 text-right">
+    <div class="info-label">Visitors</div>
+    <div class="info-text">{{visitors | number : fractionSize}}</div>
+  </div>
+</div>
+

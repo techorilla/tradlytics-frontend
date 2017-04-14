@@ -1,0 +1,127 @@
+<form name="vm.contactPersonInfoForm" novalidate>
+    <div class="row">
+        <div class="col-md-6 marginBottom10px">
+            <button type="button"
+                    class="btn btn-primary" data-toggle="modal"
+                    ng-click="vm.addContactPerson(vm.business)">
+                Add Contact Person
+            </button>
+        </div>
+    </div>
+
+    <h3 class="with-line">All Contact Persons</h3>
+
+    <div ng-repeat="contPerson in vm.business.contactPersons" class="row">
+        <div class="col-sm-4">
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Full Name</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-pattern="/^[a-zA-Z ]+$/i"
+                            ng-model="contPerson.fullName"
+                            class="form-control"
+                            name="{{'personName_'+$index}}"
+                            placeholder="Full Name"/>
+
+                    <ng-messages for="vm.contactPersonInfoForm['personName_{{$index}}'].$error"
+                                 ng-if='(vm.contactPersonInfoForm.$submitted && vm.contactPersonInfoForm["personName_"+$index].$invalid) ||
+                                            (vm.contactPersonInfoForm["personName_"+$index].$invalid && vm.contactPersonInfoForm["personName_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter contact person name.</div>
+                        <div ng-message="pattern" class="errorValidation">Name can only have alphabets.</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Designation</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-pattern="/^[a-zA-Z ]+$/i"
+                            ng-model="contPerson.designation"
+                            class="form-control"
+                            name="{{'personDesignation_'+$index}}"
+                            placeholder="Designation"/>
+
+                    <ng-messages for="vm.contactPersonInfoForm['personDesignation_{{$index}}'].$error"
+                                 ng-if='(vm.contactPersonInfoForm.$submitted && vm.contactPersonInfoForm["personDesignation_"+$index].$invalid) ||
+                                            (vm.contactPersonInfoForm["personDesignation_"+$index].$invalid && vm.contactPersonInfoForm["personDesignation_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter designation.</div>
+                        <div ng-message="pattern" class="errorValidation">Designation can only have alphabets.</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Email</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-model="contPerson.email"
+                            ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i"
+                            class="form-control"
+                            name="{{'personEmail_'+$index}}"
+                            placeholder="Email"/>
+
+                    <ng-messages for="vm.contactPersonInfoForm['personEmail_{{$index}}'].$error"
+                                 ng-if='(vm.contactPersonInfoForm.$submitted && vm.contactPersonInfoForm["personEmail_"+$index].$invalid) ||
+                                            (vm.contactPersonInfoForm["personEmail_"+$index].$invalid && vm.contactPersonInfoForm["personEmail_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter email.</div>
+                        <div ng-message="pattern" class="errorValidation">Please enter valid person email.</div>
+                    </ng-messages>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Primary Contact</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-pattern="/^[0-9-\(\)]+$/i"
+                            ng-model="contPerson.primaryNumber"
+                            class="form-control"
+                            name="{{'contPrimary_'+$index}}"
+                            placeholder="Primary Contact"/>
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Secondary Contact</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-pattern="/^[0-9-\(\)]+$/i"
+                            ng-model="contPerson.secondaryNumber"
+                            class="form-control"
+                            name="{{'contSecondary_'+$index}}"
+                            placeholder="Secondary Contact"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-2">
+            <div class="checkbox">
+                <label class="custom-checkbox">
+                    <input type="checkbox"
+                           ng-change="vm.isPrimaryChange(vm.business.contactPersons, contPerson, contPerson.isPrimary, 'isPrimary')"
+                           id="checkboxSuccess"
+                           ng-model="contPerson.isPrimary">
+                    <span>Is Primary Contact</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <i ng-click="vm.removeContactPerson(vm.business.contactPersons, contPerson)"
+               class="fa fa-trash primary-font cursor-pointer" style="padding-top: 10px;"></i>
+        </div>
+
+        <br>
+        <br>
+        <h3 class="with-line margin-top-10px margin-bottom-10px"
+            style="margin-top:110px; width:98%; margin-left: auto; margin-right: auto;"></h3>
+    </div>
+</form>

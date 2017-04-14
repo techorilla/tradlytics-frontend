@@ -4,6 +4,7 @@
 'use strict';
 
 angular.module('app.core', [
+    'ngMessages',
     'ngAnimate',
     'restangular',
     'ui.bootstrap',
@@ -22,5 +23,7 @@ angular.module('app.core', [
     'angularMoment',
     'ngBootstrap',
     'selectize',
-    'ngImgCrop'
+    'ngImgCrop',
+    'isteven-multi-select'
+
 ]);

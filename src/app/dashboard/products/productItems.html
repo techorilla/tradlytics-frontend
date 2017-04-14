@@ -1,0 +1,132 @@
+
+<div class="row">
+
+    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addNewProductItem()">
+            Add New Product Item
+        </button>
+    </div>
+
+    <div class="col-md-12">
+        <div ba-panel ba-panel-class="profile-page" ng-if="vm.showForm">
+            <div class="panel-content">
+                <form name="vm.productItemForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <selectize
+                                        ng-required="true"
+                                        name="product"
+                                        config="vm.productConfig"
+                                        options='vm.productOptions.list'
+                                        ng-model="vm.productItem.productId">
+                                </selectize>
+                                <ng-messages for="vm.productItemForm.productName.$error"
+                                             ng-if='(vm.productItemForm.$submitted && vm.productItemForm.productName.$invalid) ||
+                                            (vm.productItemForm.productName.$invalid && vm.productItemForm.productName.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please select a product.</div>
+                                </ng-messages>
+                                <span class="help-block error-block basic-block">Required</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Product Origin</label>
+                                <selectize
+                                        ng-disabled="!vm.productItem.productId"
+                                        id="product-origin"
+                                        ng-required="true"
+                                        name="productOrigin"
+                                        config="vm.originConfig"
+                                        options='vm.originOptions.list'
+                                        ng-model="vm.productItem.origin">
+                                </selectize>
+                                <ng-messages for="vm.productItemForm.productOrigin.$error"
+                                             ng-if='(vm.productItemForm.$submitted && vm.productItemForm.productOrigin.$invalid) ||
+                                            (vm.productItemForm.productOrigin.$invalid && vm.productItemForm.productOrigin.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please select a product origin.</div>
+                                </ng-messages>
+                                <span class="help-block error-block basic-block">Required</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Product Keywords</label>
+                                <selectize
+                                        ng-disabled="!vm.productItem.productId"
+                                        ng-required="true"
+                                        name="productKeyword"
+                                        config="vm.keywordConfig"
+                                        options='vm.keywordOptions.list'
+                                        ng-model="vm.productItem.keywords">
+                                </selectize>
+                            </div>
+                            <div class="form-group">
+                                <label>System Database Ids</label>
+                                <input type="text" ng-model="vm.productItem.databaseIds"
+                                       name="keywordName"
+                                       class="form-control" id="databaseIds" placeholder="Database Ids">
+                            </div>
+                        </div>
+                        <button type="button" ng-if="!vm.productItem.id"
+                                ng-click="vm.addProductItem(vm.productItemForm, vm.productItem)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Add Product Item
+                        </button>
+                        <button type="button" ng-if="vm.productItem.id"
+                                ng-click="vm.updateProductItem(vm.productItemForm, vm.productItem)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Update Product Item
+                        </button>
+                        <button type="button" ng-click="vm.cancel()"
+                                class="btn btn-danger btn-with-icon save-profile">
+                            <i class="ion-android-cancel"></i>Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div ba-panel
+             ng-if="!vm.showForm"
+             ba-panel-class="with-scroll">
+            <div class="horizontal-scroll">
+                <table class="table table-striped" st-table="smartTableData">
+                    <thead>
+                    <tr class="sortable table-header" ng-if="vm.allProductItems.length!==0">
+                        <th>Product</th>
+                        <th>Origin</th>
+                        <th>Keyword</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="table-header" ng-if="vm.allProductItems.length===0">
+                        <th>No values have been added.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in vm.allProductItems">
+                        <td class="titled" ng-bind="row.productName"></td>
+                        <td>
+                            <img width="18" src="{{vm.appConstants.HOST + row.productOriginFlag}}"/>&nbsp;
+                            {{row.productOriginName}}
+                        </td>
+                        <td ng-if="row.keywordsString" ng-bind="row.keywordsString"></td>
+                        <td ng-if="!row.keywordsString">No Keyword attached</td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editProductItem(row)">Edit</button>
+                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

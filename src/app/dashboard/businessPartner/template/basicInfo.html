@@ -1,0 +1,92 @@
+<form name="vm.basicInfoForm">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">Business Logo</label>
+
+                <div class="col-sm-9">
+                    <div class="userpic">
+                        <div class="userpic-wrapper">
+                            <img ng-src="{{ vm.businessLogo }}" ng-click="vm.uploadBusinessLogo(event)">
+                        </div>
+                        <i class="ion-ios-close-outline" ng-click="vm.removeBusinessLogo()" ng-if="!vm.business.logo"></i>
+                        <a href class="change-userpic" ng-click="vm.uploadBusinessLogo(event)">Change Business Logo</a>
+                        <input type="file" ng-show="false" id="uploadBusinessLogo" ng-file-select="vm.onFileSelect($files)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group row clearfix">
+                <label for="businessName" class="col-sm-3 control-label">Business</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           ng-required="true"
+                           name="businessName"
+                           ng-model="vm.business.name"
+                           class="form-control"
+                           id="businessName" placeholder="Business Name">
+                    <ng-messages for="vm.basicInfoForm.businessName.$error"
+                                 ng-if='(vm.basicInfoForm.$submitted && vm.basicInfoForm.businessName.$invalid) ||
+                                            (vm.basicInfoForm.businessName.$invalid && vm.basicInfoForm.businessName.$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter business name.</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">Website</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           name="businessWebsite"
+                           ng-pattern="/^(http:\/\/|https:\/\/)?[_a-z0-9]+(\.[_a-z0-9]+)*[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,7})$/"
+                           ng-model="vm.business.website"
+                           class="form-control"
+                           id="businessWebsite" placeholder="Business Website">
+                    <ng-messages for="vm.profileForm.officeLocation.$error"
+                                 ng-if='(vm.basicInfoForm.$submitted && vm.basicInfoForm.businessWebsite.$invalid) ||
+                                            (vm.basicInfoForm.businessWebsite.$invalid && vm.basicInfoForm.businessWebsite.$dirty)'>
+                        <div ng-message="pattern" class="errorValidation">Please enter a valid website.</div>
+                    </ng-messages>
+
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">NTN No.</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           name="businessNtn"
+                           ng-model="vm.business.ntn"
+                           class="form-control"
+                           id="businessNtn" placeholder="Business NTN">
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">Business Type</label>
+                <div class="col-md-9">
+                    <selectize
+                            placeholder="Business Type"
+                            name="businessType"
+                            ng-required="true"
+                            config="vm.bpTypeConfig"
+                            options='vm.bpTypeOptions.list'
+                            ng-model="vm.business.bpType">
+                    </selectize>
+
+                    <ng-messages for="vm.basicInfoForm.businessType.$error"
+                                 ng-if='(vm.basicInfoForm.$submitted && vm.basicInfoForm.businessType.$invalid) ||
+                                            (vm.basicInfoForm.businessType.$invalid && vm.basicInfoForm.businessType.$dirty)'>
+                        <div ng-message="required" class="errorValidation">A Business should at least have one type.</div>
+                    </ng-messages>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</form>

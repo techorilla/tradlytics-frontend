@@ -5,7 +5,7 @@
         .config(routeConfig);
 
     /** @ngInject */
-    function routeConfig($stateProvider){
+    function routeConfig($stateProvider, $urlRouterProvider){
 
         $stateProvider
             .state('dashboard.user', {
@@ -51,12 +51,19 @@
                 },
                 resolve:{
                     userProfile: function(user, $stateParams){
-                        return user.getUserProfile($stateParams.id).then(function(response){
-                            return response.user;
-                        })
+                        if($stateParams.id === 'new'){
+                            return user.getNewUserObj()
+                        }
+                        else{
+                            return user.getUserProfile($stateParams.id).then(function(response){
+                                return response.user;
+                            })
+                        }
                     }
                 }
             });
+
+            $urlRouterProvider.when('/user','/user/all');
     }
 
 })();

@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-md-6 marginBottom10px">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addBusinessPartner()">
+            Add New Business
+        </button>
+    </div>
+</div>
+
+<br>
+
+<div ng-if="vm.showForm" class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
+                <ba-wizard on-cancel="vm.cancel()">
+                    <ba-wizard-step title="Basic Information" form="vm.basicInfoForm"
+                                    on-next="vm.saveBusiness(vm.imagesData, vm.business, form)"
+                                    on-next-callback="vm.onSaveBusinessCallBack(response)"
+                                    submit-button-title="Save Business">
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/basicInfo.html"></div>
+                            </div>
+                        </div>
+
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Locations" form="vm.locationInfoForm"
+                                    on-next="vm.saveBusinessLocations(vm.business)"
+                                    submit-button-title="Save Locations">
+
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/location.html"></div>
+                            </div>
+                        </div>
+
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Contact Persons" form="vm.contactPersonInfoForm"
+                                    on-next="vm.saveBusinessContactPersons(vm.business)"
+                                    submit-button-title="Save Contact Persons">
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/contactPerson.html"></div>
+                            </div>
+                        </div>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Contact Numbers" form="vm.contactInfoForm"
+                                    on-next="vm.saveBusinessContactNumbers(vm.business)"
+                                    submit-button-title="Save Contacts">
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/contactInfo.html"></div>
+                            </div>
+                        </div>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Bank Information" form="vm.bankInfoForm"
+                                    on-next="vm.saveBusinessBanks(vm.business)"
+                                    on-next-callback="vm.onSaveBusinessBank(response)""
+                                    submit-button-title="Save Banks and Exit">
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/bankInfo.html"></div>
+                            </div>
+                        </div>
+                    </ba-wizard-step>
+
+
+                </ba-wizard>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<filter-bar
+        ng-show="!vm.showForm"
+        bp-types="true"
+        country="true"
+        on-bp-types-selected-changed="vm.onBpTypesSelectedChanged(selectedList)"
+        on-country-selected-changed="vm.onCountrySelectedChanged(selectedList)">
+</filter-bar>
+
+<div class="row" ng-show="!vm.showForm">
+    <div class="col-md-12">
+        <div ba-panel ba-panel-class="with-scroll">
+            <div class="horizontal-scroll">
+                <table class="table" st-table="smartTableData">
+                    <thead>
+                    <tr class="sortable table-header">
+                        <th><span class="count">{{vm.allBusiness.length}}</span></th>
+                        <th st-sort="{{heading.stSort}}"
+                            ng-repeat="heading in vm.allBusinessPartner.tableHeadings" ng-bind="heading.name"></th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="business in vm.allBusiness | selectedRows:vm.businessToRemove:'bpId'">
+                        <td></td>
+                        <td class="titled" ng-bind="business.name"></td>
+                        <td ng-if="business.contactPerson">{{business.contactPerson}}</td><td ng-if="!business.contactPerson">No Primary Contact</td>
+                        <td ng-bind="business.country"></td>
+                        <td ng-bind="business.bpTypeStr"></td>
+                        <td ng-if="row.tr_transactionID"><a ui-sref="shell.tradeBook.Transaction({tran:row.tr_transactionID})">{{row.tr_date | date:vm.vm.appFormats.Date}}</a></td><td ng-if="!row.tr_transactionID">No Transaction Done</td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-success editable-table-button btn-xs" ng-click="removeUser($index)">Report</button>
+                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editBusinessPartner(business)">Edit</button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

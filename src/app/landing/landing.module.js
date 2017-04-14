@@ -9,7 +9,7 @@
         $stateProvider
             .state('landing', {
                 nodashBackground: true,
-                url: '',
+                url: '/landing',
                 views: {
                     '@': {
                         templateUrl:'app/landing/shell/shell.html'

@@ -21,7 +21,8 @@ $panel-heading-font-size: 16px;
     height: $xsmall-panel-height;
   }
   &.medium-panel {
-    height: $medium-panel-height;
+    min-height: $medium-panel-height;
+    hieght: auto;
   }
   &.xmedium-panel {
     height: $extra-medium-panel-height;
@@ -33,6 +34,9 @@ $panel-heading-font-size: 16px;
     height: calc(100vh - 218px);
   }
 
+  &.min-height-500px{
+    min-height: 500px !important;
+  }
   &.with-scroll {
     .panel-body {
       height: calc(100% - #{$panel-title-height});
@@ -44,7 +48,7 @@ $panel-heading-font-size: 16px;
 .panel.panel-blur {
   //$blurredBgUrl: $images-root + 'blur-bg-blurred.jpg';
   //background: url($blurredBgUrl);
-  background: $auth-panel-background;
+  background: $sidebar;
   transition: none;
   background-attachment: fixed;
 }
@@ -75,7 +79,6 @@ $panel-heading-font-size: 16px;
 
 .panel-title {
   font-weight: $font-normal;
-  text-transform: uppercase;
   opacity: 0.9;
 }
 

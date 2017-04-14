@@ -12,7 +12,9 @@
         'app.dashboard.businessPartner',
         'app.dashboard.tradeBook',
         'app.dashboard.settings',
-        'app.dashboard.modals'
+        'app.dashboard.modals',
+        'app.dashboard.pricing',
+        'app.dashboard.manifest'
     ]).config(routeConfig);
 
 
@@ -28,7 +30,37 @@
         baSidebarServiceProvider.addStaticItem({
             title: 'Products',
             icon: 'ion-bag',
-            stateRef: 'dashboard.products'
+            subMenu: [
+                {
+                    title: 'Categories',
+                    stateRef: 'dashboard.productsCategories'
+                },
+                {
+                    title: 'Products',
+                    stateRef: 'dashboard.products'
+                },
+                {
+                    title: 'Product Items',
+                    stateRef: 'dashboard.productsItems'
+                },
+                {
+                    title: 'Keywords',
+                    stateRef: 'dashboard.productKeywords'
+                }
+
+            ]
+        });
+
+        baSidebarServiceProvider.addStaticItem({
+            title: 'Manifest',
+            icon: 'ion-android-clipboard',
+            stateRef: 'dashboard.manifestDashboard'
+        });
+
+        baSidebarServiceProvider.addStaticItem({
+            title: 'Pricing',
+            icon: 'ion-arrow-graph-up-right',
+            stateRef: 'dashboard.pricing.dashboard'
         });
         baSidebarServiceProvider.addStaticItem({
             title: 'Trade Book',
@@ -60,11 +92,13 @@
             icon: 'ion-android-boat',
             stateRef: 'dashboard.shipment'
         });
-        baSidebarServiceProvider.addStaticItem({
-            title: 'Settings',
-            icon: 'ion-android-settings',
-            stateRef: 'dashboard.settings'
-        });
+        // baSidebarServiceProvider.addStaticItem({
+        //     title: 'Settings',
+        //     icon: 'ion-android-settings',
+        //     stateRef: 'dashboard.settings'
+        // });
+
+
 
 
         $stateProvider
@@ -93,9 +127,20 @@
 
                     ]
                 },
+                resolve:{
+                  completeReport: function(dashboard, loaderModal){
+                      loaderModal.open();
+                      return dashboard.getCompleteDashboardReport().then(function(res){
+                         return res.data;
+                      }).finally(function(){
+                          loaderModal.close();
+                      });
+                  }
+                },
                 views: {
                     'content@dashboard':{
-                        templateUrl:'app/dashboard/dashboard.html'
+                        templateUrl:'app/dashboard/dashboard.html',
+                        controller: 'Dashboard as vm'
                     }
                 }
             });

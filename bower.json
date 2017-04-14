@@ -3,9 +3,9 @@
   "version": "1.2.0",
   "homepage": "https://github.com/1itvinka/blur-admin",
   "authors": [
-    "akveo"
+    "immadimtiaz"
   ],
-  "description": "Blur Admin HTML template",
+  "description": "Doni Group ERP",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -31,7 +31,6 @@
     "bootstrap": "~3.3.5",
     "bootstrap-select": "~1.9.3",
     "bootstrap-switch": "~3.3.2",
-    "bootstrap-tagsinput": "~0.5.0",
     "font-awesome": "fontawesome#~4.4.0",
     "fullcalendar": "~2.4.0",
     "highlight": "~8.8.0",
@@ -51,7 +50,7 @@
     "ionrangeslider": "~2.1.2",
     "angular-bootstrap": "1.3.3",
     "angular-animate": "~1.4.8",
-    "textAngular": "~1.4.6",
+    "textAngular": "1.5.16",
     "angular-xeditable": "~0.1.9",
     "ng-js-tree": "~0.0.7",
     "restangular": "^1.5.2",
@@ -65,7 +64,10 @@
     "ng-bs-daterangepicker": "^0.0.6",
     "lodash": "^4.17.3",
     "angular-selectize2": "^3.0.1",
-    "ng-img-crop-full-extended": "ngImgCropFullExtended#^0.6.2"
+    "ng-img-crop-full-extended": "ngImgCropFullExtended#^0.6.2",
+    "isteven-angular-multiselect": "^4.0.0",
+    "SVG-Loaders": "svg-loaders#^1.0.2",
+    "angular-messages": "^1.6.3"
   },
   "resolutions": {
     "angular": "~1.4.8"

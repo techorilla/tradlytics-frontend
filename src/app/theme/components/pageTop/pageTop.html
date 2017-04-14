@@ -17,7 +17,7 @@
       <ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
         <li><i class="dropdown-arr"></i></li>
         <li><a ui-sref="dashboard.user.profile({id:userData.data.id})"><i class="fa fa-user"></i>{{userData.data.firstName + ' ' + userData.data.lastName}}</a></li>
-        <li><a href><i class="fa fa-cog"></i>Settings</a></li>
+        <li><a ui-sref="dashboard.settings.transactionStatus"><i class="fa fa-cog"></i>Settings</a></li>
         <li ng-click="logout()"><a href class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>
       </ul>
     </div>

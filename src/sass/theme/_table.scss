@@ -1,8 +1,71 @@
+.titled-text{
+  font-weight: 600;
+  color: $success;
+}
+
 .table {
+  tr{
+    .titled{
+      font-weight: 600;
+      color: $success;
+    }
+    .business{
+      div{
+        float: left;
+      }
+      .name{
+        font-weight: 600;
+        color: $success;
+      }
+      .contact:after, .name:after{
+        padding-left: 5px;
+        padding-right: 5px;
+        content:'|';
+        color: $primary;
+      }
+      .contact{
+        font-weight: 400;
+      }
+      .country{
+        font-weight: 100;
+        img:after{
+          padding-left: 3px;
+        }
+      }
+
+    }
+    .productItemsColumn{
+      padding: 5px 5px 5px 5px;
+      width: 100%;
+      height: auto;
+      &:not(:last-child){
+        border-bottom: 2px solid $border;
+      }
+      .origin{
+        font-weight: bold;
+        width: 100%;
+      }
+      .keywords{
+        width: 80%;
+        text-overflow: ellipsis;
+        font-weight: 600;
+        font-size:10px;
+      }
+    }
+  }
+
   margin-bottom: 0px;
   thead{
     .table-header{
       background: $primary;
+    }
+    .table-sub-header{
+      background: $primary;
+      .center-align{
+        text-align: center;
+        border-left: 1px solid $info;
+        border-right: 1px solid $info;
+      }
     }
   }
   & > thead {
@@ -226,6 +289,14 @@ input.search-input {
   }
 }
 
+.count{
+  color: $primary;
+  padding: 2px 5px 2px 5px;
+  background: aliceblue;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
 .black-muted-bg {
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -243,7 +314,7 @@ input.search-input {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td{
-  border: 1px solid $border-light;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
@@ -282,9 +353,9 @@ input.search-input {
   border-bottom: dashed 1px $border;
 }
 
-th {
-  font-weight: $font-normal;
-}
+//th {
+//  font-weight: $font-normal;
+//}
 
 .editable-empty {
   color: $danger-dark;
@@ -300,7 +371,7 @@ th {
 .pagination > li > a,
 .pagination > li > span{
   color: $default-text;
-  border-color: $border;
+  border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
 
@@ -323,7 +394,7 @@ th {
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
   background-color: $primary;
-  border-color: $border;
+  border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
 .pagination > li > a:hover,
@@ -340,4 +411,10 @@ th {
 
 .table-responsive {
   margin-top: 10px;
+}
+
+.price{
+  .breakdown{
+    float: left;
+  }
 }

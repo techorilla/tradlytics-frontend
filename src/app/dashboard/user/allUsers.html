@@ -1,8 +1,16 @@
 <div class="row">
+
+    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addNewUser()">
+            Add New User
+        </button>
+    </div>
+
     <div class="col-md-12">
-        <div ba-panel ba-panel-title="System Users<br><small>Total {{vm.allUsers.length}} System Users</small>" ba-panel-class="with-scroll">
+        <div ba-panel ba-panel-title="<small>Total {{vm.allUsers.length}} System Users</small>" ba-panel-class="with-scroll">
             <div class="horizontal-scroll">
-                <table class="table" st-table="smartTableData">
+                <table class="table table-striped" st-table="smartTableData">
                     <thead>
                         <tr class="sortable table-header">
                             <th>Username</th>
@@ -10,7 +18,8 @@
                             <th>Email</th>
                             <th>Designation</th>
                             <th>Last Login</th>
-                            <th>Is Active</th>
+                            <th class="center-align">Is Active</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -20,7 +29,16 @@
                             <td>{{user.email}}</td>
                             <td>{{user.designation}}</td>
                             <td>{{user.lastLogin | date:vm.appFormats.Time}}</td>
-                            <td>{{user.active}}</td>
+                            <td class="center-align">
+                                <i ng-if="user.active" ng-click="" class="fa fa-unlock cursor-pointer"></i>
+                                <i ng-if="!user.active" ng-click="" class="fa fa-lock cursor-pointer"></i>
+                            </td>
+                            <td>
+                                <div class="buttons">
+                                    <button class="btn btn-primary editable-table-button btn-xs"
+                                            ng-click="vm.editUser(user.id)">Edit</button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

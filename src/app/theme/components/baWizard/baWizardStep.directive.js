@@ -5,20 +5,26 @@
     .directive('baWizardStep', baWizardStep);
 
   /** @ngInject */
-  function baWizardStep() {
+  function baWizardStep(toastr) {
     return {
       restrict: 'E',
       transclude: true,
       require: '^baWizard',
       scope: {
-        form: '='
+        form: '=',
+        submitButtonTitle: '@',
+        skip: '=',
+        onNext: '&',
+        onNextCallback: '&'
       },
       templateUrl:  'app/theme/components/baWizard/baWizardStep.html',
       link: function($scope, $element, $attrs, wizard) {
         $scope.selected = true;
 
         var tab = {
+          onSubmitCallback: $scope.onNextCallback ? $scope.onNextCallback : null,
           title: $attrs.title,
+          submitButtonTitle: $scope.submitButtonTitle,
           select: select,
           submit: submit,
           isComplete: isComplete,
@@ -30,7 +36,7 @@
         wizard.addTab(tab);
 
         function select(isSelected) {
-          if (isSelected) {
+          if(isSelected) {
             $scope.selected = true;
           } else {
             $scope.selected = false;
@@ -39,6 +45,12 @@
 
         function submit() {
           $scope.form && $scope.form.$setSubmitted(true);
+          if($scope.form && $scope.form.$valid){
+            return $scope.onNext({form: $scope.form});
+          }
+          else if($scope.form){
+            toastr.error('Please enter missing fields', 'Invalid Form')
+          }
         }
 
         function isComplete() {

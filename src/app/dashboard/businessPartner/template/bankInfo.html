@@ -1,0 +1,127 @@
+<form name="vm.bankInfoForm" novalidate>
+
+    <div class="row">
+        <div class="col-md-6 marginBottom10px">
+            <button type="button"
+                    class="btn btn-primary" data-toggle="modal"
+                    ng-click="vm.addBusinessBank(vm.business)">
+                Add Bank Account
+            </button>
+        </div>
+    </div>
+
+    <h3 class="with-line">All Banks</h3>
+
+    <div ng-repeat="bank in vm.business.banks" class="notification row clearfix margin-top-10px">
+
+        <div class="col-sm-4">
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Bank Name</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-model="bank.bankName"
+                            class="form-control"
+                            name="{{'banKName_'+$index}}"
+                            placeholder="Bank Name"/>
+                    <ng-messages for="vm.bankInfoForm['banKName_{{$index}}'].$error"
+                                 ng-if='(vm.bankInfoForm.$submitted && vm.bankInfoForm["banKName_"+$index].$invalid) ||
+                                            (vm.bankInfoForm["banKName_"+$index].$invalid && vm.bankInfoForm["banKName_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter a bank name.</div>
+                    </ng-messages>
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Account Title</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-model="bank.accountTitle"
+                            class="form-control"
+                            name="{{'accountTitle_'+$index}}"
+                            placeholder="Account Title"/>
+                    <ng-messages for="vm.bankInfoForm['accountTitle_{{$index}}'].$error"
+                                 ng-if='(vm.bankInfoForm.$submitted && vm.bankInfoForm["accountTitle_"+$index].$invalid) ||
+                                            (vm.bankInfoForm["accountTitle_"+$index].$invalid && vm.bankInfoForm["accountTitle_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter account title.</div>
+                    </ng-messages>
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Country</label>
+                <div class="col-xs-8">
+                    <selectize
+                            placeholder="Bank Country"
+                            name="{{'bankCountry_'+$index}}"
+                            ng-required="true"
+                            config="vm.bankCountryConfig"
+                            options='vm.countryOptions.list'
+                            ng-model="bank.accountCountry">
+                    </selectize>
+                    <ng-messages for="vm.bankInfoForm['locationCountry_{{$index}}'].$error"
+                                 ng-if='(vm.bankInfoForm.$submitted && vm.bankInfoForm["bankCountry_"+$index].$invalid) ||
+                                            (vm.bankInfoForm["bankCountry_"+$index].$invalid && vm.bankInfoForm["bankCountry_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please select a country.</div>
+                    </ng-messages>
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Branch Address</label>
+                <div class="col-xs-8">
+                            <textarea
+                                    ng-required="true"
+                                    ng-model="bank.accountAddress"
+                                    class="form-control"
+                                    name="{{'accountAddress_'+$index}}"
+                                    placeholder="Account Address"/>
+                    <ng-messages for="vm.bankInfoForm['accountAddress_{{$index}}'].$error"
+                                 ng-if='(vm.bankInfoForm.$submitted && vm.bankInfoForm["accountAddress_"+$index].$invalid) ||
+                                            (vm.bankInfoForm["accountAddress_"+$index].$invalid && vm.bankInfoForm["accountAddress_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter account address.</div>
+                    </ng-messages>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Account Number</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-model="bank.accountNumber"
+                            class="form-control"
+                            name="{{'accountNumber_'+$index}}"
+                            placeholder="Account Number"/>
+                    <ng-messages for="vm.marketPriceForm['accountNumber_{{$index}}'].$error"
+                                 ng-if='(vm.bankInfoForm.$submitted && vm.bankInfoForm["accountNumber_"+$index].$invalid) ||
+                                            (vm.bankInfoForm["accountNumber_"+$index].$invalid && vm.bankInfoForm["accountNumber_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter account number.</div>
+                    </ng-messages>
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">City</label>
+                <div class="col-xs-8">
+                    <selectize
+                            placeholder="City"
+                            ng-disabled="!bank.accountCountry"
+                            id="bankCity_{{$index}}"
+                            name="bankCity_{{$index}}"
+                            config="vm.cityConfig"
+                            options='bank.cityOptions.list'
+                            ng-model="bank.accountCity">
+                    </selectize>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-2">
+            <i ng-click="vm.removeBusinessBank(vm.business.banks, bank)"
+               class="fa fa-trash primary-font cursor-pointer" style="padding-top: 10px;"></i>
+        </div>
+
+        <br>
+
+    </div>
+</form>

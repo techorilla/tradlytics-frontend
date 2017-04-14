@@ -9,7 +9,7 @@
         .controller('ProfilePage', ProfilePage);
 
     /** @ngInject */
-    function ProfilePage(fileReader, authentication, $filter, deModal, userProfile, dropDownConfig, toastr, $scope, user) {
+    function ProfilePage(fileReader, authentication, $filter, deModal, userProfile, dropDownConfig, toastr, $scope, user, $state) {
         var vm = this;
         _init();
 
@@ -19,16 +19,27 @@
             vm.designationOptions = {};
             vm.designationConfig = {};
             vm.userProfile = userProfile;
+            vm.cancel = cancel;
             vm.imagesData = null;
             vm.userData = authentication.getUserData();
-            console.log(vm.userData);
             vm.picture = $filter('profilePicture')(userProfile.profilePic);
             vm.updateUser = updateUser;
+            vm.addUser = addUser;
             vm.removePicture = removePicture;
             vm.uploadPicture = uploadPicture;
             vm.getFile = getFile;
             dropDownConfig.prepareBusinessLocationsDropDown(vm.locationConfig, vm.locationOptions);
             dropDownConfig.prepareDesignationDropDown(vm.designationConfig, vm.designationOptions);
+        }
+
+        function cancel(){
+            try {
+                $state.go($state.current.prevState, $state.current.prevParam);
+            }
+            catch(err) {
+                $state.go('dashboard.main');
+            }
+
         }
 
         function removePicture() {
@@ -42,20 +53,53 @@
             fileInput.click();
         }
 
-        function updateUser(userObj, images){
-            user.updateUserProfile(userObj, images).then(function(response){
-                if(!vm.noPicture){
-                    user.addProfilePic(images, response.user_id).then(function(picResp){
-                        if(vm.userData.data.id === response.user_id){
-                            authentication.getUserData(true);
+        function addUser(form, userObj, images){
+            if(form.$valid){
+                user.addUserProfile(userObj, images).then(function(response){
+                    if(response.success){
+                        if(!vm.noPicture){
+                            user.addProfilePic(images, response.user_id).then(function(picResp){
+                                toastr.success(response.message,'Success');
+                                cancel();
+                            });
                         }
-                        toastr.success(response.message,'Success')
-                    });
-                }
-                else{
-                    toastr.success(response.message,'Success')
-                }
-            });
+                    }
+                    else{
+                        toastr.error(response.message);
+                    }
+                });
+            }
+            else{
+                toastr.error('Please enter the missing fields', 'Invalid Form');
+            }
+
+        }
+
+        function updateUser(form, userObj, images){
+            if(form.$valid){
+                user.updateUserProfile(userObj, images).then(function(response){
+                    if(response.success){
+                        if(!vm.noPicture){
+                            user.addProfilePic(images, response.user_id).then(function(picResp){
+                                if(vm.userData.data.id === response.user_id){
+                                    authentication.getUserData(true);
+                                }
+                                toastr.success(response.message,'Success');
+                                cancel();
+                            });
+                        }
+                        else{
+                            toastr.success(response.message,'Success')
+                        }
+                    }
+                    else{
+                        toastr.error(response.message);
+                    }
+                });
+            }
+            else {
+                toastr.error('Please enter the missing fields', 'Invalid Form');
+            }
         }
 
         function getFile(picture){

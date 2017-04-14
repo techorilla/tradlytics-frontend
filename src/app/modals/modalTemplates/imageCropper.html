@@ -9,13 +9,14 @@
         <div class="row">
             <div class="cropArea">
                 <img-crop image="image" area-type="rectangle"
-                          area-init-size="{ w:cropper.cropWidth,h:cropper.cropHeight}"
+                          area-init-size="{w:cropper.cropWidth,h:cropper.cropHeight}"
+                          result-image-quality="1.0"
                           aspect-ratio="aspectRatio"
                           result-blob="blob"
                           result-image="croppedImage"
                           result-array-image="croppedImages"
                           result-image-size='resultImageSizes'
-                          rea-min-size="{w:100, h:100}"
+                          area-min-size="{w:100, h:100}"
                           init-max-area="true">
 
                 </img-crop>

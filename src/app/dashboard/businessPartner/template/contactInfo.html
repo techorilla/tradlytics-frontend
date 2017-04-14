@@ -1,0 +1,73 @@
+<form name="vm.contactInfoForm" novalidate>
+
+    <div class="row">
+        <div class="col-md-6 marginBottom10px">
+            <button type="button"
+                    class="btn btn-primary" data-toggle="modal"
+                    ng-click="vm.addBusinessContact(vm.business)">
+                Add Contact Person
+            </button>
+        </div>
+    </div>
+
+    <h3 class="with-line">All Contacts</h3>
+
+    <div ng-repeat="contact in vm.business.contacts" class="row">
+        <div class="col-sm-4">
+
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Contact Number</label>
+                <div class="col-xs-8">
+                    <input
+                            ng-required="true"
+                            ng-pattern="/^[0-9+\(\)-]+$/i"
+                            ng-model="contact.contactNumber"
+                            class="form-control"
+                            name="{{'contactNumber_'+$index}}"
+                            placeholder="Contact Number"/>
+
+                    <ng-messages for="vm.contactInfoForm['contactNumber_{{$index}}'].$error"
+                                 ng-if='(vm.contactInfoForm.$submitted && vm.businessForm["contactNumber_"+$index].$invalid) ||
+                                            (vm.contactInfoForm["contactNumber_"+$index].$invalid && vm.contactInfoForm["contactNumber_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter contact number.</div>
+                        <div ng-message="pattern" class="errorValidation">Contact Number can not have alphabets.</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-4">
+
+            <div class="form-group row clearfix">
+                <label class="col-xs-4">Contact Type</label>
+                <div class="col-xs-8">
+                    <selectize
+                            placeholder="Contact Type"
+                            name="{{'contactType_'+$index}}"
+                            ng-required="true"
+                            config="vm.contactTypeConfig"
+                            options='vm.contactTypeOptions.list'
+                            ng-model="contact.contactType">
+                    </selectize>
+                    <ng-messages for="vm.contactInfoForm['contactNumber_{{$index}}'].$error"
+                                 ng-if='(vm.contactInfoForm.$submitted && vm.contactInfoForm["contactType_"+$index].$invalid) ||
+                                            (vm.contactInfoForm["contactType_"+$index].$invalid && vm.contactInfoForm["contactType_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter contact type.</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-2">
+            <i ng-click="vm.removeBusinessContact(vm.business.contacts, contact)"
+               class="fa fa-trash primary-font cursor-pointer" style="padding-top: 10px;"></i>
+        </div>
+
+        <br>
+        <br>
+        <h3 class="with-line margin-top-10px margin-bottom-10px" style="width:98%; margin-left: auto; margin-right: auto;"></h3>
+    </div>
+
+</form>

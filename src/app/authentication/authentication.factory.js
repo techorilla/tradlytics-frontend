@@ -32,6 +32,8 @@
             getUserBusinessId: getUserBusinessId
         };
 
+
+
         function getUserBusinessId(){
             return getUserData().data.businessId
         }

@@ -1,0 +1,127 @@
+<div class="row">
+    <div class="col-md-6 marginBottom10px">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addProductPricing('dashboard.pricing.productItems')">
+            Product Pricing
+        </button>
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addProductPricing('dashboard.pricing.market')">
+            Pricing Market
+        </button>
+    </div>
+</div>
+
+<filter-bar
+        country="true"
+        product="true"
+        on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)"
+        on-country-selected-changed="vm.onCountrySelectedChanged(selectedList)">
+</filter-bar>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div ba-panel  ba-panel-class="with-scroll">
+            <div class="horizontal-scroll">
+
+                <div class="priceItemList col-lg-12">
+                    <div class="priceContainer col-lg-4 col-sm-12" ng-repeat="row in vm.allProductPriceSummary | selectedRows:vm.priceSummaryToRemove:'productItemId'">
+                        <div class="priceItem" >
+                            <div class="col-lg-12 col-xs-12">
+                                <div class="productName">
+                                    <div class="name" ng-bind="row.productName"></div>
+                                    <div>
+                                        <div class="productKeyword" ng-bind="row.keywords"></div>
+                                        <div class="productOrigin">
+                                            {{row.productOriginName}}
+                                        </div>
+                                        <img width="60" src="{{vm.appConstants.HOST + row.originFlag}}"/>&nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="row.internationalPrice!=='NA'" class="col-lg-6 col-sm-6 priceDetails">
+                                <div class="currency">International</div>
+                                <div class="change" ng-if="row.internationalPercentangeChange !== 0 && row.internationalPercentangeChange!=='NA'">
+                                    <div class="number" ng-bind="row.internationalPercentangeChange + ' %'"></div>
+                                    <i ng-if="row.internationalPercentangeChange > 0" class="icon fa fa-caret-up"></i>
+                                    <i ng-if="row.internationalPercentangeChange < 0" class="icon fa fa-caret-down"></i>
+                                </div>
+                                <div class="currency" ng-bind="row.internationalCurrency"></div>
+                                <div class="price-number" ng-bind="row.internationalPrice"></div>
+                                <div class="metric" ng-bind="'per ' +row.internationalMetric"></div>
+                                <div class="high-lows">
+                                    <div class="heading">Weekly</div>
+                                    <div class="info">
+                                        <div class="info-label">High</div>
+                                        <div class="number" ng-if="row.weeklyInternational.high!=='NA'">{{row.internationalCurrency + ' ' + row.weeklyInternational.high + ' / ' + row.internationalMetric}}</div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="info-label">Low</div>
+                                        <div class="number" ng-if="row.weeklyInternational.low!=='NA'">{{row.internationalCurrency + ' ' + row.weeklyInternational.low + ' / ' + row.internationalMetric}}</div>
+                                    </div>
+                                    <div class="heading">Monthly</div>
+                                    <div class="info">
+                                        <div class="info-label">High</div>
+                                        <div class="number" ng-if="row.monthlyInternational.high!=='NA'">{{row.internationalCurrency + ' ' + row.monthlyInternational.high + ' / ' + row.internationalMetric}}</div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="info-label">Low</div>
+                                        <div class="number" ng-if="row.monthlyInternational.low!=='NA'">{{row.internationalCurrency + ' ' + row.monthlyInternational.low + ' / ' + row.internationalMetric}}</div>
+                                    </div>
+                                </div>
+                                <div class="lastUpdated" ng-bind="(row.intlastUpdated !== 'NA') ? (row.intlastUpdated | date: vm.appFormats.Time) : 'NA'"></div>
+                            </div>
+                            <div ng-if="row.internationalPrice==='NA'" class="col-lg-6 col-sm-6 priceDetails">
+                                <div class="currency">International</div>
+                                <div class="price-number-na">NA</div>
+                            </div>
+                            <div ng-if="row.localCurrency!=='NA'" class="col-lg-6 col-sm-6 priceDetails">
+                                <div class="currency">Local</div>
+                                <div class="change" ng-if="row.localPercentangeChange !== 0 && row.localPercentangeChange!=='NA'">
+                                    <div class="number" ng-bind="row.localPercentangeChange + ' %'"></div>
+                                    <i ng-if="row.localPercentangeChange > 0" class="icon fa fa-caret-up"></i>
+                                    <i ng-if="row.localPercentangeChange < 0" class=" icon fa fa-caret-down"></i>
+                                </div>
+                                <div class="currency" ng-bind="row.localCurrency"></div>
+                                <div class="price-number" ng-bind="row.localPrice"></div>
+                                <div class="metric" ng-bind="'per ' +row.localMetric"></div>
+                                <div class="high-lows">
+                                    <div class="heading">Weekly</div>
+                                    <div class="info">
+                                        <div class="info-label">High</div>
+                                        <div class="number" ng-if="row.weeklyInternational.high!=='NA'">{{row.localCurrency + ' ' + row.weeklyLocal.high + ' / ' + row.localMetric}}</div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="info-label">Low</div>
+                                        <div class="number" ng-if="row.weeklyInternational.low!=='NA'">{{row.localCurrency + ' ' + row.weeklyLocal.low + ' / ' + row.localMetric}}</div>
+                                    </div>
+                                    <div class="heading">Monthly</div>
+                                    <div class="info">
+                                        <div class="info-label">High</div>
+                                        <div class="number" ng-if="row.monthlyLocal.high!=='NA'">{{row.localCurrency + ' ' + row.monthlyLocal.high + ' / ' + row.localMetric}}</div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="info-label">Low</div>
+                                        <div class="number" ng-if="row.monthlyLocal.low!=='NA'">{{row.localCurrency + ' ' + row.monthlyLocal.low + ' / ' + row.localMetric}}</div>
+                                    </div>
+                                </div>
+                                <div class="lastUpdated" ng-bind="(row.locallastUpdated !== 'NA') ? (row.locallastUpdated  | date: vm.appFormats.Time) : 'NA'"></div>
+
+                            </div>
+                            <div ng-if="row.localCurrency==='NA'" class="col-lg-6 col-sm-6 priceDetails">
+                                <div class="currency">Local</div>
+                                <div class="price-number-na">NA</div>
+                            </div>
+                            <button class="btn btn-primary col-lg-8 analytics-button" ng-click="vm.productPriceReport(row.productItemId)">Price Analytics</button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

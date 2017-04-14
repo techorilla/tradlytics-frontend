@@ -13,17 +13,385 @@
       .factory('dropDownConfig', dropDownConfig);
 
   /* @ngInject */
-  function dropDownConfig(authentication, businessPartner, utilities, settings, apiEndPoints, crud, read){
+  function dropDownConfig(authentication, businessPartner, utilities, settings, apiEndPoints, crud, read, appConstants){
     return {
       contactTypeConfig: contactTypeConfig,
-      getProductConfig: getProductConfig,
-      getBpConfig: getBpConfig,
+      prepareProductItemDropDown: prepareProductItemDropDown,
+      prepareBusinessDropDown: prepareBusinessDropDown,
       getPackingConfig: getPackingConfig,
       getCommissionTypeConfig: getCommissionTypeConfig,
       getBpLocationConfig: getBpLocationConfig,
       prepareBusinessLocationsDropDown: prepareBusinessLocationsDropDown,
-      prepareDesignationDropDown: prepareDesignationDropDown
+      prepareDesignationDropDown: prepareDesignationDropDown,
+      prepareProductCategoryDropDown: prepareProductCategoryDropDown,
+      prepareCountryDropDown: prepareCountryDropDown,
+      prepareKeywordDropDown: prepareKeywordDropDown,
+      prepareProductDropDown: prepareProductDropDown,
+      prepareProductOriginDropDown: prepareProductOriginDropDown,
+      prepareCurrencyDropDown: prepareCurrencyDropDown,
+      preparePriceMarketDropDown: preparePriceMarketDropDown,
+      prepareShipmentMonthDropDown: prepareShipmentMonthDropDown,
+      preparePriceMetricConfig: preparePriceMetricConfig,
+      prepareRegionDropDown: prepareRegionDropDown,
+      prepareCityDropDown: prepareCityDropDown,
+      prepareByTypesDropDown: prepareByTypesDropDown,
+      prepareContactNumberTypeDropDown: prepareContactNumberTypeDropDown
     };
+
+    function shipementMonthconfig(item, escape){
+      return '<div>' +
+          '<span class="dropdownLabel">' + item.month + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ item.year + '</span>' +
+          '</div>';
+    }
+
+    function prepareContactNumberTypeDropDown(contactTypeConfig, contactTypeOptions){
+      utilities.cloneIntoEmptyObject(contactTypeConfig, getBasicDropDownConfig());
+      contactTypeConfig['onItemRemove'] = function(value, obj){
+        var selectizeDropDown = this;
+        var removedOption = _.find(contactTypeOptions.list, function(opt) { return opt.id == value; });
+        contactTypeOptions.list.push(removedOption);
+        selectizeDropDown.refreshItems();
+      };
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.contactType, read.DROP_DOWN)
+          .then(function(response){
+            return utilities.cloneIntoEmptyObject(contactTypeOptions, response.list);
+          });
+    }
+
+
+    function getBusinessItem(item, escape){
+      var pContact = (item.contactPerson === null)? 'No Primary Contact' : item.contactPerson;
+      return '<div>' +
+          '<span class="dropdownLabel">' + item.name + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ item.country + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ pContact + '</span>' +
+          '</div>';
+
+    }
+
+    function prepareBusinessDropDown(businessConfig, businessOptions, businessType){
+      var config = {
+        valueField: 'id',
+        sortField: 'name',
+        searchField: ['name','contactPerson','country'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: getBusinessItem,
+          option: getBusinessItem
+        }
+      };
+      utilities.cloneIntoEmptyObject(businessConfig, config);
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.business, {'type': businessType})
+          .then(function(response){
+            return utilities.cloneIntoEmptyObject(businessOptions, response.list);
+          });
+    }
+
+    function prepareByTypesDropDown(bpTypeConfig, bpTypeOptions){
+      utilities.cloneIntoEmptyObject(bpTypeConfig, getBasicDropDownConfig(true, bpTypeOptions));
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.bpType, read.DROP_DOWN)
+          .then(function(response){
+            return utilities.cloneIntoEmptyObject(bpTypeOptions, response.list);
+          });
+    }
+
+
+    function prepareShipmentMonthDropDown(monthConfig, monthOptions, priceDate){
+      var dropDown = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(monthOptions.list, function(month) { return month.startMonth == value; });
+          monthOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'startMonth',
+        sortField: 'startMonth',
+        searchField: ['month', 'year'],
+        create: false,
+        persist: false,
+        render:{
+          item: shipementMonthconfig,
+          option: shipementMonthconfig
+        }
+      };
+      utilities.cloneIntoEmptyObject(monthConfig, dropDown);
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.shipmentMonth, priceDate).then(function (response){
+        return utilities.cloneIntoEmptyObject(monthOptions, response.list);
+      });
+    }
+
+
+    function priceMarketOption(item, escape){
+      return '<div>' +
+          '<span class="dropdownLabel">' + item.origin + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ item.currency + '</span>' +
+          '</div>';
+    }
+
+
+    function preparePriceMarketDropDown(priceMarketConfig, priceMarketOptions, onPriceMarketChange){
+      var dropDown = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(priceMarketOptions.list, function(market) { return market.id == value; });
+          priceMarketOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'id',
+        sortField: 'origin',
+        searchField: ['origin', 'currency'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: priceMarketOption,
+          option: priceMarketOption
+        }
+      };
+      if(onPriceMarketChange){
+        dropDown['onChange'] = onPriceMarketChange;
+      }
+      utilities.cloneIntoEmptyObject(priceMarketConfig, dropDown);
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.priceMarket).then(function (response){
+        return utilities.cloneIntoEmptyObject(priceMarketOptions, response.list);
+      });
+    }
+
+
+    function productItemOption(item, escape) {
+      var keywords = (item.keywords === '')? 'No Keywords' : item.keywords;
+      return '<div>' +
+          '<span class="dropdownLabel">' + item.name + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ item.origin + '</span>' +
+          '<span class="dropdownCaption" style="max-width: 80px;text-overflow: ellipsis">' + ' | '+ keywords + '</span>' +
+          '</div>';
+    }
+
+
+    function prepareProductItemDropDown(productItemConfig, productItemOptions){
+      var dropDown = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(productItemOptions.list, function(prod) { return prod.id == value; });
+          productItemOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'id',
+        sortField: 'name',
+        searchField: ['name', 'origin', 'keywords'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: productItemOption,
+          option: productItemOption
+        }
+      };
+      utilities.cloneIntoEmptyObject(productItemConfig, dropDown);
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.productItem).then(function (response){
+        return utilities.cloneIntoEmptyObject(productItemOptions, response.list);
+      });
+    }
+
+
+
+    function currencyItem(item, escape) {
+      var name = item.name;
+      return '<div>' +
+          '<span class="dropdownLabel">' + name + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ item.code + '</span>' +
+          '</div>';
+    }
+
+    function prepareCurrencyDropDown(currencyConfig, currencyOptions){
+      var dropDown = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(currencyOptions.list, function(opt) { return opt.code == value; });
+          productOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'code',
+        sortField: 'name',
+        searchField: ['name'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: currencyItem,
+          option: currencyItem
+        }
+      };
+      utilities.cloneIntoEmptyObject(currencyConfig, dropDown);
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.currency).then(function (response){
+        return utilities.cloneIntoEmptyObject(currencyOptions, response.list);
+      });
+    }
+
+    function prepareKeywordDropDown(keywordConfig, keywordOptions, productId, callback){
+      var options = {};
+      utilities.cloneIntoEmptyObject(keywordConfig, getBasicDropDownConfig(true, keywordOptions, 'id', 'name'));
+      if(!productId) return;
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.productKeywords, productId).then(function (response) {
+        utilities.cloneIntoEmptyObject(options, response.list);
+        if(callback){
+          callback();
+        }
+        return utilities.cloneIntoEmptyObject(keywordOptions, response.list);
+      });
+    }
+
+    function prepareProductDropDown(productConfig, productOptions, productOriginConfig, productOriginOptions,
+                                    keywordConfig, keywordOptions, onChangeCallBack){
+      var dropDown = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(productOptions.list, function(opt) { return opt.id == value; });
+          productOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'id',
+        sortField: 'name',
+        searchField: ['name'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: productOption,
+          option: productOption
+        }
+      };
+      if(productOriginConfig){
+        dropDown['onChange'] = function (value){
+          onChangeCallBack(productOriginConfig, productOriginOptions, keywordConfig, keywordOptions, value);
+        };
+      }
+      utilities.cloneIntoEmptyObject(productConfig, dropDown);
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.product).then(function (response){
+        return utilities.cloneIntoEmptyObject(productOptions, response.list);
+      });
+    }
+
+    function productOption(item, escape) {
+      var name = item.name;
+      return '<div>' +
+          '<span class="dropdownLabel">' + name + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ item.category + '</span>' +
+          '</div>';
+    }
+
+
+    function prepareProductOriginDropDown(productOriginConfig, productOriginOptions, productId, callback){
+      var options = {};
+      var dropDown = {
+        onItemRemove: function(value){
+          var removedItem = _.find(options.list, function(opt) { return opt.code == value; });
+          productOriginOptions.list.push(removedItem);
+          var selectizeDropDown = this;
+          selectizeDropDown.refreshItems();
+        },
+        maxItems: 1,
+        valueField: 'code',
+        sortField: 'name',
+        searchField: ['name'],
+        openOnFocus: true,
+        closeOnSelect: true,
+        create: false,
+        persist: false,
+        render: {
+          item: countryItem,
+          option: countryItem
+        }
+      };
+      utilities.cloneIntoEmptyObject(productOriginConfig, dropDown);
+      if(!productId) return;
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.productOrigin, productId).then(function (response){
+        utilities.cloneIntoEmptyObject(options, response.list);
+        utilities.cloneIntoEmptyObject(productOriginOptions, response.list);
+        if(callback){
+          callback();
+        }
+        return;
+
+      });
+    }
+
+    function prepareRegionDropDown(regionConfig, regionOptions, countryCode, onChangeCallBack){
+      if(regionConfig) {
+        utilities.cloneIntoEmptyObject(regionConfig, getBasicDropDownConfig());
+        if(onChangeCallBack){
+          regionConfig['onChange'] = function (value){
+            console.log(value);
+            onChangeCallBack(value);
+          };
+        }
+      }
+      if(countryCode){
+        settings.dropDown[crud.READ](apiEndPoints.dropDown.region, countryCode)
+            .then(function(response){
+              return utilities.cloneIntoEmptyObject(regionOptions, response.list);
+            });
+      }
+    }
+
+    function prepareCityDropDown(cityConfig, cityOptions, countryCode, regionCode){
+      if(cityConfig){
+        utilities.cloneIntoEmptyObject(cityConfig, getBasicDropDownConfig());
+      }
+      if(countryCode){
+        settings.dropDown[crud.READ](apiEndPoints.dropDown.city, {'countryCode': countryCode, 'region': regionCode})
+            .then(function(response){
+              return utilities.cloneIntoEmptyObject(cityOptions, response.list);
+            });
+      }
+    }
+
+    function countryItem(item, escape) {
+      var label = item.name;
+      return '<div>' +
+          '<img width="18" src="'+appConstants.STATIC_URL + item.image+'"/>'+
+          '<span class="dropdownLabel">&nbsp;&nbsp;&nbsp;' + label + '</span>' +
+          '</div>';
+    }
+
+
+    function prepareCountryDropDown(countryConfig, countryOption, onChangeCallBack, maxItems){
+      var options = {};
+      var config =  {
+        onItemRemove: function(value){
+          var removedItem = _.find(options.list, function(opt) { return opt.code == value; });
+          countryOption.list.push(removedItem);
+          var selectizeDropDown = this;
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'code',
+        sortField: 'name',
+        searchField: ['name'],
+        openOnFocus: true,
+        closeOnSelect: true,
+        create: false,
+        persist: false,
+        render: {
+          item: countryItem,
+          option: countryItem
+        }
+      };
+      if(maxItems) config['maxItems'] = maxItems;
+      if(onChangeCallBack){
+        config['onChange'] = function (value, a, b, c){
+          onChangeCallBack(value);
+        };
+      }
+      utilities.cloneIntoEmptyObject(countryConfig, config);
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.country, read.DROP_DOWN)
+          .then(function(response){
+            utilities.cloneIntoEmptyObject(options, response.list);
+            return utilities.cloneIntoEmptyObject(countryOption, response.list);
+          });
+    }
 
     function getCommissionTypeConfig(){
       return {
@@ -49,8 +417,9 @@
       };
     }
 
-    function getBasicDropDownConfig(){
-      return {
+    // multiple : boolean if you want a multi select
+    function getBasicDropDownConfig(multiple, dropOptions, atrValue, atrLabel){
+      var dropDown = {
         valueField: 'id',
         sortField: 'name',
         searchField: ['name'],
@@ -66,88 +435,39 @@
           },
           option: function(item, escape) {
             var name = item.name;
-            return '<div class="item">' +
+            return '<div>' +
                 '<span class="dropdownLabel">' + name + '</span>' +
                 '</div>';
           }
         }
       };
+      atrValue = (atrValue) ? atrValue : 'id';
+      atrLabel = (atrLabel) ? atrLabel : 'name';
+      dropDown['onItemRemove'] = function(value, obj){
+        var selectizeDropDown = this;
+        var removedOption = {};
+        removedOption[atrValue] = value;
+        removedOption[atrLabel] = obj.context.innerText;
+        if(dropOptions){
+          dropOptions.list.push(removedOption);
+        }
+        selectizeDropDown.refreshItems();
+      };
+      if(multiple){
+        delete dropDown['maxItems'];
+      }
+      return dropDown;
     }
 
-    function getBpConfig(){
-      return {
-        plugins: {
-          'no-delete': {}
-        },
-        valueField: 'bp_ID',
-        sortField: 'bp_Name',
-        searchField: ['bp_Name','bp_Cont_fullName', 'bp_country'],
-        maxItems:1,
-        create: false,
-        persist: false,
-        render: {
-          item: function(item, escape) {
-            var label = item.bp_Name;
-            var caption = item.bp_country;
-            var pContact = (item.bp_Cont_fullName === null)? 'No Primary Contact' : item.bp_Cont_fullName;
-            return '<div>' +
-                '<span class="dropdownLabel">' + label + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ caption + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ pContact + '</span>' +
-                '</div>';
-          },
-          option: function(item, escape) {
-            var label = item.bp_Name;
-            var caption = item.bp_country;
-            var pContact = (item.bp_Cont_fullName === null)? 'No Primary Contact' : item.bp_Cont_fullName;
-            return '<div>' +
-                '<span class="dropdownLabel">' + label + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ caption + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ pContact + '</span>' +
-                '</div>';
-          }
-        }
-      };
-    }
 
-    function getProductConfig(){
-      return {
-        plugins: {
-          'no-delete': {}
-        },
-        valueField: 'id',
-        sortField: 'name',
-        searchField: ['name','origin', 'quality'],
-        maxItems:1,
-        create: false,
-        persist: false,
-        render: {
-          item: function(item, escape) {
-            var label = item.name;
-            var caption = item.origin;
-            var pContact = (item.quality === null)? 'No Quality Tags' : item.quality;
-            return '<div>' +
-                '<span class="dropdownLabel">' + label + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ caption + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ pContact + '</span>' +
-                '</div>';
-          },
-          option: function(item, escape) {
-            var label = item.name;
-            var caption = item.origin;
-            var pContact = (item.quality === null)? 'No Quality Tags' : item.quality;
-            return '<div>' +
-                '<span class="dropdownLabel">' + label + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ caption + '</span>' +
-                '<span class="dropdownCaption">' + ' | '+ pContact + '</span>' +
-                '</div>';
-          }
-        }
-      };
-    }
+
+
 
     function getBpLocationConfig(){
       var config = {
+        plugins: {
+          'no-delete': {}
+        },
         valueField: 'id',
         sortField: 'name',
         searchField: ['address','city', 'state', 'country'],
@@ -187,6 +507,22 @@
       businessPartner.getBusinessPartnerLocation(authentication.getUserBusinessId(), 'drop_down')
           .then(function(response){
             utilities.cloneIntoEmptyObject(locationOptions,response.locations)
+          });
+    }
+
+    function prepareProductCategoryDropDown(catConfig, catOptions){
+      utilities.cloneIntoEmptyObject(catConfig, getBasicDropDownConfig());
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.productCategory).then(function (response) {
+        return utilities.cloneIntoEmptyObject(catOptions, response.list);
+      });
+    }
+
+
+    function preparePriceMetricConfig(priceMetricConfig, priceMetricOptions){
+      utilities.cloneIntoEmptyObject(priceMetricConfig, getBasicDropDownConfig(false, priceMetricOptions));
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.priceMetric, read.DROP_DOWN)
+          .then(function(response){
+            return utilities.cloneIntoEmptyObject(priceMetricOptions, response.list);
           });
     }
 

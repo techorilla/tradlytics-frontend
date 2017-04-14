@@ -18,7 +18,7 @@
     .directive('filterBar', filterBar);
 
   /* @ngInject */
-  function filterBar(appFormats, appTabFilter){
+  function filterBar(appFormats, appTabFilter, apiEndPoints){
 
     return {
       link: link,
@@ -33,7 +33,11 @@
         tranStatus:'=',
         bpTypes:'=',
         country:'=',
+        productItems: '=',
+        priceMarket: '=',
         datePicker: '=',
+        onProductItemSelectedChanged: '&',
+        onPriceMarketSelectedChanged: '&',
         onBpTypesSelectedChanged:'&',
         onBuyersSelectedChanged:'&',
         onSellersSelectedChanged:'&',
@@ -48,7 +52,8 @@
     /////////////////////
 
     function link(scope, elem, attrs){
-        scope.appTabFilter = appTabFilter
+        scope.apiEndPoints = apiEndPoints;
+        scope.appTabFilter = appTabFilter;
         scope.appFormats = appFormats;
         scope.maxDate = moment();
         scope.ranges= {

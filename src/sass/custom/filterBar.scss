@@ -2,7 +2,7 @@
   cursor: pointer;
   padding: 10px 0px;
   .dg-filterDropdown{
-    background: $my-gray;
+    background: $sidebar;
     //border: 1px solid #ccc;
     border: 1px solid $sidebar;
     box-shadow: 0px 0.5px 0px 1px $sidebar ;
@@ -36,12 +36,13 @@
 
 
 .dg-filterPanel{
-  padding: 5px;
-  margin-bottom: 10px;
+  height: auto;
+  //padding: 5px;
+  //margin-bottom: 10px;
   border-radius: 5px;
-  background: $sidebar;
-  border: 1px solid $sidebar;
-  box-shadow: 0px 0.5px 0px 1px $sidebar ;
+  //background: $auth-panel-background;
+  //border: 1px solid $sidebar;
+  //box-shadow: 0px 0.5px 0px 1px $sidebar ;
   .dg-filterDropdown{
     cursor: pointer;
     position: relative;
@@ -57,7 +58,11 @@
       .filter-count{
         padding: 1px 7px 1px 7px;
         border-radius: 2px;
-        background: $sidebar;
+        background: $primary;
+        .fa-pulse{
+          font-size: 9px;
+        }
+
       }
       .fa-filter{
         color: $primary;
@@ -70,10 +75,10 @@
       }
     }
     .dg-filterDropdownMenu{
-      background:$my-gray;
+      background:$sidebar;
       border:1px solid $sidebar;
       border-radius:5px;
-      position: absolute;
+      position: relative;
       top: 100%;
       left: 0;
       width:100%;
@@ -87,6 +92,10 @@
         list-style: none;
         height: 150px;
         li{
+          .filterHeading{
+            font-size: 12px;
+            font-weight: 800;
+          }
           margin:0;
           padding:5px;
           overflow: hidden;

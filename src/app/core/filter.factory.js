@@ -13,9 +13,9 @@
         .factory('tabFilter', filter);
 
     /* @ngInject */
-    function filter(Restangular, apiEndPoints){
+    function filter(Restangular, apiEndPoints, settings, crud){
 
-        var tabFilterAPI = Restangular.all(apiEndPoints.tabFilters);
+        var tabFilterAPI = Restangular.all(apiEndPoints.dropDown.main);
         return {
             getTabFilters: getTabFilters
         };
@@ -35,8 +35,8 @@
          * @param {int} entity id
          */
 
-        function getTabFilters(type, subtype){
-            return tabFilterAPI.customGET('list', {type:type, subType: subtype});
+        function getTabFilters(endPoint, params){
+            return settings.dropDown[crud.READ](endPoint, params);
         }
 
     }

@@ -7,10 +7,24 @@
 
   angular.module('app.theme')
       .filter('profilePicture', profilePicture)
-      .filter('productPicture', productPicture);
+      .filter('productPicture', productPicture)
+      .filter('itemImage', itemImage)
+      .filter('businessLogo', businessLogo);
+
+  function itemImage(layoutPaths){
+    return function(input, ext) {
+      return (input) ? input : layoutPaths.images.root+'/theme/no-picture.png'
+    };
+  }
 
   /** @ngInject */
   function profilePicture(layoutPaths) {
+    return function(input, ext) {
+      return (input) ? input : layoutPaths.images.root+'/theme/no-photo.png'
+    };
+  }
+
+  function businessLogo(layoutPaths){
     return function(input, ext) {
       return (input) ? input : layoutPaths.images.root+'/theme/no-photo.png'
     };

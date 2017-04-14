@@ -9,7 +9,7 @@
                     <li ng-repeat="subtab in tab.children"><a ng-click="tabClicked($event, subtab, tab, $index)">{{subtab.title}}</a></li>
                 </ul>
             </uib-tab-heading>
-            <div ui-view="subContent">
+            <div ui-view="content">
             </div>
         </uib-tab>
     </uib-tabset>

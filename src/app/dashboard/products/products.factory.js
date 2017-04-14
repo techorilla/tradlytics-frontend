@@ -15,34 +15,115 @@
     /* @ngInject */
     function product(Restangular, apiEndPoints, utilities){
 
-        var product = {
-            info:{},
-            growingConditions:{},
-            growingAreas:{}
-        };
+
 
         var productAPI = Restangular.all(apiEndPoints.product);
+        var productItemAPI = Restangular.all(apiEndPoints.productItem);
 
         return {
             getAllProductList: getAllProductList,
             getProductObj:getProductObj,
             setProductInfo: setProductInfo,
 
+            getAllProductCategories: getAllProductCategories,
+            getNewProductCategoryObj: getNewProductCategoryObj,
+            addProductCategory: addProductCategory,
+            updateProductCategory: updateProductCategory,
+
+
             addProduct: addProduct,
             updateProduct: updateProduct,
             deleteProduct: deleteProduct,
             getProduct: getProduct,
 
-            addProductImage: addProductImage,
-            updateProductImage: updateProductImage,
-            deleteProductImage: deleteProductImage,
+            getNewProductItem: getNewProductItem,
+            addProductItem: addProductItem,
+            updateProductItem: updateProductItem,
+            getAllProductItems: getAllProductItems,
 
-            resetProductObj: resetProductObj
+            getNewKeywordObj: getNewKeywordObj,
+            addProductKeyword: addProductKeyword,
+            updateProductKeyword: updateProductKeyword,
+            getAllKeywords: getAllKeywords,
+
+            resetProductObj: resetProductObj,
+            saveProductOrigin: saveProductOrigin,
+
+            getPriceReport: getPriceReport,
+            displayOnWebsite: displayOnWebsite
         };
+
+        function displayOnWebsite(productId, state){
+            return productAPI.customPOST({
+                'productId': productId,
+                'status': state
+            }, apiEndPoints.productWebsiteStatus);
+        }
+
+        function getPriceReport(dateRange, productItemId){
+            var data = angular.copy(dateRange);
+            data = angular.extend(data, {
+                'productItemId': productItemId
+            });
+            return productItemAPI.customGET(apiEndPoints.productPriceReport, data);
+        }
+
+        function updateProductKeyword(keywordObj, callback){
+            return productAPI.customPUT(keywordObj, apiEndPoints.productKeywords).then(function(res){
+               callback(res);
+            })
+        }
+
+        function addProductKeyword(keywordObj, callback){
+            return productAPI.customPOST(keywordObj, apiEndPoints.productKeywords).then(function(res){
+                callback(res);
+            });
+        }
+
+        function getAllKeywords(){
+            return productAPI.customGET(apiEndPoints.productKeywords);
+        }
+
+        function getNewKeywordObj(){
+            return {
+                keyword: '',
+                categoryId: null
+            }
+        }
+
+        // Start Product Category
+
+        function getAllProductCategories(){
+            return productAPI.customGET(apiEndPoints.productCategory)
+        }
+
+        function getNewProductCategoryObj(){
+            return {
+                name:'',
+                description: ''
+            }
+        }
+
+        function addProductCategory(categoryObj, callback){
+            return productAPI.customPOST(categoryObj, apiEndPoints.productCategory).then(function(res){
+                callback(res);
+            })
+        }
+
+        function updateProductCategory(categoryObj, callback){
+            return productAPI.customPUT(categoryObj, apiEndPoints.productCategory).then(function(res){
+                callback(res);
+            })
+        }
+
+        // End Product Category
+
+
 
         function getAllProductList(){
             return productAPI.customGET()
         }
+
 
         function resetProductObj(){
             product.info = {};
@@ -50,59 +131,97 @@
             product.growingAreas = {};
         }
 
-        function addProductImage(productId, imagesData){
+        function getNewProductItem(){
+            return {
+                'keywords':[],
+                'productId': null,
+                'productOrigin': null
+            }
+        }
+
+        function addProductItem(productItem, callback){
+           productItemAPI.customPOST(productItem).then(function(res){
+               callback(res);
+           });
+        }
+
+        function updateProductItem(productItem, callback){
+            productItemAPI.customPUT(productItem).then(function(res){
+                callback(res);
+            });
+        }
+
+        function getAllProductItems(){
+            return productItemAPI.customGET();
+        }
+
+
+
+        function getProduct(productId){
+
+        }
+
+        function prepareProduct(productObj, imagesData){
             var body = new FormData();
-            var file = new File([imagesData.resultBlob], "profile.png");
-            body.append('product_image', file);
-            body.append('primary', true);
+            if(imagesData){
+                var file = new File([imagesData.resultBlob], productObj.info.name+'.png');
+                body.append('image', file);
+            }
+            body.append('product', JSON.stringify(productObj.info));
+            return body
+        }
+
+        function updateProduct(productObj, imagesData){
             return productAPI.withHttpConfig({
                 transformRequest: angular.identity
-            }).customPOST(
-                body,
-                productId+'/image',
+            }).customPUT(
+                prepareProduct(productObj, imagesData),
+                '',
                 undefined, {
                     'Content-Type': undefined
                 }
             );
         }
 
-        function updateProductImage(){
-
+        function addProduct(productObj, imagesData){
+            return productAPI.withHttpConfig({
+                transformRequest: angular.identity
+            }).customPOST(
+                prepareProduct(productObj, imagesData),
+                '',
+                undefined, {
+                    'Content-Type': undefined
+                }
+            );
         }
 
-        function deleteProductImage(){
-
+        function saveProductOrigin(productObj){
+            return productAPI.customPOST({
+                'origins': productObj.origins,
+                'product_id': productObj.id
+            }, apiEndPoints.productOrigin);
         }
 
-        function getProduct(productId){
 
-        }
-
-        function updateProduct(form, productObj, images, callback){
-            if(form.$valid){
-
-            }
-        }
 
         function deleteProduct(productId){
-
+            return productAPI.customDELETE(productId);
         }
 
-        function addProduct(form, productObj, images, callback){
-            if(form.$valid){
-                productAPI.customPOST({'product':productObj.info}).then(function(productResponse){
-                    callback(productResponse);
-                    resetProductObj();
-                })
-            }
-        }
+
+
 
         function setProductInfo(productInfo){
             product.info = productInfo;
         }
 
         function getProductObj(){
-            return product;
+            return {
+                info:{},
+                growingConditions:{},
+                growingAreas:{},
+                origins:null
+            };
         }
     }
 

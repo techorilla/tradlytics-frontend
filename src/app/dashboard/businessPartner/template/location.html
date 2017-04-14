@@ -1,0 +1,110 @@
+<form name="vm.locationInfoForm">
+
+    <div class="row">
+        <div class="col-md-6 marginBottom10px">
+            <button type="button"
+                    class="btn btn-primary" data-toggle="modal"
+                    ng-click="vm.addBusinessAddress(vm.business)">
+                Add New Address
+            </button>
+        </div>
+    </div>
+
+    <h3 class="with-line">All Locations</h3>
+
+    <div ng-repeat="location in vm.business.locations" class="row">
+
+
+        <div class="col-md-4">
+            <div class="form-group row clearfix">
+                <label for="locationAddress_{{$index}}" class="col-sm-3 control-label">Address</label>
+                <div class="col-sm-9">
+                            <textarea ng-model="location.address"
+                                      style="height: 140px"
+                                      rows="10"
+                                      placeholder="Address"
+                                      class="form-control"
+                                      name="locationAddress_{{$index}}"
+                                      id="locationAddress_{{$index}}">
+                            </textarea>
+                    <ng-messages for="vm.locationInfoForm['locationAddress_{{$index}}'].$error"
+                                 ng-if='(vm.locationInfoForm.$submitted && vm.locationInfoForm["locationAddress_"+$index].$invalid) ||
+                                            (vm.locationInfoForm["locationAddress_"+$index].$invalid && vm.locationInfoForm["locationAddress_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter valid address.</div>
+                    </ng-messages>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">Country</label>
+                <div class="col-sm-9">
+                    <selectize
+                            placeholder="Country"
+                            name="{{'locationCountry_'+$index}}"
+                            ng-required="true"
+                            config="vm.countryConfig"
+                            options='vm.countryOptions.list'
+                            ng-model="location.country">
+                    </selectize>
+                    <ng-messages for="vm.locationInfoForm['locationCountry_{{$index}}'].$error"
+                                 ng-if='(vm.locationInfoForm.$submitted && vm.locationInfoForm["locationCountry_"+$index].$invalid) ||
+                                            (vm.locationInfoForm["locationCountry_"+$index].$invalid && vm.locationInfoForm["locationCountry_"+$index].$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please select a country.</div>
+                    </ng-messages>
+
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">State</label>
+
+                <div class="col-sm-9">
+                    <selectize
+                            placeholder="State"
+                            ng-disabled="!location.country"
+                            id="locationState_{{$index}}"
+                            name="locationState_{{$index}}"
+                            ng-required="true"
+                            config="vm.stateConfig"
+                            options='location.stateOptions.list'
+                            ng-model="location.state">
+                    </selectize>
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label for="locationCity_{{$index}}" class="col-sm-3 control-label">City</label>
+
+                <div class="col-sm-9">
+                    <selectize
+                            placeholder="City"
+                            ng-disabled="!location.country"
+                            id="locationCity_{{$index}}"
+                            name="locationCity_{{$index}}"
+                            ng-required="true"
+                            config="vm.cityConfig"
+                            options='location.cityOptions.list'
+                            ng-model="location.city">
+                    </selectize>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="checkbox">
+                <label class="custom-checkbox">
+                    <input type="checkbox" id="checkboxSuccess"
+                           ng-change="vm.isPrimaryChange(vm.business.locations, location, location.isPrimary, 'isPrimary')"
+                           ng-model="location.isPrimary">
+                    <span>Is Primary Address</span>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <i ng-click="vm.removeBusinessLocation(vm.business.locations, location)"
+               class="fa fa-trash primary-font cursor-pointer" style="padding-top: 10px;"></i>
+        </div>
+
+        <br>
+        <br>
+        <h3 class="with-line margin-top-10px margin-bottom-10px" style="margin-top:100px; width:98%; margin-left: auto; margin-right: auto;"></h3>
+    </div>
+</form>

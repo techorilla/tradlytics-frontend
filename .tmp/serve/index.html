@@ -20,7 +20,6 @@
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="../bower_components/bootstrap-select/dist/css/bootstrap-select.css" />
   <link rel="stylesheet" href="../bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" />
-  <link rel="stylesheet" href="../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
   <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
   <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.css" />
   <link rel="stylesheet" href="../bower_components/leaflet/dist/leaflet.css" />
@@ -36,6 +35,7 @@
   <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css" />
   <link rel="stylesheet" href="../bower_components/selectize/dist/css/selectize.css" />
   <link rel="stylesheet" href="../bower_components/ng-img-crop-full-extended/compile/minified/ng-img-crop.css" />
+  <link rel="stylesheet" href="../bower_components/isteven-angular-multiselect/isteven-multi-select.css" />
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -45,7 +45,7 @@
   <!-- endinject -->
   <!-- endbuild -->
 </head>
-<body ng-class="{'themebody':!nodashBackground, 'landing-body':nodashBackground}">
+<body class="{{bgBackgroundClass}}">
 
 
 <div ui-view></div>
@@ -76,7 +76,6 @@
 <script src="../bower_components/bootstrap/js/dropdown.js"></script>
 <script src="../bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
 <script src="../bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
-<script src="../bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
 <script src="../bower_components/moment/moment.js"></script>
 <script src="../bower_components/fullcalendar/dist/fullcalendar.js"></script>
 <script src="../bower_components/jquery.easing/js/jquery.easing.js"></script>
@@ -125,6 +124,8 @@
 <script src="../bower_components/selectize/dist/js/selectize.js"></script>
 <script src="../bower_components/angular-selectize2/dist/angular-selectize.js"></script>
 <script src="../bower_components/ng-img-crop-full-extended/compile/minified/ng-img-crop.js"></script>
+<script src="../bower_components/isteven-angular-multiselect/isteven-multi-select.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -142,6 +143,8 @@
 <script src="app/theme/theme.module.js"></script>
 <script src="app/widgets/widgets.module.js"></script>
 <script src="app/dashboard/businessPartner/businessPartner.module.js"></script>
+<script src="app/dashboard/manifest/manifest.module.js"></script>
+<script src="app/dashboard/pricing/pricing.module.js"></script>
 <script src="app/dashboard/products/products.module.js"></script>
 <script src="app/dashboard/settings/settings.module.js"></script>
 <script src="app/dashboard/tradeBook/tradebook.module.js"></script>
@@ -174,21 +177,27 @@
 <script src="app/widgets/ui/tabs/tabs.module.js"></script>
 <script src="app/widgets/ui/typography/typography.module.js"></script>
 <script src="app/authentication/authentication.controller.js"></script>
+<script src="app/dashboard/dashboard.controller.js"></script>
 <script src="app/modal/alertmodal.controller.js"></script>
 <script src="app/modal/changepassword.controller.js"></script>
 <script src="app/dashboard/businessPartner/addbusinesspartner.controller.js"></script>
 <script src="app/dashboard/businessPartner/businesspartner.controller.js"></script>
-<script src="app/dashboard/businessPartner/businesspartnerinfo.controller.js"></script>
-<script src="app/dashboard/products/detailProducts.controller.js"></script>
+<script src="app/dashboard/manifest/manifest.controller.js"></script>
+<script src="app/dashboard/manifest/manifestDashboard.controller.js"></script>
+<script src="app/dashboard/pricing/priceMarket.controller.js"></script>
+<script src="app/dashboard/pricing/pricing.controller.js"></script>
+<script src="app/dashboard/pricing/productPricing.controller.js"></script>
+<script src="app/dashboard/products/priceAnalytics.controller.js"></script>
+<script src="app/dashboard/products/productCategories.controller.js"></script>
+<script src="app/dashboard/products/productItems.controller.js"></script>
+<script src="app/dashboard/products/productKeyword.controller.js"></script>
 <script src="app/dashboard/products/products.controller.js"></script>
 <script src="app/dashboard/settings/settings.controller.js"></script>
 <script src="app/dashboard/tradeBook/tradebook.controller.js"></script>
 <script src="app/dashboard/user/user.controller.js"></script>
+<script src="app/dashboard/website/blog.controller.js"></script>
+<script src="app/dashboard/website/website.controller.js"></script>
 <script src="app/landing/home/home.controller.js"></script>
-<script src="app/dashboard/businessPartner/bankDetails/bpbankdetails.controller.js"></script>
-<script src="app/dashboard/businessPartner/contactNumbers/bpcontactnumbers.controller.js"></script>
-<script src="app/dashboard/businessPartner/contactPersons/bpcontactpersons.controller.js"></script>
-<script src="app/dashboard/businessPartner/products/bpproduct.controller.js"></script>
 <script src="app/dashboard/settings/appDropDowns/appDropDown.controller.js"></script>
 <script src="app/dashboard/tradeBook/transaction/transaction.controller.js"></script>
 <script src="app/dashboard/user/profile/profile.controller.js"></script>
@@ -207,9 +216,13 @@
 <script src="app/core/filter.factory.js"></script>
 <script src="app/core/restangular.config.js"></script>
 <script src="app/core/router.config.js"></script>
+<script src="app/core/textAngularDecorators.js"></script>
+<script src="app/core/textAngularSetup.js"></script>
 <script src="app/core/utilities.factory.js"></script>
+<script src="app/dashboard/dashboard.factory.js"></script>
 <script src="app/modal/modalFactory.factory.js"></script>
 <script src="app/modals/ModalsPageCtrl.js"></script>
+<script src="app/modals/loaderModal.js"></script>
 <script src="app/modals/modalPages.constants.js"></script>
 <script src="app/modals/modals.factory.js"></script>
 <script src="app/theme/theme.config.js"></script>
@@ -218,10 +231,13 @@
 <script src="app/theme/theme.run.js"></script>
 <script src="app/theme/theme.service.js"></script>
 <script src="app/dashboard/businessPartner/businessPartner.factory.js"></script>
+<script src="app/dashboard/manifest/manifest.factory.js"></script>
+<script src="app/dashboard/pricing/pricing.factory.js"></script>
 <script src="app/dashboard/products/products.factory.js"></script>
 <script src="app/dashboard/settings/settings.factory.js"></script>
 <script src="app/dashboard/tradeBook/tradebook.factory.js"></script>
 <script src="app/dashboard/user/user.factory.js"></script>
+<script src="app/dashboard/website/website.factory.js"></script>
 <script src="app/modals/notifications/NotificationsCtrl.js"></script>
 <script src="app/theme/components/toastrLibConfig.js"></script>
 <script src="app/theme/directives/animatedChange.js"></script>
@@ -237,14 +253,14 @@
 <script src="app/theme/services/fileReader.js"></script>
 <script src="app/theme/services/preloader.js"></script>
 <script src="app/theme/services/stopableInterval.js"></script>
+<script src="app/widgets/blogCard/blogCard.directive.js"></script>
 <script src="app/widgets/blurFeed/BlurFeedCtrl.js"></script>
 <script src="app/widgets/blurFeed/blurFeed.directive.js"></script>
 <script src="app/widgets/calendar/dashboardCalendar.js"></script>
+<script src="app/widgets/clickOff/clickOff.js"></script>
 <script src="app/widgets/customFilter/customFilter.directive.js"></script>
 <script src="app/widgets/dashboardCalendar/DashboardCalendarCtrl.js"></script>
 <script src="app/widgets/dashboardCalendar/dashboardCalendar.directive.js"></script>
-<script src="app/widgets/dashboardLineChart/DashboardLineChartCtrl.js"></script>
-<script src="app/widgets/dashboardLineChart/dashboardLineChart.directive.js"></script>
 <script src="app/widgets/dashboardMap/DashboardMapCtrl.js"></script>
 <script src="app/widgets/dashboardMap/dashboardMap.directive.js"></script>
 <script src="app/widgets/dashboardPieChart/DashboardPieChartCtrl.js"></script>
@@ -253,11 +269,17 @@
 <script src="app/widgets/dashboardTodo/dashboardTodo.directive.js"></script>
 <script src="app/widgets/deAccordian/deAccordian.directive.js"></script>
 <script src="app/widgets/filterBar/filterBar.directive.js"></script>
+<script src="app/widgets/lineChart/lineChart.directive.js"></script>
+<script src="app/widgets/lineChart/lineChartCtrl.js"></script>
+<script src="app/widgets/ngTagsInput/ngTagsInput.directive.js"></script>
+<script src="app/widgets/numberOnlyInput/numberOnlyInput.directive.js"></script>
 <script src="app/widgets/pageHeader/pageHeader.directive.js"></script>
 <script src="app/widgets/pieCharts/dashboardPieChart.js"></script>
-<script src="app/widgets/popularApp/popularApp.directive.js"></script>
 <script src="app/widgets/profile/ProfileModalCtrl.js"></script>
 <script src="app/widgets/profile/ProfilePageCtrl.js"></script>
+<script src="app/widgets/sparklines/sparklines.directive.js"></script>
+<script src="app/widgets/spectrumColorPicker/spectrum.js"></script>
+<script src="app/widgets/spectrumColorPicker/spectrumColorPicker.js"></script>
 <script src="app/widgets/tables/TablesPageCtrl.js"></script>
 <script src="app/widgets/trafficChart/TrafficChartCtrl.js"></script>
 <script src="app/widgets/trafficChart/trafficChart.directive.js"></script>
@@ -280,6 +302,7 @@
 <script src="app/theme/components/msgCenter/MsgCenterCtrl.js"></script>
 <script src="app/theme/components/msgCenter/msgCenter.directive.js"></script>
 <script src="app/theme/components/pageTop/pageTop.directive.js"></script>
+<script src="app/theme/components/progressBarRound/progressBarRound.directive.js"></script>
 <script src="app/theme/components/widgets/widgets.directive.js"></script>
 <script src="app/theme/filters/image/appImage.js"></script>
 <script src="app/theme/filters/image/kameleonImg.js"></script>
@@ -311,9 +334,9 @@
 <script src="app/widgets/charts/amCharts/ganttChart/ganttChartCtrl.js"></script>
 <script src="app/widgets/charts/amCharts/lineChart/LineChartCtrl.js"></script>
 <script src="app/widgets/charts/amCharts/pieChart/PieChartCtrl.js"></script>
+<script src="app/widgets/components/mail/detail/MailDetailCtrl.js"></script>
 <script src="app/widgets/components/mail/composeBox/composeBoxCtrl.js"></script>
 <script src="app/widgets/components/mail/composeBox/composeModal.js"></script>
-<script src="app/widgets/components/mail/detail/MailDetailCtrl.js"></script>
 <script src="app/widgets/components/mail/list/MailListCtrl.js"></script>
 <script src="app/widgets/ui/modals/notifications/NotificationsCtrl.js"></script>
 <script src="app/widgets/form/inputs/widgets/select/SelectpickerPanelCtrl.js"></script>

@@ -1,0 +1,149 @@
+.priceItemList {
+  .priceContainer{
+    padding: 25px 25px 25px 25px;
+
+    .priceItem {
+      padding: 30px 30px 30px 30px;
+      background: $sidebar;
+      min-height: 520px;
+      color: $sidebar-text;
+      border: 1px solid $border;
+      border-radius: 10px;
+
+      .analytics-button{
+        position: absolute;
+        width: 80%;
+        bottom: 40px;
+        right: 10%;
+        left: 10%;
+
+      }
+
+      .priceDetails{
+        background: none !important;
+        font-family: 'Montserrat',sans-serif;
+        .lastUpdated{
+          font-size: 10px;
+        }
+        div{
+        }
+        .currency{
+          position: relative;
+          right: 5px;
+          width:100%;
+          padding-top: 5px;
+          font-weight: 400;
+          font-size: 20px;
+        }
+        .price-number-na{
+          position: relative;
+          right: 5px;
+          font-family: 'Montserrat',sans-serif;
+          font-weight: 700;
+          font-size: 55px;
+          line-height: 1;
+          color: #f6f6f6;
+          top: 25px;
+          padding-bottom: 20px;
+        }
+        .price-number{
+          position: relative;
+          right: 5px;
+          font-family: 'Montserrat',sans-serif;
+          font-weight: 700;
+          font-size: 55px;
+          line-height: 1;
+          color: #f6f6f6;
+        }
+        .metric{
+          display: block;
+          font-size: 14px;
+          font-weight: 400;
+          position: relative;
+          bottom: -3px;
+          right:-50px;
+        }
+        .high-lows{
+          margin-top: 20px;
+          .heading{
+            padding-top: 10px;
+            text-align: center;
+            border-bottom: 2px solid $border;
+            font-family: 'Montserrat',sans-serif;
+            padding-bottom: 2px;
+            font-size: 13px;
+          }
+          .info{
+            padding-top:10px;
+            width: 100%;
+            .info-label{
+              text-align: left;
+            }
+            .number{
+              text-align: right;
+              color: $primary;
+              left: 56px;
+              margin-top: -13px;
+              text-align: right;
+            }
+          }
+        }
+        .lastUpdated{
+          display: block;
+          font-size: 9px;
+          padding-top: 10px;
+          font-weight: bold;
+          position: relative;
+          right:0;
+          color: $primary
+        }
+        .change{
+          position: relative;
+          .number{
+            font-size: 12px;
+            font-weight: bold;
+            float: left;
+            position: absolute;
+            top: 15px;
+            left: 30px;
+          }
+          .icon{
+            font-size: 40px;
+          }
+          .fa-caret-down{
+            color: $warning;
+          }
+          .fa-caret-up{
+            color: $success;
+          }
+        }
+      }
+      .productName{
+        font-size: 22px;
+        font-weight: 800;
+        .name{
+          line-height: 25px;
+          width: calc(100% - 60px);
+        }
+        img{
+          float: right;
+          position: absolute;
+          right: 0;
+          top: -10px;
+        }
+        .productOrigin{
+          font-size: 12px;
+          font-weight: 400;
+
+        }
+        .productKeyword{
+          padding-top: 5px;
+          font-size: 12px;
+          font-weight: 400;
+        }
+      }
+
+    }
+  }
+
+}

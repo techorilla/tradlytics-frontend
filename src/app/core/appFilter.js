@@ -35,7 +35,6 @@
                 return items;
             }
             return items.filter(function(element, index, array) {
-                console.log(element.selected);
                 if(element[bind]){
                     return element[bind].toLowerCase().indexOf(search.toLowerCase())===0;
                 }
@@ -52,8 +51,8 @@
 
     function selectedRows(){
         return function(rows,rowsToRemove,bind){
-
-            if(rowsToRemove.length === 0){
+            console.log(rows, rowsToRemove);
+            if(!rowsToRemove || rowsToRemove.length === 0){
                 return rows;
             }
             return rows.filter(function(element,index,array){

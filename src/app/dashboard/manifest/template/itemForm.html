@@ -1,0 +1,176 @@
+<form name="vm.manifestForm" novalidate>
+    <h3 class="with-line"></h3>
+
+    <div class="row">
+
+
+        <div class="col-md-6">
+            <div class="form-group row clearfix">
+                <label for="productItem" class="col-sm-3 control-label">Buyer</label>
+                <div class="col-sm-9">
+                    <selectize
+                            ng-required="true"
+                            placeholder="Buyer"
+                            name="buyer"
+                            id="buyer"
+                            config="vm.buyerConfig"
+                            options='vm.buyerOptions.list'
+                            ng-model="vm.manifestItem.buyerId">
+                    </selectize>
+                    <ng-messages for="vm.manifestForm.buyer.$error"
+                                 ng-if='(vm.manifestForm.$submitted && vm.manifestForm.buyer.$invalid) ||
+                                            (vm.manifestForm.buyer.$invalid && vm.manifestForm.buyer.$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please select Buyer</div>
+                    </ng-messages>
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label for="productItem" class="col-sm-3 control-label">Product Item</label>
+                <div class="col-sm-9">
+                    <selectize
+                            ng-required="true"
+                            name="product"
+                            placeholder="Product Item"
+                            id="product"
+                            config="vm.productConfig"
+                            options='vm.productOptions.list'
+                            ng-model="vm.manifestItem.productId">
+                    </selectize>
+                    <ng-messages for="vm.manifestForm.product.$error"
+                                 ng-if='(vm.manifestForm.$submitted && vm.manifestForm.product.$invalid) ||
+                                            (vm.manifestForm.product.$invalid && vm.manifestForm.product.$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please select product.</div>
+                    </ng-messages>
+                </div>
+            </div>
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">Date</label>
+                <div class="col-sm-9">
+                    <div uib-datepicker ng-model="vm.manifestItem.date"
+                         class="calender margin-top-10px" datepicker-options="options"></div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group row clearfix">
+                <label for="productItem" class="col-sm-3 control-label">Seller</label>
+                <div class="col-sm-9">
+                    <selectize
+                            placeholder="Seller"
+                            ng-required="true"
+                            name="productItem"
+                            id="productItem"
+                            config="vm.sellerConfig"
+                            options='vm.sellerOptions.list'
+                            ng-model="vm.manifestItem.sellerId">
+                    </selectize>
+                    <ng-messages for="vm.manifestForm.productItem.$error"
+                                 ng-if='(vm.manifestForm.$submitted && vm.manifestForm.productItem.$invalid) ||
+                                            (vm.manifestForm.productItem.$invalid && vm.manifestForm.productItem.$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please select seller.</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label for="quantityMetric" class="col-sm-3 control-label">Quantity Metric</label>
+                <div class="col-sm-9">
+                    <selectize
+                            ng-required="true"
+                            placeholder="Quantity Metric"
+                            name="quantityMetric"
+                            id="quantityMetric"
+                            config="vm.quantityMetricConfig"
+                            options='vm.quantityMetricOptions.list'
+                            ng-model="vm.manifestItem.quantityMetricId">
+                    </selectize>
+                    <ng-messages for="vm.manifestForm.quantityMetric.$error"
+                                 ng-if='(vm.manifestForm.$submitted && vm.manifestForm.quantityMetric.$invalid) ||
+                                            (vm.manifestForm.quantityMetric.$invalid && vm.manifestForm.quantityMetric.$dirty)'>
+                        <div ng-message="required" class="errorValidation">Please enter quantity metric.</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">Quantity ({{vm.marketPriceObj.priceMetricId ?  vm.marketPriceObj.priceMetricId : 'FCL' }})</label>
+                <div class="col-sm-9">
+                    <input
+                            required
+                            ng-pattern="/^[0-9]+$/i"
+                            ng-model="vm.manifestItem.quantity"
+                            class="form-control"
+                            name="quantity"
+                            placeholder="Quantity in {{vm.manifestItem.quantityMetricId}}"/>
+
+                    <ng-messages for="vm.manifestForm.quantity.$error"
+                                 ng-show='(vm.manifestForm.$submitted && vm.manifestForm.quantity.$invalid) ||
+                                            (vm.manifestForm.quantity.$invalid && vm.manifestForm.quantity.$dirty)' role="alert">
+                        <ng-message class="errorValidation" when="required">Please enter price value.</ng-message>
+                        <ng-message class="errorValidation" when="pattern">Quantity can only have numbers.</ng-message>
+                    </ng-messages>
+                </div>
+            </div>
+
+
+            <div class="form-group row clearfix">
+                <label class="col-sm-3 control-label">Container No.</label>
+                <div class="col-sm-9">
+                    <input
+                            ng-model="vm.manifestItem.containerNo"
+                            class="form-control"
+                            name="containerNo"
+                            placeholder="Container No."/>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group  row clearfix">
+                <label for="priceComments" class="col-sm-3 control-label">Comments</label>
+                <div class="col-sm-12">
+                        <textarea ng-model="vm.manifestItem.comments"
+                                  placeholder="Comments"
+                                  class="form-control"
+                                  id="priceComments">
+                        </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit"
+            ng-if="!vm.manifestItem.id"
+            ng-click="vm.saveManifestItem(vm.manifestItem, vm.manifestForm, true)"
+            class="btn btn-success btn-with-icon save-profile">
+        <i class="ion-android-checkmark-circle"></i>Add Manifest Item & Add Another
+    </button>
+
+    <button type="submit"
+            ng-if="!vm.manifestItem.id"
+            ng-click="vm.saveManifestItem(vm.manifestItem, vm.manifestForm)"
+            class="btn btn-primary btn-with-icon save-profile">
+        <i class="ion-android-checkmark-circle"></i>Add Manifest Item & Exit
+    </button>
+
+    <button type="submit"
+            ng-if="vm.manifestItem.id"
+            ng-click="vm.saveManifestItem(vm.manifestItem, vm.manifestForm)"
+            class="btn btn-primary btn-with-icon save-profile">
+        <i class="ion-android-checkmark-circle"></i>Update Manifest Item
+    </button>
+    <button type="button" ng-click="vm.cancel()"
+            class="btn btn-danger btn-with-icon save-profile">
+        <i class="ion-android-cancel"></i>Cancel
+    </button>
+</form>

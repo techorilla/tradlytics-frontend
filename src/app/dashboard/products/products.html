@@ -1,45 +1,180 @@
-<div class="row product-list">
+<div class="row">
 
-   <!--<div class="col-md-2 product-card">-->
-      <!--<div class="add-new">-->
-         <!--<div class="content">-->
-            <!--<div class="icon">-->
-               <!--<img ng-src="assets/img/theme/icon/other/plant.png">-->
+   <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm" >
+      <button class="btn btn-primary"  ng-click="vm.addNewProduct()">
+         Add New Product
+      </button>
+   </div>
 
-            <!--</div>-->
-            <!--<div class="new-product" ng-click="vm.addNewProduct()">Add New Product</div>-->
-         <!--</div>-->
-      <!--</div>-->
-   <!--</div>-->
+   <div class="col-md-12" >
 
-   <div class="col-md-2 product-card no-padding" ng-click="vm.addNewProduct()">
-      <div class="product">
-         <div class="content">
-            <div class="add-image">
-               <img ng-src="assets/img/icons/add.png">
+      <div ng-if="vm.showForm" class="widgets">
+
+         <div class="row">
+            <div class="col-md-12">
+               <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
+                  <ba-wizard on-cancel="vm.cancel()">
+                     <ba-wizard-step title="Product Info" form="vm.productInfoForm"
+                                     on-next="vm.saveProduct(vm.productObj, vm.imagesData)"
+                                     on-next-callback="vm.onSaveProductCallback(response)"
+                                     submit-button-title="{{vm.stepTitle[0]}}">
+                        <form name="vm.productInfoForm" novalidate>
+                           <div class="product-wizard">
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <div class="row">
+
+                                       <div class="col-md-12">
+                                          <div class="form-group">
+                                             <div class="product-pic col-xs-6 col-xs-offset-3">
+                                                <div class="product-pic-wrapper">
+                                                   <img ng-src="{{ vm.productImage }}" ng-click="vm.uploadProductImage(event)">
+                                                </div>
+                                                <i class="ion-ios-close-outline" ng-click="vm.removeProductPicture()" ng-if="!vm.noPicture"></i>
+                                                <a href class="change-userpic" ng-click="vm.uploadProductImage(event)">Change Profile Picture</a>
+                                                <input type="file" ng-show="false" id="uploadProductFile" ng-file-select="vm.onFileSelect($files)">
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-12 distance-10px"></div>
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                             <label for="productName">Product Name</label>
+                                             <input autocomplete="false" type="text" class="form-control" id="productName" name="productName"
+                                                    placeholder="Product Name" ng-model="vm.productObj.info.name" required>
+                                             <ng-messages for="vm.productInfoForm.productName.$error"
+                                                          ng-if='(vm.productInfoForm.$submitted && vm.productInfoForm.productName.$invalid) ||
+                                            (vm.productInfoForm.productName.$invalid && vm.productInfoForm.productName.$dirty)'>
+                                                <div ng-message="required" class="errorValidation">Please enter product name.</div>
+                                             </ng-messages>
+                                             <span class="help-block error-block basic-block">Required</span>
+                                          </div>
+                                       </div>
+
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                             <label for="productName">Product Category</label>
+                                             <selectize
+                                                     ng-required="true"
+                                                     name="productCategory"
+                                                     config="vm.categoryConfig"
+                                                     options='vm.categoryOptions.list'
+                                                     ng-model="vm.productObj.info.categoryId">
+                                             </selectize>
+                                             <ng-messages for="vm.productInfoForm.productCategory.$error"
+                                                          ng-if='(vm.productInfoForm.$submitted && vm.productInfoForm.productCategory.$invalid) ||
+                                            (vm.productInfoForm.productCategory.$invalid && vm.productInfoForm.productCategory.$dirty)'>
+                                                <div ng-message="required" class="errorValidation">Please enter select a product category.</div>
+                                             </ng-messages>
+                                             <span class="help-block error-block basic-block">Required</span>
+                                          </div>
+                                       </div>
+
+                                       <div class="col-md-12">
+                                          <div class="form-group">
+                                             <label for="productDescription">Product Description</label>
+                                             <text-angular
+                                                       ng-model="vm.productObj.info.description"
+                                                       id="productDescription"></text-angular>
+                                          </div>
+                                       </div>
+                                       <!--<button type="button" ng-click="vm.addProduct(vm.productInfoForm, vm.productObj, vm.imagesData)" class="btn btn-primary btn-with-icon save-profile">-->
+                                       <!--<i class="ion-android-add-circle"></i>Add Product-->
+                                       <!--</button>-->
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+
+                     </ba-wizard-step>
+
+
+                     <ba-wizard-step title="Product Origin" form="vm.productOriginForm"
+                                     on-next="vm.saveProductOrigin(vm.productObj)"
+                                     on-next-callback="vm.onSaveProductOriginCallback(response)"
+                                     submit-button-title="{{vm.stepTitle[1]}}">
+                        <form name="vm.productOriginForm">
+                           <div class="product-wizard">
+                              <div class="row" style="min-height: 300px;">
+                                 <div class="col-lg-12">
+                                    <div class="form-group">
+                                       <label>Origins</label>
+                                       <selectize
+                                               ng-required="true"
+                                               name="productOrigins"
+                                               config="vm.countryConfig"
+                                               options='vm.countryOptions.list'
+                                               ng-model="vm.productObj.origins">
+                                       </selectize>
+                                       <ng-messages for="vm.productOriginForm.productOrigins.$error"
+                                                    ng-if='(vm.productOriginForm.$submitted && vm.productOriginForm.productOrigins.$invalid) ||
+                                            (vm.productOriginForm.productOrigins.$invalid && vm.productOriginForm.productOrigins.$dirty)'>
+                                          <div ng-message="required" class="errorValidation">Please enter atleast one product origin.</div>
+                                       </ng-messages>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </ba-wizard-step>
+                  </ba-wizard>
+               </div>
             </div>
+         </div>
+
+      </div>
+
+      <div ba-panel ba-panel-class="with-scroll" ng-if="!vm.showForm">
+         <div class="horizontal-scroll">
+            <table class="table table-striped" st-table="smartTableData">
+               <thead>
+               <tr class="sortable table-header" ng-if="vm.allProducts.length!==0">
+                  <th>Product Name</th>
+                  <th>Product Catrgory</th>
+                  <th colspan="2">Product Items</th>
+                  <th>Actions</th>
+               </tr>
+               <tr class="table-header" ng-if="vm.allProducts.length===0">
+                  <th>No values have been added.</th>
+               </tr>
+               </thead>
+               <tbody>
+               <tr ng-repeat="row in vm.allProducts | orderBy:'info.name'">
+                  <td class="titled" ng-bind="row.info.name"></td>
+                  <td ng-bind="row.info.categoryName"></td>
+                  <td colspan="2" ng-if="row.productItems.length > 0">
+                     <div class="productItemsColumn" ng-repeat="item in row.productItems">
+                        <div class="origin">
+                           <img width="18" src="{{vm.appConstants.HOST + item.originFlag}}"/> {{item.origin}}
+                        </div>
+                        <div class="keywords" ng-bind="item.keywords"></div>
+                     </div>
+                  </td>
+                  <td colspan="2" ng-if="row.productItems.length === 0">
+                     <div class="productItemsColumn">
+                        <div class="keywords" >No product items</div>
+                     </div>
+                  </td>
+
+                  <td>
+                     <div class="buttons">
+                        <button class="btn btn-success editable-table-button btn-xs" ng-click="vm.productReport($index)">Report</button>
+                        <button class="btn btn-primary editable-table-button btn-xs"
+                                ng-click="vm.editProduct(row)">Edit</button>
+                        <button class="btn editable-table-button btn-xs"
+                                ng-class="{'btn-danger': !row.info.onWebsite, 'btn-success': row.info.onWebsite}"
+                                ng-click="vm.displayOnWebsite(row)">Website</button>
+                        <button ng-if="row.isDeletable" class="btn btn-warning editable-table-button btn-xs" ng-click="vm.deleteProduct(vm.allProducts, row)">Delete</button>
+
+                     </div>
+                  </td>
+               </tr>
+               </tbody>
+            </table>
          </div>
       </div>
    </div>
-
-   <div ng-repeat="product in vm.allProducts" class="col-md-2 product-card no-padding">
-      <div class="product">
-         <div class="content">
-            <div class="new-product" ng-bind="product.name"></div>
-            <div class="prod-image">
-               <img ng-src="{{product.image | productPicture}}">
-            </div>
-            <div class="actionContainer">
-               <div class="action">
-                  View Details
-               </div>
-               <div class="action">
-                  Delete
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-
 </div>
+
+

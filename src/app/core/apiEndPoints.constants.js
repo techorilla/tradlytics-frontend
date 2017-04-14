@@ -27,7 +27,8 @@
         logout: 'logout',
         user:'user',
         bp:{
-            main:'bp_partner',
+            main:'business',
+            list: 'list',
             basic:'basic',
             bank:'bank',
             location:'location',
@@ -35,11 +36,9 @@
             contactNumber:'contact_number',
             product:'product'
         },
-        bpBasic: 'businessPartner/basic',
-        bpBank: 'businessPartner/bank',
-        bpProducts: 'businessPartner/product',
-        bpContactPerson: 'businessPartner/contact/person',
-        bpContactNumber: 'businessPartner/contact/number',
+        dashboard:'dashboard',
+        manifest: 'manifest',
+        manifestDashboard: 'manifest/dashboard',
         transactionBasic: 'transactions/basic',
         transactionCommission: 'transactions/commission',
         transactionContract: 'transactions/contract',
@@ -47,16 +46,45 @@
         transactionNote: 'transactions/note',
         transactionSecondary: 'transactions/secondary',
         tabFilters: 'tabFilters',
+        pricing: 'pricing',
+        pricingSummary: 'summary',
+        pricingMarket: 'price_market',
+        productItem: 'product_item',
+        productPriceReport: 'price_report',
         dropDown:{
             main: 'dropDown',
+            bpType: 'business_type',
+            productItem: 'product_item',
             businessType: 'business_type',
             contactType: 'contact_type',
             contractType: 'contract_type',
             designation: 'designation',
-            productQuality: 'product_quality',
-            transactionStatus: 'transaction_status'
+            productKeywords: 'product_keywords',
+            transactionStatus: 'transaction_status',
+            productCategory: 'product_category',
+            country: 'country',
+            region: 'region',
+            city: 'city',
+            product: 'product_drop_down',
+            productOrigin: 'product_origin',
+            currency: 'currency',
+            priceMarket: 'price_market',
+            shipmentMonth: 'shipment_month',
+            priceMetric: 'price_metric',
+            business: 'business',
         },
-        product: 'product'
+        product: 'product',
+        productWebsiteStatus: 'website_status',
+        productOrigin: 'origin',
+        productKeywords: 'keywords',
+        productCategory: 'category',
+        website:{
+            basic: 'website',
+            research: 'research',
+            researchTags: 'research_tags',
+            homeSlider: 'homeSlider',
+            team: 'team'
+        }
 
     };
 

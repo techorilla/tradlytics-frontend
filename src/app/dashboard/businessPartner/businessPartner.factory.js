@@ -18,40 +18,140 @@
         var businessPartner = {};
         var bpAPI = Restangular.all(apiEndPoints.bp.main);
 
-        var bpBasicAPI = Restangular.all(apiEndPoints.bpBasic);
-        var bpBankAPI = Restangular.all(apiEndPoints.bpBank);
-        var bpProductsAPI = Restangular.all(apiEndPoints.bpProducts);
-        var bpContactPersonAPI = Restangular.all(apiEndPoints.bpContactPerson);
-        var bpContactNumberAPI = Restangular.all(apiEndPoints.bpContactPerson);
-
         return {
 
+            addBusinessBasic: addBusinessBasic,
+            updateBusinessBasic: updateBusinessBasic,
+            deleteBusiness: deleteBusiness,
+            saveBusinessLocations: saveBusinessLocations,
+            saveBusinessContactPersons: saveBusinessContactPersons,
+            saveBusinessContacts: saveBusinessContacts,
+            saveBusinessBanks: saveBusinessBanks,
+
+
             setBusinessPartner: setBusinessPartner,
-            addBusinessPartner: addBusinessPartner,
             addBPContactPerson: addBPContactPerson,
             addNewBankAccount: addNewBankAccount,
             addBusinessPartnerContact: addBusinessPartnerContact,
             addBusinessPartnerProduct: addBusinessPartnerProduct,
-
-
-            updateBusinessPartner:updateBusinessPartner,
             editBPContactPerson: editBPContactPerson,
             editBankAccount: editBankAccount,
 
             getBusinessPartner: getBusinessPartner,
             getBusinessPartnerList: getBusinessPartnerList,
-            getBusinessPartnerComplete: getBusinessPartnerComplete,
+            getBusinessComplete: getBusinessComplete,
             getBusinessPartnerLocation: getBusinessPartnerLocation,
 
-            deleteBusinessPartner: deleteBusinessPartner,
+
             deleteBusinessPartnerContact: deleteBusinessPartnerContact,
             deleteBusinessPartnerBankDetail: deleteBusinessPartnerBankDetail,
             deleteBusinessPartnerContactNumber: deleteBusinessPartnerContactNumber,
-            deleteBusinessPartnerProduct: deleteBusinessPartnerProduct,
 
+            getNewBusinessObj: getNewBusinessObj,
+            getNewBusinessBankObj: getNewBusinessBankObj,
+            getNewBusinessAddressObj: getNewBusinessAddressObj,
+            getNewBusinessContactObj: getNewBusinessContactObj,
+            getNewBusinessContactPersonObj: getNewBusinessContactPersonObj
 
 
         };
+
+        // Business Location
+
+        function saveBusinessLocations(businessId, locations){
+            return bpAPI.customPOST({
+                'locations': locations,
+                'bpId': businessId
+            }, apiEndPoints.bp.location);
+        }
+
+        // Business Contact Person
+
+        function saveBusinessContactPersons(businessId, contactPersons){
+            return bpAPI.customPOST({
+               'contactPersons': contactPersons,
+                'bpId': businessId
+            }, apiEndPoints.bp.contactPerson);
+        }
+
+        // Business Contacts
+
+        function saveBusinessContacts(businessId, contacts){
+            return bpAPI.customPOST({
+                'contacts': contacts,
+                'bpId': businessId
+            }, apiEndPoints.bp.contactNumber);
+        }
+
+        // Business Banks
+
+        function saveBusinessBanks(businessId, banks){
+            return bpAPI.customPOST({
+                'banks': banks,
+                'bpId': businessId
+            }, apiEndPoints.bp.bank);
+        }
+
+
+        // Business Basic
+
+        function getNewBusinessAddressObj(business){
+
+            return {
+                'address': '',
+                'city': '',
+                'state': '',
+                'country': '',
+                'isPrimary': (business.locations.length === 0)
+            }
+        }
+
+        function getNewBusinessObj(){
+            var businessObj = {
+                'name': '',
+                'website': '',
+                'ntn': '',
+                'bpType': [],
+                'banks': [],
+                'locations': [],
+                'contacts': [],
+                'contactPersons': []
+            };
+            businessObj.banks.push(getNewBusinessBankObj());
+            businessObj.locations.push(getNewBusinessAddressObj(businessObj));
+            businessObj.contacts.push(getNewBusinessContactObj());
+            businessObj.contactPersons.push(getNewBusinessContactPersonObj());
+            return businessObj;
+        }
+
+        function getNewBusinessBankObj(){
+            return {
+                'accountTitle': '',
+                'accountNumber': '',
+                'accountCountry': '',
+                'accountCity': '',
+                'accountAddress': '',
+                'bankName': ''
+            }
+        }
+
+        function getNewBusinessContactObj(){
+            return {
+                'contactNumber': '',
+                'contactType': ''
+            }
+        }
+
+        function getNewBusinessContactPersonObj(){
+            return {
+                'isPrimary': false,
+                'fullName': '',
+                'designation': '',
+                'email': null,
+                'primaryNumber': '',
+                'secondaryNumber': ''
+            }
+        }
 
         ////////////////////
 
@@ -80,7 +180,7 @@
         function deleteBusinessPartnerContact(bpName, contactName, id, callback){
             modalFactory.alertModal(bpName,'Contact Person ' + contactName + 'Contact Person of Business Partner', 'Delete').then(function(res){
                 if(res){
-                    bpContactPersonAPI.remove({'contact_id':id}).then(callback);
+                    bpAPI.remove({'contact_id':id}).then(callback);
                 }
             });
         }
@@ -88,7 +188,7 @@
         function deleteBusinessPartnerBankDetail(bpName, accountTitle, accountNumber, id, callback){
             modalFactory.alertModal(bpName,'Bank Account ' + accountNumber + ' of title ' +accountTitle + ' of Business Partner ' , 'Delete').then(function(res){
                 if(res){
-                    bpBankAPI.remove({'bank_id':id}).then(callback);
+                    bpAPI.remove({'bank_id':id}).then(callback);
                 }
             });
         }
@@ -96,74 +196,109 @@
         function deleteBusinessPartnerContactNumber(bpName, contactNumber, contactType, id, callback){
             modalFactory.alertModal(bpName, contactType + ' Number ' + contactNumber + ' of Business Partner' , 'Delete').then(function(res){
                 if(res){
-                    bpContactNumberAPI.remove({'cont_num_id':id}).then(callback);
+                    bpAPI.remove({'cont_num_id':id}).then(callback);
                 }
             });
         }
 
         function addNewBankAccount(bankDetails){
-            return bpBankAPI.customPOST({bankDetails: bankDetails});
+            return bpAPI.customPOST({bankDetails: bankDetails});
         }
 
         function editBankAccount(bankDetails){
-            return bpBankAPI.customPUT({bankDetails: bankDetails})
+            return bpAPI.customPUT({bankDetails: bankDetails})
         }
 
         function addBusinessPartnerContact(contact){
-            return bpContactNumberAPI.customPOST({contact: contact});
+            return bpAPI.customPOST({contact: contact});
         }
 
         function addBPContactPerson(contactPerson){
-            return bpContactPersonAPI.customPOST({contactPerson: contactPerson});
+            return bpAPI.customPOST({contactPerson: contactPerson});
         }
 
         function editBPContactPerson(contactPerson){
-            return bpContactPersonAPI.customPUT({contactPerson: contactPerson});
+            return bpAPI.customPUT({contactPerson: contactPerson});
         }
 
 
         function addBusinessPartnerProduct(bpProduct)
         {
-            return bpProductsAPI.customPOST({bpProduct: bpProduct});
+            return bpAPI.customPOST({bpProduct: bpProduct});
         }
 
         function deleteBusinessPartnerProduct(bpProduct)
         {
-            return bpProductsAPI.customPUT({bpProduct: bpProduct});
+            return bpAPI.customPUT({bpProduct: bpProduct});
         }
 
 
         // Business Partner Basic
 
-        function getBusinessPartnerComplete(id){
-            return bpBasicAPI.get({'bpId': id});
+        function getBusinessComplete(id){
+            return bpAPI.customGET(apiEndPoints.bp.basic, {'bpId': id});
         }
 
-        function deleteBusinessPartner(name, id ,callback){
+        function addBusinessBasic(imagesData, business){
+            var body = new FormData();
+            if(imagesData){
+                var file = new File([imagesData.resultBlob], "logo.png");
+                body.append('logo', file);
+            }
+            body.append('data', JSON.stringify({
+                'name': business.name,
+                'website': business.website,
+                'ntn': business.ntn,
+                'bpType': business.bpType
+            }));
+
+            return bpAPI.withHttpConfig({
+                transformRequest: angular.identity
+            }).customPOST(
+                body,
+                apiEndPoints.bp.basic,
+                undefined, {
+                    'Content-Type': undefined
+                }
+            );
+        }
+
+        function updateBusinessBasic(imagesData, business){
+            var body = new FormData();
+            if(imagesData){
+                var file = new File([imagesData.resultBlob], "logo.png");
+                body.append('logo', file);
+            }
+            body.append('data', JSON.stringify({
+                'bpId': business.bpId,
+                'name': business.name,
+                'website': business.website,
+                'ntn': business.ntn,
+                'bpType': business.bpType
+            }));
+
+            return bpAPI.withHttpConfig({
+                transformRequest: angular.identity
+            }).customPUT(
+                body,
+                apiEndPoints.bp.basic,
+                undefined, {
+                    'Content-Type': undefined
+                }
+            );
+        }
+
+        function deleteBusiness(name, id ,callback){
             modalFactory.alertModal(name,'Business Partner', 'Delete').then(function(res){
                 if(res){
-                    bpBasicAPI.remove({'bp_id':id}).then(callback);
+                    bpAPI.remove({'bp_id':id}, apiEndPoints.bp.basic).then(callback);
                 }
             });
         }
 
-        function addBusinessPartner(businessPartner,callback){
-            return bpBasicAPI.customPOST({businessPartner: businessPartner}).then(callback);
-        }
-
-        function updateBusinessPartner(businessPartner,callback){
-            return bpBasicAPI.customPUT({businessPartner: businessPartner}).then(callback);
-        }
-
-
-
-
         function getBusinessPartnerList(){
-            return bpBasicAPI.get('all');
+            return bpAPI.customGET(apiEndPoints.bp.list);
         }
-
-
-
 
         function getBusinessPartnerLocation(businessId, query){
             return bpAPI.customGET(businessId+'/location',{'q':query})

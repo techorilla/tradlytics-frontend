@@ -1,0 +1,299 @@
+<div class="row">
+
+    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addNewProductItemPrice()">
+            Add New Product Price
+        </button>
+    </div>
+
+    <div class="col-md-12">
+        <div ba-panel ba-panel-class="profile-page" ng-if="vm.showForm">
+            <div class="panel-content">
+
+                <form name="vm.marketPriceForm" novalidate>
+                    <h3 class="with-line"></h3>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row clearfix">
+                                <label for="productItem" class="col-sm-3 control-label">Product Item</label>
+                                <div class="col-sm-9">
+                                    <selectize
+                                            ng-required="true"
+                                            name="productItem"
+                                            id="productItem"
+                                            config="vm.productItemConfig"
+                                            options='vm.productItemOptions.list'
+                                            ng-model="vm.marketPriceObj.productItemId">
+                                    </selectize>
+                                    <ng-messages for="vm.marketPriceForm.productItem.$error"
+                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm.productItem.$invalid) ||
+                                            (vm.marketPriceForm.productItem.$invalid && vm.marketPriceForm.productItem.$dirty)'>
+                                        <div ng-message="required" class="errorValidation">Please enter product item.</div>
+                                    </ng-messages>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label for="priceMarket" class="col-sm-3 control-label">Price Date</label>
+                                <div class="col-sm-9">
+                                    <div uib-datepicker ng-model="vm.marketPriceObj.priceTime"
+                                         class="calender margin-top-10px" datepicker-options="options"></div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row clearfix">
+                                <label for="priceMarket" class="col-sm-3 control-label">Price Market</label>
+                                <div class="col-sm-9">
+                                    <selectize
+                                            ng-required="true"
+                                            name="priceMarket"
+                                            on-change="vm.onPriceMarketChange()"
+                                            id="priceMarket"
+                                            config="vm.priceMarketConfig"
+                                            options='vm.priceMarketOptions.list'
+                                            ng-model="vm.marketPriceObj.priceMarketId">
+                                    </selectize>
+                                    <ng-messages for="vm.marketPriceForm.priceMarket.$error"
+                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm.priceMarket.$invalid) ||
+                                            (vm.marketPriceForm.priceMarket.$invalid && vm.marketPriceForm.priceMarket.$dirty)'>
+                                        <div ng-message="required" class="errorValidation">Please enter price market.</div>
+                                    </ng-messages>
+                                </div>
+                            </div>
+
+                            <div class="form-group row clearfix">
+                                <label for="priceMarket" class="col-sm-3 control-label">Price Time</label>
+                                <div class="col-sm-9">
+                                    <div uib-timepicker ng-model="vm.marketPriceObj.priceTime"
+                                         ng-change="changed()"
+                                         hour-step="1"
+                                         minute-step="1"
+                                         show-meridian="true"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row clearfix">
+                                <label for="priceMarket" class="col-sm-3 control-label">Price Metric</label>
+                                <div class="col-sm-9">
+                                    <selectize
+                                            ng-required="true"
+                                            name="priceMetric"
+                                            id="priceMetric"
+                                            config="vm.priceMetricConfig"
+                                            options='vm.priceMetricOptions.list'
+                                            ng-model="vm.marketPriceObj.priceMetricId">
+                                    </selectize>
+                                    <ng-messages for="vm.marketPriceForm.priceMarket.$error"
+                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm.priceMetric.$invalid) ||
+                                            (vm.marketPriceForm.priceMetric.$invalid && vm.marketPriceForm.priceMetric.$dirty)'>
+                                        <div ng-message="required" class="errorValidation">Please enter price metric.</div>
+                                    </ng-messages>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group  row clearfix">
+                                <label for="priceComments" class="col-sm-3 control-label">Comments</label>
+                                <div class="col-sm-12">
+                        <textarea ng-model="vm.marketPriceObj.comments"
+                                  placeholder="Price comments"
+                                  class="form-control"
+                                  id="priceComments">
+                        </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="with-line">Pricing Details &nbsp; <i ng-click="vm.addMarketPriceItemObj(vm.marketPriceObj)"
+                                                                    class="fa fa-plus primary-font cursor-pointer"></i>
+                    </h3>
+
+                    <div ng-repeat="price in vm.marketPriceObj.priceItems" class="notification row clearfix margin-top-10px">
+                        <div class="col-sm-4">
+                            <div class="form-group row clearfix">
+                                <label class="col-xs-3" for="shipmentMonth_{{index}}">Shipment</label>
+                                <div class="col-xs-9">
+                                    <selectize
+                                            name="{{'shipmentMonth_'+$index}}"
+                                            ng-required="true"
+                                            id="shipmentMonth_{{index}}"
+                                            config="vm.shipmentMonthConfig"
+                                            options='vm.shipmentMonthOptions.list'
+                                            ng-model="price.shipmentMonths">
+                                    </selectize>
+                                    <ng-messages for="vm.marketPriceForm['shipmentMonth_{{$index}}'].$error"
+                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm["shipmentMonth_"+$index].$invalid) ||
+                                            (vm.marketPriceForm["shipmentMonth_"+$index].$invalid && vm.marketPriceForm["shipmentMonth_"+$index].$dirty)'>
+                                        <div ng-message="required" class="errorValidation">Please enter shipment month.</div>
+                                    </ng-messages>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group row clearfix">
+                                <label class="col-xs-4">Price ({{vm.currentCurrency}} / {{vm.marketPriceObj.priceMetricId ?  vm.marketPriceObj.priceMetricId : 'FCL' }})</label>
+                                <div class="col-xs-8">
+                                    <input
+                                            required
+                                            ng-pattern="/^[0-9]+(\.[0-9][0-9])$/i"
+                                            ng-model="price.priceValue"
+                                            class="form-control"
+                                            name="{{'priceValue_'+$index}}"
+                                            placeholder="Market price in {{vm.currentCurrency}}"/>
+
+                                    <ng-messages for="vm.marketPriceForm['priceValue_{{$index}}'].$error"
+                                                 ng-show='(vm.marketPriceForm.$submitted && vm.marketPriceForm["priceValue_"+$index].$invalid) ||
+                                            (vm.marketPriceForm["priceValue_"+$index].$invalid && vm.marketPriceForm["priceValue_"+$index].$dirty)' role="alert">
+                                        <ng-message class="errorValidation" when="required">Please enter price value.</ng-message>
+                                        <ng-message class="errorValidation" when="pattern">Price should be number in two decimals.</ng-message>
+                                    </ng-messages>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-change="vm.currentValueChange(vm.marketPriceObj, price, price.currentValue)"
+                                           ng-model="price.currentValue">
+                                    <span>Current Market Value</span>
+                                </label>
+                            </div>
+
+                            <!--<switch color="success"-->
+                            <!--data-on-label="Market"-->
+                            <!--data-off-label="Quote"-->
+                            <!--switch-change="vm.currentValueChange(vm.marketPriceObj, price, price.currentValue)"-->
+                            <!--ng-model="price.currentValue"></switch>-->
+                        </div>
+
+                        <div class="col-sm-2">
+                            <i ng-click="vm.removeMarketPriceItemObj(vm.marketPriceObj, price)"
+                               class="fa fa-trash primary-font cursor-pointer" style="padding-top: 10px;"></i>
+                        </div>
+
+                        <br>
+                        <br>
+                        <h3 class="with-line margin-top-10px margin-bottom-10px" style="width:98%; margin-left: auto; margin-right: auto;"></h3>
+                    </div>
+                    <button type="submit"
+                            ng-if="!vm.marketPriceObj.id"
+                            ng-click="vm.addMarketPrice(vm.marketPriceForm, vm.marketPriceObj)"
+                            class="btn btn-primary btn-with-icon save-profile">
+                        <i class="ion-android-checkmark-circle"></i>Add Pricing
+                    </button>
+                    <button type="submit"
+                            ng-if="vm.marketPriceObj.id"
+                            ng-click="vm.updateMarketPrice(vm.marketPriceForm, vm.marketPriceObj)"
+                            class="btn btn-primary btn-with-icon save-profile">
+                        <i class="ion-android-checkmark-circle"></i>Update Pricing
+                    </button>
+                    <button type="button" ng-click="vm.cancel()"
+                            class="btn btn-danger btn-with-icon save-profile">
+                        <i class="ion-android-cancel"></i>Cancel
+                    </button>
+                </form>
+
+
+            </div>
+        </div>
+        <filter-bar
+                ng-show="!vm.showForm"
+                date-picker-needed="true"
+                country="true"
+                price-market="true"
+                product="true"
+                date-picker="vm.dateRange"
+                on-date-change="vm.onDateRangeChanged(dateRange)"
+                on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)"
+                on-country-selected-changed="vm.onCountrySelectedChanged(selectedList)"
+                on-price-market-selected-changed="vm.onPriceMarketSelectedChanged(selectedList)">
+        </filter-bar>
+        <div ba-panel ba-panel-class="with-scroll min-height-500px" ng-show="!vm.showForm">
+
+            <div class="horizontal-scroll">
+                <table class="table table-striped" st-table="smartTableData">
+                    <thead>
+                    <tr class="sortable table-header" ng-if="vm.allPriceItems.length!==0">
+                        <th><span class="count">{{vm.allPriceItems.length}}</span></th>
+                        <th>Price Time</th>
+                        <th>Product</th>
+                        <th>Origin</th>
+                        <th>Keywords</th>
+                        <th>Price Market</th>
+                        <th>Market Currency</th>
+                        <th>Price Metric</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="table-header" ng-if="vm.allPriceItems.length===0">
+                        <th>No Price Items have been added for this date.</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="row in vm.allPriceItems | selectedRows:vm.priceItemsToRemove:'id'">
+                    <tr>
+                        <td ng-click="vm.toggleDetailDisplay(row)">
+                            <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showDetails"></i>
+                            <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showDetails"></i>
+                        </td>
+                        <td ng-bind="row.priceTime  | date:vm.appFormats.Time"></td>
+                        <td ng-bind="row.productName"></td>
+                        <td ng-bind="row.productOriginName"></td>
+                        <td ng-bind="row.keywords"></td>
+                        <td ng-bind="row.marketCountry"></td>
+                        <td ng-bind="row.marketCurrency"></td>
+                        <td ng-bind="row.priceMetric"></td>
+                        <td class="titled" ng-bind="row.marketCurrency + ' ' + row.currentPrice"></td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-primary editable-table-button btn-xs"
+                                        ng-click="vm.editProductItemPrice(row)">Edit</button>
+                                <button class="btn btn-danger editable-table-button btn-xs"
+                                        ng-click="removeUser($index)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="10">
+                            <div class="priceDetails row"  ng-show="row.showDetails" >
+                                <div class="col-md-4 comments">
+                                    <div class="label col-md-12">Comments</div>
+                                    <div class="label col-md-12 comment" ng-bind="row.comments"></div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="col-md-12 priceInfo" ng-repeat="price in row.priceItems">
+                                        <div class="col-md-8" ng-repeat="month in price.shipmentMonths">
+                                            <div ng-bind="month | date: vm.appFormats.ShipmentMonth"></div>
+                                        </div>
+                                        <div class="col-md-4" ng-bind="row.marketCurrency + ' ' + price.priceValue"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

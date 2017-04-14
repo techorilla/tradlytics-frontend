@@ -1,3 +1,4 @@
+
 .ng-messages{
   color: #cccccc;
   font-size: 10px;
@@ -10,10 +11,28 @@
   height: 300px;
 }
 
-.errorValidation{
-  font-size: 11px;
-  color: $primary;
-  padding-top: 1px;
+.margin-left-20px{
+  margin-left: 20px;
+}
+
+ng-messages{
+  .errorValidation{
+    font-size: 11px;
+    color: $warning;
+    padding-top: 1px;
+    padding-left: 5px;
+    float:left;
+  }
+}
+
+
+
+.distance-10px{
+  height: 40px;
+}
+
+.center-align{
+  text-align: center !important;
 }
 
 .wizard-containers{
@@ -45,4 +64,100 @@
     border-bottom: 1px solid #ccc;
     margin-bottom: 16px;
   }
+}
+
+
+
+.primary-font{
+  color:$primary;
+  &.fa-trash{
+    color: $warning;
+  }
+}
+
+.btn-link{
+  color: $primary !important;
+}
+
+button.btn.btn-info:hover, button.btn.btn-info:focus, button.btn.btn-info.focus, button.btn.btn-info:active, button.btn.btn-info.active {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  color: #fff !important;
+}
+
+.text-info {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.uib-daypicker{
+  &:focus{
+    outline: 0;
+    border: none;
+  }
+}
+
+.calender .btn{
+  background: #303131 !important;
+}
+
+
+.cursor-pointer{
+  cursor: pointer !important;
+}
+
+textarea { resize: vertical; }
+
+
+.table > tbody > tr > td{
+  border-top: 1px solid #303131 !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.margin-top-10px{
+  margin-top: 10px;
+}
+
+.margin-bottom-10px{
+  margin-bottom: 10px;
+}
+
+
+.priceDetails{
+  background: $danger;
+  height: auto;
+  padding-top:10px;
+  padding-bottom:10px;
+  .priceInfo{
+    border-top: 1px solid $border;
+    font-weight: bolder;
+  }
+  .comments{
+    height: 100%;
+    .label{
+      font-size: 14px;
+    }
+    .comment{
+      font-size: 12px;
+      font-weight: 400;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+  }
+
+}
+
+.font-18px{
+  font-size: 18px;
+}
+
+.table > tbody + tbody {
+  border-top: 2px solid $primary !important;
 }

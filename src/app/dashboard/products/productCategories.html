@@ -1,0 +1,104 @@
+<div class="row">
+
+
+    <div class="col-md-12 marginBottom10px" ng-if="!vm.showForm">
+        <button class="btn btn-primary"
+                ng-click="vm.addNewCategory()">
+            Add New Category
+        </button>
+    </div>
+
+    <div class="col-md-12">
+        <div ba-panel ba-panel-class="profile-page" ng-if="vm.showForm">
+            <div class="panel-content">
+                <form name="vm.productCategoryForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <input type="text"
+                                       ng-model="vm.categoryObj.name"
+                                       ng-required="true"
+                                       name="categoryName"
+                                       class="form-control" id="categoryName" placeholder="Category">
+                                <ng-messages for="vm.productCategoryForm.productName.$error"
+                                             ng-if='(vm.productCategoryForm.$submitted && vm.productCategoryForm.categoryName.$invalid) ||
+                                            (vm.productCategoryForm.categoryName.$invalid && vm.productCategoryForm.categoryName.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter a category name</div>
+                                </ng-messages>
+                                <span class="help-block error-block basic-block">Required</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea placeholder="Category Description"
+                                          ng-model="vm.categoryObj.description"
+                                          class="form-control"
+                                          id="priceComments"></textarea>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" ng-if="!vm.categoryObj.id"
+                                ng-click="vm.addCategory(vm.productCategoryForm, vm.categoryObj)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Add Product Category
+                        </button>
+                        <button type="submit" ng-if="vm.categoryObj.id"
+                                ng-click="vm.updateCategory(vm.productCategoryForm, vm.categoryObj)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Update Product Category
+                        </button>
+                        <button type="button" ng-click="vm.cancel()"
+                                class="btn btn-danger btn-with-icon save-profile">
+                            <i class="ion-android-cancel"></i>Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+
+        <div ba-panel
+             ba-panel-class="with-scroll">
+            <div class="horizontal-scroll">
+                <table class="table table-striped" st-table="smartTableData">
+                    <thead>
+                    <tr class="sortable table-header" ng-if="vm.allCategories.length!==0">
+                        <th>Product Category</th>
+                        <th>Description</th>
+                        <th>Number of Keywords</th>
+                        <th>Number of Products</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="table-header" ng-if="vm.allCategories.length===0">
+                        <th>No values have been added.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in vm.allCategories">
+                        <td class="titled" ng-bind="row.name"></td>
+                        <td ng-if="row.description" ng-bind="row.description"></td>
+                        <td ng-if="!row.description">No Description Provided</td>
+                        <td ng-bind="row.keywordCount"></td>
+                        <td ng-bind="row.productCount"></td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editCategory(row)">Edit</button>
+                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

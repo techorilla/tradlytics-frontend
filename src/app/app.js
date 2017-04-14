@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('app', [
+  'textAngularSetup',
   'app.core',
   'app.common',
   'app.theme',
@@ -8,8 +9,5 @@ angular.module('app', [
   'app.landing',
   'app.authentication',
   'app.dashboard',
-  'app.widgets'
-
-
-
+  'app.widgets',
 ]);

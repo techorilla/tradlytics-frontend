@@ -156,4 +156,10 @@ a.forgot-pass {
   color: #ffffff!important;
 }
 
+.loginBackground{
+  $blurredBgUrl: $images-root + 'blur-bg.jpg';
+  background: url($blurredBgUrl);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 

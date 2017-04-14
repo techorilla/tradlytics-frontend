@@ -5,7 +5,8 @@
         .config(routeConfig);
 
     /** @ngInject */
-    function routeConfig($stateProvider){
+    function routeConfig($stateProvider, $urlRouterProvider){
+        // $urlRouterProvider.when('/dashboard/settings/','/dashboard/settings/transactionStatus');
         $stateProvider
             .state('dashboard.settings', {
                 url: '/settings',
@@ -21,26 +22,13 @@
                     }
                 }
             })
-            .state('dashboard.settings.dashboardProducts',{
-                url:'/dashboardProducts',
-                title: 'Dashboard Products',
-                views:{
-                    'subContent@dashboard.settings':{
-                        templateUrl:'app/dashboard/settings/dashboardProducts/dashboardProducts.html'
 
-                    }
-                }
-            })
-            .state('dashboard.settings.appDropDowns',{
-                url:'/dropDowns',
-                title: 'Application Drop Downs',
-                hasAccordianDropDown: true
-            })
-            .state('dashboard.settings.appDropDowns.transactionStatus',{
+
+            .state('dashboard.settings.transactionStatus',{
                 url:'/transactionStatus',
                 title: 'Transaction Status',
                 views:{
-                    'subContent@dashboard.settings':{
+                    'content@dashboard.settings':{
                         templateUrl:'app/dashboard/settings/appDropDowns/appDropDown.html',
                         controller: 'appDropDown as vm'
                     }
@@ -59,11 +47,11 @@
                     }
                 }
             })
-            .state('dashboard.settings.appDropDowns.bpTypes',{
+            .state('dashboard.settings.bpTypes',{
                 url:'/bpTypes',
                 title: 'Business Partner Type',
                 views:{
-                    'subContent@dashboard.settings':{
+                    'content@dashboard.settings':{
                         templateUrl:'app/dashboard/settings/appDropDowns/appDropDown.html',
                         controller: 'appDropDown as vm'
                     }
@@ -82,11 +70,11 @@
                     }
                 }
             })
-            .state('dashboard.settings.appDropDowns.contractTypes',{
+            .state('dashboard.settings.contractTypes',{
                 url:'/contractTypes',
                 title: 'Transaction Contract Type',
                 views:{
-                    'subContent@dashboard.settings':{
+                    'content@dashboard.settings':{
                         templateUrl:'app/dashboard/settings/appDropDowns/appDropDown.html',
                         controller: 'appDropDown as vm'
                     }
@@ -105,11 +93,11 @@
                     }
                 }
             })
-            .state('dashboard.settings.appDropDowns.designation',{
+            .state('dashboard.settings.designation',{
                 url:'/contractTypes',
                 title: 'User Designation',
                 views:{
-                    'subContent@dashboard.settings':{
+                    'content@dashboard.settings':{
                         templateUrl:'app/dashboard/settings/appDropDowns/appDropDown.html',
                         controller: 'appDropDown as vm'
                     }
@@ -128,11 +116,11 @@
                     }
                 }
             })
-            .state('dashboard.settings.appDropDowns.contactType',{
+            .state('dashboard.settings.contactType',{
                 url:'/contactTypes',
                 title: 'Contact Type',
                 views:{
-                    'subContent@dashboard.settings':{
+                    'content@dashboard.settings':{
                         templateUrl:'app/dashboard/settings/appDropDowns/appDropDown.html',
                         controller: 'appDropDown as vm'
                     }
@@ -145,29 +133,6 @@
                     },
                     endPoint: function(apiEndPoints){
                         return apiEndPoints.dropDown.contactType;
-                    },
-                    page: function(modalTemplates){
-                        return modalTemplates.CR_UP_BASIC_DROP_DOWN;
-                    }
-                }
-            })
-            .state('dashboard.settings.appDropDowns.productKeywords',{
-                url:'/productQuality',
-                title: 'Product Quality Keywords',
-                views:{
-                    'subContent@dashboard.settings':{
-                        templateUrl:'app/dashboard/settings/appDropDowns/appDropDown.html',
-                        controller: 'appDropDown as vm'
-                    }
-                },
-                resolve:{
-                    list: function(settings, apiEndPoints, crud){
-                        return settings.dropDown[crud.READ](apiEndPoints.dropDown.productQuality).then(function(response){
-                            return response.list;
-                        });
-                    },
-                    endPoint: function(apiEndPoints){
-                        return apiEndPoints.dropDown.productQuality
                     },
                     page: function(modalTemplates){
                         return modalTemplates.CR_UP_BASIC_DROP_DOWN;

@@ -15,13 +15,20 @@
     /* @ngInject */
     function deModal($uibModal, modalTemplates, fileReader){
         return {
+            openProgressModal: openProgressModal,
             openModal: openModal,
             dismissModal: dismissModal,
             openImageCropper: openImageCropper,
             getFile: getFile
         };
 
+
         ////////////////////
+
+        function openProgressModal(){
+
+        }
+
 
         function getFile(picture, scope, aspectRatio, sizeArray, resultSize, callBack){
             fileReader.readAsDataUrl(picture, scope)
@@ -46,6 +53,7 @@
         }
 
         function openImageCropper(image, aspectRatio, imageSizes, cropSize, callback){
+            console.log(imageSizes);
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: modalTemplates.IMAGE_CROP_WINDOW,
@@ -58,7 +66,7 @@
                         cropWidth: cropSize.width,
                         cropHeight: cropSize.height
                     };
-                    $scope.resultImageSizes=imageSizes;
+                    $scope.resultImageSizes=imageSizes[0];
                     $scope.saveImage = function () {
                         $uibModalInstance.close({
                             'croppedImages':$scope.croppedImages,
@@ -77,7 +85,6 @@
                     aspectRatio: function(){
                         return aspectRatio
                     }
-
                 }
             });
 

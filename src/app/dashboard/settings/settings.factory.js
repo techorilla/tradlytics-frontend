@@ -31,8 +31,13 @@
         }
 
         function dropDownRead(endPoint, query){
-            query = (query) ? query : 'all';
-            return tranStatusAPI.customGET(endPoint, {q: query})
+            if(typeof query === 'object' ){
+                return tranStatusAPI.customGET(endPoint, query)
+            }
+            else{
+                query = (query) ? query : 'all';
+                return tranStatusAPI.customGET(endPoint, {q: query})
+            }
         }
 
         function dropDownDelete(endPoint, id){

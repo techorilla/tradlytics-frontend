@@ -1,146 +1,223 @@
 <div ba-panel ba-panel-class="profile-page">
   <div class="panel-content">
 
+    <form  name="vm.profileForm" novalidate>
+      <h3 class="with-line">General Information</h3>
 
-    <h3 class="with-line">General Information</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row clearfix">
+            <label for="inputFirstName" class="col-sm-3 control-label">Picture</label>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <label for="inputFirstName" class="col-sm-3 control-label">Picture</label>
-
-          <div class="col-sm-9">
-            <div class="userpic">
-              <div class="userpic-wrapper">
-                <img ng-src="{{ vm.picture }}" ng-click="vm.uploadPicture(event)">
+            <div class="col-sm-9">
+              <div class="userpic">
+                <div class="userpic-wrapper">
+                  <img ng-src="{{ vm.picture }}" ng-click="vm.uploadPicture(event)">
+                </div>
+                <i class="ion-ios-close-outline" ng-click="vm.removePicture()" ng-if="!vm.noPicture"></i>
+                <a href class="change-userpic" ng-click="vm.uploadPicture(event)">Change Profile Picture</a>
+                <input type="file" ng-show="false" id="uploadFile" ng-file-select="vm.onFileSelect($files)">
               </div>
-              <i class="ion-ios-close-outline" ng-click="vm.removePicture()" ng-if="!vm.noPicture"></i>
-              <a href class="change-userpic" ng-click="vm.uploadPicture(event)">Change Profile Picture</a>
-              <input type="file" ng-show="false" id="uploadFile" ng-file-select="vm.onFileSelect($files)">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row clearfix">
+            <label for="inputFirstName" class="col-sm-3 control-label">First Name</label>
+            <div class="col-sm-9">
+              <input type="text"
+                     ng-required="true"
+                     name="firstName"
+                     ng-pattern="/^[a-zA-Z]*$/"
+                     ng-model="vm.userProfile.firstName"
+                     class="form-control"
+                     id="inputFirstName" placeholder="First Name">
+              <ng-messages for="vm.profileForm.firstName.$error"
+                           ng-if='(vm.profileForm.$submitted && vm.profileForm.firstName.$invalid) ||
+                                            (vm.profileForm.firstName.$invalid && vm.profileForm.firstName.$dirty)'>
+                <div ng-message="required" class="errorValidation">Please enter first name.</div>
+                <div ng-message="pattern" class="errorValidation">First Name can only have alphabets.</div>
+              </ng-messages>
+            </div>
+          </div>
+          <div class="form-group row clearfix">
+            <label for="lastName"
+                   class="col-sm-3 control-label">Last Name</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="vm.userProfile.lastName"
+                     class="form-control"
+                     name="lastName"
+                     ng-pattern="/^[a-zA-Z]*$/"
+                     ng-required="true"
+                     id="lastName"
+                     placeholder="Last Name">
+              <ng-messages for="vm.profileForm.lastName.$error"
+                           ng-if='(vm.profileForm.$submitted && vm.profileForm.lastName.$invalid) ||
+                                            (vm.profileForm.lastName.$invalid && vm.profileForm.lastName.$dirty)'>
+                <div ng-message="required" class="errorValidation">Please enter last name.</div>
+                <div ng-message="pattern" class="errorValidation">Last Name can only have alphabets.</div>
+              </ng-messages>
+            </div>
+          </div>
+          <div class="form-group row clearfix">
+            <label class="col-sm-3 control-label">Designation</label>
+            <div class="col-sm-9">
+              <selectize
+                      name="designation"
+                      ng-required="true"
+                      placeholder="Designation"
+                      config="vm.designationConfig"
+                      options='vm.designationOptions.list'
+                      ng-model="vm.userProfile.designationId">
+              </selectize>
+              <ng-messages for="vm.profileForm.designation.$error"
+                           ng-if='(vm.profileForm.$submitted && vm.profileForm.designation.$invalid) ||
+                                            (vm.profileForm.designation.$invalid && vm.profileForm.designation.$dirty)'>
+                <div ng-message="required" class="errorValidation">Please select a designation.</div>
+              </ng-messages>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row clearfix">
+            <label class="col-sm-3 control-label">Office Location</label>
+            <div class="col-sm-9">
+              <selectize
+                      placeholder="Office Location"
+                      name="officeLocation"
+                      ng-required="true"
+                      config="vm.locationConfig"
+                      options='vm.locationOptions.list'
+                      ng-model="vm.userProfile.businessLocationId">
+              </selectize>
+              <ng-messages for="vm.profileForm.officeLocation.$error"
+                           ng-if='(vm.profileForm.$submitted && vm.profileForm.officeLocation.$invalid) ||
+                                            (vm.profileForm.officeLocation.$invalid && vm.profileForm.officeLocation.$dirty)'>
+                <div ng-message="required" class="errorValidation">Please select an office Location.</div>
+              </ng-messages>
+
+            </div>
+          </div>
+          <div class="form-group row clearfix">
+            <label for="email"
+                   ng-required="true"
+                   class="col-sm-3 control-label">Email</label>
+
+            <div class="col-sm-9">
+              <input type="email" class="form-control"
+                     ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i"
+                     name="email" ng-model="vm.userProfile.email"
+                     ng-required="true"
+                     id="email" placeholder="">
+              <ng-messages for="vm.profileForm.officeLocation.$error"
+                           ng-if='(vm.profileForm.$submitted && vm.profileForm.email.$invalid) ||
+                                            (vm.profileForm.email.$invalid && vm.profileForm.email.$dirty)'>
+                <div ng-message="pattern" class="errorValidation">Invalid email.</div>
+                <div ng-message="required" class="errorValidation">Please enter user email.</div>
+              </ng-messages>
+            </div>
+          </div>
+          <div class="form-group row clearfix">
+            <label for="username" class="col-sm-3 control-label">User Name</label>
+
+            <div class="col-sm-9">
+              <input type="text"
+                     ng-pattern="/^[a-zA-Z0-9]*$/"
+                     ng-model="vm.userProfile.username" name="username"
+                     class="form-control" id="username" placeholder="">
+              <ng-messages for="vm.profileForm.officeLocation.$error"
+                           ng-if='(vm.profileForm.$submitted && vm.profileForm.username.$invalid) ||
+                                            (vm.profileForm.username.$invalid && vm.profileForm.username.$dirty)'>
+                <div ng-message="required" class="errorValidation">Please enter user username.</div>
+                <div ng-message="required" class="errorValidation">User Name can only be alphanumeric.</div>
+              </ng-messages>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6"></div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <label for="inputFirstName" class="col-sm-3 control-label">First Name</label>
 
-          <div class="col-sm-9">
-            <input type="text" ng-model="vm.userProfile.firstName" class="form-control" id="inputFirstName" placeholder="">
+
+      <!--<h3 class="with-line">Contact Information</h3>-->
+
+      <!--<div class="row">-->
+
+
+      <!--</div>-->
+
+      <h3 class="with-line">Send Email Notifications</h3>
+
+      <div class="notification row clearfix">
+        <div class="col-sm-6">
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">When a new transaction is added</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.notify.newTransaction"></switch>
+            </div>
+          </div>
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">When shipment arrives</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.notify.shipmentArrival"></switch>
+            </div>
+          </div>
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">When I recieve a message</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.notify.messages"></switch>
+            </div>
           </div>
         </div>
-        <div class="form-group row clearfix">
-          <label for="inputLastName" class="col-sm-3 control-label">Last Name</label>
+        <div class="col-sm-6">
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">Monthly Reports</label>
 
-          <div class="col-sm-9">
-            <input type="text" ng-model="vm.userProfile.lastName" class="form-control" id="inputLastName" placeholder="" value="">
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.notify.monthlyReports"></switch>
+            </div>
           </div>
-        </div>
-        <div class="form-group row clearfix">
-          <h5>Designation</h5>
-          <div class="col-sm-9">
-            <selectize
-                    config="vm.designationConfig"
-                    options='vm.designationOptions.list'
-                    ng-model="vm.userProfile.designationId">
-            </selectize>
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">Weekly Reports</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.notify.weeklyReports"></switch>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <h5>Office Location</h5>
-          <div class="col-sm-9">
-            <selectize
-                       config="vm.locationConfig"
-                       options='vm.locationOptions.list'
-                       ng-model="vm.userProfile.businessLocationId">
-            </selectize>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
 
-          <div class="col-sm-9">
-            <input type="email" class="form-control" ng-model="vm.userProfile.email" id="inputEmail3" placeholder="">
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label for="inputPhone" class="col-sm-3 control-label">User Name</label>
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">Daily Reports</label>
 
-          <div class="col-sm-9">
-            <input type="text" ng-model="vm.userProfile.username" class="form-control" id="inputPhone" placeholder="">
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <!--<h3 class="with-line">Contact Information</h3>-->
-
-    <!--<div class="row">-->
-
-
-    <!--</div>-->
-
-    <h3 class="with-line">Send Email Notifications</h3>
-
-    <div class="notification row clearfix">
-      <div class="col-sm-6">
-        <div class="form-group row clearfix">
-          <label class="col-xs-8">When a new transaction is added</label>
-
-          <div class="col-xs-4">
-            <switch color="primary" ng-model="vm.userProfile.notify.newTransaction"></switch>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label class="col-xs-8">When shipment arrives</label>
-
-          <div class="col-xs-4">
-            <switch color="primary" ng-model="vm.userProfile.notify.shipmentArrival"></switch>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label class="col-xs-8">When I recieve a message</label>
-
-          <div class="col-xs-4">
-            <switch color="primary" ng-model="vm.userProfile.notify.messages"></switch>
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.notify.dailyReports"></switch>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="form-group row clearfix">
-          <label class="col-xs-8">Monthly Reports</label>
+      <button type="submit"
+              ng-if="vm.userProfile.id"
+              ng-click="vm.updateUser(vm.profileForm, vm.userProfile, vm.imagesData)"
+              class="btn btn-primary btn-with-icon save-profile">
+        <i class="ion-android-checkmark-circle"></i>Update Profile
+      </button>
+      <button type="submit"
+              ng-if="!vm.userProfile.id"
+              ng-click="vm.addUser(vm.profileForm, vm.userProfile, vm.imagesData)"
+              class="btn btn-primary btn-with-icon save-profile">
+        <i class="ion-android-checkmark-circle"></i>Add New Profile
+      </button>
+      <button type="button" ng-click="vm.cancel()"
+              class="btn btn-danger btn-with-icon save-profile">
+        <i class="ion-android-cancel"></i>Cancel
+      </button>
+    </form>
 
-          <div class="col-xs-4">
-            <switch color="primary" ng-model="vm.userProfile.notify.monthlyReports"></switch>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label class="col-xs-8">Weekly Reports</label>
-
-          <div class="col-xs-4">
-            <switch color="primary" ng-model="vm.userProfile.notify.weeklyReports"></switch>
-          </div>
-        </div>
-
-        <div class="form-group row clearfix">
-          <label class="col-xs-8">Daily Reports</label>
-
-          <div class="col-xs-4">
-            <switch color="primary" ng-model="vm.userProfile.notify.dailyReports"></switch>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button type="button" ng-click="vm.updateUser(vm.userProfile, vm.imagesData)" class="btn btn-primary btn-with-icon save-profile">
-      <i class="ion-android-checkmark-circle"></i>Update Profile
-    </button>
   </div>
 </div>

@@ -18,16 +18,17 @@
       .directive('customFilter', customFilter);
 
   /* @ngInject */
-  function customFilter(tabFilter){
+  function customFilter(tabFilter, apiEndPoints, appConstants){
 
     return {
       link: link,
       restrict: 'E',
       templateUrl: 'app/widgets/customFilter/customFilter.template.html',
       scope: {
-        filterType: '@',
-        filterSubType: '@',
-        selectedValues: '@',
+        title:'@',
+        endPoint: '@',
+        heading: '@',
+        subheading: '@',
         onSelectedValuesChanged:'&'
       },
       replace:true
@@ -40,20 +41,27 @@
     function link(scope, elem, attrs){
 
       function onFilterSuccessCallBack(response){
-
-        scope.dropDownValues = response.filterList;
+        scope.appConstants = appConstants;
+        scope.apiEndPoints = apiEndPoints;
+        scope.dropDownValues = response.list;
+        angular.forEach(scope.dropDownValues, function(value, key){
+          value.selected = true;
+        });
         scope.selectedValues = angular.copy(scope.dropDownValues);
         scope.onSelectedValuesChanged({selectedList:scope.selectedValues});
-        console.log(scope.dropDownValues);
+        scope.isLoading = false;
       }
 
-      initiateFilterType(scope.filterType, scope.filterSubType);
+      initiateFilterType(scope.title);
 
-
-      function initiateFilterType(type, subtype){
-        console.log(type, subtype);
-        scope.title = type;
-        tabFilter.getTabFilters(scope.filterType).then(onFilterSuccessCallBack);
+      function initiateFilterType(title){
+        scope.isLoading = true;
+        if(scope.endPoint === apiEndPoints.dropDown.business){
+          return tabFilter.getTabFilters(scope.endPoint, {'type': title}).then(onFilterSuccessCallBack);
+        }
+        else{
+          return tabFilter.getTabFilters(scope.endPoint).then(onFilterSuccessCallBack);
+        }
       }
 
 

@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="col-md-6 marginBottom10px">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addPriceMarket()">
+            Add New Price Market
+        </button>
+    </div>
+</div>
+
+
+<div ba-panel ba-panel-class="profile-page" ng-if="vm.showForm">
+    <div class="panel-content">
+
+        <form>
+            <h3 class="with-line"></h3>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row clearfix">
+                        <label for="productItem" class="col-sm-2 control-label">Country</label>
+                        <div class="col-sm-6">
+                            <selectize
+                                    ng-disabled="vm.priceMarket.isInternational"
+                                    id="productItem"
+                                    config="vm.countryConfig"
+                                    options='vm.countryOptions.list'
+                                    ng-model="vm.priceMarket.country">
+                            </selectize>
+                        </div>
+
+                        <label class="col-sm-2">International</label>
+
+                        <div class="col-sm-2">
+                            <switch color="primary" ng-model="vm.priceMarket.isInternational"></switch>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group row clearfix">
+                        <label for="priceMarketCurrency" class="col-sm-3 control-label">Currency</label>
+                        <div class="col-sm-9">
+                            <selectize
+                                    ng-required="true"
+                                    id="priceMarketCurrency"
+                                    config="vm.currencyConfig"
+                                    options='vm.currencyOptions.list'
+                                    ng-model="vm.priceMarket.currency">
+                            </selectize>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group  row clearfix">
+                        <label for="marketDescription" class="col-sm-3 control-label">Description</label>
+                        <div class="col-sm-12">
+                        <textarea placeholder="Market Description"
+                                  ng-model="vm.priceMarket.description"
+                                  class="form-control"
+                                  id="marketDescription"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" ng-if="!vm.priceMarket.id" ng-click="vm.addNewPriceMarket(vm.priceMarket)" class="btn btn-primary btn-with-icon save-profile">
+                <i class="ion-android-checkmark-circle"></i>Add Pricing
+            </button>
+            <button type="button" ng-if="vm.priceMarket.id" ng-click="vm.updatePriceMarket(vm.priceMarket)" class="btn btn-primary btn-with-icon save-profile">
+                <i class="ion-android-checkmark-circle"></i>Update Pricing
+            </button>
+            <button type="button" ng-click="vm.cancelPriceMarket()"
+                    class="btn btn-danger btn-with-icon save-profile">
+                <i class="ion-android-cancel"></i>Cancel
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div ba-panel  ba-panel-class="with-scroll">
+            <div class="horizontal-scroll">
+                <table class="table table-striped" st-table="smartTableData">
+                    <thead>
+                    <tr class="sortable table-header" ng-if="vm.allMarkets.length!==0">
+                        <th>Country</th>
+                        <th>Currency</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="table-header" ng-if="vm.allMarkets.length===0">
+                        <th>No values have been added.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in vm.allMarkets">
+                        <td class="titled" ng-bind="row.countryName"></td>
+                        <td ng-bind="row.currency"></td>
+                        <td ng-bind="row.description"></td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editPriceMarket(row)">Edit</button>
+                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

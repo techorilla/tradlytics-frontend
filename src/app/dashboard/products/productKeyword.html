@@ -1,0 +1,105 @@
+<div class="row">
+
+    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addNewKeyword()">
+            Add New Product Keyword
+        </button>
+    </div>
+
+    <div class="col-md-12">
+        <div ba-panel ba-panel-class="profile-page" ng-if="vm.showForm">
+            <div class="panel-content">
+                <form name="vm.productKeywordForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Keyword Name</label>
+                                <input type="text" ng-model="vm.keywordObj.name"
+                                       ng-required="true"
+                                       name="keywordName"
+                                       class="form-control" id="keywordName" placeholder="Keyword Name">
+                                <ng-messages for="vm.productKeywordForm.productName.$error"
+                                             ng-if='(vm.productKeywordForm.$submitted && vm.productKeywordForm.keywordName.$invalid) ||
+                                            (vm.productKeywordForm.keywordName.$invalid && vm.productKeywordForm.keywordName.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter a keyword name</div>
+                                </ng-messages>
+                                <span class="help-block error-block basic-block">Required</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Product Category</label>
+                                <selectize
+                                        id="category"
+                                        ng-required="true"
+                                        name="category"
+                                        placeholder="Keyword Product Category"
+                                        config="vm.categoryConfig"
+                                        options='vm.categoryOptions.list'
+                                        ng-model="vm.keywordObj.categoryId">
+                                </selectize>
+                                <ng-messages for="vm.productKeywordForm.productOrigin.$error"
+                                             ng-if='(vm.productKeywordForm.$submitted && vm.productKeywordForm.category.$invalid) ||
+                                            (vm.productKeywordForm.category.$invalid && vm.productKeywordForm.category.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please select category</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" ng-if="!vm.keywordObj.id"
+                                ng-click="vm.addKeyword(vm.productKeywordForm, vm.keywordObj)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Add Product Item
+                        </button>
+                        <button type="submit" ng-if="vm.keywordObj.id"
+                                ng-click="vm.updateKeyword(vm.productKeywordForm, vm.keywordObj)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Update Product Item
+                        </button>
+                        <button type="button" ng-click="vm.cancel()"
+                                class="btn btn-danger btn-with-icon save-profile">
+                            <i class="ion-android-cancel"></i>Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div ba-panel
+              ba-panel-class="with-scroll">
+            <div class="horizontal-scroll">
+                <table class="table table-striped" st-table="smartTableData">
+                    <thead>
+                    <tr class="sortable table-header" ng-if="vm.allKeywords.length!==0">
+                        <th>Keywords</th>
+                        <th>Category</th>
+                        <th>No. of Product Items</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="table-header" ng-if="vm.allKeywords.length===0">
+                        <th>No keywords have been added.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in vm.allKeywords">
+                        <td class="titled" ng-bind="row.name"></td>
+                        <td ng-if="row.categoryName" ng-bind="row.categoryName"></td>
+                        <td ng-if="!row.categoryName">No category assigned</td>
+                        <td ng-bind="row.noOfProductItems"></td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editKeyword(row)">Edit</button>
+                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

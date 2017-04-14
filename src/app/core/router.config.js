@@ -14,7 +14,7 @@
 
     /* @ngInject */
     function configuration($urlRouterProvider){
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/login');
     }
 
     /* @ngInject */
@@ -26,9 +26,10 @@
 
         //on routing error
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+
             //do some title setting
             $rootScope.pageTitle = toState.title || 'Doni Enterprises';
-            $rootScope.nodashBackground = toState.nodashBackground || false;
+            $rootScope.bgBackgroundClass = toState.bgBackgroundClass || '';
             if(toState.pageHeader){
                 $rootScope.headerTitle = toState.pageHeader.title;
                 $rootScope.headerSubTitle = toState.pageHeader.subTitle;
@@ -41,7 +42,9 @@
             }
             fromState.wentTo = toState.name;
             toState.params = toParams;
+            console.log(fromState, fromParams, toState.wentTo );
             if(toState.wentTo !== fromState.name){
+
                 toState.prevState = fromState.name;
                 toState.prevParam = fromParams;
             }

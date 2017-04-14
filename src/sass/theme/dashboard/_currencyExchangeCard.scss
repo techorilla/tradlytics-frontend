@@ -1,0 +1,54 @@
+.currency-exchange-card{
+  .details{
+    float:left;
+    .heading{
+      color: $text-color;
+      font-size: 20px;
+      font-weight: $font-ultraBold;
+      padding-top: 15px;
+    }
+    .value{
+      padding-top: 10px;
+      font-size: 25px;
+      .currency{
+        color: $success;
+        float: left;
+        font-weight: $font-ultraBold;
+      }
+      .change{
+        position: absolute;
+        width: 80px;
+        right: 15px;
+        bottom: 10px;
+        .fa{
+          margin-left: 25px;
+          font-size: 45px !important;
+        }
+        .fa-caret-up{
+          color: yellowgreen;
+        }
+        .fa-caret-down{
+          color: red;
+        }
+        .change-rate{
+          padding-left: 3px;
+          font-size: 15px;
+          font-weight: $font-bold;
+          text-align: center;
+        }
+      }
+      .rate{
+        padding-left: 10px;
+        font-weight: $font-thin;
+      }
+      .last-update{
+        margin-top: 10px;
+        font-size: 10px;
+        color: $text-color;
+      }
+    }
+  }
+  .sparkLine{
+    float: left;
+  }
+}

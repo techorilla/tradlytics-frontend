@@ -1,0 +1,137 @@
+
+
+
+<div class="row">
+
+    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm" >
+        <button class="btn btn-primary"  ng-click="vm.addNewResearch()">
+            Add New Research
+        </button>
+    </div>
+
+    <div class="col-md-12" ba-panel ng-show="!vm.showForm">
+
+        <div ng-repeat="research in vm.researchList"
+             ng-if="vm.researchList.length > 0"
+             class="col-xlg-4 col-lg-4 col-md-4 col-sm-12 col-xs-12"
+             ba-panel
+             ba-panel-class="popular-app medium-panel">
+            <blog-card
+                    visitors="research.visitors"
+                    research-id="research.id"
+                    can-edit="research.canEdit"
+                    can-delete="research.canDelete"
+                    display-web="research.displayOnWeb"
+                    is-draft="research.isDraft"
+                    on-edit="vm.editResearch(researchId)"
+                    author="research.createdBy"
+                    user-pic="research.createdByImage"
+                    comments="research.comments"
+                    reads="research.reads"
+                    created-on="research.createdOn"
+                    title="research.title"
+                    on-display-web="vm.displayResearchOnWeb(researchId)"
+                    on-delete="vm.deleteResearch(researchId)"
+                    image-url="research.image">
+            </blog-card>
+        </div>
+
+        <div ng-if="vm.researchList.length == 0">
+            <table class="table table-striped" st-table="smartTableData">
+                <thead>
+                    <tr class="table-header">
+                        <th>No Research have been added.</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+
+    <div ba-panel ba-panel-class="profile-page" ng-show="vm.showForm">
+        <div class="panel-content">
+            <h3 class="with-line">Research</h3>
+            <form name="vm.researchForm" novalidate>
+                <div class="product-wizard">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="product-pic col-xs-6 col-xs-offset-3">
+                                            <div class="product-pic-wrapper">
+                                                <img ng-src="{{ vm.blogImage }}" ng-click="vm.uploadResearchImage(event)">
+                                            </div>
+                                            <i class="ion-ios-close-outline" ng-click="vm.removeResearchImage()" ng-if="!vm.noPicture"></i>
+                                            <a href class="change-userpic" ng-click="vm.uploadResearchImage(event)">Change Blog Image</a>
+                                            <input type="file" ng-show="false" id="uploadResearchFile" ng-file-select="vm.onFileSelect($files)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 distance-10px"></div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="researchTitle">Research Title</label>
+                                        <input autocomplete="false" type="text" class="form-control" id="researchTitle" name="researchTitle"
+                                               placeholder="Title" ng-model="vm.researchObj.title"
+                                               ng-maxlength="120"
+                                               required>
+                                        <ng-messages for="vm.researchForm.researchTitle.$error"
+                                                     ng-if='(vm.researchForm.$submitted && vm.researchForm.researchTitle.$invalid) ||
+                                            (vm.researchForm.researchTitle.$invalid && vm.researchForm.researchTitle.$dirty)'>
+                                            <div ng-message="required" class="errorValidation">Please enter research title.</div>
+                                            <div ng-message="maxlength" class="errorValidation">Can only have 120 characters.</div>
+                                        </ng-messages>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="researchTitle">Research Slug</label>
+                                        <input autocomplete="false" type="text" class="form-control" id="researchSlug" name="researchSlug"
+                                               placeholder="URL Slug" ng-model="vm.researchObj.slug" required>
+                                        <ng-messages for="vm.researchForm.researchSlug.$error"
+                                                     ng-if='(vm.researchForm.$submitted && vm.researchForm.slug.$invalid) ||
+                                            (vm.researchForm.slug.$invalid && vm.researchForm.slug.$dirty)'>
+                                            <div ng-message="required" class="errorValidation">Please enter research slug.</div>
+                                        </ng-messages>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="researchTitle">Research Tags</label>
+                                        <tags-input ng-model="vm.researchObj.tags" add-on-paste="true">
+                                            <auto-complete source="vm.loadTags($query)"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <h3 class="with-line">Research</h3>
+                                    <div class="form-group">
+                                        <!--<label for="productDescription">Product Description</label>-->
+                                        <text-angular
+                                                ng-model="vm.researchObj.content"
+                                                id="productDescription"></text-angular>
+                                    </div>
+                                </div>
+                                <button type="button" ng-click="vm.saveResearch(vm.researchForm, vm.researchObj, vm.imagesData, false)" class="btn btn-success btn-with-icon save-profile">
+                                    <i class="ion-android-add-circle"></i>Save & Publish
+                                </button>
+                                <button type="button" ng-click="vm.saveResearch(vm.researchForm, vm.researchObj, vm.imagesData, true)" class="btn btn-primary btn-with-icon save-profile">
+                                    <i class="ion-android-add-circle"></i>Save As Draft
+                                </button>
+                                <button type="button" ng-click="vm.cancel(vm.researchForm)"
+                                        class="btn btn-danger btn-with-icon save-profile">
+                                    <i class="ion-android-cancel"></i>Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

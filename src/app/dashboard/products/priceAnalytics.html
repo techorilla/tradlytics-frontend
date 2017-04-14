@@ -1,0 +1,29 @@
+<filter-bar
+        ng-show="!vm.showForm"
+        date-picker-needed="true"
+        date-picker="vm.dateRange"
+        on-date-change="vm.onDateRangeChanged(dateRange)">
+</filter-bar>
+
+<div class="col-xlg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" ba-panel>
+    <div class="row">
+        <div class="row pie-charts" ng-if="vm.showCharts">
+            <div class="pie-chart-item-container">
+                <div ba-panel>
+                    <div class="pie-chart-item">
+                        <div class="chart" rel="{{ ::vm.dashboardColors.colors.success }}" data-percent="{{vm.sumData.sumPercentage}}"> <span class="percent"></span> </div>
+                        <div class="description">
+                            <div>Average Price</div>
+                            <div class="description-stats">{{::vm.sumData.filteredSum}}<span class="metric">FCL</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-7 col-xs-12"
+             ba-panel
+             ba-panel-class="medium-panel">
+            <line-chart chart-data="vm.graphData"></line-chart>
+        </div>
+    </div>
+</div>

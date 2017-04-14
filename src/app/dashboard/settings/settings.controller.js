@@ -7,7 +7,6 @@
         var vm = this;
         _init();
         function _init(){
-            $state.go('dashboard.settings.dashboardProducts');
         }
 
 

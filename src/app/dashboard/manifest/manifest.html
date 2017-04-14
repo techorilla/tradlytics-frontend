@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-6 marginBottom10px">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.addNewManifestItem()">
+            Add New Manifest Item
+        </button>
+    </div>
+
+    <div class="col-md-12">
+        <div ba-panel ba-panel-class="profile-page" ng-if="vm.showForm">
+            <div class="panel-content" include-with-scope="app/dashboard/manifest/template/itemForm.html">
+            </div>
+        </div>
+        <filter-bar
+                ng-show="!vm.showForm"
+                date-picker-needed="true"
+                product="true"
+                buyer="true"
+                seller="true"
+                date-picker="vm.dateRange"
+                on-date-change="vm.onDateRangeChanged(dateRange)"
+                on-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList)"
+                on-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList)"
+                on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)">
+        </filter-bar>
+        <div ba-panel ba-panel-class="with-scroll min-height-500px" ng-show="!vm.showForm">
+
+            <div class="horizontal-scroll">
+                <table class="table table-striped" st-table="smartTableData">
+                    <thead>
+                    <tr class="sortable table-header" ng-if="vm.allManifestList.length!==0">
+                        <th><span class="count">{{vm.allManifestList.length}}</span></th>
+                        <th>Date</th>
+                        <th>Buyer</th>
+                        <th>Seller</th>
+                        <th>Product</th>
+                        <th>Metric</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr class="table-header" ng-if="vm.allManifestList.length===0">
+                        <th>No Manifest Items have been added for selected filters</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="row in vm.displayList">
+                    <tr>
+
+                        <td colspan="2" ng-bind="row.date  | date:vm.appFormats.Time"></td>
+                        <td class="business">
+                            <div class="name" ng-bind="row.buyerName"></div>
+                            <div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>
+                            <div class="country"><img ng-if="row.buyerCountryFlag" width="15" src="{{vm.appConstants.STATIC_URL + row.buyerCountryFlag}}"/> {{row.buyerCountry ? row.buyerCountry : 'No Origin' }}</div>
+                        </td>
+                        <td class="business">
+                            <div class="name" ng-bind="row.sellerName"></div>
+                            <div class="contact">{{row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact'}}</div>
+                            <div class="country"><img ng-if="row.sellerCountryFlag" width="15" src="{{vm.appConstants.STATIC_URL + row.sellerCountryFlag}}"/> {{row.sellerCountry  ? row.sellerCountry : 'No Origin' }}</div>
+                        </td>
+                        <td ng-bind="row.productName"></td>
+                        <td ng-bind="row.quantityMetric"></td>
+                        <td ng-bind="row.quantity"></td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-primary editable-table-button btn-xs"
+                                        ng-click="vm.editManifestItem(row)">Edit</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-if="row.deleteable"
+                                        ng-click="vm.deleteManifestItem(row)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul ng-show="vm.totalItems > 0" uib-pagination
+                ng-change="vm.pageChanged()"
+                total-items="vm.totalItems"
+                ng-model="vm.currentPage"
+                max-size="vm.itemsPerPage"
+                class="pagination-sm push-left"
+                boundary-link-numbers="true"
+                rotate="false">
+            </ul>
+
+        </div>
+
+    </div>
+
+
+</div>

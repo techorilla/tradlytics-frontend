@@ -17,6 +17,7 @@
     $stateProvider
       .state('login', {
         url:'/login',
+        bgBackgroundClass: 'loginBackground',
         views:{
           '@': {
             templateUrl:'app/authentication/auth.html',

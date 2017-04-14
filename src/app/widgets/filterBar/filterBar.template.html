@@ -1,8 +1,4 @@
-<!--<div class="row" ng-show="datePickerNeeded">-->
-
-    <!--&lt;!&ndash;<input date-range-picker class="form-control date-picker" type="text" ng-model="datePicker" />&ndash;&gt;-->
-<!--</div>-->
-<div class="dg-filterPanel" ng-if="buyer || seller || product || bpTypes || country || tranSatatus">
+<div ba-panel class="dg-filterPanel" ng-if="buyer || seller || product || bpTypes || country || priceMarket || datePickerNeeded">
     <div class="row">
         <div ng-if="datePickerNeeded" class="col-sm-6 col-sm-offset-6">
             <div class="dg-datePicker">
@@ -19,16 +15,36 @@
             </div>
         </div>
         <custom-filter on-selected-values-changed="onBuyersSelectedChanged({selectedList:selectedList})"
-                       ng-if="buyer" filter-type="{{appTabFilter.BP}}" filterSubType="{{appTabFilter.BUYER}}"></custom-filter>
+                       ng-if="buyer"
+                       title="Buyer"
+                       end-point="{{apiEndPoints.dropDown.business}}" filterSubType="{{appTabFilter.BUYER}}">
+
+        </custom-filter>
         <custom-filter on-selected-values-changed="onSellersSelectedChanged({selectedList:selectedList})"
-                       ng-if="seller"  filter-type="{{appTabFilter.BP}}" filterSubType="{{appTabFilter.SELLER}}"></custom-filter>
+                       ng-if="seller"
+                       end-point="{{apiEndPoints.dropDown.business}}"
+                       title="Seller">
+        </custom-filter>
         <custom-filter on-selected-values-changed="onProductsSelectedChanged({selectedList:selectedList})"
-                       ng-if="product" filter-type="{{appTabFilter.PRODUCTS}}"></custom-filter>
+                       ng-if="product"
+                       title = "Products"
+                       end-point="{{apiEndPoints.dropDown.product}}">
+        </custom-filter>
         <custom-filter on-selected-values-changed="onBpTypesSelectedChanged({selectedList:selectedList})"
-                       ng-if="bpTypes" filter-type="{{appTabFilter.BP_TYPES}}"></custom-filter>
+                       title="Business Type"
+                       ng-if="bpTypes" end-point="{{apiEndPoints.dropDown.bpType}}">
+        </custom-filter>
         <custom-filter on-selected-values-changed="onCountrySelectedChanged({selectedList:selectedList})"
-                       ng-if="country" filter-type="{{appTabFilter.COUNTRY}}"></custom-filter>
+                       title="Country"
+                       ng-if="country" end-point="{{apiEndPoints.dropDown.country}}">
+        </custom-filter>
+        <custom-filter on-selected-values-changed="onPriceMarketSelectedChanged({selectedList:selectedList})"
+                       title="Price Market"
+                       ng-if="priceMarket" end-point="{{apiEndPoints.dropDown.priceMarket}}">
+        </custom-filter>
         <custom-filter on-selected-values-changed="onTranStatusSelectedChanged({selectedList:selectedList})"
-                       ng-if="tranStatus" filter-type="{{appTabFilter.TRANSACTION_STATUS}}"></custom-filter>
+                       title="Transaction Status"
+                       ng-if="tranStatus" end-point="{{apiEndPoints.dropDown.transactionStatus}}">
+        </custom-filter>
     </div>
 </div>

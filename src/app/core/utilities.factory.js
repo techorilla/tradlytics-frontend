@@ -32,6 +32,7 @@
             internalServerError: internalServerError,
             successMessage: successMessage,
             initialDateRange: initialDateRange,
+            todayDateRange: todayDateRange,
             getDateRangeArray: getDateRangeArray,
             getYearsInDateRange: getYearsInDateRange,
             getMonthsInDateRange: getMonthsInDateRange,
@@ -39,6 +40,7 @@
             getMonthTitle: getMonthTitle,
             getWeekTitle: getWeekTitle,
             filterDate: filterDate,
+            lastThirtyDaysDateRange: lastThirtyDaysDateRange,
             resetFormValidation: resetFormValidation,
             colors: colors,
             dashboardDateRange: dashboardDateRange,
@@ -46,7 +48,8 @@
             getStatesForAccordian: getStatesForAccordian,
             setupCRUD: setupCRUD,
             cloneIntoEmptyObject: cloneIntoEmptyObject,
-            cloneObjectInToObject: cloneObjectInToObject
+            cloneObjectInToObject: cloneObjectInToObject,
+            convertMomentDateRange: convertMomentDateRange
         };
 
         function uploadImage(evt){
@@ -80,7 +83,7 @@
             crudObj[crud.CREATE] = create;
             crudObj[crud.UPDATE] = update;
             crudObj[crud.DELETE] = del;
-            crudObj[crud.READ] = read
+            crudObj[crud.READ] = read;
             return crudObj;
         }
 
@@ -128,7 +131,19 @@
             toastr.error(data,text);
         }
 
+        function todayDateRange(){
+            var datePicker = {};
+            datePicker.startDate = moment().startOf('day');
+            datePicker.endDate = moment().endOf('day');
+            return datePicker;
+        }
 
+        function lastThirtyDaysDateRange(){
+            var datePicker = {};
+            datePicker.startDate = moment().subtract(30,'days').startOf('day');
+            datePicker.endDate = moment().endOf('day');
+            return datePicker;
+        }
 
         function initialDateRange(){
             var datePicker = {};
@@ -220,6 +235,13 @@
                 currentDate = currentDate.addDays(1);
             }
             return dateArray;
+        }
+
+        function convertMomentDateRange(dateRange){
+            var range = angular.copy(dateRange);
+            range.startDate = range.startDate._d;
+            range.endDate = range.endDate._d;
+            return range;
         }
 
         function resetFormValidation(formObj){

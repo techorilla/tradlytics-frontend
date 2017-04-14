@@ -11,7 +11,8 @@ gulp.task('copyVendorImages', function () {
       path.join(conf.wiredep.directory, '**/amcharts/dist/amcharts/images/**/*'),
       path.join(conf.wiredep.directory, '**/ionrangeslider/img/**/*'),
       path.join(conf.wiredep.directory, '**/jstree/dist/themes/**/*'),
-      path.join(conf.wiredep.directory, '**/leaflet/dist/images/**/*')
+      path.join(conf.wiredep.directory, '**/leaflet/dist/images/**/*'),
+      path.join(conf.wiredep.directory, '**/SVG-Loaders/svg-loaders/*')
     ])
     .pipe(gulp.dest(path.join(conf.paths.tmp, 'serve', '/assets/img/theme/vendor')));
 });

@@ -9,7 +9,7 @@
       .directive('pageTop', pageTop);
 
   /** @ngInject */
-  function pageTop(authentication) {
+  function pageTop(authentication, $state) {
     return {
       restrict: 'E',
       link: link,
@@ -17,6 +17,9 @@
     };
 
     function link(scope, elem, attrs){
+      scope.goToSettings = function(){
+        $state.go('dashboard.settings.transactionStatus');
+      };
       scope.userData = authentication.getUserData();
       scope.logout = function(){
         authentication.logout();
