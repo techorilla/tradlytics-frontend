@@ -51,7 +51,6 @@
 
     function selectedRows(){
         return function(rows,rowsToRemove,bind){
-            console.log(rows, rowsToRemove);
             if(!rowsToRemove || rowsToRemove.length === 0){
                 return rows;
             }

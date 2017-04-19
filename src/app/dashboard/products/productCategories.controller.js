@@ -5,7 +5,6 @@
 
     function productCategories(allCategories, $state, product, toastr){
         var vm = this;
-        console.log(allCategories);
         _init();
 
         function _init(){

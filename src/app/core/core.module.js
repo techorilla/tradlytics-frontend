@@ -24,6 +24,8 @@ angular.module('app.core', [
     'ngBootstrap',
     'selectize',
     'ngImgCrop',
-    'isteven-multi-select'
+    'angularSpectrumColorpicker',
+    'ui.validate',
+    'satellizer'
 
 ]);

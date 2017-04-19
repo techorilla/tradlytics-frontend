@@ -32,8 +32,6 @@
             vm.showForm = false;
             vm.selectedBPTypes = [];
             vm.selectedOrigin = [];
-            vm.allBusinessPartner = {};
-            vm.allBusinessPartner.data = [];
             vm.bpToRemove = [];
             vm.searchBusinessPartner = '';
             vm.countryConfig = {};
@@ -71,7 +69,7 @@
             vm.removeBusinessLogo = removeBusinessLogo;
             vm.getFile = getFile;
 
-            vm.allBusinessPartner.tableHeadings = [
+            vm.tableHeadings = [
                 {name: 'Name', stSort:'', stPlaceholder:''},
                 {name:'Contact Person', stSort:'bp_Cont_fullName', stPlaceholder:''},
                 {name:'Origin', stSort:'bp_Cont_fullName', stPlaceholder:''},
@@ -79,9 +77,6 @@
                 {name:'Last Transaction On', stSort:'bp_Cont_fullName', stPlaceholder:''},
                 {name:'Actions'}
             ];
-            businessPartner.getBusinessPartnerList().then(function(response){
-                vm.allBusinessPartner.data = response.businessPartners;
-            });
             dropDownConfig.prepareByTypesDropDown(vm.bpTypeConfig, vm.bpTypeOptions);
             dropDownConfig.prepareContactNumberTypeDropDown(vm.contactTypeConfig, vm.contactTypeOptions);
             dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions, onCountryDropDownChange, 1);

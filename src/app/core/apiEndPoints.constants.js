@@ -26,6 +26,7 @@
         login: 'login',
         logout: 'logout',
         user:'user',
+        changePassword: 'changePassword',
         bp:{
             main:'business',
             list: 'list',

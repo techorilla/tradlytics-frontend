@@ -18,6 +18,7 @@
         var tranStatusAPI = Restangular.all(apiEndPoints.dropDown.main);
 
         return {
+            getChangePasswordObj: getChangePasswordObj,
             dropDown: utilities.setupCRUD(
                 dropDownCreate,
                 dropDownRead,
@@ -25,6 +26,14 @@
                 dropDownDelete
             )
         };
+
+        function getChangePasswordObj(){
+            return {
+                'confirmPassword': '',
+                'oldPassword': '',
+                'newPassword': ''
+            }
+        }
 
         function dropDownCreate(endPoint, name){
             return tranStatusAPI.customPOST({name:name}, endPoint)
@@ -45,7 +54,10 @@
         }
 
         function dropDownUpdate(endPoint, name, id){
-            return tranStatusAPI
+            return tranStatusAPI.customPUT({
+                name: name,
+                id: id
+            }, endPoint);
         }
         
         

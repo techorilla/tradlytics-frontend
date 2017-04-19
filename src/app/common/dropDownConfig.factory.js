@@ -420,6 +420,9 @@
     // multiple : boolean if you want a multi select
     function getBasicDropDownConfig(multiple, dropOptions, atrValue, atrLabel){
       var dropDown = {
+        plugins: {
+          'no-delete': {}
+        },
         valueField: 'id',
         sortField: 'name',
         searchField: ['name'],
@@ -504,7 +507,7 @@
 
     function prepareBusinessLocationsDropDown(locationConfig, locationOptions){
       utilities.cloneIntoEmptyObject(locationConfig, getBpLocationConfig());
-      businessPartner.getBusinessPartnerLocation(authentication.getUserBusinessId(), 'drop_down')
+      businessPartner.getBusinessPartnerLocation('drop_down')
           .then(function(response){
             utilities.cloneIntoEmptyObject(locationOptions,response.locations)
           });

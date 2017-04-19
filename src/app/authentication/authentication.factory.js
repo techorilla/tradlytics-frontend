@@ -18,7 +18,7 @@
         .module('app.authentication').factory('authentication', authentication);
 
 
-    function authentication(Restangular, apiEndPoints, $state, $http, $cookies, toastr, httpStatus, utilities){
+    function authentication(Restangular, apiEndPoints, $state, $http, $cookies, toastr, httpStatus, utilities, $auth){
 
         var loginApi = Restangular.all(apiEndPoints.login);
         var logOutApi = Restangular.all(apiEndPoints.logout);
@@ -29,10 +29,13 @@
             logout: logout,
             getUserData: getUserData,
             setUserData: setUserData,
-            getUserBusinessId: getUserBusinessId
+            getUserBusinessId: getUserBusinessId,
+            authenticate: authenticate
         };
 
-
+        function authenticate(provider){
+            $auth.authenticate(provider);s
+        }
 
         function getUserBusinessId(){
             return getUserData().data.businessId

@@ -18,7 +18,7 @@
         .directive('pageHeader', pageHeader);
 
     /* @ngInject */
-    function pageHeader($state, $rootScope){
+    function pageHeader($state, $rootScope, utilities){
 
         return {
             link: link,
@@ -41,20 +41,7 @@
             function _init(){
                 scope.rootScope = $rootScope;
             }
-            scope.goToBack = function(){
-                if($state.current.prevState){
-                    $state.go($state.current.prevState,$state.current.prevParam);
-                }
-                else{
-                    try{
-                        $state.go('^');
-                    }
-                    catch(err){
-                        $state.go('dashboard.main');
-                    }
-
-                }
-            };
+            scope.goToBack = utilities.goBackState;
         }
     }
 

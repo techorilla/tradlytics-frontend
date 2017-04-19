@@ -37,12 +37,12 @@
                 });
         }
 
-        function dismissModal(){
-            $uibModal.dismiss('cancel');
+        function dismissModal(modalInstance){
+            modalInstance.dismiss('cancel');
         }
 
         function openModal(page, size, controller, resolve) {
-            $uibModal.open({
+            return $uibModal.open({
                 animation: true,
                 templateUrl: page,
                 controller: controller,

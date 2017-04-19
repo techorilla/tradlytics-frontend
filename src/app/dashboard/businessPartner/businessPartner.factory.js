@@ -300,8 +300,8 @@
             return bpAPI.customGET(apiEndPoints.bp.list);
         }
 
-        function getBusinessPartnerLocation(businessId, query){
-            return bpAPI.customGET(businessId+'/location',{'q':query})
+        function getBusinessPartnerLocation(query){
+            return bpAPI.customGET(apiEndPoints.bp.location,{'q':query})
         }
 
     }

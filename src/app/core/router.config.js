@@ -42,7 +42,6 @@
             }
             fromState.wentTo = toState.name;
             toState.params = toParams;
-            console.log(fromState, fromParams, toState.wentTo );
             if(toState.wentTo !== fromState.name){
 
                 toState.prevState = fromState.name;

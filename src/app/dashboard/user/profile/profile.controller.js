@@ -9,7 +9,8 @@
         .controller('ProfilePage', ProfilePage);
 
     /** @ngInject */
-    function ProfilePage(fileReader, authentication, $filter, deModal, userProfile, dropDownConfig, toastr, $scope, user, $state) {
+    function ProfilePage(fileReader, authentication, $filter, deModal, userProfile,
+                         utilities, dropDownConfig, toastr, $scope, user, $state) {
         var vm = this;
         _init();
 
@@ -66,6 +67,7 @@
                     }
                     else{
                         toastr.error(response.message);
+                        utilities.goBackState();
                     }
                 });
             }
@@ -89,7 +91,8 @@
                             });
                         }
                         else{
-                            toastr.success(response.message,'Success')
+                            toastr.success(response.message,'Success');
+                            utilities.goBackState();
                         }
                     }
                     else{
@@ -107,7 +110,7 @@
                 .then(function (result) {
                     deModal.openImageCropper(result, 1, [{w:100, h:100}, {w: 200,h: 200}], {width:100, height:100},
                         function(imagesData){
-                            vm.picture = imagesData.croppedImages[1].dataURI;
+                            vm.picture = imagesData.croppedImage;
                             vm.imagesData = imagesData;
                         });
                     // vm.picture = result;

@@ -87,7 +87,6 @@
                 vm.showCharts = true;
                 $timeout(function () {
                     loadPieCharts();
-                    updatePieCharts();
                 }, 100);
                 loaderModal.close();
             });

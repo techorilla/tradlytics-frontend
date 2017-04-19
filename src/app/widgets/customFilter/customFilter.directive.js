@@ -39,7 +39,7 @@
 
 
     function link(scope, elem, attrs){
-
+      scope.dropDownValues = [];
       function onFilterSuccessCallBack(response){
         scope.appConstants = appConstants;
         scope.apiEndPoints = apiEndPoints;

@@ -10,7 +10,7 @@
     min-width: 100px;
   }
   .tab-content {
-    width: calc(100% - 100px);
+    width: calc(100% - 155px);
     overflow-y: auto;
   }
 }
@@ -20,7 +20,7 @@
 }
 
 .tabs-left .tab-content {
-  margin-left: 100px;
+  margin-left: 155px;
 }
 
 .tab-content > .tab-pane,

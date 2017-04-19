@@ -49,13 +49,29 @@
             setupCRUD: setupCRUD,
             cloneIntoEmptyObject: cloneIntoEmptyObject,
             cloneObjectInToObject: cloneObjectInToObject,
-            convertMomentDateRange: convertMomentDateRange
+            convertMomentDateRange: convertMomentDateRange,
+            goBackState: goBackState
         };
 
         function uploadImage(evt){
 
 
         }
+
+        function goBackState(){
+            if($state.current.prevState){
+                $state.go($state.current.prevState,$state.current.prevParam);
+            }
+            else{
+                try{
+                    $state.go('^');
+                }
+                catch(err){
+                    $state.go('dashboard.main');
+                }
+
+            }
+        };
 
         function cloneObjectInToObject(clone, sample){
             for(var key in clone){

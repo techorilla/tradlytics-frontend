@@ -25,10 +25,14 @@
             addProfilePic: addProfilePic,
             updateProfilePic: updateProfilePic,
             deleteProfilePic: deleteProfilePic,
-            getNewUserObj: getNewUserObj
+            getNewUserObj: getNewUserObj,
+            changePassword: changePassword
+
         };
 
-
+        function changePassword(passwordObj){
+            return userAPI.customPOST(passwordObj, apiEndPoints.changePassword)
+        }
 
         function getNewUserObj(){
             return {

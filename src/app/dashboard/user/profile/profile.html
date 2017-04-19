@@ -68,7 +68,7 @@
             <div class="col-sm-9">
               <selectize
                       name="designation"
-                      ng-required="true"
+                      required='true'
                       placeholder="Designation"
                       config="vm.designationConfig"
                       options='vm.designationOptions.list'
@@ -90,7 +90,7 @@
               <selectize
                       placeholder="Office Location"
                       name="officeLocation"
-                      ng-required="true"
+                      required='true'
                       config="vm.locationConfig"
                       options='vm.locationOptions.list'
                       ng-model="vm.userProfile.businessLocationId">
@@ -114,7 +114,7 @@
                      name="email" ng-model="vm.userProfile.email"
                      ng-required="true"
                      id="email" placeholder="">
-              <ng-messages for="vm.profileForm.officeLocation.$error"
+              <ng-messages for="vm.profileForm.email.$error"
                            ng-if='(vm.profileForm.$submitted && vm.profileForm.email.$invalid) ||
                                             (vm.profileForm.email.$invalid && vm.profileForm.email.$dirty)'>
                 <div ng-message="pattern" class="errorValidation">Invalid email.</div>
@@ -129,8 +129,8 @@
               <input type="text"
                      ng-pattern="/^[a-zA-Z0-9]*$/"
                      ng-model="vm.userProfile.username" name="username"
-                     class="form-control" id="username" placeholder="">
-              <ng-messages for="vm.profileForm.officeLocation.$error"
+                     class="form-control" id="username" placeholder="User Name">
+              <ng-messages for="vm.profileForm.username.$error"
                            ng-if='(vm.profileForm.$submitted && vm.profileForm.username.$invalid) ||
                                             (vm.profileForm.username.$invalid && vm.profileForm.username.$dirty)'>
                 <div ng-message="required" class="errorValidation">Please enter user username.</div>

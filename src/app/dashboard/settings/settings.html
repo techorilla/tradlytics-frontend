@@ -1,11 +1,12 @@
 <uib-tabset active="$tabSetStatus.activeTab">
     <uib-tab heading="Change Password">
+        <div ng-include="'app/dashboard/settings/templates/changePassword.html'"></div>
+    </uib-tab>
 
+    <uib-tab heading="Application Drop Downs">
+        <div ng-include="'app/dashboard/settings/templates/appDropDown.html'"></div>
     </uib-tab>
     <uib-tab heading="Business Details">
-
-    </uib-tab>
-    <uib-tab heading="Application Drop Downs">
-
+        <div ng-include="'app/dashboard/settings/templates/businessDetails.html'"></div>
     </uib-tab>
 </uib-tabset>

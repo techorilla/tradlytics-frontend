@@ -1,0 +1,48 @@
+<div ba-panel
+     ba-panel-class="tabs-panel with-scroll">
+    <uib-tabset class="tabs-left">
+        <uib-tab ng-repeat="dropDown in vm.appDropDowns" heading="{{dropDown.title}}"
+                 ng-click="vm.getDropDownList(dropDown)">
+            <button class="btn btn-primary" data-toggle="modal"
+                    ng-click="vm.openDropDownModal('Add New ' + dropDown.title, dropDown.endPoint, vm.page, 'md', vm.modalController, null, null)">
+                Add New {{dropDown.title}}
+            </button>
+            </br>
+            </br>
+            <table class="table" st-table="smartTableData">
+                <thead>
+                <tr class="sortable table-header" ng-if="dropDown.list.length!==0">
+                    <th>Drop Down Value</th>
+                    <th>Created By</th>
+                    <th>Created On</th>
+                    <th>Updated By</th>
+                    <th>Updated On</th>
+                    <th>Actions</th>
+                </tr>
+                <tr class="table-header" ng-if="dropDown.list.length===0">
+                    <th>No values have been added.</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in dropDown.list">
+                    <td ng-bind="row.name"></td>
+                    <td ng-bind="row.createdBy"></td>
+                    <td ng-bind="row.createdAt | date:vm.appFormats.Date"></td>
+                    <td>{{(!row.updatedBy) && 'Not Updated' || row.updatedBy}}</td>
+                    <td>{{(!row.updatedOn) && 'Not Updated' || (row.updatedOn | date:vm.appFormats.Date)}}</td>
+                    <td>
+                        <div class="buttons">
+                            <button class="btn btn-primary editable-table-button btn-xs"
+                                    ng-click="vm.openDropDownModal('Edit ' + dropDown.title, dropDown.endPoint, vm.page, 'md', vm.modalController, row.name, row.id)">Edit</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </uib-tab>
+    </uib-tabset>
+</div>
+
+
+
+
