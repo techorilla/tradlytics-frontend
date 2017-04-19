@@ -108,7 +108,7 @@
         function getFile(picture){
             fileReader.readAsDataUrl(picture, $scope)
                 .then(function (result) {
-                    deModal.openImageCropper(result, 1, [{w:100, h:100}, {w: 200,h: 200}], {width:100, height:100},
+                    deModal.openImageCropper(result, 1, [{w: 200,h: 200}, {w:100, h:100}], {width:100, height:100},
                         function(imagesData){
                             vm.picture = imagesData.croppedImage;
                             vm.imagesData = imagesData;

@@ -23,7 +23,7 @@ angular.module('app.core', [
     'angularMoment',
     'ngBootstrap',
     'selectize',
-    'ngImgCrop',
+    'uiCropper',
     'angularSpectrumColorpicker',
     'ui.validate',
     'satellizer'

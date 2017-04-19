@@ -33,6 +33,7 @@
         function getFile(picture, scope, aspectRatio, sizeArray, resultSize, callBack){
             fileReader.readAsDataUrl(picture, scope)
                 .then(function (result) {
+                    console.log('hogaya');
                     openImageCropper(result, aspectRatio, sizeArray, resultSize, callBack);
                 });
         }
@@ -42,7 +43,7 @@
         }
 
         function openModal(page, size, controller, resolve) {
-            return $uibModal.open({
+            $uibModal.open({
                 animation: true,
                 templateUrl: page,
                 controller: controller,
@@ -53,7 +54,6 @@
         }
 
         function openImageCropper(image, aspectRatio, imageSizes, cropSize, callback){
-            console.log(imageSizes);
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: modalTemplates.IMAGE_CROP_WINDOW,
@@ -63,11 +63,12 @@
                     $scope.croppedImage = '';
                     $scope.image = image;
                     $scope.cropper = {
-                        cropWidth: cropSize.width,
-                        cropHeight: cropSize.height
+                        w: cropSize.width,
+                        h: cropSize.height
                     };
                     $scope.resultImageSizes=imageSizes[0];
                     $scope.saveImage = function () {
+                        console.log($scope.croppedImages, $scope.blob);
                         $uibModalInstance.close({
                             'croppedImages':$scope.croppedImages,
                             'resultBlob': $scope.blob,

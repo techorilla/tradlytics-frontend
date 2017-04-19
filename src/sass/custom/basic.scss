@@ -5,10 +5,10 @@
 }
 
 .cropArea {
-  background: $sidebar;
-  overflow: hidden;
-  width: 100%;
-  height: 300px;
+  background: $sidebar !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  height: 300px !important;
 }
 
 .margin-left-20px{
