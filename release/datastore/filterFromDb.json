@@ -1,0 +1,113 @@
+{
+
+    "brokers": [
+        {
+            "value":1,
+            "text": "Ali Nawaz"
+        },
+        {
+            "value":3,
+            "text": "David Dzumba"
+        },
+        {
+            "value": 4,
+            "text": "Nazim Masood"
+        },
+        {
+            "value": 5,
+            "text": "Ibrahim Ali"
+        },
+        {
+            "value": 6,
+            "text": "Abdul Nawaz Sheikh"
+        }
+    ],
+    "contractualBuyer": [
+        {
+            "value":1,
+            "text": "Dangra Buyers"
+        },
+        {
+            "value":3,
+            "text": "David Dzumba"
+        },
+        {
+            "value": 4,
+            "text": "Nazim Masood"
+        },
+        {
+            "value": 5,
+            "text": "Ibrahim Ali"
+        },
+        {
+            "value": 6,
+            "text": "Abdul Nawaz Sheikh"
+        }
+    ],
+    "sellers": [
+        {
+            "value":1,
+            "text": "Khan & Company"
+        },
+        {
+            "value":3,
+            "text": "Sameed Lentils"
+        },
+        {
+            "value": 4,
+            "text": "Jaffer Seeds"
+        },
+        {
+            "value": 5,
+            "text": "Ibrahim Ali"
+        },
+        {
+            "value": 6,
+            "text": "Doni Co"
+        }
+    ],
+    "buyers": [
+        {
+            "value":1,
+            "text": "Saba lelo"
+        },
+        {
+            "value":3,
+            "text": "Daal leloonga"
+        },
+        {
+            "value": 4,
+            "text": "Nazim Masood"
+        },
+        {
+            "value": 5,
+            "text": "Ibrahim Ali"
+        },
+        {
+            "value": 6,
+            "text": "Chawal"
+        }
+    ],
+    "products": [
+        {
+            "value":1,
+            "text": "Kali Masoor"
+        },
+        {
+            "value":3,
+            "text": "Yellow Mash"
+        },
+        {
+            "value": 4,
+            "text": "Orange Mash"
+        },
+        {
+            "value": 5,
+            "text": "Black Mash"
+        },
+        {
+            "value": 6,
+            "text": "Zinda Mash"
+        }
+    ]
+}

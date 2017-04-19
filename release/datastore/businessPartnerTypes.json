@@ -1,0 +1,29 @@
+{
+    "bpTypes":[
+        {
+            "id": 1,
+            "name": "Buyer",
+            "isChecked": false,
+            "model": "bp_isBuyer"
+        },
+        {
+            "id": 2,
+            "name": "Seller",
+            "isChecked": false,
+            "model": "bp_isSeller"
+
+        },
+        {
+            "id": 3,
+            "name": "Broker",
+            "isChecked": false,
+            "model": "bp_isBroker"
+        },
+        {
+            "id": 4,
+            "name": "Shipper",
+            "isChecked": false,
+            "model": "bp_isShipper"
+        }
+    ]
+}
