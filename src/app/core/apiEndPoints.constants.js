@@ -23,6 +23,10 @@
     'use strict';
 
     var apiEndPoints = {
+        authentication: {
+            basic:'auth',
+            googleAnalytics: 'google_analytics',
+        },
         login: 'login',
         logout: 'logout',
         user:'user',
@@ -84,7 +88,8 @@
             research: 'research',
             researchTags: 'research_tags',
             homeSlider: 'homeSlider',
-            team: 'team'
+            team: 'team',
+            dashboard:'dashboard'
         }
 
     };

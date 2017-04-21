@@ -18,8 +18,8 @@
         .module('app.authentication').factory('authentication', authentication);
 
 
-    function authentication(Restangular, apiEndPoints, $state, $http, $cookies, toastr, httpStatus, utilities, $auth){
-
+    function authentication(Restangular, apiEndPoints, $state, $http, $cookies, toastr, httpStatus, utilities, $auth, loaderModal){
+        var authAPI = Restangular.all(apiEndPoints.authentication.basic);
         var loginApi = Restangular.all(apiEndPoints.login);
         var logOutApi = Restangular.all(apiEndPoints.logout);
         var userData = {};
@@ -33,8 +33,19 @@
             authenticate: authenticate
         };
 
-        function authenticate(provider){
-            $auth.authenticate(provider);s
+        function authenticate(provider, callback){
+            loaderModal.open();
+            $auth.authenticate(provider).then(function(res){
+                if(res.data.success){
+                    toastr.success(res.message);
+                    callback();
+                }
+                else{
+                    toastr.error(res.data.message);
+                }
+            }).finally(function(){
+                loaderModal.close();
+            });
         }
 
         function getUserBusinessId(){

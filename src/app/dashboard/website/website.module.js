@@ -22,6 +22,15 @@
                 pageHeader:{
                     subTitle: 'Website',
                     title:'Dashboard'
+                },
+                resolve:{
+                    dashboard: function(website, loaderModal){
+                        loaderModal.open();
+                        return website.getWebsiteDashboard().then(function(res){
+                            loaderModal.close();
+                            return res.dashboardData;
+                        })
+                    }
                 }
             })
 

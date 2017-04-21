@@ -26,8 +26,13 @@
             displayResearchOnWebsite: displayResearchOnWebsite,
             getNewResearchObj: getNewResearchObj,
             getResearchTags: getResearchTags,
-            getCompleteResearch: getCompleteResearch
+            getCompleteResearch: getCompleteResearch,
+            getWebsiteDashboard: getWebsiteDashboard
         };
+
+        function getWebsiteDashboard(){
+            return websiteAPI.customGET(apiEndPoints.website.dashboard);
+        }
 
         function getNewResearchObj(){
             return {
