@@ -118,6 +118,10 @@
                         <td>
                             <div class="buttons">
                                 <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editProductItem(row)">Edit</button>
+                                <button style="width: 115px;"
+                                        ng-class="{'btn-danger': !row.priceOnWebsite, 'btn-success':row.priceOnWebsite}"
+                                        class="btn  editable-table-button btn-xs"
+                                        ng-click="vm.displayPriceOnWebsite(row)">Price On Website</button>
                                 <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
                             </div>
                         </td>

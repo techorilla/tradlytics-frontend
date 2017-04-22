@@ -50,7 +50,8 @@
             saveProductOrigin: saveProductOrigin,
 
             getPriceReport: getPriceReport,
-            displayOnWebsite: displayOnWebsite
+            displayOnWebsite: displayOnWebsite,
+            productItemPriceOnWebsite: productItemPriceOnWebsite
         };
 
         function displayOnWebsite(productId, state){
@@ -149,6 +150,13 @@
             productItemAPI.customPUT(productItem).then(function(res){
                 callback(res);
             });
+        }
+
+        function productItemPriceOnWebsite(productItemId, priceOnWebsite){
+            return productItemAPI.customPOST({
+                'productItemId': productItemId,
+                'priceOnWebsite': priceOnWebsite
+            }, apiEndPoints.productItemPriceOnWebsite)
         }
 
         function getAllProductItems(){

@@ -53,10 +53,15 @@
             getNewBusinessContactObj: getNewBusinessContactObj,
             getNewBusinessContactPersonObj: getNewBusinessContactPersonObj,
 
-            saveBusinessSettings: saveBusinessSettings
+            saveBusinessSettings: saveBusinessSettings,
+            getBusinessSettings: getBusinessSettings
 
 
         };
+
+        function getBusinessSettings(){
+            return bpAPI.customGET(apiEndPoints.bp.self)
+        }
 
         function saveBusinessSettings(obj){
             return bpAPI.customPOST(obj, apiEndPoints.bp.self)

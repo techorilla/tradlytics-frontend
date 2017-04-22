@@ -6,7 +6,7 @@
     <uib-tab heading="Application Drop Downs">
         <div ng-include="'app/dashboard/settings/templates/appDropDown.html'"></div>
     </uib-tab>
-    <uib-tab heading="Business Details">
+    <uib-tab heading="Business Details" ng-click="vm.getBusinessSettings()">
         <div ng-include="'app/dashboard/settings/templates/businessDetails.html'"></div>
     </uib-tab>
 </uib-tabset>

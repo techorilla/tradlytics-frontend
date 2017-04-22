@@ -37,7 +37,7 @@
                                           </div>
                                        </div>
                                        <div class="col-md-12 distance-10px"></div>
-                                       <div class="col-md-6">
+                                       <div class="col-md-4">
                                           <div class="form-group">
                                              <label for="productName">Product Name</label>
                                              <input autocomplete="false" type="text" class="form-control" id="productName" name="productName"
@@ -51,7 +51,20 @@
                                           </div>
                                        </div>
 
-                                       <div class="col-md-6">
+                                       <div class="col-md-4">
+                                          <div class="form-group">
+                                             <label for="productName">Product Code</label>
+                                             <input autocomplete="false" type="text" class="form-control" id="productCode" name="productCode"
+                                                    placeholder="Product Code" ng-model="vm.productObj.info.productCode" required>
+                                             <ng-messages for="vm.productInfoForm.productName.$error"
+                                                          ng-if='(vm.productInfoForm.$submitted && vm.productInfoForm.productCode.$invalid) ||
+                                            (vm.productInfoForm.productCode.$invalid && vm.productInfoForm.productCode.$dirty)'>
+                                                <div ng-message="required" class="errorValidation">Please enter product name.</div>
+                                             </ng-messages>
+                                          </div>
+                                       </div>
+
+                                       <div class="col-md-4">
                                           <div class="form-group">
                                              <label for="productName">Product Category</label>
                                              <selectize

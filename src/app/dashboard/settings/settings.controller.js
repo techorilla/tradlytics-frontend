@@ -21,6 +21,7 @@
             vm.modalController = modalController;
             vm.getDropDownList = getDropDownList;
             vm.saveBusinessSettings = saveBusinessSettings;
+            vm.getBusinessSettings = getBusinessSettings;
             vm.appDropDowns = [
                 {
                     'title': 'Business Partner Type',
@@ -127,6 +128,15 @@
                     deModal.dismissModal();
                 }
             });
+        }
+
+        function getBusinessSettings(){
+            loaderModal.open();
+            businessPartner.getBusinessSettings().then(function(response){
+                vm.businessSettings = response.business
+                loaderModal.close();
+            })
+
         }
 
         function saveBusinessSettings(form, obj){

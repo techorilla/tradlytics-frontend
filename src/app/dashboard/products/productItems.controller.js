@@ -21,6 +21,7 @@
             vm.addNewProductItem = addNewProductItem;
             vm.addProductItem = addProductItem;
             vm.updateProductItem = updateProductItem;
+            vm.displayPriceOnWebsite = displayPriceOnWebsite;
             vm.productConfig = {};
             vm.productOptions = {};
             dropDownConfig.prepareProductOriginDropDown(vm.originConfig, vm.originOptions, null);
@@ -81,6 +82,19 @@
                 vm.productItem=row;
                 vm.showForm=true;
             });
+        }
+
+        function displayPriceOnWebsite(row){
+            console.log(row);
+            product.productItemPriceOnWebsite(row.id, !row.priceOnWebsite).then(function(res){
+                if(res.success){
+                    row.priceOnWebsite = !row.priceOnWebsite;
+                    toastr.success(res.message);
+                }
+                else{
+                    toastr.error(res.message);
+                }
+            })
         }
 
 

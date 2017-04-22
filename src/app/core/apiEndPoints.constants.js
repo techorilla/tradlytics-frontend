@@ -56,6 +56,7 @@
         pricingSummary: 'summary',
         pricingMarket: 'price_market',
         productItem: 'product_item',
+        productItemPriceOnWebsite: 'price_on_website',
         productPriceReport: 'price_report',
         dropDown:{
             main: 'dropDown',
