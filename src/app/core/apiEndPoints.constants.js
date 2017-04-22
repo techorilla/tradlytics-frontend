@@ -39,7 +39,8 @@
             location:'location',
             contactPerson:'contact_person',
             contactNumber:'contact_number',
-            product:'product'
+            product:'product',
+            self: 'self'
         },
         dashboard:'dashboard',
         manifest: 'manifest',

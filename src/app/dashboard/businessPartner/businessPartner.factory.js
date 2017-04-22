@@ -51,10 +51,16 @@
             getNewBusinessBankObj: getNewBusinessBankObj,
             getNewBusinessAddressObj: getNewBusinessAddressObj,
             getNewBusinessContactObj: getNewBusinessContactObj,
-            getNewBusinessContactPersonObj: getNewBusinessContactPersonObj
+            getNewBusinessContactPersonObj: getNewBusinessContactPersonObj,
+
+            saveBusinessSettings: saveBusinessSettings
 
 
         };
+
+        function saveBusinessSettings(obj){
+            return bpAPI.customPOST(obj, apiEndPoints.bp.self)
+        }
 
         // Business Location
 

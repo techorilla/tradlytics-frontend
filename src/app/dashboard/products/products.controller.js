@@ -43,10 +43,10 @@
 
         function displayOnWebsite(prod){
             loaderModal.open();
-            product.displayOnWebsite(prod.info.id, !prod.onWebsite).then(function(res){
+            product.displayOnWebsite(prod.info.id, !prod.info.onWebsite).then(function(res){
                 if(res.success){
                     toastr.success(res.message);
-                    prod.info.onWebsite = !prod.onWebsite;
+                    prod.info.onWebsite = !prod.info.onWebsite;
                 }
                 else{
                     toastr.error(res.message);

@@ -37,7 +37,7 @@
                             <div class="form-group row clearfix">
                                 <label for="priceMarket" class="col-sm-3 control-label">Price Date</label>
                                 <div class="col-sm-9">
-                                    <div uib-datepicker ng-model="vm.marketPriceObj.priceTime"
+                                    <div uib-datepicker ng-model="vm.marketPriceObj.priceTime" ng-change="vm.onPriceDateChange()"
                                          class="calender margin-top-10px" datepicker-options="options"></div>
                                 </div>
                             </div>

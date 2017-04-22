@@ -43,7 +43,7 @@
                            ng-model="vm.business.website"
                            class="form-control"
                            id="businessWebsite" placeholder="Business Website">
-                    <ng-messages for="vm.profileForm.officeLocation.$error"
+                    <ng-messages for="vm.profileForm.businessWebsite.$error"
                                  ng-if='(vm.basicInfoForm.$submitted && vm.basicInfoForm.businessWebsite.$invalid) ||
                                             (vm.basicInfoForm.businessWebsite.$invalid && vm.basicInfoForm.businessWebsite.$dirty)'>
                         <div ng-message="pattern" class="errorValidation">Please enter a valid website.</div>

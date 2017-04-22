@@ -45,7 +45,6 @@ body {
   .page-not-found-modal a {
     text-decoration: none;
     outline: none;
-    -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
     color: #684D61;
     display: inline-block; }

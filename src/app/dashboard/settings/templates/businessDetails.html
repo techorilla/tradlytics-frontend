@@ -1,0 +1,34 @@
+<div>
+    <div class="panel-content">
+        <form name="vm.businessSettingsForm">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-12">
+                        <label>Website</label>
+                        <input type="text"
+                               name="businessWebsite"
+                               ng-pattern="/^(http:\/\/|https:\/\/)?[_a-z0-9]+(\.[_a-z0-9]+)*[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,7})$/"
+                               ng-model="vm.businessSettings.website"
+                               class="form-control"
+                               id="businessWebsite" placeholder="Business Website">
+                        <ng-messages for="vm.businessSettingsForm.businessWebsite.$error"
+                                     ng-if='(vm.businessSettingsForm.$submitted && vm.businessSettingsForm.businessWebsite.$invalid) ||
+                                            (vm.businessSettingsForm.businessWebsite.$invalid && vm.businessSettingsForm.businessWebsite.$dirty)'>
+                            <div ng-message="pattern" class="errorValidation">Please enter a valid website.</div>
+                        </ng-messages>
+                    </div>
+                </div>
+                </br>
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="submit" ng-click="vm.saveBusinessSettings(vm.businessSettingsForm, vm.businessSettings)"
+                                    class="btn btn-primary">Save Business Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

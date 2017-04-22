@@ -133,7 +133,6 @@ body.mobile {
     height: 100%; } }
 
 a {
-  -webkit-transition: color 0.5s ease;
   transition: color 0.5s ease;
   outline: 0 !important; }
 
@@ -163,7 +162,6 @@ a {
   bottom: 0;
   font-size: 13px;
   color: #ffffff;
-  -webkit-transition: padding-left 0.5s ease;
   transition: padding-left 0.5s ease; }
 
 .al-footer-main {
@@ -197,7 +195,6 @@ a {
     margin-left: 16px; }
     .al-share li i {
       cursor: pointer;
-      -webkit-transition: all 0.1s ease;
       transition: all 0.1s ease;
       color: white;
       padding: 6px;
@@ -282,7 +279,6 @@ a {
 
 .btn {
   border-radius: 5px;
-  -webkit-transition: all 0.1s ease;
   transition: all 0.1s ease; }
 
 .btn:hover {
@@ -653,7 +649,6 @@ button.progress-button.btn.btn-danger {
   color: rgba(0, 0, 0, 0.2); }
 
 .bootstrap-select .btn {
-  -webkit-transition: none;
   transition: none; }
 
 .label {
@@ -746,7 +741,6 @@ textarea.form-control {
 .bootstrap-switch {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-transition: border-color ease-in-out .7s, box-shadow ease-in-out .7s;
   transition: border-color ease-in-out .7s, box-shadow ease-in-out .7s; }
   .bootstrap-switch:focus {
     outline: none; }
@@ -779,7 +773,6 @@ textarea.form-control {
   .bootstrap-switch .bootstrap-switch-label {
     background: transparent; }
   .bootstrap-switch.bootstrap-switch-animate .bootstrap-switch-container {
-    -webkit-transition: margin-left .2s;
     transition: margin-left .2s; }
 
 .switches {
@@ -1265,7 +1258,6 @@ tags-input[disabled] .tags {
 
 tags-input[disabled] .tags .tag-item {
   opacity: .65;
-  background: -webkit-linear-gradient(top, #f0f9ff 0, rgba(203, 235, 255, 0.75) 47%, rgba(161, 219, 255, 0.62) 100%);
   background: linear-gradient(to bottom, #f0f9ff 0, rgba(203, 235, 255, 0.75) 47%, rgba(161, 219, 255, 0.62) 100%); }
 
 tags-input[disabled] .tags .tag-item .remove-button {
@@ -1363,7 +1355,6 @@ tags-input .autocomplete .suggestion-item {
   .auth-block a {
     text-decoration: none;
     outline: none;
-    -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
     color: #684D61; }
     .auth-block a:hover {

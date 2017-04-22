@@ -40,6 +40,7 @@
 
     function link(scope, elem, attrs){
       scope.dropDownValues = [];
+      scope.intialized = true;
       function onFilterSuccessCallBack(response){
         scope.appConstants = appConstants;
         scope.apiEndPoints = apiEndPoints;
@@ -48,8 +49,11 @@
           value.selected = true;
         });
         scope.selectedValues = angular.copy(scope.dropDownValues);
-        scope.onSelectedValuesChanged({selectedList:scope.selectedValues});
+        if(!scope.intialized){
+          scope.onSelectedValuesChanged({selectedList:scope.selectedValues});
+        }
         scope.isLoading = false;
+        scope.intialized = false;
       }
 
       initiateFilterType(scope.title);

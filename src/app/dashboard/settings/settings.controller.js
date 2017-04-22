@@ -3,7 +3,8 @@
     angular.module('app.dashboard.settings')
         .controller('settings', settings);
 
-    function settings($state, user, inputFields, utilities, toastr, settings, appFormats, modalTemplates, crud, deModal, apiEndPoints){
+    function settings($state, user, inputFields, utilities, toastr, settings, appFormats, modalTemplates, crud, deModal,
+                      apiEndPoints, businessPartner, loaderModal){
         var vm = this;
         _init();
 
@@ -19,6 +20,7 @@
             vm.openDropDownModal = openDropDownModal;
             vm.modalController = modalController;
             vm.getDropDownList = getDropDownList;
+            vm.saveBusinessSettings = saveBusinessSettings;
             vm.appDropDowns = [
                 {
                     'title': 'Business Partner Type',
@@ -113,6 +115,7 @@
         }
 
         function addDropDown(endPoint, name, id){
+            deModal.open();
             settings.dropDown[crud.CREATE](endPoint, name).then(function(response){
                 if(response.success){
                     toastr.success(response.message);
@@ -124,6 +127,25 @@
                     deModal.dismissModal();
                 }
             });
+        }
+
+        function saveBusinessSettings(form, obj){
+            if(form.$valid){
+                loaderModal.open();
+                businessPartner.saveBusinessSettings(obj).then(function(response){
+                   if(response.success){
+                       toastr.success(response.message);
+                       loaderModal.close()
+                   }
+                   else{
+                       toastr.error(response.message);
+                       loaderModal.close();
+                   }
+                });
+            }
+            else{
+                toastr.error('Please enter form correctly', 'Invalid Form')
+            }
         }
 
 

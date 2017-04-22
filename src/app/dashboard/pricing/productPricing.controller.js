@@ -51,6 +51,7 @@
             vm.onProductsSelectedChanged = onProductsSelectedChanged;
             vm.onPriceMarketSelectedChanged = onPriceMarketSelectedChanged;
             vm.onCountrySelectedChanged = onCountrySelectedChanged;
+            vm.onPriceDateChange = onPriceDateChange;
         }
 
         function filterChanged(){
@@ -66,10 +67,22 @@
             });
         }
 
+        function onPriceDateChange(){
+            var priceTime = new Date(vm.marketPriceObj.priceTime);
+            priceTime = priceTime.toUTCString();
+            angular.forEach(vm.marketPriceObj.priceItems, function(val, key){
+                val.shipmentMonths = [];
+            });
+            dropDownConfig.prepareShipmentMonthDropDown(vm.shipmentMonthConfig, vm.shipmentMonthOptions, priceTime);
+
+        }
+
         function editProductItemPrice(row){
+            console.log(row.priceTime);
             vm.showForm=false;
             vm.shipmentMonthConfig = {};
             vm.shipmentMonthOptions = {};
+            console.log()
             dropDownConfig.prepareShipmentMonthDropDown(vm.shipmentMonthConfig, vm.shipmentMonthOptions, row.priceTime);
             vm.marketPriceObj = row;
             vm.showForm=true;
