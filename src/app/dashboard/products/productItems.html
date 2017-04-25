@@ -66,6 +66,18 @@
                                 </selectize>
                             </div>
                             <div class="form-group">
+                                <label>Import Expense</label>
+                                <input type="text" ng-model="vm.productItem.importExpense"
+                                       name="importExpense"
+                                       required="true"
+                                       class="form-control" id="importExpense" placeholder="Import Expense">
+                                <ng-messages for="vm.productItemForm.importExpense.$error"
+                                             ng-if='(vm.productItemForm.$submitted && vm.productItemForm.importExpense.$invalid) ||
+                                            (vm.productItemForm.importExpense.$invalid && vm.productItemForm.importExpense.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter import Expense.</div>
+                                </ng-messages>
+                            </div>
+                            <div class="form-group">
                                 <label>System Database Ids</label>
                                 <input type="text" ng-model="vm.productItem.databaseIds"
                                        name="keywordName"
@@ -100,6 +112,7 @@
                         <th>Product</th>
                         <th>Origin</th>
                         <th>Keyword</th>
+                        <th>Import Expense</th>
                         <th>Actions</th>
                     </tr>
                     <tr class="table-header" ng-if="vm.allProductItems.length===0">
@@ -115,6 +128,7 @@
                         </td>
                         <td ng-if="row.keywordsString" ng-bind="row.keywordsString"></td>
                         <td ng-if="!row.keywordsString">No Keyword attached</td>
+                        <td ng-bind="row.importExpense"></td>
                         <td>
                             <div class="buttons">
                                 <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editProductItem(row)">Edit</button>

@@ -10,10 +10,15 @@
         function _init(){
             vm.completeReport=completeReport;
             console.log(vm.completeReport.usdExchange.sevenDays);
+            vm.refreshCurrentDollarRate = refreshCurrentDollarRate;
             prepareDashboard();
         }
 
         function prepareDashboard(){
+
+        }
+
+        function refreshCurrentDollarRate(){
 
         }
     }

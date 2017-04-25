@@ -78,13 +78,11 @@
         }
 
         function editProductItemPrice(row){
-            console.log(row.priceTime);
             vm.showForm=false;
+            vm.marketPriceObj = row;
             vm.shipmentMonthConfig = {};
             vm.shipmentMonthOptions = {};
-            console.log()
             dropDownConfig.prepareShipmentMonthDropDown(vm.shipmentMonthConfig, vm.shipmentMonthOptions, row.priceTime);
-            vm.marketPriceObj = row;
             vm.showForm=true;
         }
 

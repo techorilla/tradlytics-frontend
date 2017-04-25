@@ -192,18 +192,28 @@
                         <br>
                         <h3 class="with-line margin-top-10px margin-bottom-10px" style="width:98%; margin-left: auto; margin-right: auto;"></h3>
                     </div>
+
+                    <button type="submit"
+                            ng-if="!vm.marketPriceObj.id"
+                            ng-click="vm.addMarketPrice(vm.marketPriceForm, vm.marketPriceObj)"
+                            class="btn btn-success btn-with-icon save-profile">
+                        <i class="ion-android-checkmark-circle"></i>Add Pricing And Add Another
+                    </button>
+
                     <button type="submit"
                             ng-if="!vm.marketPriceObj.id"
                             ng-click="vm.addMarketPrice(vm.marketPriceForm, vm.marketPriceObj)"
                             class="btn btn-primary btn-with-icon save-profile">
-                        <i class="ion-android-checkmark-circle"></i>Add Pricing
+                        <i class="ion-android-checkmark-circle"></i>Add Pricing And Exit
                     </button>
+
                     <button type="submit"
                             ng-if="vm.marketPriceObj.id"
                             ng-click="vm.updateMarketPrice(vm.marketPriceForm, vm.marketPriceObj)"
                             class="btn btn-primary btn-with-icon save-profile">
                         <i class="ion-android-checkmark-circle"></i>Update Pricing
                     </button>
+
                     <button type="button" ng-click="vm.cancel()"
                             class="btn btn-danger btn-with-icon save-profile">
                         <i class="ion-android-cancel"></i>Cancel

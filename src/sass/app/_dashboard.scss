@@ -23,3 +23,11 @@
 }
 
 .amcharts-chart-div a {display:none !important;}
+
+.card-refresh{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: $success;
+  cursor: pointer;
+}

@@ -12,11 +12,16 @@
         var dashboardAPI = Restangular.all(apiEndPoints.dashboard);
 
         return {
-            getCompleteDashboardReport: getCompleteDashboardReport
+            getCompleteDashboardReport: getCompleteDashboardReport,
+            refreshCurrentDollarRate: refreshCurrentDollarRate
         };
 
         function getCompleteDashboardReport(){
             return dashboardAPI.customGET('');
+        }
+
+        function refreshCurrentDollarRate(){
+
         }
     }
 
