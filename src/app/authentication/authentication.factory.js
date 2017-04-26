@@ -43,6 +43,9 @@
                 else{
                     toastr.error(res.data.message);
                 }
+                loaderModal.close();
+            }, function(err){
+                toastr.error('Unable to save your google analytics token');
             }).finally(function(){
                 loaderModal.close();
             });

@@ -169,9 +169,24 @@
         }
 
         function deleteMarketPrice(marketPriceObj){
-            pricing.deleteProductItemPrice(marketPriceObj, function(res){
-
+            loaderModal.open();
+            pricing.deleteProductItemPrice(marketPriceObj).then(function(res){
+                if(res.success){
+                    var deletedPriceItem = _.find(vm.allPriceItems, function(item){
+                        return item.id = marketPriceObj.id
+                    });
+                    var index = _.indexOf(vm.allPriceItems, deletedPriceItem);
+                    if (index !== -1){
+                        vm.allPriceItems.splice(index,1);
+                        toastr.success(res.message);
+                    }
+                }
+                else{
+                    toastr.error(res.message);
+                }
+                loaderModal.close();
             });
+
         }
 
         function addMarketPriceItemObj(marketPriceObj){

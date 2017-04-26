@@ -60,8 +60,8 @@
             });
         }
 
-        function deleteProductItemPrice(marketPriceObj, callback){
-
+        function deleteProductItemPrice(marketPriceObj){
+            return pricingAPI.customDELETE(apiEndPoints.productItem+'/'+marketPriceObj.id);
         }
 
         function getNewMarketPriceItemObj(isCurrent){

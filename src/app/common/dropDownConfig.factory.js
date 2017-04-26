@@ -446,18 +446,21 @@
       };
       atrValue = (atrValue) ? atrValue : 'id';
       atrLabel = (atrLabel) ? atrLabel : 'name';
-      dropDown['onItemRemove'] = function(value, obj){
-        var selectizeDropDown = this;
-        var removedOption = {};
-        removedOption[atrValue] = value;
-        removedOption[atrLabel] = obj.context.innerText;
-        if(dropOptions){
-          dropOptions.list.push(removedOption);
-        }
-        selectizeDropDown.refreshItems();
-      };
+
       if(multiple){
         delete dropDown['maxItems'];
+        delete dropDown['plugins'];
+        dropDown['onItemRemove'] = function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = {};
+          removedOption[atrValue] = value;
+          removedOption[atrLabel] = obj[0].innerText;
+          if(dropOptions){
+            dropOptions.list.push(removedOption);
+          }
+          selectizeDropDown.refreshItems();
+        };
+
       }
       return dropDown;
     }
