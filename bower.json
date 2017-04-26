@@ -67,7 +67,8 @@
     "ng-bs-daterangepicker": "0.0.5",
     "angular-ui-validate": "^1.2.2",
     "satellizer": "^0.15.5",
-    "ui-cropper": "^1.0.4"
+    "ui-cropper": "^1.0.4",
+    "spectrum": "^1.8.0"
   },
   "resolutions": {
     "angular": "~1.5.9",
