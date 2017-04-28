@@ -9,6 +9,7 @@
 
         function _init() {
             vm.graphData = [];
+            vm.chartValues = ['quantity'];
             vm.selectedBuyerID = [];
             vm.selectedSellerID = [];
             vm.selectedProductID = [];
@@ -38,19 +39,9 @@
                     scaleLength: 0,
                     animation: 2000,
                     lineWidth: 9,
-                    lineCap: 'round',
+                    lineCap: 'round'
                 });
             });
-        }
-
-
-
-
-        function prepareGraphData(graphData){
-            _.forEach(graphData, function(value, key){
-                value['date'] = new Date(value['date']);
-            });
-            return graphData
         }
 
         function onBuyersSelectedChanged(selectedList){
@@ -82,7 +73,7 @@
             loaderModal.open();
             vm.showCharts = false;
             manifest.getManifestDashboardReport(dateRange, selectedBuyerId, selectedSellerId, selectedProductId).then(function(res){
-                vm.graphData = prepareGraphData(res.graphData);
+                vm.graphData = utilities.prepareGraphData(res.graphData);
                 vm.sumData = res.sumData;
                 vm.showCharts = true;
                 $timeout(function () {

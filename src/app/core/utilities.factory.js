@@ -19,7 +19,7 @@
         ];
 
         var colors = [
-            "#333333", "#f47414", "#1691AC", "#A53860", "#4C3B4D",
+            "#f47414", "#1691AC", "#A53860", "#4C3B4D",
             "#ADA8B6", "#36C4BB", "#7EAAAF", "#A5C5C9", "#B4E6ED", "#E88D67",
             "#BAA298", "#C1A397", "#DD977A", "#E5CABE", "#424B54", "#79ACE0",
             "#B2CEEA", "#AEB9C4"
@@ -50,12 +50,19 @@
             cloneIntoEmptyObject: cloneIntoEmptyObject,
             cloneObjectInToObject: cloneObjectInToObject,
             convertMomentDateRange: convertMomentDateRange,
-            goBackState: goBackState
+            goBackState: goBackState,
+            prepareGraphData: prepareGraphData
         };
 
         function uploadImage(evt){
 
+        }
 
+        function prepareGraphData(graphData){
+            _.forEach(graphData, function(value, key){
+                value['date'] = new Date(value['date']);
+            });
+            return graphData
         }
 
         function goBackState(){

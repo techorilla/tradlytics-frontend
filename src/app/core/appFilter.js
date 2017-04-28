@@ -13,7 +13,20 @@
         .filter('selectFilterDropDown', selectFilterDropDown)
         .filter('selectedRows', selectedRows)
         .filter('uniqueByAttribute', uniqueByAttribute)
-        .filter('range', range);
+        .filter('range', range)
+        .filter('secondsToDateTime', secondsToDateTime)
+        .filter('percentage', ['$filter', function ($filter) {
+            return function (input, decimals) {
+                var number = (input > 1) ? input : input*100;
+                return $filter('number')(number, decimals) + '%';
+            };
+        }]);
+
+    function secondsToDateTime() {
+        return function(seconds) {
+            return new Date(1970, 0, 1).setSeconds(seconds);
+        };
+    }
 
     function selectFilter(){
         return function(items, search, bind) {

@@ -9,18 +9,40 @@
       .controller('LineChartCtrl', lineChartCtrl);
 
   /** @ngInject */
-  function lineChartCtrl($scope, baConfig, layoutPaths, baUtil) {
+  function lineChartCtrl($scope, baConfig, layoutPaths, baUtil, utilities) {
+    var chartType = ($scope.chartType) ? $scope.chartType : 'column';
     var layoutColors = baConfig.colors;
+    var chartColors = utilities.chartColors();
     var graphColor = baConfig.theme.blur ? '#21b799' : layoutColors.primary;
     
     var chart = makeChart();
 
     $scope.$watch('chartData', function(){
-      var chart = makeChart();
+      console.log($scope.chartData);
+      chart = makeChart();
     });
 
 
+
+
     function makeChart(){
+      var graphs = [];
+      angular.forEach($scope.chartValues, function(val, key){
+        console.log(val);
+        graphs.push({
+          id: 'g'+key,
+          bullet: 'none',
+          useLineColorForBulletBorder: true,
+          lineColor: chartColors[key],
+          lineThickness: 1,
+          negativeLineColor: layoutColors.danger,
+          type: chartType,
+          valueField: val,
+          fillAlphas: 1,
+          fillColorsField: 'lineColor'
+        });
+      });
+
       return AmCharts.makeChart('amchart', {
         type: 'serial',
         theme: 'blur',
@@ -42,32 +64,7 @@
             axisColor: layoutColors.defaultText
           }
         ],
-        graphs: [
-          {
-            id: 'g0',
-            bullet: 'none',
-            useLineColorForBulletBorder: true,
-            lineColor: baUtil.hexToRGB(graphColor, 0.3),
-            lineThickness: 1,
-            negativeLineColor: layoutColors.danger,
-            type: 'smoothedLine',
-            valueField: 'quantity',
-            fillAlphas: 1,
-            fillColorsField: 'lineColor'
-          }
-          // {
-          //   id: 'g1',
-          //   bullet: 'none',
-          //   useLineColorForBulletBorder: true,
-          //   lineColor: baUtil.hexToRGB(graphColor, 0.5),
-          //   lineThickness: 1,
-          //   negativeLineColor: layoutColors.danger,
-          //   type: 'smoothedLine',
-          //   valueField: 'value',
-          //   fillAlphas: 1,
-          //   fillColorsField: 'lineColor'
-          // }
-        ],
+        graphs: graphs,
         chartCursor: {
           categoryBalloonDateFormat: 'DD MMM YYYY',
           categoryBalloonColor: '#684D61',

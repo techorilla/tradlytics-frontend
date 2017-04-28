@@ -15,7 +15,9 @@
       controller: 'LineChartCtrl',
       templateUrl: 'app/widgets/lineChart/lineChart.html',
       scope:{
-        chartData: '='
+        chartData: '=',
+        chartValues: '=',
+        chartType: '='
       }
     };
   }

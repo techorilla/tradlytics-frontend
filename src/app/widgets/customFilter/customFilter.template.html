@@ -23,33 +23,33 @@
                 </li>
             </ul>
             <ul style="overflow-y: scroll; ">
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name' | orderBy: 'name'"
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'"
                     ng-if="endPoint===apiEndPoints.dropDown.product">
                     <input ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading titled-text">{{value.name}}</span>
                     <span class="dg-value">{{value.category}}</span>
                 </li>
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'origin' | orderBy: 'origin'"
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'origin'"
                     ng-if="endPoint===apiEndPoints.dropDown.priceMarket">
                     <input ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading">{{value.origin}}</span>
                     <span class="dg-value">{{value.currency}}</span>
                 </li>
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'  | orderBy: 'name'"
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'"
                     ng-if="endPoint===apiEndPoints.dropDown.country">
                     <input ng-change="onSingleSelectChange(value,value.selected,'name')"
                            type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading"><img width="18" src="{{appConstants.STATIC_URL + value.image}}"/>&nbsp;{{value.name}}</span>
                 </li>
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'text' | orderBy: 'value'" ng-if="(endPoint===apiEndPoints.dropDown.transactionStatus)">
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'text'" ng-if="(endPoint===apiEndPoints.dropDown.transactionStatus)">
                     <input ng-init="value.selected = true" ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">
                     <span class="dg-value singleFilterHeading titled-text">{{value.name}}</span>
                 </li>
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name' | orderBy: 'name'" ng-if="(endPoint===apiEndPoints.dropDown.bpType)">
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'" ng-if="(endPoint===apiEndPoints.dropDown.bpType)">
                     <input ng-init="value.selected = true" ng-change="onSingleSelectChange(value,value.selected,'name')" type="checkbox" ng-model="value.selected">
                     <span class="dg-value singleFilterHeading titled-text">{{value.name}}</span>
                 </li>
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name' | orderBy: 'name' "
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name' "
                     ng-if="(endPoint === apiEndPoints.dropDown.business)">
                     <input ng-init="value.selected = true" ng-change="onSingleSelectChange(value,value.selected,'id')"  type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading titled-text">{{value.name}}</span>

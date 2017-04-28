@@ -136,8 +136,8 @@
 
 <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
 <!-- inject:js -->
-<script src="app/common/common.module.js"></script>
 <script src="app/authentication/authentication.module.js"></script>
+<script src="app/common/common.module.js"></script>
 <script src="app/core/core.module.js"></script>
 <script src="app/dashboard/dashboard.module.js"></script>
 <script src="app/landing/landing.module.js"></script>
@@ -206,13 +206,13 @@
 <script src="app/dashboard/tradeBook/transaction/transaction.controller.js"></script>
 <script src="app/dashboard/user/profile/profile.controller.js"></script>
 <script src="app/app.js"></script>
+<script src="app/authentication/authentication.factory.js"></script>
 <script src="app/common/documentExporter.factory.js"></script>
 <script src="app/common/dropDownConfig.factory.js"></script>
 <script src="app/common/extendedMethods.js"></script>
 <script src="app/common/httpStatus.constant.js"></script>
 <script src="app/common/print.service.js"></script>
 <script src="app/common/routing.factory.js"></script>
-<script src="app/authentication/authentication.factory.js"></script>
 <script src="app/core/apiEndPoints.constants.js"></script>
 <script src="app/core/appFilter.js"></script>
 <script src="app/core/appInterceptors.js"></script>
@@ -275,27 +275,29 @@
 <script src="app/widgets/filterBar/filterBar.directive.js"></script>
 <script src="app/widgets/lineChart/lineChart.directive.js"></script>
 <script src="app/widgets/lineChart/lineChartCtrl.js"></script>
+<script src="app/widgets/mapBubbles/MapBubblePageCtrl.js"></script>
+<script src="app/widgets/mapBubbles/mapBubbles.directive.js"></script>
 <script src="app/widgets/ngTagsInput/ngTagsInput.directive.js"></script>
 <script src="app/widgets/numberOnlyInput/numberOnlyInput.directive.js"></script>
 <script src="app/widgets/pageHeader/pageHeader.directive.js"></script>
 <script src="app/widgets/pieCharts/dashboardPieChart.js"></script>
+<script src="app/widgets/sparklines/sparklines.directive.js"></script>
 <script src="app/widgets/profile/ProfileModalCtrl.js"></script>
 <script src="app/widgets/profile/ProfilePageCtrl.js"></script>
-<script src="app/widgets/sparklines/sparklines.directive.js"></script>
 <script src="app/widgets/tables/TablesPageCtrl.js"></script>
 <script src="app/widgets/trafficChart/TrafficChartCtrl.js"></script>
 <script src="app/widgets/trafficChart/trafficChart.directive.js"></script>
 <script src="app/widgets/weather/WeatherCtrl.js"></script>
 <script src="app/widgets/weather/weather.directive.js"></script>
-<script src="app/theme/components/baSidebar/BaSidebarCtrl.js"></script>
-<script src="app/theme/components/baSidebar/baSidebar.directive.js"></script>
-<script src="app/theme/components/baSidebar/baSidebar.service.js"></script>
-<script src="app/theme/components/baSidebar/baSidebarHelpers.directive.js"></script>
 <script src="app/theme/components/baPanel/baPanel.directive.js"></script>
 <script src="app/theme/components/baPanel/baPanel.service.js"></script>
 <script src="app/theme/components/baPanel/baPanelBlur.directive.js"></script>
 <script src="app/theme/components/baPanel/baPanelBlurHelper.service.js"></script>
 <script src="app/theme/components/baPanel/baPanelSelf.directive.js"></script>
+<script src="app/theme/components/baSidebar/BaSidebarCtrl.js"></script>
+<script src="app/theme/components/baSidebar/baSidebar.directive.js"></script>
+<script src="app/theme/components/baSidebar/baSidebar.service.js"></script>
+<script src="app/theme/components/baSidebar/baSidebarHelpers.directive.js"></script>
 <script src="app/theme/components/baWizard/baWizard.directive.js"></script>
 <script src="app/theme/components/baWizard/baWizardCtrl.js"></script>
 <script src="app/theme/components/baWizard/baWizardStep.directive.js"></script>
@@ -329,8 +331,8 @@
 <script src="app/widgets/ui/modals/ModalsPageCtrl.js"></script>
 <script src="app/widgets/ui/notifications/NotificationsPageCtrl.js"></script>
 <script src="app/theme/components/backTop/lib/jquery.backTop.min.js"></script>
-<script src="app/widgets/charts/amCharts/areaChart/AreaChartCtrl.js"></script>
 <script src="app/widgets/charts/amCharts/barChart/BarChartCtrl.js"></script>
+<script src="app/widgets/charts/amCharts/areaChart/AreaChartCtrl.js"></script>
 <script src="app/widgets/charts/amCharts/combinedChart/combinedChartCtrl.js"></script>
 <script src="app/widgets/charts/amCharts/funnelChart/FunnelChartCtrl.js"></script>
 <script src="app/widgets/charts/amCharts/ganttChart/ganttChartCtrl.js"></script>

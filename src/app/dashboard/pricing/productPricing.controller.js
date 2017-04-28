@@ -134,13 +134,21 @@
             }
         }
 
-        function addMarketPrice(form, marketPriceObj){
+        function addMarketPrice(form, marketPriceObj, addAnother){
             if(form.$valid){
                 pricing.addProductItemPrice(marketPriceObj, function(res){
                    if(res.success){
-                       toastr.success(res.message);
-                       onDateRangeChanged(vm.dateRange);
-                       cancel();
+                       if(!addAnother){
+                           toastr.success(res.message);
+                           onDateRangeChanged(vm.dateRange);
+                           cancel();
+                       }
+                       else{
+                           toastr.success(res.message);
+                           vm.marketPriceObj = pricing.getNewMarketPriceObj();
+                           utilities.resetFormValidation(form);
+                       }
+
                    }
                 });
             }

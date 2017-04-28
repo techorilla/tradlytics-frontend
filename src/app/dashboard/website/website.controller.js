@@ -8,9 +8,16 @@
         _init();
         function _init() {
             vm.dashboardData = dashboard;
+            vm.trafficChartData = [];
+            vm.mapData = [];
+            vm.trafficChartValues = ['newUsers', 'visits']
             vm.goToWebsiteBlogs = goToWebsiteBlogs;
             vm.connectGoogleAnalytics = connectGoogleAnalytics;
-
+            if(vm.dashboardData.googleAnalyticsConnected) {
+                vm.mapData = vm.dashboardData.data.trafficCountryChartData;
+                vm.cardsTotalData = vm.dashboardData.data.cardsTotalData;
+                vm.trafficChartData = utilities.prepareGraphData(vm.dashboardData.data.trafficChartData);
+            }
         }
 
         function goToWebsiteBlogs(){
@@ -19,7 +26,7 @@
 
         function connectGoogleAnalytics(){
             authentication.authenticate('google', function(){
-                vm.dashboardData.googleAnalyticsConnected = true;
+                $state.reload();
             });
         }
 

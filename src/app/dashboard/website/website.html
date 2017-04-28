@@ -6,19 +6,76 @@
     </div>
 </div>
 </br>
-<div class="row">
-    <div class="col-md-12" ba-panel ba-panel-class="medium-panel" >
+<div class="row" ba-panel ba-panel-title="Last 30 Days Report">
+    <div class="row pie-charts" ng-if="vm.dashboardData.googleAnalyticsConnected">
+        <div class="dash-cards col-xs-4">
+            <div ba-panel>
+                <div class="card-item">
+                    <div class="details row">
+                        <div class="col-xs-4 item">
+                            <div class="title">Total Users</div>
+                            <div class="number" ng-bind="vm.cardsTotalData.visits"></div>
+                        </div>
+                        <div class="col-xs-4 item">
+                            <div class="title">Page Views</div>
+                            <div class="number" ng-bind="vm.cardsTotalData.pageViews"></div>
+                        </div>
+                        <div class="col-xs-4 item">
+                            <div class="title">Hits</div>
+                            <div class="number" ng-bind="vm.cardsTotalData.hits"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dash-cards col-xs-4">
+            <div ba-panel>
+                <div class="card-item">
+                    <div class="details col-xs-12">
+                        <div class="col-xs-12 item">
+                            <div class="title">Bounce Rate</div>
+                            <div class="number" ng-bind="vm.cardsTotalData.bounceRate | percentage: 2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dash-cards col-xs-4">
+            <div ba-panel>
+                <div class="card-item">
+                    <div class="details col-xs-12">
+                        <div class="col-xs-6 item">
+                            <div class="title">Sessions</div>
+                            <div class="number"  ng-bind="vm.cardsTotalData.sessions"></div>
+                        </div>
+                        <div class="col-xs-6 item">
+                            <div class="title">Average Session Duration</div>
+                            <div class="number" ng-bind="vm.cardsTotalData.avgSessionDuration | secondsToDateTime | date:'HH:mm:ss'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12" ba-panel ba-panel-class="medium-panel">
         <button class="col-md-offset-3 col-md-6 btn btn-success" ng-if="!vm.dashboardData.googleAnalyticsConnected"
                 ng-click="vm.connectGoogleAnalytics()">
             Connect with Google Analytics to create website dashboard
         </button>
 
-        <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-7 col-xs-12"
+        <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
              ng-if="vm.dashboardData.googleAnalyticsConnected"
              ba-panel
-             ba-panel-title="Container FCL"
              ba-panel-class="medium-panel">
-            <line-chart chart-data="vm.graphData"></line-chart>
+            <line-chart chart-data="vm.trafficChartData" chart-values="vm.trafficChartValues"></line-chart>
+        </div>
+
+        <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+             ng-if="vm.dashboardData.googleAnalyticsConnected"
+             ba-panel
+             ba-panel-class="medium-panel">
+            <map-bubbles heading="Traffic By Country" map-chart-data="vm.mapData"></map-bubbles>
         </div>
 
     </div>
