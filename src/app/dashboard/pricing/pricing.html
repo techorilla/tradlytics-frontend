@@ -41,8 +41,12 @@
                             </div>
                             <div ng-if="row.internationalPrice!=='NA'" class="col-lg-6 col-sm-6 priceDetails">
                                 <div class="currency">International</div>
+                                <div class="change" ng-if="row.internationalPercentangeChange=='NA' || row.internationalPercentangeChange==0">
+                                    <i class="icon fa fa-minus"></i>
+                                </div>
                                 <div class="change" ng-if="row.internationalPercentangeChange !== 0 && row.internationalPercentangeChange!=='NA'">
                                     <div class="number" ng-bind="row.internationalPercentangeChange + ' %'"></div>
+
                                     <i ng-if="row.internationalPercentangeChange > 0" class="icon fa fa-caret-up"></i>
                                     <i ng-if="row.internationalPercentangeChange < 0" class="icon fa fa-caret-down"></i>
                                 </div>
@@ -77,6 +81,9 @@
                             </div>
                             <div ng-if="row.localCurrency!=='NA'" class="col-lg-6 col-sm-6 priceDetails">
                                 <div class="currency">Local</div>
+                                <div class="change" ng-if="row.localPercentangeChange=='NA' || row.localPercentangeChange==0">
+                                    <i class="icon fa fa-minus"></i>
+                                </div>
                                 <div class="change" ng-if="row.localPercentangeChange !== 0 && row.localPercentangeChange!=='NA'">
                                     <div class="number" ng-bind="row.localPercentangeChange + ' %'"></div>
                                     <i ng-if="row.localPercentangeChange > 0" class="icon fa fa-caret-up"></i>
