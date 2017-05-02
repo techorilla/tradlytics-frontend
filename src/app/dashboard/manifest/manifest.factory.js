@@ -21,9 +21,9 @@
             getManifestDashboardReport: getManifestDashboardReport
         };
 
-        function getNewManifestItemObj(){
+        function getNewManifestItemObj(date){
             return {
-                'date': new Date(),
+                'date': (date) ? date : new Date(),
                 'buyerId': null,
                 'sellerId': null,
                 'productId': null,

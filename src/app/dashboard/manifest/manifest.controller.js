@@ -128,9 +128,8 @@
                         if(response.success){
                             toastr.success(response.message);
                             if(addMore){
-                                vm.manifestItem = manifest.getNewManifestItemObj();
+                                vm.manifestItem = manifest.getNewManifestItemObj(manifestItem.date);
                                 utilities.resetFormValidation(form);
-
                             }
                             else {
                                 vm.cancel();
