@@ -15,12 +15,31 @@
         .filter('uniqueByAttribute', uniqueByAttribute)
         .filter('range', range)
         .filter('secondsToDateTime', secondsToDateTime)
+        .filter('utcToLocal', utcToLocal)
         .filter('percentage', ['$filter', function ($filter) {
             return function (input, decimals) {
                 var number = (input > 1) ? input : input*100;
                 return $filter('number')(number, decimals) + '%';
             };
         }]);
+
+
+
+    function utcToLocal($filter) {
+        return function (utcDateString, format) {
+            console.log('hello', utcDateString);
+            if (!utcDateString) {
+                return;
+            }
+
+            // append 'Z' to the date string to indicate UTC time if the timezone isn't already specified
+            if (utcDateString.indexOf('Z') === -1 && utcDateString.indexOf('+') === -1) {
+                utcDateString += 'Z';
+            }
+
+            return $filter('date')(utcDateString, format);
+        };
+    }
 
     function secondsToDateTime() {
         return function(seconds) {

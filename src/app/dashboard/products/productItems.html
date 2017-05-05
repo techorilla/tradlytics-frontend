@@ -84,6 +84,119 @@
                                        class="form-control" id="databaseIds" placeholder="Database Ids">
                             </div>
                         </div>
+
+                        <div class="col-sm-12">
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Moisture</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            from="vm.productItem.specification.moisture"
+                                            ng-model="vm.productItem.specification.moisture"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            from="0"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Purity</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.purity"
+                                            from="vm.productItem.specification.purity"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Foreign Matter</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.foreignMatter"
+                                            from="vm.productItem.specification.foreignMatter"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Broken Splits</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.brokenSplits"
+                                            from="vm.productItem.specification.brokenSplits"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Damaged</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.damaged"
+                                            from="vm.productItem.specification.damaged"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Green Damaged</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.greenDamaged"
+                                            from="vm.productItem.specification.greenDamaged"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Weevilied</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.weevilied"
+                                            from="vm.productItem.specification.weevilied"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Other Color</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.otherColor"
+                                            from="vm.productItem.specification.otherColor"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                            <div class="slider-box col-sm-12 col-md-4">
+                                <h5>Wrinkled</h5>
+                                <ion-slider type="single"
+                                            grid="true"
+                                            ng-model="vm.productItem.specification.wrinkled"
+                                            from="vm.productItem.specification.wrinkled"
+                                            min="0"
+                                            max="100"
+                                            prefix="%"
+                                            disable="false">
+                                </ion-slider>
+                            </div>
+                        </div>
+
                         <button type="button" ng-if="!vm.productItem.id"
                                 ng-click="vm.addProductItem(vm.productItemForm, vm.productItem)"
                                 class="btn btn-primary btn-with-icon save-profile">
@@ -116,11 +229,11 @@
                         <th>Actions</th>
                     </tr>
                     <tr class="table-header" ng-if="vm.allProductItems.length===0">
-                        <th>No values have been added.</th>
+                        <th>No from have been added.</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="row in vm.allProductItems">
+                    <tr ng-repeat="row in vm.allProductItems | orderBy:'productName'">
                         <td class="titled" ng-bind="row.productName"></td>
                         <td>
                             <img width="18" src="{{vm.appConstants.HOST + row.productOriginFlag}}"/>&nbsp;

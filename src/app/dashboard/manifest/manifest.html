@@ -45,7 +45,7 @@
                     <tbody ng-repeat="row in vm.displayList">
                     <tr>
 
-                        <td colspan="2" ng-bind="row.date  | date:vm.appFormats.Time"></td>
+                        <td colspan="2" ng-bind="row.date | date:vm.appFormats.DBDate"></td>
                         <td class="business">
                             <div class="name" ng-bind="row.buyerName"></div>
                             <div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>

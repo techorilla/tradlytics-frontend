@@ -85,7 +85,6 @@
         }
 
         function displayPriceOnWebsite(row){
-            console.log(row);
             product.productItemPriceOnWebsite(row.id, !row.priceOnWebsite).then(function(res){
                 if(res.success){
                     row.priceOnWebsite = !row.priceOnWebsite;

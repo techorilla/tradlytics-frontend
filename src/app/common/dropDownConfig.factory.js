@@ -35,8 +35,26 @@
       prepareRegionDropDown: prepareRegionDropDown,
       prepareCityDropDown: prepareCityDropDown,
       prepareByTypesDropDown: prepareByTypesDropDown,
-      prepareContactNumberTypeDropDown: prepareContactNumberTypeDropDown
+      prepareContactNumberTypeDropDown: prepareContactNumberTypeDropDown,
+      preparePackagingConfig: preparePackagingConfig,
+      prepareCommissionTypeConfig: prepareCommissionTypeConfig
     };
+
+    function preparePackagingConfig(packagingConfig, packagingOption){
+      utilities.cloneIntoEmptyObject(packagingConfig, getBasicDropDownConfig());
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.packaging, read.DROP_DOWN)
+          .then(function(response){
+            return utilities.cloneIntoEmptyObject(packagingOption, response.list);
+          });
+    }
+
+    function prepareCommissionTypeConfig(commissionTypeConfig, commissionTypeOptions){
+      utilities.cloneIntoEmptyObject(commissionTypeConfig, getBasicDropDownConfig());
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.commissionType, read.DROP_DOWN)
+          .then(function(response){
+            return utilities.cloneIntoEmptyObject(commissionTypeOptions, response.list);
+          });
+    }
 
     function shipementMonthconfig(item, escape){
       return '<div>' +

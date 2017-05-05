@@ -42,6 +42,14 @@
                 {
                     'title': 'Transaction Status',
                     'endPoint': apiEndPoints.dropDown.transactionStatus
+                },
+                {
+                    'title': 'Packaging',
+                    'endPoint': apiEndPoints.dropDown.packaging
+                },
+                {
+                    'title': 'Commission Type',
+                    'endPoint': apiEndPoints.dropDown.commissionType
                 }
             ];
 
@@ -116,7 +124,6 @@
         }
 
         function addDropDown(endPoint, name, id){
-            deModal.open();
             settings.dropDown[crud.CREATE](endPoint, name).then(function(response){
                 if(response.success){
                     toastr.success(response.message);

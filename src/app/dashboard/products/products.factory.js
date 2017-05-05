@@ -1,4 +1,5 @@
 /**
+ /**
  * @ngdoc service
  * @name app.dashboard.tradeBook.tradeBook
  * @description < description placeholder >
@@ -71,7 +72,7 @@
 
         function updateProductKeyword(keywordObj, callback){
             return productAPI.customPUT(keywordObj, apiEndPoints.productKeywords).then(function(res){
-               callback(res);
+                callback(res);
             })
         }
 
@@ -136,17 +137,30 @@
             return {
                 'keywords':[],
                 'productId': null,
-                'productOrigin': null
+                'productOrigin': null,
+                'specification': {
+                    'moisture': 0,
+                    'purity': 0,
+                    'foreignMatter': 0,
+                    'brokenSplits': 0,
+                    'damaged': 0,
+                    'greenDamaged': 0,
+                    'weevilied': 0,
+                    'otherColor': 0,
+                    'wrinkled': 0
+                }
             }
         }
 
         function addProductItem(productItem, callback){
-           productItemAPI.customPOST(productItem).then(function(res){
-               callback(res);
-           });
+            console.log(productItem);
+            productItemAPI.customPOST(productItem).then(function(res){
+                callback(res);
+            });
         }
 
         function updateProductItem(productItem, callback){
+            console.log(productItem);
             productItemAPI.customPUT(productItem).then(function(res){
                 callback(res);
             });

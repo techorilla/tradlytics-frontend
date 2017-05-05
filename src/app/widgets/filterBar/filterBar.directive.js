@@ -69,6 +69,8 @@
         };
         scope.seperator = ' to ';
         scope.datePickerChanged = function(dateRange){
+            dateRange.startDate = dateRange.startDate.removeTime();
+            dateRange.endDate = dateRange.endDate.removeTime();
             scope.onDateChange({dateRange: dateRange});
         };
     }

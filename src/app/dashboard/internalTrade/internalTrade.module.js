@@ -7,16 +7,16 @@
 
     function configuration(){
         $stateProvider
-            .state('dashboard.localTradeBook', {
+            .state('dashboard.internalTradeBook', {
                 url:'/tradeBook',
                 subNav: true,
-                subNavTitle: 'Trade Book',
+                subNavTitle: 'Internal Trade Book',
                 pageHeader:{
                     subTitle: 'Business',
-                    title:'Trade Book',
+                    title:'Internal Trade',
                     headerAnchor: [
                         {
-                            text: 'Add new Transaction',
+                            text: 'Add New Internal Trade',
                             state: 'dashboard.transaction({id:"new"})'
                         }
                     ]

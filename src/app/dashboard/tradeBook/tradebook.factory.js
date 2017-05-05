@@ -20,8 +20,43 @@
         // var transactionAPI =
 
         return {
-
+            getNewTransaction: getNewTransaction
         };
+
+        function getNewTransaction(){
+            return {
+                basic:{
+                    date: new Date(),
+                    quantityMetricId: 'FCL',
+                    buyerId: null,
+                    sellerId: null,
+                    productItemId: null,
+                    price: null,
+                    packaging: null,
+                    shipmentEnd: null,
+                    shipmentStart: null
+                },
+                commission:{
+                    typeId: 1,
+                    commission: 0,
+                    differance: 0,
+                    discount: 0,
+                    netCommission: 0
+
+                },
+                productSpecification:{
+                    moisture: null,
+                    purity: null,
+                    foreignMatter: null,
+                    brokenSplits: null,
+                    damaged: null,
+                    greenDamaged: null,
+                    weevilied: null,
+                    otherColor: null,
+                    wrinkled: null
+                }
+            }
+        }
 
 
         // return {

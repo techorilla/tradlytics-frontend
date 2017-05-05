@@ -68,6 +68,16 @@
             stateRef: 'dashboard.tradeBook'
         });
         baSidebarServiceProvider.addStaticItem({
+            title: 'Internal Trade Book',
+            icon: 'ion-social-usd',
+            stateRef: 'dashboard.internalTradeBook'
+        });
+        baSidebarServiceProvider.addStaticItem({
+            title: 'Local Trade Book',
+            icon: 'ion-social-usd',
+            stateRef: 'dashboard.localTradeBook'
+        });
+        baSidebarServiceProvider.addStaticItem({
             title: 'Business Partner',
             icon: 'ion-ios-people',
             stateRef: 'dashboard.businessPartner'

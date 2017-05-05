@@ -1,0 +1,21 @@
+.datePickerInput{
+  position: relative;
+  .input-group-btn{
+    position: absolute;
+    top: 0px;
+    right: 35px;
+
+    .dropdown-menu {
+      margin: 100px !important;
+    }
+
+    .btn{
+      background: $danger !important;
+    }
+  }
+
+  .uib-datepicker-popup{
+    background: $sidebar;
+  }
+
+}

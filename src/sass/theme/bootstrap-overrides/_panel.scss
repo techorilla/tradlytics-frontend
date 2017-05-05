@@ -40,7 +40,7 @@ $panel-heading-font-size: 16px;
   &.with-scroll {
     .panel-body {
       height: calc(100% - #{$panel-title-height});
-      overflow-y: auto;
+      overflow-y: visible;
     }
   }
 }

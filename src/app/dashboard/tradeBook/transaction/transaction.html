@@ -3,114 +3,12 @@
     <div class="row">
         <div class="col-md-12">
             <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
-                <ba-wizard>
-                    <ba-wizard-step title="Basic Information" form="vm.basicInfoForm">
-                        <div ng-include="'app/dashboard/tradeBook/transaction/templates/basicInformation.html'"></div>
-
-                    </ba-wizard-step>
-
-                    <ba-wizard-step title="Product Info" form="vm.productInfoForm">
-                        <div ng-include="'app/dashboard/tradeBook/transaction/templates/productInformation.html'"></div>
-                    </ba-wizard-step>
-
-                    <ba-wizard-step title="Trade Details">
-                        <div ng-include="'app/dashboard/tradeBook/transaction/templates/productInformation.html'"></div>
-                    </ba-wizard-step>
-
-
-                    <ba-wizard-step title="Shipment"  form="vm.addressForm">
-                        <form name="vm.addressForm" novalidate>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group has-feedback"
-                                         ng-class="{'has-error': vm.addressForm.address.$invalid && (vm.addressForm.address.$dirty || vm.addressForm.$submitted)}">
-                                        <label for="productName">Shipment address</label>
-                                        <input type="text" class="form-control" id="address" name="address" placeholder="Shipment address" ng-model="vm.shipment.address" required>
-                                        <span class="help-block error-block basic-block">Required</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="productName">Shipment method</label>
-                                        <select class="form-control" title="Category" selectpicker>
-                                            <option selected>Fast & expensive</option>
-                                            <option>Cheap & free</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkbox">
-                                <label class="custom-checkbox">
-                                    <input type="checkbox">
-                                    <span>Save shipment info</span>
-                                </label>
-                            </div>
-                        </form>
-                    </ba-wizard-step>
-                    <ba-wizard-step title="Documents"  form="vm.addressForm">
-                        <form name="vm.addressForm" novalidate>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group has-feedback"
-                                         ng-class="{'has-error': vm.addressForm.address.$invalid && (vm.addressForm.address.$dirty || vm.addressForm.$submitted)}">
-                                        <label for="productName">Shipment address</label>
-                                        <input type="text" class="form-control" id="address" name="address" placeholder="Shipment address" ng-model="vm.shipment.address" required>
-                                        <span class="help-block error-block basic-block">Required</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="productName">Shipment method</label>
-                                        <select class="form-control" title="Category" selectpicker>
-                                            <option selected>Fast & expensive</option>
-                                            <option>Cheap & free</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkbox">
-                                <label class="custom-checkbox">
-                                    <input type="checkbox">
-                                    <span>Save shipment info</span>
-                                </label>
-                            </div>
-                        </form>
-                    </ba-wizard-step>
-                    <ba-wizard-step title="Notes"  form="vm.addressForm">
-                        <form name="vm.addressForm" novalidate>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group has-feedback"
-                                         ng-class="{'has-error': vm.addressForm.address.$invalid && (vm.addressForm.address.$dirty || vm.addressForm.$submitted)}">
-                                        <label for="productName">Shipment address</label>
-                                        <input type="text" class="form-control" id="address" name="address" placeholder="Shipment address" ng-model="vm.shipment.address" required>
-                                        <span class="help-block error-block basic-block">Required</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="productName">Shipment method</label>
-                                        <select class="form-control" title="Category" selectpicker>
-                                            <option selected>Fast & expensive</option>
-                                            <option>Cheap & free</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkbox">
-                                <label class="custom-checkbox">
-                                    <input type="checkbox">
-                                    <span>Save shipment info</span>
-                                </label>
-                            </div>
-                        </form>
-                    </ba-wizard-step>
-                    <ba-wizard-step title="Finish">
-                        <form class="form-horizontal" name="vm.finishForm" novalidate>
-                            Congratulations! You have successfully filled the form!
-                        </form>
-                    </ba-wizard-step>
-                </ba-wizard>
+                <div ng-include="'app/dashboard/tradeBook/transaction/templates/basic.html'"></div>
+                <div ng-include="'app/dashboard/tradeBook/transaction/templates/product.html'"></div>
+                <div ng-include="'app/dashboard/tradeBook/transaction/templates/commission.html'"></div>
+                <div ng-include="'app/dashboard/tradeBook/transaction/templates/shipment.html'"></div>
+                <div ng-include="'app/dashboard/tradeBook/transaction/templates/notes.html'"></div>
+                <div ng-include="'app/dashboard/tradeBook/transaction/templates/documents.html'"></div>
             </div>
         </div>
     </div>

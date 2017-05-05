@@ -1,0 +1,97 @@
+<form name="vm.transactionCommissionForm" novalidate>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row wizard-containers">
+                <h3 class="with-line">Commission Details</h3>
+                <div class="row wizard-containers">
+                    <div class="col-md-4">
+                        <div class="form-group row clearfix">
+                            <label class="col-sm-3 control-label">Commission Type</label>
+                            <div class="col-sm-9">
+                                <selectize
+                                        placeholder="Commission Type"
+                                        ng-required="true"
+                                        name="commissionType"
+                                        id="commissionType"
+                                        config="vm.commissionTypeConfig"
+                                        options='vm.commissionTypeOptions.list'
+                                        ng-model="vm.transaction.commission.typeId">
+                                </selectize>
+                                <ng-messages for="vm.transactionCommissionForm.seller.$error"
+                                             ng-if='(vm.transactionCommissionForm.$submitted &&
+                                             vm.transactionCommissionForm.commissionType.$invalid) ||
+                                            (vm.transactionCommissionForm.commissionType.$invalid &&
+                                            vm.transactionCommissionForm.commissionType.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please select commission type.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+                        <div class="form-group row clearfix">
+                            <label class="col-sm-3 control-label">Commission</label>
+                            <div class="col-sm-9">
+                                <input
+                                        required
+                                        ng-model="vm.transaction.commission.commission"
+                                        class="form-control"
+                                        name="commission"
+                                        placeholder="Commission"/>
+                                <ng-messages for="vm.transactionCommissionForm.commission.$error"
+                                             ng-if='(vm.transactionCommissionForm.$submitted &&
+                                             vm.transactionCommissionForm.commission.$invalid) ||
+                                            (vm.transactionCommissionForm.commission.$invalid &&
+                                            vm.transactionCommissionForm.commission.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter commission.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+                        <div class="form-group row clearfix">
+                            <label class="col-sm-3 control-label">Differance</label>
+                            <div class="col-sm-9">
+                                <input
+                                        required
+                                        ng-model="vm.transaction.commission.differance"
+                                        class="form-control"
+                                        name="differance"
+                                        placeholder="Differance"/>
+                                <ng-messages for="vm.transactionCommissionForm.differance.$error"
+                                             ng-if='(vm.transactionCommissionForm.$submitted &&
+                                             vm.transactionCommissionForm.differance.$invalid) ||
+                                            (vm.transactionCommissionForm.differance.$invalid &&
+                                            vm.transactionCommissionForm.differance.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter commission differance.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+
+                        <div class="form-group row clearfix">
+                            <label class="col-sm-3 control-label">Discount</label>
+                            <div class="col-sm-9">
+                                <input
+                                        required
+                                        ng-model="vm.transaction.commission.discount"
+                                        class="form-control"
+                                        name="discount"
+                                        placeholder="Discount"/>
+                                <ng-messages for="vm.transactionCommissionForm.discount.$error"
+                                             ng-if='(vm.transactionCommissionForm.$submitted &&
+                                             vm.transactionCommissionForm.discount.$invalid) ||
+                                            (vm.transactionCommissionForm.discount.$invalid &&
+                                            vm.transactionCommissionForm.discount.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please select commission type.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row wizard-containers">
+                    <div class="col-md-4">
+                    </div>
+                </div>
+                <div class="row wizard-containers">
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

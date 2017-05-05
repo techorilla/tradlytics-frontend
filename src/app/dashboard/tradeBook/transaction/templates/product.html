@@ -2,49 +2,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row wizard-containers">
-                <div class="col-xs-12 insideForm-heading">Product Details</div>
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label>Product</label>
-                        <selectize
-                                config="vm.locationConfig"
-                                options='vm.locationOptions.list'
-                                ng-model="vm.userProfile.businessLocationId">
-                        </selectize>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label>Origin</label>
-                        <selectize
-                                config="vm.locationConfig"
-                                options='vm.locationOptions.list'
-                                ng-model="vm.userProfile.businessLocationId">
-                        </selectize>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="row wizard-containers">
-                <div class="col-xs-12 insideForm-heading">Product Quality Keywords</div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <input type="text" tag-input="primary" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" placeholder="Add Tag">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-
-            <div class="row wizard-containers">
-                <div class="col-xs-12 insideForm-heading">Product Specification</div>
+                <h3 class="with-line">Product Specification</h3>
                 <div class="slider-box col-sm-12 col-md-4">
                     <h5>Moisture</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.moisture"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -56,6 +19,7 @@
                     <h5>Purity</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.purity"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -67,6 +31,7 @@
                     <h5>Foreign Matter</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.foreignMatter"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -78,6 +43,7 @@
                     <h5>Broken Splits</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.brokenSplits"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -89,6 +55,7 @@
                     <h5>Damaged</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.damaged"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -100,6 +67,7 @@
                     <h5>Green Damaged</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.greenDamaged"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -111,6 +79,7 @@
                     <h5>Weevilied</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.weevilied"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -122,6 +91,7 @@
                     <h5>Other Color</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.otherColor"
                                 min="0"
                                 max="100"
                                 prefix="%"
@@ -133,6 +103,7 @@
                     <h5>Wrinkled</h5>
                     <ion-slider type="single"
                                 grid="true"
+                                ng-model="vm.transaction.productSpecification.wrinkled"
                                 min="0"
                                 max="100"
                                 prefix="%"
