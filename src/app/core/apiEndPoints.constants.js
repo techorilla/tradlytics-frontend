@@ -87,6 +87,7 @@
         productOrigin: 'origin',
         productKeywords: 'keywords',
         productCategory: 'category',
+        productCategorySpecification:'category/specification',
         website:{
             basic: 'website',
             research: 'research',

@@ -91,6 +91,33 @@
 
             })
 
+            .state('dashboard.productSpecification', {
+                url:'/productSpecification/:categoryId',
+                title: 'Product Specification',
+                views:{
+                    'content@dashboard':{
+                        templateUrl: 'app/dashboard/products/productSpecification.html',
+                        controller: 'ProductSpecification as vm'
+                    }
+                },
+                resolve: {
+                    'specificationData': function(product, loaderModal, $stateParams){
+                        loaderModal.open();
+                        return product.getProductCategorySpecification($stateParams.categoryId).then(function(success){
+                            loaderModal.close();
+                            return success.data;
+                        }).finally(function(){
+                            loaderModal.close();
+                        });
+                    }
+                },
+                pageHeader:{
+                    subTitle: 'Category',
+                    title:'Specification'
+                }
+
+            })
+
             .state('dashboard.productKeywords', {
                 url: '/productKeywords',
                 title:'Product Keywords',

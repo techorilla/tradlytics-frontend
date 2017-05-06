@@ -1,8 +1,86 @@
-<div class="row">
-    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm">
-        <button class="btn btn-primary" data-toggle="modal"
-                ng-click="vm.addProductSpecification()">
-            Add New Product Keyword
-        </button>
+<div ba-panel ba-panel-title="{{vm.categoryName}} Specification" ba-panel-class="profile-page" class="row">
+
+    <div>
+        <div class="panel-content">
+            <form name="vm.productSpecificationForm" novalidate>
+                <h3 class="with-line">Add Specification Item  <i ng-click="vm.addSpecificationItem(vm.marketPriceObj)"
+                                                                 class="fa fa-plus primary-font cursor-pointer"></i>
+                </h3>
+
+                <div ng-repeat="spec in vm.specificationData.specs" class="notification row clearfix margin-top-10px">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group row clearfix">
+                            <label class="col-xs-12 col-sm-4" for="specName_{{$index}}">Specification Name</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <input
+                                        class="form-control"
+                                        name="{{'specName_'+$index}}"
+                                        ng-required="true"
+                                        id="specName_{{$index}}"
+                                        ng-model="spec.name">
+                                </input>
+                                <ng-messages for="vm.productSpecificationForm['specName_'+$index].$error"
+                                             ng-if='(vm.productSpecificationForm.$submitted && vm.productSpecificationForm["specName_"+$index].$invalid) ||
+                                            (vm.productSpecificationForm["specName_"+$index].$invalid && vm.productSpecificationForm["specName_"+$index].$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter specification name.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group row clearfix">
+                            <label class="col-xs-12 col-sm-3">Specification Type</label>
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="input-demo radio-demo row">
+                                    <div class="col-md-2 col-xs-12">
+                                        <label class="radio-inline custom-radio nowrap">
+                                            <input type="radio" ng-model="spec.type" name="{{'specType_'+$index}}"
+                                                   required value="percentage">
+                                            <span>Percentage</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2 col-xs-12">
+                                        <label class="radio-inline custom-radio nowrap">
+                                            <input type="radio" ng-model="spec.type" name="{{'specType_'+$index}}"
+                                                   required  value="text">
+                                            <span>Text</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <ng-messages for="vm.productSpecificationForm['specType_'+$index].$error"
+                                                     ng-if='(vm.productSpecificationForm.$submitted && vm.productSpecificationForm["specType_"+$index].$invalid) ||
+                                            (vm.productSpecificationForm["specType_"+$index].$invalid && vm.productSpecificationForm["specType_"+$index].$dirty)'>
+                                            <div ng-message="required" class="errorValidation">Please enter specification type.</div>
+                                        </ng-messages>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <i ng-click="vm.removeSpecItem(vm.specificationData.specs, spec)"
+                           class="fa fa-trash primary-font cursor-pointer" style="padding-top: 10px;"></i>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <button type="submit"
+                            ng-click="vm.saveSpecs(vm.productSpecificationForm, vm.specificationData)"
+                            class="btn btn-primary btn-with-icon save-profile">
+                        <i class="ion-android-checkmark-circle"></i>Save Product Category Specification
+                    </button>
+                    <button type="button" ng-click="vm.cancel()"
+                            class="btn btn-danger btn-with-icon save-profile">
+                        <i class="ion-android-cancel"></i>Cancel
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
     </div>
 </div>

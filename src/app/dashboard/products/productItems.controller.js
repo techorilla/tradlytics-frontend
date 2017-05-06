@@ -22,6 +22,7 @@
             vm.addProductItem = addProductItem;
             vm.updateProductItem = updateProductItem;
             vm.displayPriceOnWebsite = displayPriceOnWebsite;
+            vm.specsConfig = [];
             vm.productConfig = {};
             vm.productOptions = {};
             dropDownConfig.prepareProductOriginDropDown(vm.originConfig, vm.originOptions, null);

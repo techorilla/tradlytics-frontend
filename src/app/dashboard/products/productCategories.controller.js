@@ -16,7 +16,12 @@
             vm.updateCategory = updateCategory;
             vm.editCategory = editCategory;
             vm.cancel = cancel;
+            vm.specification = specification;
 
+        }
+
+        function specification(categoryId){
+            $state.go('dashboard.productSpecification', {'categoryId': categoryId});
         }
 
         function updateCategory(form, categoryObj){

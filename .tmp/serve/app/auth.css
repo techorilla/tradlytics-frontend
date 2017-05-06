@@ -821,10 +821,10 @@ label.custom-checkbox, label.custom-radio {
       font-family: fontAwesome;
       font-weight: 300;
       font-size: 12px;
-      color: #ffffff;
+      color: #21b799;
       content: "\a0";
       background-color: transparent;
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(80, 80, 80, 0.97);
       border-radius: 0;
       display: inline-block;
       text-align: center;

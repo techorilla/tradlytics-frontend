@@ -30,6 +30,8 @@
             getNewProductCategoryObj: getNewProductCategoryObj,
             addProductCategory: addProductCategory,
             updateProductCategory: updateProductCategory,
+            getProductCategorySpecification: getProductCategorySpecification,
+            saveProductCategorySpecification: saveProductCategorySpecification,
 
 
             addProduct: addProduct,
@@ -110,6 +112,16 @@
             return productAPI.customPOST(categoryObj, apiEndPoints.productCategory).then(function(res){
                 callback(res);
             })
+        }
+        
+        function getProductCategorySpecification(categoryId){
+            return productAPI.customGET(apiEndPoints.productCategorySpecification, {
+                'categoryId': categoryId
+            });
+        }
+
+        function saveProductCategorySpecification(specsObj){
+            return productAPI.customPOST(specsObj, apiEndPoints.productCategorySpecification)
         }
 
         function updateProductCategory(categoryObj, callback){

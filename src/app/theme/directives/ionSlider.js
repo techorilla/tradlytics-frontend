@@ -56,9 +56,15 @@
           from: $scope.from,
           to: $scope.to,
           disable: $scope.disable,
-          onChange: $scope.onChange,
-          onFinish: function(data){
+          onChange: function(data){
+            console.log('change',data);
             $scope.ngModel = data.from;
+          },
+          onFinish: function(data){
+            var scope = $element.scope();
+            scope.$apply(function(){
+              scope.ngModel = data.from;
+            });
           },
           values: $scope.values
         });
