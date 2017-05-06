@@ -25,6 +25,17 @@
 
         Restangular.setErrorInterceptor(errorInterceptor);
         Restangular.addResponseInterceptor(responseInterceptor);
+        Restangular.addFullRequestInterceptor(requestInterceptor);
+
+        function requestInterceptor(element, operation, route, url, headers, params, httpConfig){
+            var today = new Date();
+            var timezoneHourDifference = (today.getTimezoneOffset()/60);
+            console.log(element, operation, route, url, headers, params, httpConfig);
+            var extendedHeader = {
+                'Hour-Difference': timezoneHourDifference
+            };
+            return angular.extend(headers, extendedHeader);
+        }
 
 
         function responseInterceptor(response,deffered,responseHandler){

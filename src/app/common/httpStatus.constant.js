@@ -137,7 +137,8 @@
     FullDate: 'MMMM D, YYYY',
     DateAsFilter: 'date:"dd-MMM-yyyy"',
     Time: 'MMM dd, yyyy hh:mm a ',
-    DBDate:'yyyy-MM-dd HH:mm:ss'
+    DBDate:'yyyy-MM-dd HH:mm:ss',
+
   };
 
   var appTabFilter = {

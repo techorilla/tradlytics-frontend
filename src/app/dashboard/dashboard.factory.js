@@ -17,7 +17,9 @@
         };
 
         function getCompleteDashboardReport(){
-            return dashboardAPI.customGET('');
+            return dashboardAPI.customGET('',{
+
+            });
         }
 
         function refreshCurrentDollarRate(){

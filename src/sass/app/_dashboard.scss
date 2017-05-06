@@ -31,3 +31,70 @@
   color: $success;
   cursor: pointer;
 }
+
+.single-number-card{
+  .single-number{
+    color:$success;
+    text-align: center;
+    font-size: 100px;
+    height: 90px;
+    vertical-align: middle;
+    padding-top: 35px;
+    font-weight: bolder;
+  }
+  .last-update-time{
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+  }
+}
+
+.manifest-item-updates{
+  .single-number{
+    color:$success;
+    text-align: center;
+    font-size: 100px;
+    height: 90px;
+    vertical-align: middle;
+    padding-top: 35px;
+    font-weight: bolder;
+  }
+
+  .contributor-card{
+    padding-top: 10px;
+
+    .number{
+      padding-top: 10px;
+      height: 40px;
+      color: #21b799;
+      font-size: 40px;
+      font-weight: bolder;
+      text-align: center;
+    }
+    .username{
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
+  }
+
+  .last-update-time{
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+  }
+
+  .no-data{
+    text-align: center;
+    margin-top: 35px;
+    font-size: 14px;
+  }
+
+  .heading{
+    border-bottom: 1px solid $danger;
+    text-align: center;
+    padding-bottom: 5px;
+    font-weight: bold;
+  }
+}
