@@ -39,8 +39,8 @@
                 <!--</div>-->
                 <div class="col-lg-12 col-xs-12">
                     <div class="col-xs-12 col-lg-4 contributor-card" ng-repeat="contrib in vm.completeReport.manifestUpdate.topThreeContributors">
-                        <div class="col-xs-6 number" ng-bind="contrib.updates"></div>
-                        <div class="col-xs-6 username" ng-bind="contrib.username"></div>
+                        <div class="col-xs-12 number" ng-bind="contrib.updates"></div>
+                        <div class="col-xs-12 username" ng-bind="contrib.username"></div>
                         <div class="col-xs-12 last-update-time">Last Updated: {{contrib.lastUpdate | date: vm.appFormat.DBDate}}</div>
                     </div>
                 </div>
