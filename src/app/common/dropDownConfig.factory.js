@@ -79,10 +79,22 @@
 
 
     function getBusinessItem(item, escape){
+      var country = (!item.country) ? 'No Origin' : item.country;
+      var pContact = (item.contactPerson === null)? 'No Primary Contact' : item.contactPerson;
+      return '<div>' +
+          '<span class="dropdownLabel">' + utilities.manageTextOverFlow(item.name, 20) + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ country + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ pContact + '</span>' +
+          '</div>';
+
+    }
+
+    function getBusinessOption(item, escape){
+      var country = (!item.country) ? 'No Origin' : item.country;
       var pContact = (item.contactPerson === null)? 'No Primary Contact' : item.contactPerson;
       return '<div>' +
           '<span class="dropdownLabel">' + item.name + '</span>' +
-          '<span class="dropdownCaption">' + ' | '+ item.country + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ country + '</span>' +
           '<span class="dropdownCaption">' + ' | '+ pContact + '</span>' +
           '</div>';
 
@@ -98,7 +110,7 @@
         persist: false,
         render: {
           item: getBusinessItem,
-          option: getBusinessItem
+          option: getBusinessOption
         }
       };
       utilities.cloneIntoEmptyObject(businessConfig, config);
@@ -179,6 +191,16 @@
     }
 
 
+
+    function productItemItem(item, escape) {
+      var keywords = (item.keywords === '')? 'No Keywords' : item.keywords;
+      return '<div>' +
+          '<span class="dropdownLabel">' + utilities.manageTextOverFlow(item.name, 20) + '</span>' +
+          '<span class="dropdownCaption">' + ' | '+ item.origin + '</span>' +
+          '<span class="dropdownCaption" style="max-width: 80px;text-overflow: ellipsis">' + ' | '+utilities.manageTextOverFlow(keywords, 15)  + '</span>' +
+          '</div>';
+    }
+
     function productItemOption(item, escape) {
       var keywords = (item.keywords === '')? 'No Keywords' : item.keywords;
       return '<div>' +
@@ -204,7 +226,7 @@
         create: false,
         persist: false,
         render: {
-          item: productItemOption,
+          item: productItemItem,
           option: productItemOption
         }
       };

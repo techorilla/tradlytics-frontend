@@ -1,10 +1,12 @@
 <form name="vm.transactionForm" novalidate>
     <div class="row">
         <div class="col-md-12">
-            <h3 class="with-line">Transaction Information</h3>
+            <h3 class="with-line">Transaction Information
+            <button type="button" ng-if="vm.transactionForm.basic.productItemId" ng-click="vm.changeProductSpecs()" class="btn pull-right btn-xs btn-success">Change Product Specs</button>
+            </h3>
             <div class="row wizard-containers">
-                <div class="col-md-4">
-                    <div class="form-group row clearfix">
+                <div class="row">
+                    <div class="form-group col-md-4 clearfix">
                         <label class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
                             <date-picker-input date="vm.transaction.basic.date" name="date">
@@ -16,7 +18,45 @@
                             </ng-messages>
                         </div>
                     </div>
-                    <div class="form-group row clearfix">
+                    <div class="form-group col-md-4 clearfix">
+                        <label for="buyer" class="col-sm-3 control-label">Buyer</label>
+                        <div class="col-sm-9">
+                            <selectize
+                                    ng-required="true"
+                                    placeholder="Buyer"
+                                    name="buyer"
+                                    id="buyer"
+                                    config="vm.buyerConfig"
+                                    options='vm.buyerOptions.list'
+                                    ng-model="vm.transaction.basic.buyerId">
+                            </selectize>
+                            <ng-messages for="vm.transactionForm.buyer.$error"
+                                         ng-if='(vm.transactionForm.$submitted && vm.transactionForm.buyer.$invalid) ||
+                                            (vm.transactionForm.buyer.$invalid && vm.transactionForm.buyer.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please select Buyer</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 clearfix">
+                        <label for="seller" class="col-sm-3 control-label">Seller</label>
+                        <div class="col-sm-9">
+                            <selectize
+                                    placeholder="Seller"
+                                    ng-required="true"
+                                    name="seller"
+                                    id="seller"
+                                    config="vm.sellerConfig"
+                                    options='vm.sellerOptions.list'
+                                    ng-model="vm.transaction.basic.sellerId">
+                            </selectize>
+                            <ng-messages for="vm.transactionForm.seller.$error"
+                                         ng-if='(vm.transactionForm.$submitted && vm.transactionForm.seller.$invalid) ||
+                                            (vm.transactionForm.seller.$invalid && vm.transactionForm.seller.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please select seller.</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 clearfix">
                         <label for="productItem" class="col-sm-3 control-label">Product Item</label>
                         <div class="col-sm-9">
                             <selectize
@@ -34,28 +74,22 @@
                             </ng-messages>
                         </div>
                     </div>
-
-                    <div class="form-group row clearfix">
-                        <label class="col-sm-3 control-label">Price (US$ / {{vm.transaction.priceMetricId ?  vm.transaction.priceMetricId : 'MT' }})</label>
+                    <div class="form-group col-md-4 clearfix">
+                        <label for="productItem" class="col-sm-3 control-label">Contractual Buyer</label>
                         <div class="col-sm-9">
-                            <input
-                                    required
-                                    ng-pattern="/^[0-9]+$/i"
-                                    ng-model="vm.transaction.basic.price"
-                                    class="form-control"
-                                    name="price"
-                                    placeholder="Price US$ / {{vm.transaction.quantityMetricId ?  vm.transaction.priceMetricId : 'MT'}}"/>
-
-                            <ng-messages for="vm.transactionForm.price.$error"
-                                         ng-show='(vm.transactionForm.$submitted && vm.transactionForm.price.$invalid) ||
-                                            (vm.transactionForm.price.$invalid && vm.transactionForm.price.$dirty)' role="alert">
-                                <ng-message class="errorValidation" when="required">Please enter price value.</ng-message>
-                                <ng-message class="errorValidation" when="pattern">Quantity can only have numbers.</ng-message>
-                            </ng-messages>
+                            <selectize
+                                    ng-required="true"
+                                    placeholder="Contractual Buyer"
+                                    name="contractbuyer"
+                                    id="contractbuyer"
+                                    config="vm.buyerConfig"
+                                    options='vm.buyerOptions.list'
+                                    ng-model="vm.transaction.basic.contractualBuyerId">
+                            </selectize>
                         </div>
                     </div>
 
-                    <div class="form-group row clearfix">
+                    <div class="form-group col-md-4  clearfix">
                         <label class="col-sm-3 control-label">Packaging</label>
                         <div class="col-sm-9">
                             <selectize
@@ -74,29 +108,10 @@
                             </ng-messages>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group row clearfix">
-                        <label for="productItem" class="col-sm-3 control-label">Buyer</label>
-                        <div class="col-sm-9">
-                            <selectize
-                                    ng-required="true"
-                                    placeholder="Buyer"
-                                    name="buyer"
-                                    id="buyer"
-                                    config="vm.buyerConfig"
-                                    options='vm.buyerOptions.list'
-                                    ng-model="vm.transaction.buyerId">
-                            </selectize>
-                            <ng-messages for="vm.transactionForm.buyer.$error"
-                                         ng-if='(vm.transactionForm.$submitted && vm.transactionForm.buyer.$invalid) ||
-                                            (vm.transactionForm.buyer.$invalid && vm.transactionForm.buyer.$dirty)'>
-                                <div ng-message="required" class="errorValidation">Please select Buyer</div>
-                            </ng-messages>
-                        </div>
-                    </div>
 
-                    <div class="form-group row clearfix">
+
+
+                    <div class="form-group col-md-4  clearfix">
                         <label for="quantityMetric" class="col-sm-3 control-label">Quantity Metric</label>
                         <div class="col-sm-9">
                             <selectize
@@ -116,32 +131,77 @@
                         </div>
                     </div>
 
-                    <div class="form-group row clearfix">
-                        <label class="col-sm-3 control-label">Shipment End</label>
+                    <div class="form-group col-md-4 clearfix">
+                        <label class="col-sm-3 control-label">Quantity ({{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT' }})</label>
                         <div class="col-sm-9">
-                            <date-picker-input date="vm.transaction.shipmentEnd" name="shipmentEnd">
+                            <input
+                                    required
+                                    ng-pattern="/^[0-9.]+$/i"
+                                    ng-model="vm.transaction.basic.quantity"
+                                    class="form-control"
+                                    name="quantity"
+                                    placeholder="Quantity in {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT'}}"/>
 
-                            </date-picker-input>
-
-                            <ng-messages for="vm.transactionForm.shipmentEnd.$error"
-                                         ng-show='(vm.transactionForm.$submitted && vm.transactionForm.shipmentEnd.$invalid) ||
-                                            (vm.transactionForm.shipmentEnd.$invalid && vm.transactionForm.shipmentEnd.$dirty)' role="alert">
-                                <ng-message class="errorValidation" when="required">Please enter shipment start date.</ng-message>
+                            <ng-messages for="vm.transactionForm.quantity.$error"
+                                         ng-show='(vm.transactionForm.$submitted || vm.transactionForm.quantity.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter quantity value.</ng-message>
+                                <ng-message class="errorValidation" when="pattern">Quantity can only have numbers.</ng-message>
                             </ng-messages>
                         </div>
                     </div>
 
-                    <div class="form-group row clearfix">
+                    <div class="form-group col-md-4  clearfix">
+                        <label class="col-sm-3 control-label">Price (US$ / {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT' }})</label>
+                        <div class="col-sm-9">
+                            <input
+                                    required
+                                    ng-pattern="/^[0-9.]+$/i"
+                                    ng-model="vm.transaction.basic.price"
+                                    class="form-control"
+                                    name="price"
+                                    placeholder="Price US$ / {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT'}}"/>
+
+                            <ng-messages for="vm.transactionForm.price.$error"
+                                         ng-show='(vm.transactionForm.$submitted && vm.transactionForm.price.$invalid) ||
+                                            (vm.transactionForm.price.$invalid && vm.transactionForm.price.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter price value.</ng-message>
+                                <ng-message class="errorValidation" when="pattern">Price can only have numbers.</ng-message>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                    </div>
+
+                    <div class="form-group col-md-4 col-md-offset-4 clearfix">
+                        <label class="col-sm-3 control-label">File ID</label>
+                        <div class="col-sm-9">
+                            <input
+                                    required
+                                    ng-model="vm.transaction.basic.fileId"
+                                    class="form-control"
+                                    name="fileId"
+                                    placeholder="File Id"/>
+
+                            <ng-messages for="vm.transactionForm.fileId.$error"
+                                         ng-show='(vm.transactionForm.$submitted || vm.transactionForm.fileId.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter a valid file Id.</ng-message>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4  clearfix">
                         <label class="col-sm-3 control-label">Contract ID</label>
                         <div class="col-sm-9">
                             <input
                                     required
-                                    ng-model="vm.transaction.contractID"
+                                    ng-model="vm.transaction.basic.contractID"
                                     class="form-control"
                                     name="contractId"
                                     placeholder="Contract Id"/>
 
-                            <ng-messages for="vm.transactionForm.fileId.$error"
+                            <ng-messages for="vm.transactionForm.contractId.$error"
                                          ng-show='(vm.transactionForm.$submitted && vm.transactionForm.contractId.$invalid) ||
                                             (vm.transactionForm.contractId.$invalid && vm.transactionForm.contractId.$dirty)' role="alert">
                                 <ng-message class="errorValidation" when="required">Please enter a valid contract Id.</ng-message>
@@ -150,86 +210,48 @@
                     </div>
 
 
-
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group row clearfix">
-                        <label for="productItem" class="col-sm-3 control-label">Seller</label>
-                        <div class="col-sm-9">
-                            <selectize
-                                    placeholder="Seller"
-                                    ng-required="true"
-                                    name="seller"
-                                    id="seller"
-                                    config="vm.sellerConfig"
-                                    options='vm.sellerOptions.list'
-                                    ng-model="vm.transaction.sellerId">
-                            </selectize>
-                            <ng-messages for="vm.transactionForm.seller.$error"
-                                         ng-if='(vm.transactionForm.$submitted && vm.transactionForm.seller.$invalid) ||
-                                            (vm.transactionForm.seller.$invalid && vm.transactionForm.seller.$dirty)'>
-                                <div ng-message="required" class="errorValidation">Please select seller.</div>
-                            </ng-messages>
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-group row clearfix">
-                        <label class="col-sm-3 control-label">Quantity ({{vm.transaction.priceMetricId ?  vm.transaction.priceMetricId : 'MT' }})</label>
-                        <div class="col-sm-9">
-                            <input
-                                    required
-                                    ng-pattern="/^[0-9]+$/i"
-                                    ng-model="vm.transaction.quantity"
-                                    class="form-control"
-                                    name="quantity"
-                                    placeholder="Quantity in {{vm.transaction.quantityMetricId ?  vm.transaction.priceMetricId : 'MT'}}"/>
-
-                            <ng-messages for="vm.transactionForm.quantity.$error"
-                                         ng-show='(vm.transactionForm.$submitted && vm.transactionForm.quantity.$invalid) ||
-                                            (vm.transactionForm.quantity.$invalid && vm.transactionForm.quantity.$dirty)' role="alert">
-                                <ng-message class="errorValidation" when="required">Please enter price value.</ng-message>
-                                <ng-message class="errorValidation" when="pattern">Quantity can only have numbers.</ng-message>
-                            </ng-messages>
-                        </div>
-                    </div>
-
-                    <div class="form-group row clearfix">
+                    <div class="form-group col-md-4 col-md-offset-4 clearfix">
                         <label class="col-sm-3 control-label">Shipment Start</label>
                         <div class="col-sm-9">
-                            <date-picker-input date="vm.transaction.shipmentStart" name="shipmentStart">
+                            <date-picker-input date="vm.transaction.basic.shipmentStart" name="shipmentStart">
 
                             </date-picker-input>
 
-                            <ng-messages for="vm.transactionForm.fileId.$error"
-                                         ng-show='(vm.transactionForm.$submitted && vm.transactionForm.shipmentStart.$invalid) ||
-                                            (vm.transactionForm.shipmentStart.$invalid && vm.transactionForm.shipmentStart.$dirty)' role="alert">
+                            <ng-messages for="vm.transactionForm.shipmentStart.$error"
+                                         ng-show='(vm.transactionForm.$submitted || vm.transactionForm.shipmentStart.$dirty)' role="alert">
                                 <ng-message class="errorValidation" when="required">Please enter shipment start date.</ng-message>
                             </ng-messages>
                         </div>
                     </div>
 
-                    <div class="form-group row clearfix">
-                        <label class="col-sm-3 control-label">File ID</label>
+                    <div class="form-group col-md-4 clearfix">
+                        <label class="col-sm-3 control-label">Shipment End</label>
                         <div class="col-sm-9">
-                            <input
-                                    required
-                                    ng-model="vm.transaction.fileId"
-                                    class="form-control"
-                                    name="fileId"
-                                    placeholder="File Id"/>
+                            <date-picker-input date="vm.transaction.basic.shipmentEnd" name="shipmentEnd">
 
-                            <ng-messages for="vm.transactionForm.fileId.$error"
-                                         ng-show='(vm.transactionForm.$submitted && vm.transactionForm.fileId.$invalid) ||
-                                            (vm.transactionForm.fileId.$invalid && vm.transactionForm.fileId.$dirty)' role="alert">
-                                <ng-message class="errorValidation" when="required">Please enter a valid file Id.</ng-message>
+                            </date-picker-input>
+
+                            <ng-messages for="vm.transactionForm.shipmentEnd.$error"
+                                         ng-show='(vm.transactionForm.$submitted || vm.transactionForm.shipmentEnd.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter shipment start date.</ng-message>
                             </ng-messages>
                         </div>
                     </div>
 
 
 
+
+                    <div class="form-group col-md-12 clearfix">
+                        <label class="col-sm-12 control-label">Other Information</label>
+                        <div class="col-sm-12">
+                            <textarea
+                                    class="form-control"
+                                    row="5">
+
+                            </textarea>
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row wizard-containers">

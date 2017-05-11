@@ -3,7 +3,8 @@
     angular.module('app.dashboard.manifest')
         .controller('Manifest', manifest);
 
-    function manifest($state, $stateParams, $filter, loaderModal, utilities, manifest, dropDownConfig, toastr, appConstants, $scope){
+    function manifest($state, $stateParams, $filter, loaderModal, utilities, manifest, dropDownConfig,
+                      toastr, appConstants, documentExporter){
         var vm = this;
         _init();
 
@@ -11,6 +12,8 @@
             vm.currentPage = 1;
             vm.itemsPerPage = 10;
             vm.appConstants = appConstants;
+            vm.exportToExcel = exportToExcel;
+            vm.exportToPDF = exportToPDF;
             vm.addNewManifestItem = addManifestItem;
             vm.editManifestItem = editManifestItem;
             vm.saveManifestItem = saveManifestItem;
@@ -40,6 +43,22 @@
             vm.allManifestItems = [];
             vm.allManifestList = [];
             vm.displayList = [];
+            vm.columnHeader=[
+                'Date',
+                'Buyer',
+                'Seller',
+                'Product',
+                'Quantity(FCL)',
+                'Container No.'
+            ];
+            vm.columnKeys = [
+                'date',
+                'buyerName',
+                'sellerName',
+                'productName',
+                'quantity',
+                'containerNo'
+            ];
             getManifestItems(vm.dateRange);
         }
 
@@ -96,6 +115,7 @@
             manifest.getAllManifestItems(dateRange).then(function(res){
                 vm.allManifestItems = res.manifestItems;
                 vm.allManifestList = angular.copy(vm.allManifestItems);
+                vm.totalQuantity = _.sumBy(vm.allManifestList, function(item) { return item.quantity; });
                 setPagingData(vm.currentPage, vm.allManifestList, vm.itemsPerPage);
                 loaderModal.close();
             }, function(err){
@@ -169,6 +189,14 @@
         function addManifestItem(){
             vm.showForm = true;
             vm.manifestItem = manifest.getNewManifestItemObj();
+        }
+
+        function exportToPDF(manifestList){
+            documentExporter.printPDF(angular.copy(vm.columnHeader), angular.copy(vm.columnKeys), manifestList);
+        }
+
+        function exportToExcel(manifestList, dateRange){
+            documentExporter.getTableInExcelSheet(angular.copy(vm.columnHeader), angular.copy(vm.columnKeys), manifestList, 'Manifest');
         }
     }
 

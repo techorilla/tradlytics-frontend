@@ -25,6 +25,7 @@
 
     function link(scope, elem, attrs){
        scope.isOpen = false;
+       scope.dateFormat = 'dd-MMMM-yyyy';
        if(!scope.date){
            scope.date = new Date();
        }

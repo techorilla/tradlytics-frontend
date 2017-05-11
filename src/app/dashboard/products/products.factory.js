@@ -43,6 +43,7 @@
             addProductItem: addProductItem,
             updateProductItem: updateProductItem,
             getAllProductItems: getAllProductItems,
+            getProductSpecification: getProductSpecification,
 
             getNewKeywordObj: getNewKeywordObj,
             addProductKeyword: addProductKeyword,
@@ -70,6 +71,12 @@
                 'productItemId': productItemId
             });
             return productItemAPI.customGET(apiEndPoints.productPriceReport, data);
+        }
+
+        function getProductSpecification(productItemId){
+            return productItemAPI.customGET('specs',{
+                'productItemId': productItemId
+            })
         }
 
         function updateProductKeyword(keywordObj, callback){

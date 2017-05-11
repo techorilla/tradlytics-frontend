@@ -1,0 +1,24 @@
+.expected-commission{
+
+  .commission-title{
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-size: 25px;
+  }
+  .commission-value{
+    font-size: 22px;
+    .minus{
+      color: $warning;
+    }
+    .plus{
+      color: $success;
+    }
+  }
+}
+
+.productSpecs{
+  padding-bottom: 20px;
+  h5{
+    margin-top: 10px;
+  }
+}

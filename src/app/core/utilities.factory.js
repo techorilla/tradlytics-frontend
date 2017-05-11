@@ -51,11 +51,19 @@
             cloneObjectInToObject: cloneObjectInToObject,
             convertMomentDateRange: convertMomentDateRange,
             goBackState: goBackState,
-            prepareGraphData: prepareGraphData
+            prepareGraphData: prepareGraphData,
+            manageTextOverFlow: manageTextOverFlow
         };
 
         function uploadImage(evt){
 
+        }
+
+        function manageTextOverFlow(string, size){
+            if (string.length > size)
+                return string.substring(0,size)+'...';
+            else
+                return string;
         }
 
         function prepareGraphData(graphData){

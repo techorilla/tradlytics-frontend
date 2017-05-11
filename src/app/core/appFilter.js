@@ -16,6 +16,12 @@
         .filter('range', range)
         .filter('secondsToDateTime', secondsToDateTime)
         .filter('utcToLocal', utcToLocal)
+        .filter('plusOrMinus', function(){
+            return function(input){
+                input = input ? input : 0;
+                return input > 0 ? input : '-'+input
+            }
+        })
         .filter('percentage', ['$filter', function ($filter) {
             return function (input, decimals) {
                 var number = (input > 1) ? input : input*100;

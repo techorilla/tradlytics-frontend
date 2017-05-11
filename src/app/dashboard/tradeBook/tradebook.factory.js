@@ -13,35 +13,73 @@
         .factory('tradeBook', tradeBook);
 
     /* @ngInject */
-    function tradeBook(apiEndPoints , $filter, appFormats, FileSaver, Blob){
+    function tradeBook(apiEndPoints, Restangular, $filter, appFormats, FileSaver, Blob, utilities){
 
-        var transactionBasic = {};
+        var transactionAPI = Restangular.all(apiEndPoints.transaction.main);
+
+        var productItemAPI = Restangular.all(apiEndPoints.productItem);
 
         // var transactionAPI =
 
         return {
-            getNewTransaction: getNewTransaction
+            getNewTransaction: getNewTransaction,
+            calculateCommission: calculateCommission,
+            addTransaction: addTransaction,
+            updateTransaction: updateTransaction
         };
+
+        function addTransaction(transactionObj){
+            return transactionAPI.customPOST(apiEndPoints.basic, transactionObj);
+        }
+
+        function updateTransaction(transactionObj){
+            return transactionAPI.customPUT(apiEndPoints.basic, transactionObj)
+        }
+
+        function calculateCommission(transactionObj){
+            var type = transactionObj.commission.typeId;
+            var price = transactionObj.basic.price;
+            var quantity = transactionObj.basic.quantity;
+            var comm =  transactionObj.commission.commission;
+            var commIntoPrice = 0;
+            var brokerCommType = transactionObj.commission.buyerBrokerCommissionTypeId;
+            var brokerIntoPrice = 0;
+            var bComm = transactionObj.commission.buyerBrokerCommission;
+            if(type){
+                commIntoPrice = (parseInt(type) === 1) ? (comm) : (comm*0.01)*price;
+            }
+            if(brokerCommType){
+                brokerIntoPrice = (parseInt(brokerCommType)===1) ? bComm : (bComm*0.01)*price;
+            }
+            var netCommission = (((commIntoPrice - brokerIntoPrice) + transactionObj.commission.difference )- transactionObj.commission.discount);
+
+            return (netCommission * quantity);
+        }
 
         function getNewTransaction(){
             return {
+                id: null,
                 basic:{
                     date: new Date(),
                     quantityMetricId: 'FCL',
+                    quantity: 0,
                     buyerId: null,
                     sellerId: null,
                     productItemId: null,
-                    price: null,
+                    price: 0,
                     packaging: null,
-                    shipmentEnd: null,
+                    shipmentEnd: (new Date()).addDays(30),
                     shipmentStart: null
                 },
                 commission:{
                     typeId: 1,
                     commission: 0,
-                    differance: 0,
+                    difference: 0,
                     discount: 0,
-                    netCommission: 0
+                    buyerBrokerId: null,
+                    buyerBrokerCommissionTypeId: 1,
+                    buyerBrokerCommission: 0,
+                    sellerBrokerId: null
 
                 },
                 productSpecification:{

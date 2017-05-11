@@ -1,6 +1,7 @@
 <div class="datePickerInput">
     <input type="text" class="form-control"
-           uib-datepicker-popup="{{format}}"
+           uib-datepicker-popup="{{dateFormat}}"
+           name="{{name}}"
            ng-model="date" is-open="isOpen"
            datepicker-options="dateOptions"
            ng-required="true"

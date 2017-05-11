@@ -1,97 +1,151 @@
-<form name="vm.transactionCommissionForm" novalidate>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row wizard-containers">
-                <h3 class="with-line">Commission Details</h3>
-                <div class="row wizard-containers">
-                    <div class="col-md-4">
-                        <div class="form-group row clearfix">
-                            <label class="col-sm-3 control-label">Commission Type</label>
-                            <div class="col-sm-9">
-                                <selectize
-                                        placeholder="Commission Type"
-                                        ng-required="true"
-                                        name="commissionType"
-                                        id="commissionType"
-                                        config="vm.commissionTypeConfig"
-                                        options='vm.commissionTypeOptions.list'
-                                        ng-model="vm.transaction.commission.typeId">
-                                </selectize>
-                                <ng-messages for="vm.transactionCommissionForm.seller.$error"
-                                             ng-if='(vm.transactionCommissionForm.$submitted &&
-                                             vm.transactionCommissionForm.commissionType.$invalid) ||
-                                            (vm.transactionCommissionForm.commissionType.$invalid &&
-                                            vm.transactionCommissionForm.commissionType.$dirty)'>
-                                    <div ng-message="required" class="errorValidation">Please select commission type.</div>
-                                </ng-messages>
-                            </div>
-                        </div>
-                        <div class="form-group row clearfix">
-                            <label class="col-sm-3 control-label">Commission</label>
-                            <div class="col-sm-9">
-                                <input
-                                        required
-                                        ng-model="vm.transaction.commission.commission"
-                                        class="form-control"
-                                        name="commission"
-                                        placeholder="Commission"/>
-                                <ng-messages for="vm.transactionCommissionForm.commission.$error"
-                                             ng-if='(vm.transactionCommissionForm.$submitted &&
-                                             vm.transactionCommissionForm.commission.$invalid) ||
-                                            (vm.transactionCommissionForm.commission.$invalid &&
-                                            vm.transactionCommissionForm.commission.$dirty)'>
-                                    <div ng-message="required" class="errorValidation">Please enter commission.</div>
-                                </ng-messages>
-                            </div>
-                        </div>
-                        <div class="form-group row clearfix">
-                            <label class="col-sm-3 control-label">Differance</label>
-                            <div class="col-sm-9">
-                                <input
-                                        required
-                                        ng-model="vm.transaction.commission.differance"
-                                        class="form-control"
-                                        name="differance"
-                                        placeholder="Differance"/>
-                                <ng-messages for="vm.transactionCommissionForm.differance.$error"
-                                             ng-if='(vm.transactionCommissionForm.$submitted &&
-                                             vm.transactionCommissionForm.differance.$invalid) ||
-                                            (vm.transactionCommissionForm.differance.$invalid &&
-                                            vm.transactionCommissionForm.differance.$dirty)'>
-                                    <div ng-message="required" class="errorValidation">Please enter commission differance.</div>
-                                </ng-messages>
-                            </div>
-                        </div>
 
-                        <div class="form-group row clearfix">
-                            <label class="col-sm-3 control-label">Discount</label>
-                            <div class="col-sm-9">
-                                <input
-                                        required
-                                        ng-model="vm.transaction.commission.discount"
-                                        class="form-control"
-                                        name="discount"
-                                        placeholder="Discount"/>
-                                <ng-messages for="vm.transactionCommissionForm.discount.$error"
-                                             ng-if='(vm.transactionCommissionForm.$submitted &&
-                                             vm.transactionCommissionForm.discount.$invalid) ||
-                                            (vm.transactionCommissionForm.discount.$invalid &&
-                                            vm.transactionCommissionForm.discount.$dirty)'>
-                                    <div ng-message="required" class="errorValidation">Please select commission type.</div>
-                                </ng-messages>
-                            </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row wizard-containers">
+            <h3 class="with-line">Commission Details</h3>
+            <div class="row wizard-containers">
+                <div class="col-md-4">
+                    <div class="form-group row clearfix">
+                        <label class="col-sm-3 control-label">Commission Type</label>
+                        <div class="col-sm-9">
+                            <selectize
+                                    placeholder="Commission Type"
+                                    ng-required="true"
+                                    name="commissionType"
+                                    id="commissionType"
+                                    config="vm.commissionTypeConfig"
+                                    options='vm.commissionTypeOptions.list'
+                                    ng-model="vm.transaction.commission.typeId">
+                            </selectize>
+                            <ng-messages for="vm.transactionForm.commissionType.$error"
+                                         ng-if='(vm.transactionForm.$submitted ||
+                                         vm.transactionForm.commissionType.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please select commission type.</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+                    <div class="form-group row clearfix">
+                        <label class="col-sm-3 control-label">Commission</label>
+                        <div class="col-sm-9">
+                            <input
+                                    required
+                                    ng-model="vm.transaction.commission.commission"
+                                    class="form-control"
+                                    name="commission"
+                                    ng-pattern="/^[0-9.]+$/i"
+                                    placeholder="Commission"/>
+                            <ng-messages for="vm.transactionForm.commission.$error"
+                                         ng-if='(vm.transactionForm.$submitted ||
+                                            vm.transactionForm.commission.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter commission.</div>
+                                <div ng-message="pattern" class="errorValidation">Commission can only have number.</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+                    <div class="form-group row clearfix">
+                        <label class="col-sm-3 control-label">Differance</label>
+                        <div class="col-sm-9">
+                            <input
+                                    required
+                                    ng-model="vm.transaction.commission.difference"
+                                    class="form-control"
+                                    name="difference"
+                                    ng-pattern="/^[0-9.]+$/i"
+                                    placeholder="Difference"/>
+                            <ng-messages for="vm.transactionForm.difference.$error"
+                                         ng-if='(vm.transactionForm.$submitted ||
+                                            vm.transactionForm.difference.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter commission difference.</div>
+                                <div ng-message="pattern" class="errorValidation">Commission difference can only have number.</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="form-group row clearfix">
+                        <label class="col-sm-3 control-label">Discount</label>
+                        <div class="col-sm-9">
+                            <input
+                                    required
+                                    ng-model="vm.transaction.commission.discount"
+                                    class="form-control"
+                                    name="discount"
+                                    ng-pattern="/^[0-9.]+$/i"
+                                    placeholder="Discount"/>
+                            <ng-messages for="vm.transactionForm.discount.$error"
+                                         ng-if='(vm.transactionForm.$submitted ||
+                                            vm.transactionForm.discount.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter commission discount.</div>
+                                <div ng-message="pattern" class="errorValidation">Commission discount can only have numbers.</div>
+                            </ng-messages>
                         </div>
                     </div>
                 </div>
-                <div class="row wizard-containers">
-                    <div class="col-md-4">
+                <div class="col-md-4">
+                    <div class="form-group row clearfix">
+                        <label for="buyerBroker" class="col-sm-3 control-label">Buyer Broker</label>
+                        <div class="col-sm-9">
+                            <selectize
+                                    ng-required="true"
+                                    placeholder="Buyer Broker"
+                                    name="buyerBroker"
+                                    id="buyerBroker"
+                                    config="vm.brokerConfig"
+                                    options='vm.brokerOptions.list'
+                                    ng-model="vm.transaction.commission.buyerBrokerId">
+                            </selectize>
+                        </div>
+                    </div>
+                    <div class="form-group row clearfix">
+                        <label class="col-sm-3 control-label">Buyer Broker Commission Type</label>
+                        <div class="col-sm-9">
+                            <selectize
+                                    ng-disabled="!vm.transaction.commission.buyerBrokerId"
+                                    placeholder="Commission Type"
+                                    name="buyerBrokerCommissionType"
+                                    id="buyerBrokerCommissionType"
+                                    config="vm.commissionTypeConfig"
+                                    options='vm.commissionTypeOptions.list'
+                                    ng-model="vm.transaction.commission.buyerBrokerCommissionTypeId">
+                            </selectize>
+                        </div>
+                    </div>
+
+                    <div class="form-group row clearfix">
+                        <label class="col-sm-3 control-label">Buyer Broker Commission</label>
+                        <div class="col-sm-9">
+                            <input
+                                    ng-model="vm.transaction.commission.buyerBrokerCommission"
+                                    class="form-control"
+                                    ng-pattern="/^[0-9.]+$/i"
+                                    ng-disabled="!vm.transaction.commission.buyerBrokerId"
+                                    name="buyerBrokerCommission"
+                                    placeholder="Buyer Broker Commission"/>
+                            <ng-messages for="vm.transactionForm.buyerBrokerCommission.$error"
+                                         ng-if='(vm.transactionForm.$submitted ||
+                                            vm.transactionForm.buyerBrokerCommission.$dirty)'>
+                                <div ng-message="pattern" class="errorValidation">Please enter valid commission value.</div>
+                            </ng-messages>
+                        </div>
                     </div>
                 </div>
-                <div class="row wizard-containers">
-                    <div class="col-md-4">
+                <div class="col-md-4">
+                    <div class="form-group row clearfix">
+                        <label for="buyerBroker" class="col-sm-3 control-label">Seller Broker</label>
+                        <div class="col-sm-9">
+                            <selectize
+                                    ng-required="true"
+                                    placeholder="Seller Broker"
+                                    name="sellerBroker"
+                                    id="sellerBroker"
+                                    config="vm.brokerConfig"
+                                    options='vm.brokerOptions.list'
+                                    ng-model="vm.transaction.commission.sellerBrokerId">
+                            </selectize>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>

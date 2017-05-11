@@ -28,8 +28,43 @@ ng-messages{
     padding-top: 1px;
     padding-left: 5px;
     float:left;
+    position: absolute;
   }
 }
+
+.table-options{
+  .manifest-quantity{
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .box{
+      margin-top: 5px;
+    }
+    .title{
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .number{
+      color:$success;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  .button-bar{
+    text-align: right;
+  }
+
+  .excel-btn{
+    background: $excel;
+  }
+
+  .pdf-btn{
+    background: $pdf;
+  }
+}
+
+
 
 
 

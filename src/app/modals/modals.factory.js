@@ -19,11 +19,41 @@
             openModal: openModal,
             dismissModal: dismissModal,
             openImageCropper: openImageCropper,
-            getFile: getFile
+            getFile: getFile,
+            openProductSpecificationModal: openProductSpecificationModal
         };
 
 
         ////////////////////
+
+
+        function openProductSpecificationModal(defaultSpecs, callback){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: modalTemplates.PRODUCT_SPECS,
+                controller: function($scope, productSpecs, $uibModalInstance){
+                    $scope.productSpecs = productSpecs;
+                    $scope.saveSpecs = function(productSpecs){
+                        $uibModalInstance.close({
+                            'productSpecs': productSpecs
+                        });
+                    };
+                },
+                size: 'lg',
+                backdrop: 'static',
+                resolve: {
+                    productSpecs: function(){
+                        return defaultSpecs;
+                    }
+                }
+
+
+            });
+
+            modalInstance.result.then(function(productSpecs){
+                callback(productSpecs.productSpecs);
+            });
+        }
 
         function openProgressModal(){
 
@@ -33,7 +63,6 @@
         function getFile(picture, scope, aspectRatio, sizeArray, resultSize, callBack){
             fileReader.readAsDataUrl(picture, scope)
                 .then(function (result) {
-                    console.log('hogaya');
                     openImageCropper(result, aspectRatio, sizeArray, resultSize, callBack);
                 });
         }
@@ -51,6 +80,7 @@
                 backdrop: 'static',
                 resolve: resolve
             });
+
         }
 
         function openImageCropper(image, aspectRatio, imageSizes, cropSize, callback){

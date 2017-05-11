@@ -24,7 +24,23 @@
                 on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)">
         </filter-bar>
         <div ba-panel ba-panel-class="with-scroll min-height-500px" ng-show="!vm.showForm">
+            <div class="row table-options">
+                <div class="col-md-6 manifest-quantity">
+                    <div class="box title">Total Quantity</div>
+                    <div class="number box">{{vm.totalQuantity}} FCL</div>
+                </div>
+                <div class="col-md-6 button-bar">
+                    <button class="btn excel-btn btn-xs" data-toggle="modal"
+                            ng-click="vm.exportToExcel(vm.allManifestList)">
+                        <i class="fa fa-file-excel-o" aria-hidden="true"></i> &nbsp; Export to Excel
+                    </button>
 
+                    <button class="btn pdf-btn btn-xs" data-toggle="modal"
+                            ng-click="vm.exportToPDF(vm.allManifestList)">
+                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Export to PDF
+                    </button>
+                </div>
+            </div>
             <div class="horizontal-scroll">
                 <table class="table table-striped" st-table="smartTableData">
                     <thead>
@@ -80,6 +96,8 @@
                 boundary-link-numbers="true"
                 rotate="false">
             </ul>
+
+
 
         </div>
 
