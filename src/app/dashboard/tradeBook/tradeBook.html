@@ -3,64 +3,16 @@
         date-picker-needed="true"
         buyer="true"
         seller="true"
-        product="true"
+        product-items="true"
         tran-status="true"
         date-picker="vm.dateRange"
         on-date-change="vm.onDateRangeChanged(dateRange)"
         on-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList)"
         on-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList)"
-        on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)"
+        on-products-item-selected-changed="vm.onProductsSelectedChanged(selectedList)"
         on-tran-status-selected-changed="vm.onTranStatusSelectedChanged(selectedList)">
 </filter-bar>
-<div class="row">
-    <div class="col-md-12">
-        <div ba-panel ba-panel-title="Business Partner (Standard)<br><small>Total {{vm.allBusinessPartner.data.length - vm.bpToRemove.length}} Business Partners</small>" ba-panel-class="with-scroll">
-            <div>
-                <table class="table" st-table="smartTableData">
-                    <thead>
-                    <tr class="sortable ">
-                        <th st-sort="{{heading.stSort}}"
-                            ng-repeat="heading in vm.allBusinessPartner.tableHeadings" ng-bind="heading.name"></th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input st-search="bp_Cont_fullName"
-                                   placeholder="Search Business Partner"
-                                   class="input-sm form-control search-input"
-                                   type="search"/>
-                        </th>
-                        <th></th>
-                        <th>
-                            <input st-search="bp_country"
-                                   placeholder="Search Origin"
-                                   class="input-sm form-control search-input"
-                                   type="search"/>
-                        </th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!--<tr ng-repeat="row in vm.allBusinessPartner.data| selectedRows:vm.bpToRemove:'bp_ID'| selectFilter: vm.searchBusinessPartner:'bp_Name' | orderBy: 'bp_Name' ">-->
-                        <!--<td><a ui-sref="shell.businessPartner.view({id:row.bp_ID})">{{row.bp_Name}}</a></td>-->
-                        <!--<td ng-if="row.bp_Cont_fullName"><a ui-sref="shell.businessPartner.viewContactPerson({id:row.bp_cont_ID})">{{row.bp_Cont_fullName}}</a></td><td ng-if="!row.bp_Cont_fullName">No Primary Contact</td>-->
-                        <!--<td ng-bind="row.bp_country"></td>-->
-                        <!--<td><span ng-if="row.bp_isBuyer">&nbsp;&nbsp;Buyer</span><span ng-if="row.bp_isBroker">&nbsp;&nbsp;Broker</span><span ng-if="row.bp_isSeller">&nbsp;&nbsp;Seller</span><span ng-if="row.bp_isShipper">&nbsp;&nbsp;Shipper</span></td>-->
-                        <!--<td>{{row.bp_credibilityIndex}}/5</td>-->
-                        <!--<td ng-if="row.tr_transactionID"><a ui-sref="shell.tradeBook.Transaction({tran:row.tr_transactionID})">{{row.tr_date | date:vm.vm.appFormats.Date}}</a></td><td ng-if="!row.tr_transactionID">No Transaction Done</td>-->
-                    <!--</tr>-->
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="6" class="text-center">
-                            <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+<trade-table type="int" list-data="vm.allTransactions">
+
+</trade-table>

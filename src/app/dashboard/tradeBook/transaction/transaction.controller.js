@@ -57,7 +57,7 @@
                 }
             });
 
-            $scope.$watch('vm.transactionForm.basic.productItemId', function(newVal, oldVal){
+            $scope.$watch('vm.transaction.basic.productItemId', function(newVal, oldVal){
                 if(newVal){
                     product.getProductSpecification(newVal).then(function(response){
                         if(response.success){
@@ -69,10 +69,13 @@
         }
 
         function addTransaction(transactionForm, transactionObj){
-            if(transactionForm.$valid){
-                tradeBook.addTransaction(transactionObj).then(function(response){
+            if(transactionForm.$valid || true){
+                tradeBook.addTransaction(transactionObj, vm.netCommission).then(function(response){
                     if(response.success){
-                        console.log(transactionObj);
+                        toastr.success(response.message);
+                    }
+                    else{
+                        toastr.error(response.message);
                     }
                 })
             }
@@ -82,11 +85,14 @@
         }
 
         function updateTransaction(transactionObj){
-            tradeBook.updateTransaction(transactionObj).then(function(response){
-                if(transactionForm.$valid){
+            tradeBook.updateTransaction(transactionObj, vm.netCommission).then(function(response){
+                if(transactionForm.$valid || true){
                     tradeBook.addTransaction(transactionObj).then(function(response){
                         if(response.success){
-
+                            toastr.success(response.message);
+                        }
+                        else{
+                            toastr.error(response.message);
                         }
                     })
                 }

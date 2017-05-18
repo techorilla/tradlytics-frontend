@@ -1,0 +1,123 @@
+<div class="row ">
+    <div class="col-md-12">
+        <div ba-panel ba-panel-title="Trade Book" ba-panel-class="with-scroll">
+            <div>
+                <table class="table" st-table="smartTableData">
+
+                    <thead>
+                    <tr class="sortable table-header"  ng-if="listData.length!==0">
+                        <th></th>
+                        <th ng-repeat="name in heading" ng-bind="name"></th>
+                    </tr>
+                    <tr class="table-header" ng-if="listData.length===0">
+                        <th>No from have been added.</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="row in listData">
+                    <tr>
+                        <td ng-click="toggleNotes(row)">
+                            <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
+                            <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
+                        </td>
+                        <td  class="titled">{{row.date | date:appFormats.Date}}</td>
+                        <td><a class="titled" ui-sref="dashboard.transactionView({id:row.id})">{{row.fileNo}}</a></td>
+                        <td class="business">
+                            <div class="name" ng-bind="row.buyerName"></div>
+                            <div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>
+                            <div class="country"><img ng-if="row.buyerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.buyerCountryFlag}}"/> {{row.buyerCountry ? row.buyerCountry : 'No Origin' }}</div>
+                        </td>
+                        <td>{{row.productName}}</td>
+                        <td>{{row.productOriginName}}</td>
+                        <td>{{row.quantity  | number: 2}}</td>
+                        <td>{{row.price  | number: 2}}</td>
+                        <td class="business">
+                            <div class="name" ng-bind="row.sellerName"></div>
+                            <div class="contact">{{row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact'}}</div>
+                            <div class="country"><img ng-if="row.sellerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.sellerCountryFlag}}"/> {{row.sellerCountry  ? row.sellerCountry : 'No Origin' }}</div>
+                        </td>
+                        <td>{{row.shipmentStart  | date:appFormats.Date}}</td>
+                        <td>{{row.shipmentEnd  | date:appFormats.Date}}</td>
+                        <td class="titled">US$ {{row.expectedCommission | number: 2}}</td>
+
+                    </tr>
+                    <tr ng-show="row.showNotes">
+                        <td></td>
+                        <td colspan="{{heading.length}}">
+                            <div class="row" >
+                                <div class="col-xs-12 col-md-6">
+                                    <div ba-panel ba-panel-class="with-scroll" class="noteList">
+                                        <img ng-if="noteListLoading" width="60" height="60" src="assets/img/loader.svg" />
+                                        <div ng-if="!noteListLoading && (row.noteList.length === 0)">No trade notes.</div>
+                                        <div class="col-xs-12"  ng-repeat="nte in row.noteList | orderBy: '-createdAt'">
+                                            <div class="col-xs-6 note"
+                                                 ng-class="{'pull-right':nte.self, 'self':nte.self, 'other': !nte.self, 'editing': nte.editing}">
+                                                <div class="col-xs-12 userData">
+                                                    <img class="userImage" ng-src="{{( nte.createdByPic | profilePicture )}}">
+                                                    <div class="details">
+                                                        <div class="name">{{nte.createdBy}}</div>
+                                                        <div class="date">Note on: {{nte.createdAt | date:appFormats.Time }}</div>
+                                                        <div class="date" ng-if="nte.updatedAt">Note Updated On: {{nte.updatedAt | date:appFormats.Time }}</div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xs-12">{{nte.note}}</div>
+                                                <div class="col-xs-12 button-bar">
+                                                    <button class="btn btn-danger btn-xs pull-right" ng-if="nte.self" ng-click="editTradeNote(row, nte.note, nte)">Edit</button>
+                                                    <button class="btn btn-warning btn-xs pull-right" ng-click="deleteTradeNote(row.id, nte.noteId, nte, row.noteList)" ng-if="nte.isDeleteAble">Delete</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="form-group col-md-12 clearfix">
+                                        <form name="vm.trade_note_form_{{row.id}}" novalidate>
+                                            <label class="col-sm-12 control-label">Notes</label>
+                                            <div class="col-sm-12">
+                                                <textarea ng-if="!addingNote"
+                                                          ng-required="true"
+                                                          name="tradeNote_{{row.id}}"
+                                                          ng-model="row.note"
+                                                          class="form-control">
+                                                </textarea>
+                                                <ng-messages for="vm['trade_note_form_'+row.id]['tradeNote_'+row.id].$error"
+                                                             ng-if='(vm["trade_note_form_"+row.id].$submitted || vm["trade_note_form_"+row.id]["tradeNote_"+row.id].$dirty)'>
+                                                    <div ng-message="required" class="errorValidation">Please enter a trade note.</div>
+                                                </ng-messages>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-success editable-table-button btn-xs"
+                                                        type="submit"
+                                                        style="min-width: 115px;"
+                                                        ng-click="addTradeNote(row.id, row.note, row.noteList, row, vm['trade_note_form_'+row.id])">
+                                                <span ng-if="addingNote">
+                                                    <i class="fa fa-spinner fa-pulse fa-spin fa-3x fa-fw"></i>
+                                                    <span class="sr-only">Loading...</span>
+                                                    &nbsp;
+                                                </span>
+                                                    <span ng-if="!addingNote && !updateNote">Add Note</span>
+                                                    <span ng-if="updateNote">Update Note</span>
+                                                </button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

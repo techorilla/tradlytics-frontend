@@ -5,34 +5,32 @@
     </div>
 
     <div class="modal-body">
-        <form name="vm.productInfoForm" novalidate>
-            <div class="row productSpecs">
-                <div class="col-md-12">
-                    <div class="row wizard-containers">
-                        <div ng-repeat="spec in productSpecs" class="slider-box col-sm-12 col-md-4">
-                            <h5 ng-bind="spec.name"></h5>
-                            <input
-                                    style="margin-top: 25px;"
-                                    class="form-control"
-                                    ng-model="spec.value"
-                                    ng-if="spec.type=='text'"/>
-                            <ion-slider
-                                    ng-if="spec.type=='percentage'"
-                                    type="single"
-                                    grid="true"
-                                    from="spec.value"
-                                    ng-model="spec.value"
-                                    min="0"
-                                    max="100"
-                                    prefix="%"
-                                    from="0"
-                                    disable="false">
-                            </ion-slider>
-                        </div>
+        <div class="row productSpecs">
+            <div class="col-md-12">
+                <div class="row wizard-containers">
+                    <div ng-repeat="spec in productSpecs" class="slider-box col-sm-12 col-md-4">
+                        <h5 ng-bind="spec.name"></h5>
+                        <input
+                                style="margin-top: 25px;"
+                                class="form-control"
+                                ng-model="spec.value"
+                                ng-if="spec.type=='text'"/>
+                        <ion-slider
+                                ng-if="spec.type=='percentage'"
+                                type="single"
+                                grid="true"
+                                from="spec.value"
+                                ng-model="spec.value"
+                                min="0"
+                                max="100"
+                                prefix="%"
+                                from="0"
+                                disable="false">
+                        </ion-slider>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="modal-footer">

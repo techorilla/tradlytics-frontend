@@ -29,6 +29,12 @@
                     <span class="dg-value filterHeading titled-text">{{value.name}}</span>
                     <span class="dg-value">{{value.category}}</span>
                 </li>
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'"
+                    ng-if="endPoint===apiEndPoints.dropDown.productItem">
+                    <input ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">
+                    <span class="dg-value filterHeading titled-text">{{value.name}}</span>
+                    <span class="dg-value">{{value.origin}} | {{value.keywords ? value.keywords : 'No keywords'}}</span>
+                </li>
                 <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'origin'"
                     ng-if="endPoint===apiEndPoints.dropDown.priceMarket">
                     <input ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">

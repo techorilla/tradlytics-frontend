@@ -1,0 +1,29 @@
+<div class="col-md-12">
+    <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row wizard-containers">
+                    <h3 class="with-line">Transaction Documents
+                    <button class="btn btn-xs btn-success" ng-click="vm.addNewDocument()"> Add New</button>
+                    </h3>
+                    <div ng-show="vm.addingDocument" class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group col-lg-4  col-xs-12">
+                                <label>Document Name</label>
+                                <input class="form-control" ng-model="vm.newDocumentName" type="text"/>
+                                <button class="btn btn-success btn-xs"
+                                        type="file"
+                                        ngf-select="vm.uploadTradeDocument($file, $invalidFiles)"
+                                        accept="*">
+                                    <i class="fa fa-upload"></i> Upload
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -52,7 +52,18 @@
                         controller:'Transaction as vm'
                     }
                 }
+            })
+            .state('dashboard.transactionView', {
+                url:'/tradeView/:id',
+                title: 'Trade',
+                views:{
+                    'content@dashboard':{
+                        templateUrl:'app/dashboard/tradeBook/transaction/transactionView.html',
+                        controller: 'TransactionView as vm'
+                    }
+                }
             });
+
     }
 
 }());

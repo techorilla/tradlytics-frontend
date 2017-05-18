@@ -85,7 +85,6 @@
                         <label for="buyerBroker" class="col-sm-3 control-label">Buyer Broker</label>
                         <div class="col-sm-9">
                             <selectize
-                                    ng-required="true"
                                     placeholder="Buyer Broker"
                                     name="buyerBroker"
                                     id="buyerBroker"
@@ -127,13 +126,14 @@
                             </ng-messages>
                         </div>
                     </div>
+
+
                 </div>
                 <div class="col-md-4">
                     <div class="form-group row clearfix">
-                        <label for="buyerBroker" class="col-sm-3 control-label">Seller Broker</label>
+                        <label for="sellerBroker" class="col-sm-3 control-label">Seller Broker</label>
                         <div class="col-sm-9">
                             <selectize
-                                    ng-required="true"
                                     placeholder="Seller Broker"
                                     name="sellerBroker"
                                     id="sellerBroker"
@@ -141,7 +141,6 @@
                                     options='vm.brokerOptions.list'
                                     ng-model="vm.transaction.commission.sellerBrokerId">
                             </selectize>
-
                         </div>
                     </div>
                 </div>

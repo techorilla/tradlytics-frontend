@@ -23,17 +23,57 @@
 
         return {
             getNewTransaction: getNewTransaction,
+            getTransactionList: getTransactionList,
             calculateCommission: calculateCommission,
             addTransaction: addTransaction,
-            updateTransaction: updateTransaction
+            updateTransaction: updateTransaction,
+
+            addTradeNote: addTradeNote,
+            editTradeNote: editTradeNote,
+            deleteTradeNote: deleteTradeNote,
+            getAllNotesForTrade: getAllNotesForTrade
+
         };
 
-        function addTransaction(transactionObj){
-            return transactionAPI.customPOST(apiEndPoints.basic, transactionObj);
+        function getAllNotesForTrade(tradeId){
+            return transactionAPI.customGET(apiEndPoints.transaction.note+'/'+tradeId)
         }
 
-        function updateTransaction(transactionObj){
-            return transactionAPI.customPUT(apiEndPoints.basic, transactionObj)
+        function addTradeNote(tradeId, note){
+            return transactionAPI.customPOST({
+                'note': note,
+                'tradeId': tradeId
+            }, apiEndPoints.transaction.note);
+        }
+
+        function deleteTradeNote(tradeId, noteId){
+            return transactionAPI.customDELETE(apiEndPoints.transaction.note+'/'+tradeId+'/'+noteId);
+        }
+
+        function editTradeNote(tradeId, noteId, note){
+            return transactionAPI.customPUT({
+                'note': note,
+                'noteId': noteId,
+                'tradeId': tradeId
+            }, apiEndPoints.transaction.note)
+
+        }
+
+        function getTransactionList(dateRange){
+            var dateRangeCopy = angular.copy(dateRange);
+            return transactionAPI.customGET(apiEndPoints.transaction.list, dateRangeCopy);
+        }
+
+        function addTransaction(transactionObj, netCommission){
+            return transactionAPI.customPOST(angular.extend(transactionObj, {
+                'netCommission': netCommission
+            }), apiEndPoints.transaction.basic);
+        }
+
+        function updateTransaction(transactionObj, netCommission){
+            return transactionAPI.customPUT(angular.extend(transactionObj, {
+                'netCommission': netCommission
+            }), apiEndPoints.transaction.basic)
         }
 
         function calculateCommission(transactionObj){
@@ -66,10 +106,14 @@
                     buyerId: null,
                     sellerId: null,
                     productItemId: null,
+                    contractualBuyerId: null,
                     price: 0,
-                    packaging: null,
+                    fileId: null,
+                    contractId: null,
+                    packagingId: null,
                     shipmentEnd: (new Date()).addDays(30),
-                    shipmentStart: null
+                    shipmentStart: null,
+                    otherInfo: ''
                 },
                 commission:{
                     typeId: 1,

@@ -26,6 +26,7 @@ angular.module('app.core', [
     'uiCropper',
     'angularSpectrumColorpicker',
     'ui.validate',
-    'satellizer'
+    'satellizer',
+    'ngFileUpload'
 
 ]);

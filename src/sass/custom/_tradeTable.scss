@@ -1,0 +1,54 @@
+.noteList{
+  height: 400px;
+  overflow-y: scroll;
+  .note{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    padding-top: 10px;
+    .button-bar{
+      padding-bottom: 10px;
+      .btn{
+        margin-left: 10px;
+      }
+    }
+    .userData{
+      .userImage{
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        float: left;
+      }
+      .details{
+        margin-left: 55px;
+        .name{
+          padding-top: 5px;
+          float: left;
+          padding-left: 10px;
+        }
+        .date{
+          font-size: 11px;
+          font-weight: 400;
+          padding-top: 5px;
+          padding-left: 12px;
+          float: left;
+        }
+      }
+    }
+  }
+
+  .other{
+    background: rgba(104, 77, 97, 0.33);;
+    color: $text-color;
+  }
+
+  .editing{
+    background: rgba(22, 11, 5, 0.33) !important;
+  }
+
+  .self{
+    background: rgba(33, 183, 153, 0.18);;
+    color: $text-color;
+  }
+}

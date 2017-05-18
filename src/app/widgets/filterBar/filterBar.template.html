@@ -1,4 +1,4 @@
-<div ba-panel class="dg-filterPanel" ng-if="buyer || seller || product || bpTypes || country || priceMarket || datePickerNeeded">
+<div ba-panel class="dg-filterPanel" ng-if="buyer || seller || product || productItems ||bpTypes || country || priceMarket || datePickerNeeded">
     <div class="row">
         <div ng-if="datePickerNeeded" class="col-sm-6 col-sm-offset-6">
             <div class="dg-datePicker">
@@ -19,6 +19,11 @@
                        title="Buyer"
                        end-point="{{apiEndPoints.dropDown.business}}" filterSubType="{{appTabFilter.BUYER}}">
 
+        </custom-filter>
+        <custom-filter on-selected-values-changed="onProductItemSelectedChanged({selectedList:selectedList})"
+                       ng-if="productItems"
+                       title="Product Items"
+                       end-point="{{apiEndPoints.dropDown.productItem}}">
         </custom-filter>
         <custom-filter on-selected-values-changed="onSellersSelectedChanged({selectedList:selectedList})"
                        ng-if="seller"

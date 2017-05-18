@@ -35,7 +35,7 @@
         }
 
         function getManifestDashboardReport(dateRange, selectedBuyer, selectedSeller, selectedProduct){
-            var dateRangeCopy = angular.copy(dateRange)
+            var dateRangeCopy = angular.copy(dateRange);
             // dateRangeCopy.startDate = dateRangeCopy.startDate.addTimeZoneOffset();
             // dateRangeCopy.endDate = dateRangeCopy.endDate.addTimeZoneOffset();
             var postData = dateRangeCopy;

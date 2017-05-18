@@ -47,6 +47,7 @@
         manifestDashboard: 'manifest/dashboard',
         transaction:{
           main:'transactions',
+          list: 'list',
           basic: 'basic',
           commission: 'commission',
           contract: 'contract',

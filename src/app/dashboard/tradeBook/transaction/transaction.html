@@ -19,13 +19,13 @@
                     </div>
 
                     <div class="row">
-                        <button type="button" ng-if="!vm.transaction.id"
-                                ng-click="vm.addTransaction(vm.transactionForm, vm.transacation)"
+                        <button type="submit" ng-if="!vm.transaction.id"
+                                ng-click="vm.addTransaction(vm.transactionForm, vm.transaction)"
                                 class="btn btn-primary btn-with-icon save-profile">
                             <i class="ion-android-checkmark-circle"></i> Add New Transaction
                         </button>
-                        <button type="button" ng-if="vm.transaction.id"
-                                ng-click="vm.updateTransaction(vm.transactionForm, vm.transacation)"
+                        <button type="submit" ng-if="vm.transaction.id"
+                                ng-click="vm.updateTransaction(vm.transactionForm, vm.transaction)"
                                 class="btn btn-primary btn-with-icon save-profile">
                             <i class="ion-android-checkmark-circle"></i> Update Transaction
                         </button>

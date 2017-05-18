@@ -13,7 +13,7 @@
         .controller('TradeBook', tradeBook);
 
     /* @ngInject */
-    function tradeBook(tradeBook,routing,documentExporter, appFormats, utilities, $filter){
+    function tradeBook(tradeBook,routing,documentExporter, appFormats, utilities, $filter, loaderModal){
         var vm = this;
         init();
         /////////////////////
@@ -45,12 +45,12 @@
             vm.onCountrySelectedChanged = onCountrySelectedChanged;
             vm.onTranStatusSelectedChanged = onTranStatusSelectedChanged;
             vm.filterChanged = filterChanged;
-            vm.gettradeBookExcel = gettradeBookExcel;
-            // onDateRangeChanged(vm.dateRange);
+            vm.getTradeBookExcel = getTradeBookExcel;
+            onDateRangeChanged(vm.dateRange);
 
-            vm.transactionTableHeadings = ['Date', 'File No','Buyer', 'Product', 'Quantity', 'Rate', 'Seller', 'Origin', 'Shipment Start', 'Shipment End', 'Commission'];
-            vm.headingAssociation = ['transactionDate','fileNo','buyer','product', 'quantity', 'rate', 'seller', 'origin', 'shipment_start', 'shipment_end', 'commission'];
             vm.headingclass = ['dateColumn','fileId','dropDownCol2','dropDownCol2','','','dropDownCol2','','dateColumn2','dateColumn',''];
+
+
             vm.headerAnchor = [
                 {
                     text: 'Add new Transaction',
@@ -60,22 +60,22 @@
 
         }
 
-        function gettradeBookExcel(headings, dataObject){
+
+
+        function getTradeBookExcel(headings, dataObject){
             var filteredData = $filter('selectedRows')(vm.allTransactions,vm.tranToRemove,'tr_transactionID');
             documentExporter.getTableInExcelSheet(headings, filteredData, vm.headingAssociation, 'tradeBook');
         }
 
         function onDateRangeChanged(dateRange){
-            if(true){
-                var startDate = new Date(dateRange.startDate);
-                var endDate = new Date(dateRange.endDate);
-                tradeBook.getTransactionListOnDateRange(startDate,endDate).then(function(res){
-                    if(res.data.success){
-                        vm.allTransactions = res.data.transactions;
-                        filterChanged();
-                    }
-                });
-            }
+            loaderModal.open();
+            tradeBook.getTransactionList(dateRange).then(function(res){
+                if(res.success){
+                    vm.allTransactions = res.transactions;
+                    filterChanged();
+                    loaderModal.close();
+                }
+            });
         }
 
         function filterChanged(){
