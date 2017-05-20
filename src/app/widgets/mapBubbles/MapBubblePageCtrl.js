@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function MapBubblePageCtrl(utilities, $scope, baConfig, $timeout, layoutPaths) {
-    var layoutColors = baConfig.colors;
+    // var layoutColors = baConfig.colors;
     var colors = utilities.chartColors();
     var latlong = {};
     latlong['AD'] = {'latitude': 42.5, 'longitude': 1.5};
@@ -255,7 +255,9 @@
     latlong['ZW'] = {'latitude': -20, 'longitude': 30};
 
     angular.forEach($scope.mapChartData, function(val, key){
-      val.color=colors[key];
+      if(val){
+        val.color = colors[key];
+      }
     });
 
     var mapData = $scope.mapChartData;
@@ -309,17 +311,18 @@
       }
       var size = Math.sqrt(square / (Math.PI * 2));
       var id = dataItem.code;
-
-      dataProvider.images.push({
-        type: 'circle',
-        width: size,
-        height: size,
-        color: dataItem.color,
-        longitude: latlong[id].longitude,
-        latitude: latlong[id].latitude,
-        title: dataItem.name,
-        value: value
-      });
+      if(id){
+        dataProvider.images.push({
+          type: 'circle',
+          width: size,
+          height: size,
+          color: dataItem.color,
+          longitude: latlong[id].longitude,
+          latitude: latlong[id].latitude,
+          title: dataItem.name,
+          value: value
+        });
+      }
     }
 
     map.dataProvider = dataProvider;

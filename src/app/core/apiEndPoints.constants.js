@@ -87,6 +87,7 @@
             business: 'business'
         },
         product: 'product',
+        productTags:'product_tags',
         productWebsiteStatus: 'website_status',
         productOrigin: 'origin',
         productKeywords: 'keywords',

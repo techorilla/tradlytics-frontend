@@ -37,8 +37,13 @@
             vm.saveProductOrigin = saveProductOrigin;
             vm.onSaveProductOriginCallback = onSaveProductOriginCallback;
             vm.displayOnWebsite = displayOnWebsite;
+            vm.loadRelatedProducts = loadRelatedProducts;
             dropDownConfig.prepareProductCategoryDropDown(vm.categoryConfig, vm.categoryOptions);
             dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions);
+        }
+
+        function loadRelatedProducts(query, productId){
+            return product.loadRelatedProducts(query, productId);
         }
 
         function displayOnWebsite(prod){
@@ -88,6 +93,7 @@
         }
 
         function saveProduct(productObj, images){
+            console.log(productObj);
             if(productObj.id){
                 return product.updateProduct(productObj, images);
             }

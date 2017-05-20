@@ -55,8 +55,17 @@
 
             getPriceReport: getPriceReport,
             displayOnWebsite: displayOnWebsite,
-            productItemPriceOnWebsite: productItemPriceOnWebsite
+            productItemPriceOnWebsite: productItemPriceOnWebsite,
+
+            loadRelatedProducts: loadRelatedProducts
         };
+
+        function loadRelatedProducts(query, productId){
+            return productAPI.customGET(apiEndPoints.productTags, {
+                'productId': productId,
+                'query': query
+            });
+        }
 
         function displayOnWebsite(productId, state){
             return productAPI.customPOST({

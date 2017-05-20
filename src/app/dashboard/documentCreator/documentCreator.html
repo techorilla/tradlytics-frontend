@@ -1,0 +1,22 @@
+<div class="col-lg-12">
+    <div ba-panel>
+
+        <div id="document">
+            <div class="col-md-12">
+                <h3 class="with-line">Document Content</h3>
+                <div class="form-group">
+                    <!--<label for="productDescription">Product Description</label>-->
+                    <text-angular
+                            ng-model="vm.documentContent"
+                            id="documentContent"></text-angular>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <button class="btn btn-success" ng-click="vm.createA4Document(vm.documentContent)"> Export to PDF</button>
+        </div>
+
+    </div>
+</div>

@@ -14,7 +14,9 @@
         'app.dashboard.settings',
         'app.dashboard.modals',
         'app.dashboard.pricing',
-        'app.dashboard.manifest'
+        'app.dashboard.manifest',
+        'app.dashboard.documentCreator',
+        'app.dashboard.shipping'
     ]).config(routeConfig);
 
 
@@ -100,7 +102,12 @@
         baSidebarServiceProvider.addStaticItem({
             title: 'Shipment',
             icon: 'ion-android-boat',
-            stateRef: 'dashboard.shipment'
+            stateRef: 'dashboard.shipping'
+        });
+        baSidebarServiceProvider.addStaticItem({
+            title: 'Document Creator',
+            icon: 'ion-android-document',
+            stateRef: 'dashboard.documentCreator'
         });
         // baSidebarServiceProvider.addStaticItem({
         //     title: 'Settings',
