@@ -12,8 +12,8 @@
                 title: 'Document Creator',
                 views: {
                     'content@dashboard': {
-                        templateUrl: 'app/dashboard/documentCreator/documentCreator.html',
-                        controller: 'DocumentCreator as vm'
+                        templateUrl: 'app/dashboard/shipping/shipping.html',
+                        controller: 'Shipping as vm'
                     }
                 },
             });

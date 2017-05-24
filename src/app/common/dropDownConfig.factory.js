@@ -102,6 +102,12 @@
 
     function prepareBusinessDropDown(businessConfig, businessOptions, businessType){
       var config = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(businessOptions.list, function(business) { return business.id == value; });
+          businessOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
         valueField: 'id',
         sortField: 'name',
         searchField: ['name','contactPerson','country'],

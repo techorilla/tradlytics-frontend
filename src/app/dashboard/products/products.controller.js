@@ -141,7 +141,7 @@
         }
 
         function getFile(picture){
-            deModal.getFile(picture, $scope, 1, [{w: 800,h: 400}], {width:800, height:400}, function(imagesData){
+            deModal.getFile(picture, $scope, 1.2, [{w: 400,h: 400}], {width:400, height:400}, function(imagesData){
                 vm.productImage = imagesData.croppedImage;
                 vm.imagesData = imagesData;
             });
