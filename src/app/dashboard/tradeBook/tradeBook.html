@@ -9,10 +9,10 @@
         on-date-change="vm.onDateRangeChanged(dateRange)"
         on-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList)"
         on-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList)"
-        on-products-item-selected-changed="vm.onProductsSelectedChanged(selectedList)"
+        on-product-item-selected-changed="vm.onProductsSelectedChanged(selectedList)"
         on-tran-status-selected-changed="vm.onTranStatusSelectedChanged(selectedList)">
 </filter-bar>
 
-<trade-table type="int" list-data="vm.allTransactions">
+<trade-table type="int" list-data="vm.allTransactionsList" items-per-page="10">
 
 </trade-table>

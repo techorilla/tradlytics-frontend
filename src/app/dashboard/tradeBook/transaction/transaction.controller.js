@@ -3,7 +3,7 @@
     angular.module('app.dashboard.tradeBook')
         .controller('Transaction', transaction);
 
-    function transaction(dropDownConfig, tradeBook, $scope, deModal, product, toastr){
+    function transaction(dropDownConfig, tradeBook, $scope, deModal, product, toastr, $state, loaderModal){
         console.log('hello');
         var vm = this;
         _init();
@@ -11,6 +11,7 @@
         function _init(){
             vm.quantityMetricConfig = {};
             vm.quantityMetricOptions = {};
+
             vm.productConfig = {};
             vm.productOptions = {};
             vm.packagingConfig = {};
@@ -34,6 +35,7 @@
             dropDownConfig.prepareBusinessDropDown(vm.sellerConfig, vm.sellerOptions, 'Seller');
             dropDownConfig.prepareBusinessDropDown(vm.brokerConfig, vm.brokerOptions, 'Broker');
             vm.transaction = tradeBook.getNewTransaction();
+            vm.cancel = cancel;
             vm.addTransaction = addTransaction;
             vm.updateTransaction = updateTransaction;
             vm.changeProductSpecs = changeProductSpecs;
@@ -68,11 +70,20 @@
             });
         }
 
+        function cancel(){
+            $state.go('dashboard.tradeBook');
+        }
+
+        function onSuccessFullSave(id){
+            $state.go('dashboard.transactionView', {'id': id});
+        }
+
         function addTransaction(transactionForm, transactionObj){
             if(transactionForm.$valid || true){
                 tradeBook.addTransaction(transactionObj, vm.netCommission).then(function(response){
                     if(response.success){
                         toastr.success(response.message);
+                        onSuccessFullSave(response.tradeId);
                     }
                     else{
                         toastr.error(response.message);
@@ -89,6 +100,7 @@
                 if(transactionForm.$valid || true){
                     tradeBook.addTransaction(transactionObj).then(function(response){
                         if(response.success){
+                            onSuccessFullSave(response.tradeId);
                             toastr.success(response.message);
                         }
                         else{

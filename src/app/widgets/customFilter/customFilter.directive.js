@@ -44,14 +44,15 @@
       function onFilterSuccessCallBack(response){
         scope.appConstants = appConstants;
         scope.apiEndPoints = apiEndPoints;
-        scope.dropDownValues = response.list;
-        angular.forEach(scope.dropDownValues, function(value, key){
+        scope.noneSelected = response.list;
+        scope.allSelected = angular.copy(scope.noneSelected);
+        angular.forEach(scope.allSelected, function(value, key){
           value.selected = true;
         });
+        scope.dropDownValues = angular.copy(scope.allSelected);
         scope.selectedValues = angular.copy(scope.dropDownValues);
-        if(!scope.intialized){
-          scope.onSelectedValuesChanged({selectedList:scope.selectedValues});
-        }
+        scope.onSelectedValuesChanged({selectedList:scope.selectedValues, initialized: scope.intialized});
+
         scope.isLoading = false;
         scope.intialized = false;
       }
@@ -97,16 +98,13 @@
 
       function onSelectAll(selectAll){
         if(selectAll){
-          angular.forEach(scope.dropDownValues,function(val,key){
-            val.selected = true;
-          });
+          scope.dropDownValues = angular.copy(scope.allSelected);
           scope.selectedValues = angular.copy(scope.dropDownValues);
         }
         else{
+          scope.dropDownValues = angular.copy(scope.noneSelected);
           scope.selectedValues = [];
-          angular.forEach(scope.dropDownValues,function(val,key){
-            val.selected = false;
-          });
+
         }
       }
 

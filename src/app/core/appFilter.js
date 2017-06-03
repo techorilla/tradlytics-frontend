@@ -54,7 +54,9 @@
     }
 
     function selectFilter(){
+        
         return function(items, search, bind) {
+            console.log(search, items, bind);
             if (!search) {
                 return items;
             }

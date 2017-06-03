@@ -44,19 +44,25 @@
             });
         }
 
-        function onBuyersSelectedChanged(selectedList){
+        function onBuyersSelectedChanged(selectedList, initialized){
             vm.selectedBuyerID = _.map(selectedList, 'id');
-            getManifestAnalytics(vm.dateRange, vm.selectedBuyerID, vm.selectedSellerID, vm.selectedProductID);
+            if(!initialized){
+                getManifestAnalytics(vm.dateRange, vm.selectedBuyerID, vm.selectedSellerID, vm.selectedProductID);
+            }
         }
 
-        function onSellersSelectedChanged(selectedList){
+        function onSellersSelectedChanged(selectedList, initialized){
             vm.selectedSellerID = _.map(selectedList, 'id');
-            getManifestAnalytics(vm.dateRange, vm.selectedBuyerID, vm.selectedSellerID, vm.selectedProductID);
+            if(!initialized) {
+                getManifestAnalytics(vm.dateRange, vm.selectedBuyerID, vm.selectedSellerID, vm.selectedProductID);
+            }
         }
 
-        function onProductsSelectedChanged(selectedList){
+        function onProductsSelectedChanged(selectedList, initialized){
             vm.selectedProductID = _.map(selectedList, 'id');
-            getManifestAnalytics(vm.dateRange, vm.selectedBuyerID, vm.selectedSellerID, vm.selectedProductID);
+            if(!initialized) {
+                getManifestAnalytics(vm.dateRange, vm.selectedBuyerID, vm.selectedSellerID, vm.selectedProductID);
+            }
         }
 
         function goToManifestItems(){

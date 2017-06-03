@@ -48,16 +48,16 @@
                     <span class="dg-value filterHeading"><img width="18" src="{{appConstants.STATIC_URL + value.image}}"/>&nbsp;{{value.name}}</span>
                 </li>
                 <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'text'" ng-if="(endPoint===apiEndPoints.dropDown.transactionStatus)">
-                    <input ng-init="value.selected = true" ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">
+                    <input ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">
                     <span class="dg-value singleFilterHeading titled-text">{{value.name}}</span>
                 </li>
                 <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'" ng-if="(endPoint===apiEndPoints.dropDown.bpType)">
-                    <input ng-init="value.selected = true" ng-change="onSingleSelectChange(value,value.selected,'name')" type="checkbox" ng-model="value.selected">
+                    <input ng-change="onSingleSelectChange(value,value.selected,'name')" type="checkbox" ng-model="value.selected">
                     <span class="dg-value singleFilterHeading titled-text">{{value.name}}</span>
                 </li>
                 <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name' "
                     ng-if="(endPoint === apiEndPoints.dropDown.business)">
-                    <input ng-init="value.selected = true" ng-change="onSingleSelectChange(value,value.selected,'id')"  type="checkbox" ng-model="value.selected">
+                    <input ng-change="onSingleSelectChange(value,value.selected,'id')"  type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading titled-text">{{value.name}}</span>
                     <span class="dg-value">{{value.country}} | {{value.contactPerson ? value.contactPerson : 'No Primary Contact'  }}</span>
                 </li>

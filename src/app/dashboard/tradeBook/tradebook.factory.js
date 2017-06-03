@@ -27,6 +27,7 @@
             calculateCommission: calculateCommission,
             addTransaction: addTransaction,
             updateTransaction: updateTransaction,
+            getTransactionDetail: getTransactionDetail,
 
             addTradeNote: addTradeNote,
             editTradeNote: editTradeNote,
@@ -34,6 +35,12 @@
             getAllNotesForTrade: getAllNotesForTrade
 
         };
+
+        function getTransactionDetail(tradeId){
+            return transactionAPI.customGET(apiEndPoints.transaction.basic,{
+                'tradeId': tradeId
+            });
+        }
 
         function getAllNotesForTrade(tradeId){
             return transactionAPI.customGET(apiEndPoints.transaction.note+'/'+tradeId)

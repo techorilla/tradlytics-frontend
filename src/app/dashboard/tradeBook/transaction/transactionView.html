@@ -4,20 +4,120 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row wizard-containers">
+                    <h3 class="with-line">Transaction Details</h3>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6"></div>
+                        <div class="col-xs-12 col-md-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row wizard-containers">
                     <h3 class="with-line">Transaction Documents
                     <button class="btn btn-xs btn-success" ng-click="vm.addNewDocument()"> Add New</button>
                     </h3>
                     <div ng-show="vm.addingDocument" class="row">
+
                         <div class="col-lg-12">
                             <div class="form-group col-lg-4  col-xs-12">
                                 <label>Document Name</label>
                                 <input class="form-control" ng-model="vm.newDocumentName" type="text"/>
+                                <br/>
                                 <button class="btn btn-success btn-xs"
                                         type="file"
                                         ngf-select="vm.uploadTradeDocument($file, $invalidFiles)"
                                         accept="*">
                                     <i class="fa fa-upload"></i> Upload
                                 </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row wizard-containers">
+                    <h3 class="with-line">Shipment</h3>
+                    <div class="col-md-12">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row wizard-containers">
+                    <h3 class="with-line">Notes</h3>
+                    <div class="row" >
+                        <div class="col-xs-12 col-md-6">
+                            <div ba-panel ba-panel-class="with-scroll" class="noteList">
+                                <img ng-if="noteListLoading" width="60" height="60" src="assets/img/loader.svg" />
+                                <div ng-if="!noteListLoading && (vm.transaction.notes.length === 0)">No trade notes.</div>
+                                <div class="col-xs-12"  ng-repeat="nte in vm.transaction.notes | orderBy: '-createdAt'">
+                                    <div class="col-xs-6 note"
+                                         ng-class="{'pull-right':nte.self, 'self':nte.self, 'other': !nte.self, 'editing': nte.editing}">
+                                        <div class="col-xs-12 userData">
+                                            <img class="userImage" ng-src="{{( nte.createdByPic | profilePicture )}}">
+                                            <div class="details">
+                                                <div class="name">{{nte.createdBy}}</div>
+                                                <div class="date">Note on: {{nte.createdAt | date:appFormats.Time }}</div>
+                                                <div class="date" ng-if="nte.updatedAt">Note Updated On: {{nte.updatedAt | date:appFormats.Time }}</div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12">{{nte.note}}</div>
+                                        <div class="col-xs-12 button-bar">
+                                            <button class="btn btn-danger btn-xs pull-right" ng-if="nte.self" ng-click="vm.editTradeNote(nte.note, nte)">Edit</button>
+                                            <button class="btn btn-warning btn-xs pull-right" ng-click="vm.deleteTradeNote(vm.transactionId, nte.noteId, nte, vm.transaction.notes)" ng-if="nte.isDeleteAble">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group col-md-12 clearfix">
+                                <form name="vm.trade_note_form" novalidate>
+                                    <label class="col-sm-12 control-label">Notes</label>
+                                    <div class="col-sm-12">
+                                                <textarea ng-if="!addingNote"
+                                                          ng-required="true"
+                                                          name="tradeNote"
+                                                          ng-model="vm.noteText"
+                                                          class="form-control">
+                                                </textarea>
+                                        <ng-messages for="vm['trade_note_form_'+row.id]['tradeNote_'+row.id].$error"
+                                                     ng-if='(vm["trade_note_form_"+row.id].$submitted || vm["trade_note_form_"+row.id]["tradeNote_"+row.id].$dirty)'>
+                                            <div ng-message="required" class="errorValidation">Please enter a trade note.</div>
+                                        </ng-messages>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        </br>
+                                        <button class="btn btn-success editable-table-button btn-xs"
+                                                type="submit"
+                                                style="min-width: 115px;"
+                                                ng-click="vm.addTradeNote(vm.transactionId, vm.noteText, vm.transaction.notes, vm.trade_note_form)">
+                                                <span ng-if="addingNote">
+                                                    <i class="fa fa-spinner fa-pulse fa-spin fa-3x fa-fw"></i>
+                                                    <span class="sr-only">Loading...</span>                                                    &nbsp;
+                                                </span>
+
+                                            <span ng-if="!vm.addingNote && !vm.updateNote">Add Note</span>
+                                            <span ng-if="vm.updateNote">Update Note</span>
+                                        </button>
+
+                                    </div>
+                                </form>
                             </div>
                         </div>
 

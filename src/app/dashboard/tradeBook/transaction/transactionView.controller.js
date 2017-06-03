@@ -8,27 +8,97 @@
         .controller('TransactionView', transactionView);
 
     /* @ngInject */
-    function transactionView(Upload, tradeBook, toastr, $stateParams){
+    function transactionView(Upload, tradeBook, toastr, $stateParams, $state, trade, utilities){
         var vm = this;
         _init();
 
         function _init(){
+            vm.addingNote=false;
+            vm.updateNote=false;
             vm.transactionId = $stateParams.id;
+            vm.transaction = trade;
             vm.showDocument = false;
             vm.documentAdding = false;
             vm.addingDocument = false;
             vm.newDocumentName = '';
+            vm.noteText = '';
             vm.addNewDocument = addNewDocument;
             vm.uploadTradeDocument = uploadTradeDocument;
             vm.cancelDocumentUpload = cancelDocumentUpload;
+            vm.editTradeNote = editTradeNote;
+            vm.deleteTradeNote = deleteTradeNote;
+            vm.addTradeNote = addTradeNote;
+
         }
 
         function uploadTradeDocument(file, errFiles){
-            if(vm.newDocumentName === ''){
-                toastr.error('Please enter document name', 'Error');
-                return;
-            }
+            console.log(file, errFiles);
         }
+
+        function editTradeNote(noteText, note){
+            vm.noteText = noteText;
+            note.editing = true;
+            vm.updateNote = true;
+        }
+
+        function deleteTradeNote(tradeId, noteId, note, noteList){
+            return tradeBook.deleteTradeNote(tradeId, noteId).then(function(res){
+                if(res.success){
+                    var index = _.indexOf(noteList, note);
+                    noteList.splice(index, 1);
+                    toastr.success(res.message, 'Note Deleted');
+                }
+                else{
+                    toastr.error(res.message);
+                }
+            });
+        };
+
+        function addTradeNote(tradeId, note, noteList, formObj){
+            if(formObj.$valid){
+                if(note === ''){
+                    toastr.error('Please add a note');
+                }
+                else{
+
+                    vm.addingNote = false;
+                    if(!vm.updateNote){
+                        tradeBook.addTradeNote(tradeId, note).then(function(res){
+                            if(res.success){
+                                toastr.success(res.message, 'Note Added');
+                                noteList.push(res.note);
+
+                            }
+                            else{
+                                toastr.error(res.message);
+                            }
+                            vm.noteText = '';
+                            utilities.resetFormValidation(formObj);
+                        })
+                    }
+                    else{
+                        var noteEdited = _.find(noteList, function(n) { return (n.editing == true); });
+                        var index = _.indexOf(noteList, noteEdited);
+                        tradeBook.editTradeNote(tradeId, noteEdited.noteId, note).then(function(res){
+                            if(res.success){
+                                vm.updateNote = false;
+                                noteList[index] = res.note;
+                                toastr.success(res.message, 'Note Updated')
+                            }
+                            else{
+                                toastr.error(res.message);
+                            }
+                            vm.noteText = '';
+                            utilities.resetFormValidation(formObj);
+
+
+                        })
+                    }
+
+                }
+            }
+
+        };
 
         function cancelDocumentUpload(){
 

@@ -56,12 +56,26 @@
             .state('dashboard.transactionView', {
                 url:'/tradeView/:id',
                 title: 'Trade',
+                resolve:{
+                    trade: function(tradeBook, $stateParams, loaderModal){
+                        loaderModal.open();
+                        return tradeBook.getTransactionDetail($stateParams.id).then(function(response){
+                            loaderModal.close();
+                            return response.transaction
+                        });
+                    }
+                },
                 views:{
                     'content@dashboard':{
                         templateUrl:'app/dashboard/tradeBook/transaction/transactionView.html',
                         controller: 'TransactionView as vm'
                     }
-                }
+                },
+                pageHeader:{
+                    subTitle: 'File No',
+                    title: '',
+                    goBack: true
+                },
             });
 
     }

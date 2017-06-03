@@ -35,14 +35,18 @@
             });
         }
 
-        function onProductsSelectedChanged(selectedList){
+        function onProductsSelectedChanged(selectedList, initialized){
             vm.selectedProductID = _.map(selectedList, 'id');
-            filterChanged();
+            if(!initialized){
+                filterChanged();
+            }
         }
 
-        function onCountrySelectedChanged(selectedList){
+        function onCountrySelectedChanged(selectedList, initialized){
             vm.selectedCountry = _.map(selectedList, 'name');
-            filterChanged();
+            if(!initialized){
+                filterChanged();
+            }
         }
 
         function addProductPricing(stateName){

@@ -14,7 +14,8 @@
             templateUrl: 'app/widgets/tradeTable/tradeTable.template.html',
             scope: {
                 type:'@',
-                listData: '='
+                listData: '=',
+                itemsPerPage: '@'
             },
             replace: true
         };
@@ -83,7 +84,6 @@
                         else{
                             var noteEdited = _.find(noteList, function(n) { return (n.editing == true); });
                             var index = _.indexOf(noteList, noteEdited);
-                            console.log(index);
                             tradeBook.editTradeNote(tradeId, noteEdited.noteId, note).then(function(res){
                                 if(res.success){
                                     scope.updateNote = false;
@@ -105,9 +105,11 @@
             };
 
             function _init(){
-                var vm = this;
+                scope.searchTransactionByFileID = '';
+                scope.displayList = [];
                 scope.appConstants = appConstants;
                 scope.appFormats = appFormats;
+                scope.currentPage = 1;
                 var intTradeHeading = [
                     'Date',
                     'File No',
@@ -125,6 +127,23 @@
                 angular.forEach(scope.listData, function(val,key){
                     val.showNotes = false;
                     val.note = '';
+                });
+
+                scope.pageChanged = function(page){
+                    scope.setPagingData(page, scope.listData, scope.itemsPerPage);
+                };
+
+                scope.setPagingData = function(page, list, itemsPerPage) {
+                    scope.totalItems = list.length;
+                    scope.currentPage = page;
+                    var pagedData = list.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+                    scope.displayList = pagedData;
+                };
+
+                scope.$watch('listData', function(newVal, oldVal){
+                    if(newVal.length > 0) {
+                        scope.setPagingData(scope.currentPage, newVal, scope.itemsPerPage);
+                    }
                 });
             }
 

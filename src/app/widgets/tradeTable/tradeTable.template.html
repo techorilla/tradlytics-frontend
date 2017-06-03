@@ -2,18 +2,20 @@
     <div class="col-md-12">
         <div ba-panel ba-panel-title="Trade Book" ba-panel-class="with-scroll">
             <div>
-                <table class="table" st-table="smartTableData">
+                <table class="table">
 
                     <thead>
                     <tr class="sortable table-header"  ng-if="listData.length!==0">
-                        <th></th>
+                        <th><span class="count">{{listData.length}}</span></th>
                         <th ng-repeat="name in heading" ng-bind="name"></th>
                     </tr>
+
                     <tr class="table-header" ng-if="listData.length===0">
                         <th>No from have been added.</th>
                     </tr>
                     </thead>
-                    <tbody ng-repeat="row in listData">
+                    <tbody ng-repeat="row in displayList">
+
                     <tr>
                         <td ng-click="toggleNotes(row)">
                             <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
@@ -65,7 +67,6 @@
                                                     <button class="btn btn-danger btn-xs pull-right" ng-if="nte.self" ng-click="editTradeNote(row, nte.note, nte)">Edit</button>
                                                     <button class="btn btn-warning btn-xs pull-right" ng-click="deleteTradeNote(row.id, nte.noteId, nte, row.noteList)" ng-if="nte.isDeleteAble">Delete</button>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -110,14 +111,19 @@
                     </tr>
                     </tbody>
                     <tfoot>
-                    <tr>
-                        <td colspan="6" class="text-center">
-                            <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
-                        </td>
-                    </tr>
+
                     </tfoot>
                 </table>
             </div>
+            <ul ng-show="listData.length > 0" uib-pagination
+                ng-change="pageChanged(currentPage)"
+                total-items="listData.length"
+                ng-model="currentPage"
+                max-size="itemsPerPage"
+                class="pagination-sm push-left"
+                boundary-link-numbers="true"
+                rotate="false">
+            </ul>
         </div>
     </div>
 </div>

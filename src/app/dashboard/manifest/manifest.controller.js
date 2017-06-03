@@ -86,22 +86,30 @@
                 }
             });
             vm.allManifestList = $filter('selectedRows')(vm.allManifestItems, vm.manifestItemsToRemove, 'id');
+            vm.totalQuantity = _.sumBy(vm.allManifestList, function(item) { return item.quantity; });
             setPagingData(vm.currentPage, vm.allManifestList, vm.itemsPerPage);
         }
 
-        function onBuyersSelectedChanged(selectedList){
+        function onBuyersSelectedChanged(selectedList, initialized){
             vm.selectedBuyerID = _.map(selectedList, 'id');
-            filterChanged();
+            if(!initialized){
+                filterChanged();
+            }
+
         }
 
-        function onSellersSelectedChanged(selectedList){
+        function onSellersSelectedChanged(selectedList, initialized){
             vm.selectedSellerID = _.map(selectedList, 'id');
-            filterChanged();
+            if(!initialized){
+                filterChanged();
+            }
         }
 
-        function onProductsSelectedChanged(selectedList){
+        function onProductsSelectedChanged(selectedList, initialized){
             vm.selectedProductID = _.map(selectedList, 'id');
-            filterChanged();
+            if(!initialized){
+                filterChanged();
+            }
         }
 
         function onDateRangeChanged(dateRange){

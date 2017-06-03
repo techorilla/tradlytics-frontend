@@ -250,6 +250,7 @@
                         <th>Market Currency</th>
                         <th>Price Metric</th>
                         <th>Price</th>
+                        <th>Updated By</th>
                         <th>Actions</th>
                     </tr>
                     <tr class="table-header" ng-if="vm.allPriceItems.length===0">
@@ -270,6 +271,7 @@
                         <td ng-bind="row.marketCurrency"></td>
                         <td ng-bind="row.priceMetric"></td>
                         <td class="titled" ng-bind="row.marketCurrency + ' ' + row.currentPrice"></td>
+                        <td class="titled" ng-bind="row.updatedBy ? row.updatedBy : row.createdBy"></td>
                         <td>
                             <div class="buttons">
                                 <button class="btn btn-primary editable-table-button btn-xs"
