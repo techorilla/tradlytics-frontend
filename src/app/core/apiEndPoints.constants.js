@@ -55,6 +55,10 @@
           note: 'note',
           secondary: 'secondary'
         },
+        shipping:{
+          main: 'shipping',
+          ports: 'ports'
+        },
         tabFilters: 'tabFilters',
         pricing: 'pricing',
         pricingSummary: 'summary',

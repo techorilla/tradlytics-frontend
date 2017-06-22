@@ -14,7 +14,7 @@
 
     /* @ngInject */
     function BusinessPartner(fileReader, $state, $stateParams, $q, businessPartner, dropDownConfig, $filter,
-                             deModal, $scope, allBusiness, toastr, loaderModal){
+                             deModal, $scope, allBusiness, toastr, loaderModal, $timeout){
         var vm = this;
         init();
 
@@ -43,7 +43,9 @@
             vm.bpTypeOptions = {};
             vm.contactTypeConfig = {};
             vm.contactTypeOptions = {};
-            vm.allBusiness = allBusiness;
+            vm.allBusiness = allBusiness.list;
+            vm.allBusinessCount = allBusiness.count;
+            console.log(allBusiness);
 
             vm.cancel = cancel;
             vm.onBpTypesSelectedChanged = onBpTypesSelectedChanged;
@@ -92,15 +94,41 @@
             vm.saveBusinessBanks = saveBusinessBanks;
             vm.onBpTypesSelectedChanged = onBpTypesSelectedChanged;
             vm.onCountrySelectedChanged = onCountrySelectedChanged;
+            vm.setCurrentIndex = setCurrentIndex;
+
+            vm.alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
+            vm.currentIndex = 'A';
+
+            if($state.current.name==='dashboard.businessPartner.form'){
+                if($stateParams.id==='new'){
+                    vm.business = businessPartner.getNewBusinessObj();
+                    vm.businessLogo = $filter('businessLogo')(vm.business.logo);
+                }
+                else{
+                    loaderModal.open();
+                    businessPartner.getBusinessComplete($stateParams.id).then(function(res){
+                        vm.business = angular.copy(res.business);
+                        loaderModal.close();
+                        vm.businessLogo = $filter('businessLogo')(vm.business.logo);
+                    });
+                }
+            }
 
         }
 
-        function onSaveBusinessBank(response){
-            $state.transitionTo($state.current, $stateParams, {
-                reload: true,
-                inherit: false,
-                notify: true
+        function setCurrentIndex(alpha){
+            loaderModal.open();
+            vm.currentIndex = alpha;
+            businessPartner.getBusinessPartnerList(vm.currentIndex).then(function(res){
+                loaderModal.close();
+                vm.allBusiness = res.businessList.list;
+                vm.allBusinessCount = res.businessList.count;
+                filterChanged()
             });
+        }
+
+        function onSaveBusinessBank(response){
+            $state.go('dashboard.businessPartner');
         }
 
         function onSaveBusinessCallBack(response){
@@ -280,7 +308,9 @@
 
         function uploadBusinessLogo(){
             var fileInput = document.getElementById('uploadBusinessLogo');
-            fileInput.click();
+            $timeout(function(){
+                fileInput.click();
+            });
         }
 
         function removeBusinessLogo(){
@@ -290,46 +320,28 @@
         }
 
         function getFile(picture){
-            fileReader.readAsDataUrl(picture, $scope)
-                .then(function (result) {
-                    deModal.openImageCropper(result, 1, [{w:100, h:100}, {w: 200,h: 200}], {width:100, height:100},
-                        function(imagesData){
-                            vm.businessLogo = imagesData.croppedImages[1].dataURI;
-                            console.log(imagesData);
-                            vm.imagesData = imagesData;
-                        });
-                    // vm.picture = result;
-                });
+            deModal.getFile(picture, $scope, 1, [{w: 200,h: 200}], {width:200, height:200}, function(imagesData){
+                vm.businessLogo = imagesData.croppedImage;
+                vm.imagesData = imagesData;
+            });
+
         }
 
 
 
 
         function addBusinessPartner(){
-            vm.showForm = true;
-            vm.business = businessPartner.getNewBusinessObj();
-            vm.businessLogo = $filter('businessLogo')(vm.business.logo);
+            $state.go('dashboard.businessPartner.form', {'id': 'new'});
+
         }
 
         function editBusinessPartner(business){
-            loaderModal.open();
-            businessPartner.getBusinessComplete(business.bpId).then(function(res){
-                vm.business = angular.copy(res.business);
-                vm.showForm = true;
-                loaderModal.close();
-                console.log(vm.business.logo);
-                vm.businessLogo = $filter('businessLogo')(vm.business.logo);
-            });
+            $state.go('dashboard.businessPartner.form', {'id': business.bpId});
+
         }
 
         function cancel(){
-            loaderModal.open();
-            businessPartner.getBusinessPartnerList().then(function(res){
-                loaderModal.close();
-                vm.showForm = false;
-                vm.allBusiness = res.businessList;
-            });
-
+            $state.go('dashboard.businessPartner');
         }
 
 

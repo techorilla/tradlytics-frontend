@@ -121,6 +121,7 @@
             var businessObj = {
                 'name': '',
                 'website': '',
+                'databaseId': '',
                 'ntn': '',
                 'bpType': [],
                 'banks': [],
@@ -307,8 +308,10 @@
             });
         }
 
-        function getBusinessPartnerList(){
-            return bpAPI.customGET(apiEndPoints.bp.list);
+        function getBusinessPartnerList(alpha){
+            return bpAPI.customGET(apiEndPoints.bp.list, {
+                'alpha': alpha
+            });
         }
 
         function getBusinessPartnerLocation(query){

@@ -97,7 +97,6 @@
             })
         }
 
-
         function addNewProductItem(){
             vm.showForm = false;
             vm.productItem = product.getNewProductItem();

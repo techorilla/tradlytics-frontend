@@ -1,0 +1,36 @@
+.docCard{
+  color: $sidebar-text;
+  .docCardContainer{
+    background: $sidebar;
+    border: 1px solid #3b3736;
+    border-radius: 10px;
+    height: 100px;
+    .details{
+      position: absolute;
+      top: 25px;
+      left: 23px;
+      .fileIcon{
+        font-size: 24px;
+        float:left;
+        margin-left: 10px;
+
+      }
+      .filename{
+        text-align: left;
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 31px;
+        margin-top: 5px;
+        margin-left: 40px;
+        margin-top: 7px;
+      }
+    }
+
+    .buttons{
+      position: absolute;
+      bottom: 10px;
+      left: 23px;
+    }
+  }
+
+}

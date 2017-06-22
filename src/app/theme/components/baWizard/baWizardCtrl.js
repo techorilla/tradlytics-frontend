@@ -9,7 +9,6 @@
     var vm = this;
 
     vm.tabs = [];
-
     vm.tabNum = 0;
     vm.progress = 0;
 
@@ -56,12 +55,26 @@
       return vm.tabNum == vm.tabs.length - 1 ;
     };
 
+    vm.nextTabAndExit = function(){
+      vm.tabs[vm.tabNum+1].submit().then(function(res){
+        if(res.success){
+          toastr.success(res.message);
+          $scope.onCancel({});
+        }
+        else{
+          toastr.error(res.message);
+        }
+      });
+    };
+
     vm.nextTab = function () {
       vm.selectTab(vm.tabNum + 1)
     };
 
     vm.previousTab = function () {
-      vm.selectTab(vm.tabNum - 1)
+      vm.tabs[vm.tabNum].select(false);
+      vm.tabNum = vm.tabNum - 1;
+      vm.tabs[vm.tabNum].select(true);
     };
 
     function calcProgress() {

@@ -1,0 +1,103 @@
+<div class="col-md-12">
+    <div ba-panel ba-panel-class="profile-page">
+        <div class="panel-content">
+
+
+            <form name="vm.portForm" novalidate>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Country</label>
+                            <selectize
+                                    placeholder="Country"
+                                    name="country"
+                                    ng-required="true"
+                                    config="vm.countryConfig"
+                                    options='vm.countryOptions.list'
+                                    ng-model="vm.portObj.countryCode">
+                            </selectize>
+                            <ng-messages for="vm.portForm.country.$error"
+                                         ng-if='(vm.portForm.$submitted || vm.portForm.country.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please select a country</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Lo Code</label>
+                            <input type="text"
+                                   ng-model="vm.portObj.loCode"
+                                   ng-required="true"
+                                   name="loCode"
+                                   class="form-control" id="loCode" placeholder="Lo Code">
+                            <ng-messages for="vm.portForm.loCode.$error"
+                                         ng-if='(vm.portForm.$submitted || vm.portForm.loCode.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter Port LO Code</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text"
+                                   ng-model="vm.portObj.name"
+                                   ng-required="true"
+                                   name="name"
+                                   class="form-control" id="name" placeholder="Name">
+                            <ng-messages for="vm.portForm.name.$error"
+                                         ng-if='(vm.portForm.$submitted || vm.portForm.name.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter port Name</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Contact No.</label>
+                            <input type="text"
+                                   ng-model="vm.portObj.contactNo"
+                                   name="contactNo"
+                                   class="form-control" id="contactNo" placeholder="Contact No">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Website</label>
+                            <input type="text"
+                                   ng-model="vm.portObj.website"
+                                   name="loCode"
+                                   class="form-control" id="website" placeholder="Website">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="submit" ng-if="!vm.portObj.id"
+                                ng-click="vm.addPort(vm.portForm, vm.portObj)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Add Product Category
+                        </button>
+                        <button type="submit" ng-if="vm.portObj.id"
+                                ng-click="vm.updatePort(vm.portForm, vm.portObj)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i>Update Product Category
+                        </button>
+                        <button type="button" ng-click="vm.cancel()"
+                                class="btn btn-danger btn-with-icon save-profile">
+                            <i class="ion-android-cancel"></i>Cancel
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="col-xs-12 col-md-4 docCard">
+    <div class="docCardContainer">
+        <div class="details">
+            <div class="fileIcon"><i class="fa fa-file" aria-hidden="true"></i></div>
+            <div class="filename" ng-bind="docInfo.fileName"></div>
+            <div class="uploadedBy" ng-bind="docInfo.uploadedBy"></div>
+            <div class="uploadedAt" ng-bind="docInfo.uploadedAt | date "></div>
+
+        </div>
+        <div class="buttons">
+            <button class="btn btn-success btn-xs">Open</button>
+            <button class="btn btn-primary btn-xs">Download</button>
+            <button class="btn btn-warning btn-xs">Delete</button>
+        </div>
+    </div>
+
+</div>

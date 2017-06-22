@@ -9,70 +9,6 @@
 
 <br>
 
-<div ng-if="vm.showForm" class="widgets">
-    <div class="row">
-        <div class="col-md-12">
-            <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
-                <ba-wizard on-cancel="vm.cancel()">
-                    <ba-wizard-step title="Basic Information" form="vm.basicInfoForm"
-                                    on-next="vm.saveBusiness(vm.imagesData, vm.business, form)"
-                                    on-next-callback="vm.onSaveBusinessCallBack(response)"
-                                    submit-button-title="Save Business">
-                        <div class="product-wizard">
-                            <div class="row">
-                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/basicInfo.html"></div>
-                            </div>
-                        </div>
-
-                    </ba-wizard-step>
-                    <ba-wizard-step title="Locations" form="vm.locationInfoForm"
-                                    on-next="vm.saveBusinessLocations(vm.business)"
-                                    submit-button-title="Save Locations">
-
-                        <div class="product-wizard">
-                            <div class="row">
-                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/location.html"></div>
-                            </div>
-                        </div>
-
-                    </ba-wizard-step>
-                    <ba-wizard-step title="Contact Persons" form="vm.contactPersonInfoForm"
-                                    on-next="vm.saveBusinessContactPersons(vm.business)"
-                                    submit-button-title="Save Contact Persons">
-                        <div class="product-wizard">
-                            <div class="row">
-                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/contactPerson.html"></div>
-                            </div>
-                        </div>
-                    </ba-wizard-step>
-                    <ba-wizard-step title="Contact Numbers" form="vm.contactInfoForm"
-                                    on-next="vm.saveBusinessContactNumbers(vm.business)"
-                                    submit-button-title="Save Contacts">
-                        <div class="product-wizard">
-                            <div class="row">
-                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/contactInfo.html"></div>
-                            </div>
-                        </div>
-                    </ba-wizard-step>
-                    <ba-wizard-step title="Bank Information" form="vm.bankInfoForm"
-                                    on-next="vm.saveBusinessBanks(vm.business)"
-                                    on-next-callback="vm.onSaveBusinessBank(response)""
-                                    submit-button-title="Save Banks and Exit">
-                        <div class="product-wizard">
-                            <div class="row">
-                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/bankInfo.html"></div>
-                            </div>
-                        </div>
-                    </ba-wizard-step>
-
-
-                </ba-wizard>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <filter-bar
         ng-show="!vm.showForm"
         bp-types="true"
@@ -82,13 +18,27 @@
 </filter-bar>
 
 <div class="row" ng-show="!vm.showForm">
+
+
+
     <div class="col-md-12">
+
+
         <div ba-panel ba-panel-class="with-scroll">
+            <div class="row index-container">
+                    <ul class="alphaIndex">
+                        <li ng-class="{'active': (vm.currentIndex === alpha)}" class="alphaIndexItem"
+                            ng-repeat="alpha in vm.alphabet" ng-bind="alpha"
+                            ng-click="vm.setCurrentIndex(alpha)"></li>
+                    </ul>
+                    <div class="totalBusiness"><span class="title">Total Business</span> <span class="count" ng-bind="vm.allBusinessCount"></span></div>
+            </div>
+
             <div class="horizontal-scroll">
                 <table class="table" st-table="smartTableData">
                     <thead>
                     <tr class="sortable table-header">
-                        <th><span class="count">{{vm.allBusiness.length}}</span></th>
+                        <th><span class="count">{{vm.allBusiness.length - vm.businessToRemove.length}}</span></th>
                         <th st-sort="{{heading.stSort}}"
                             ng-repeat="heading in vm.tableHeadings" ng-bind="heading.name"></th>
                     </tr>

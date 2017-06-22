@@ -30,15 +30,29 @@
                     title:'Business'
                 },
                 resolve: {
-                    'allBusiness': function(businessPartner, loaderModal){
-                        loaderModal.open();
-                        return businessPartner.getBusinessPartnerList().then(function(res){
-                            loaderModal.close();
-                            return res.businessList;
-                        });
+                    'allBusiness': function(businessPartner, loaderModal, $state){
+                        if($state.current.name==='dashboard.businessPartner.form'){
+                            return [];
+                        }
+                        else{
+                            loaderModal.open();
+
+                            return businessPartner.getBusinessPartnerList('A').then(function(res){
+                                loaderModal.close();
+                                return res.businessList;
+                            });
+                        }
                     }
                 }
-
+            })
+            .state('dashboard.businessPartner.form', {
+                url:'/form/:id',
+                views:{
+                    'content@dashboard':{
+                        templateUrl: 'app/dashboard/businessPartner/businessPartnerForm.html',
+                        controller: 'BusinessPartner as vm'
+                    }
+                }
             });
 
     }

@@ -1,0 +1,62 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
+                <ba-wizard on-cancel="vm.cancel()">
+                    <ba-wizard-step title="Basic Information" form="vm.basicInfoForm"
+                                    on-next="vm.saveBusiness(vm.imagesData, vm.business, form)"
+                                    on-next-callback="vm.onSaveBusinessCallBack(response)"
+                                    submit-button-title="Save Business">
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/basicInfo.html"></div>
+                            </div>
+                        </div>
+
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Locations" form="vm.locationInfoForm"
+                                    on-next="vm.saveBusinessLocations(vm.business)"
+                                    submit-button-title="Save Locations">
+
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/location.html"></div>
+                            </div>
+                        </div>
+
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Contact Persons" form="vm.contactPersonInfoForm"
+                                    on-next="vm.saveBusinessContactPersons(vm.business)"
+                                    submit-button-title="Save Contact Persons">
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/contactPerson.html"></div>
+                            </div>
+                        </div>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Contact Numbers" form="vm.contactInfoForm"
+                                    on-next="vm.saveBusinessContactNumbers(vm.business)"
+                                    submit-button-title="Save Contacts">
+                        <div class="product-wizard">
+                            <div class="row">
+                                <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/contactInfo.html"></div>
+                            </div>
+                        </div>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Bank Information" form="vm.bankInfoForm"
+                                    on-next="vm.saveBusinessBanks(vm.business)"
+                                    on-next-callback="vm.onSaveBusinessBank(response)""
+                    submit-button-title="Save Banks and Exit">
+                    <div class="product-wizard">
+                        <div class="row">
+                            <div class="col-md-12" include-with-scope="app/dashboard/businessPartner/template/bankInfo.html"></div>
+                        </div>
+                    </div>
+                    </ba-wizard-step>
+
+
+                </ba-wizard>
+            </div>
+        </div>
+    </div>
+</div>

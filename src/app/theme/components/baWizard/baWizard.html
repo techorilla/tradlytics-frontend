@@ -20,7 +20,9 @@
 
             <li class="next  margin-left-20px"> <button ng-click="$baWizardController.onCancel()" type="button" class="btn btn-danger">Cancel <span aria-hidden="true"></span></button></li>
 
-            <li class="next"> <button ng-click="$baWizardController.nextTab()" type="button" class="btn btn-primary">{{$baWizardController.tabs[$baWizardController.tabNum].submitButtonTitle}} <span aria-hidden="true">&rarr;</span></button></li>
+            <li class="next margin-left-20px"> <button ng-click="$baWizardController.nextTab()" type="button" class="btn btn-primary">{{$baWizardController.tabs[$baWizardController.tabNum].submitButtonTitle}} <span aria-hidden="true">&rarr;</span></button></li>
+
+            <li class="next"> <button ng-click="$baWizardController.nextTabAndExit()" type="button" class="btn btn-success">{{$baWizardController.tabs[$baWizardController.tabNum].submitButtonTitle}} & exit <span aria-hidden="true">&rarr;</span></button></li>
 
         </ul>
     </nav>

@@ -32,9 +32,23 @@
             addTradeNote: addTradeNote,
             editTradeNote: editTradeNote,
             deleteTradeNote: deleteTradeNote,
-            getAllNotesForTrade: getAllNotesForTrade
+            getAllNotesForTrade: getAllNotesForTrade,
+            deleteTransactionDocument: deleteTransactionDocument,
+            downloadTradeDocument: downloadTradeDocument
+
 
         };
+
+        function downloadTradeDocument(docId, fileName, fileType){
+            return transactionAPI.customGET(apiEndPoints.transaction.document+'/'+docId).then(function(res){
+                var data = new Blob([res], { type: fileType });
+                FileSaver.saveAs(data, fileName);
+            })
+        }
+
+        function deleteTransactionDocument(docId){
+            return transactionAPI.customDELETE(apiEndPoints.transaction.document+'/'+docId);
+        }
 
         function getTransactionDetail(tradeId){
             return transactionAPI.customGET(apiEndPoints.transaction.basic,{

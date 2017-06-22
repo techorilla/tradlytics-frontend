@@ -27,6 +27,7 @@ angular.module('app.core', [
     'angularSpectrumColorpicker',
     'ui.validate',
     'satellizer',
-    'ngFileUpload'
+    'ngFileUpload',
+    'infinite-scroll'
 
 ]);

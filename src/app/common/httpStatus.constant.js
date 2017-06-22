@@ -36,9 +36,14 @@
     READ: 'READ'
   };
 
+  // var appConstants = {
+  //   STATIC_URL: 'http://tramodity.com/static/',
+  //   HOST: 'http://tramodity.com/'
+  // };
+
   var appConstants = {
     STATIC_URL: 'http://tramodity.com/static/',
-    HOST: 'http://tramodity.com/'
+    HOST: 'http://localhost:8000/'
   };
 
   var httpStatus = {

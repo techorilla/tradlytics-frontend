@@ -8,11 +8,12 @@
         .controller('TransactionView', transactionView);
 
     /* @ngInject */
-    function transactionView(Upload, tradeBook, toastr, $stateParams, $state, trade, utilities){
+    function transactionView(Upload, tradeBook, toastr, $stateParams, apiEndPoints, trade, utilities, appFormats){
         var vm = this;
         _init();
 
         function _init(){
+            vm.appFormats = appFormats;
             vm.addingNote=false;
             vm.updateNote=false;
             vm.transactionId = $stateParams.id;
@@ -28,11 +29,67 @@
             vm.editTradeNote = editTradeNote;
             vm.deleteTradeNote = deleteTradeNote;
             vm.addTradeNote = addTradeNote;
+            vm.deleteTradeDoc = deleteTradeDoc;
+            vm.downloadTradeDoc = downloadTradeDoc;
+            vm.editTransactionDetails = editTransactionDetails;
+
 
         }
 
+        function editTransactionDetails(){
+            $state.go('dashboard.transaction', {id: $stateParams.id});
+        }
+
+        function openTradeDoc(){
+
+        }
+
+        function downloadTradeDoc(docId, fileName, fileType){
+            tradeBook.downloadTradeDocument(docId, fileName, fileType);
+        }
+
+        function deleteTradeDoc(docId){
+            tradeBook.deleteTransactionDocument(docId).then(function(res){
+                if(res.success){
+                    toastr.success(res.message);
+                    var index = _.findIndex(vm.transaction.files, function(doc){
+                        return doc.id = doc.fileId;
+                    });
+                    vm.transaction.files.splice(index, 1);
+                }
+                else{
+                    toastr.error(res.message);
+                }
+            })
+        }
+
         function uploadTradeDocument(file, errFiles){
-            console.log(file, errFiles);
+            if(vm.newDocumentName === ''){
+                toastr.error('Please enter document name', 'Error');
+                return;
+            }
+            var extension = file.name.split('.');
+            var ext = extension[extension.length - 1];
+            if(file){
+                file.upload = Upload.upload({
+                    url: 'api/'+apiEndPoints.transaction.main + '/' + apiEndPoints.transaction.document + '/',
+                    data: {
+                        file: file,
+                        name: vm.newDocumentName+'.'+ext,
+                        tradeId: vm.transactionId,
+                        extension: ext,
+
+                    }
+                });
+
+                file.upload.then(function (response) {
+                    if(response.data.success){
+                        vm.addingDocument = false;
+                        vm.transaction.files.push(response.data.fileObj);
+
+                    }
+                });
+            }
         }
 
         function editTradeNote(noteText, note){

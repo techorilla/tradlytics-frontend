@@ -209,3 +209,41 @@ text-angular{
     color: #000;
   }
 }
+
+.index-container{
+  text-align: center;
+  .totalBusiness{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    font-size: 12px;
+    .title{
+      font-weight: bold;
+    }
+  }
+  .alphaIndex{
+    list-style: none;
+    padding-bottom: 30px;
+    text-align: center;
+    .alphaIndexItem{
+      cursor: pointer;
+      font-weight: bold;
+      float: left;
+      color: aliceblue;
+      width: 30px;
+      background: $danger;
+      margin-right: 5px;
+      margin-left: 5px;
+      padding: 5px 5px 5px 5px;
+      border: 1px solid $border-light;
+      border-radius: 2px;
+      &.active{
+        color: $primary;
+        background: aliceblue;
+      }
+
+
+    }
+  }
+}
+

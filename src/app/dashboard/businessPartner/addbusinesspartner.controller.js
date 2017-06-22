@@ -27,6 +27,9 @@
             vm.saveBusinessPartner = saveBusinessPartner;
             vm.updateBusinessPartner = updateBusinessPartner;
             initializeBusinessPartner();
+
+
+
         }
 
         function initializeBusinessPartner(){

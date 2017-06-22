@@ -1,0 +1,63 @@
+<div class="row ">
+
+    <div class="col-md-6 marginBottom10px">
+        <button class="btn btn-primary" data-toggle="modal"
+                ng-click="vm.goToShipmentPortForm('dashboard.shipping.ports.form', 'new')">
+            Add New Shipping Port
+        </button>
+    </div>
+
+</div>
+
+
+    <filter-bar
+            country="true"
+            on-country-selected-changed="vm.onCountrySelectedChanged(selectedList)">
+    </filter-bar>
+
+<div class="row">
+    <div class="col-md-12">
+        <div ba-panel ba-panel-title="All Ports" ba-panel-class="with-scroll">
+
+            <table class="table">
+
+                <thead>
+                <tr class="sortable table-header"  ng-if="vm.portsList.length!==0">
+                    <th><span class="count">{{vm.portsList.length}}</span></th>
+                    <th ng-repeat="name in vm.heading" ng-bind="name"></th>
+
+                </tr>
+
+                <tr class="table-header" ng-if="vm.portsList.length===0">
+                    <th>No ports have been added.</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="row in vm.portsList | selectedRows:vm.portsToRemove:'id' | orderBy: 'loCode'">
+                        <td></td>
+                        <td ng-bind="row.loCode"></td>
+                        <td ng-bind="row.name"></td>
+                        <td ng-bind="row.country"></td>
+                        <td ng-bind="row.contactNo === 'n/a' ? 'N/A' : row.contactNo"></td>
+                        <td ng-if="row.website!=='n/a'"><a  class="titled" target="_blank" href="{{row.website}}">{{row.website}}</a></td>
+                        <td ng-if="row.website==='n/a'">N/A</td>
+                        <td ng-bind="row.addedBy"></td>
+                        <td>
+                            <div class="buttons">
+                                <button class="btn btn-primary editable-table-button btn-xs"
+                                        ng-click="vm.goToShipmentPortForm('dashboard.shipping.ports.form', row.id)">Edit</button>
+                                <button
+                                        class="btn btn-warning editable-table-button btn-xs"
+                                        ng-click="vm.deletePort(row, vm.portsList)">Delete</button>
+                                <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
