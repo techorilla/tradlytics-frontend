@@ -26,7 +26,7 @@
 
   function businessLogo(layoutPaths){
     return function(input, ext) {
-      return (input) ? input : layoutPaths.images.root+'/theme/no-photo.png'
+      return (input) ? input : layoutPaths.images.root+'/theme/no-business.png'
     };
   }
 

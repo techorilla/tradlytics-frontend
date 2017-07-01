@@ -1,0 +1,33 @@
+<div class="col-xs-12 col-md-4 business-card">
+    <div class="content">
+        <div class="detail-heading" ng-bind="businessType"></div>
+        <div ng-if="!business">
+            <div class="notApplicable">NA</div>
+        </div>
+        <div ng-if="business">
+            <div class="row">
+                <div class="logo">
+                    <img width="60" height="60" ng-src="{{businessLogo}}" >
+                </div>
+                <div class="details">
+                    <div class="name">{{business.name}}</div>
+                    <div class="country">
+                        <div class="flag"><img width="20" src="{{appConstants.STATIC_URL  + '/' +business.countryFlag}}"></div>
+                        <div class="name">{{business.country}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="website col-md-6 col-xs-12">
+                    <div class="label">Website</div>
+                    <div class="url"><a href="{{business.website}}" target="_blank">{{business.website}}</a></div>
+                </div>
+                <div class="primary-contact col-md-6 col-xs-12">
+                    <div class="label">Primary Contact</div>
+                    <div class="contact">{{(business.primaryContact) ? business.primaryContact : 'No Primary Contact Entered'}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

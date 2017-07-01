@@ -1,0 +1,30 @@
+<div class="col-xs-12 col-md-4 business-card">
+    <div class="content">
+        <div class="detail-heading">Product Item</div>
+        <div>
+            <div class="row">
+                <div class="logo">
+                    <img width="60" height="60" ng-src="{{productImage}}" >
+                </div>
+                <div class="details">
+                    <div class="name">{{productItem.name}}</div>
+                    <div class="country">
+                        <div class="flag"><img width="20" src="{{appConstants.HOST +productItem.countryFlag}}"></div>
+                        <div class="name">{{productItem.country}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="website col-md-6 col-xs-12">
+                    <div class="label"></div>
+                    <div class="url"></div>
+                </div>
+                <div class="primary-contact col-md-6 col-xs-12">
+                    <div class="label"></div>
+                    <div class="contact"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

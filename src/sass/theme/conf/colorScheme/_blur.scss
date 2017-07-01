@@ -1,20 +1,20 @@
 $default: rgba(#000000, 0.2);
-$body-bg: #F0F3F4;
-$default-text: #ffffff;
+$body-bg: #F0F8FF;
+$default-text: #2C3E50;
 $help-text: #eeeeee;
-$label-text: #ffffff;
+$label-text: #2C3E50;
 
 $disabled: #dddddd;
 $disabled-bg: transparent;
 $border: rgba(0, 0, 0, 0.12);
 $border-light: rgba(#ffffff, 0.2);
 $input-border: transparent;
-$input-background: rgba(#000000, 0.15);
+$input-background: rgba(rgba(0, 0, 0, 0.18), 0.10);
 
-$sidebar: rgba(#000000, 0.8);
-$sidebar-text: #ffffff;
-$dropdown-text: #7d7d7d;
-$bootstrap-panel-text: #7d7d7d;
+$sidebar: #BDC3C7;
+$sidebar-text: #2C3E50;
+$dropdown-text: #2C3E50;
+$bootstrap-panel-text: #2C3E50;
 $bootstrap-panel-bg: #ffffff;
 $gray-text: #303131;
 $mail-box: whitesmoke;
@@ -26,10 +26,11 @@ $gray: #3b3736;
 $excel: #217346;
 $pdf: #FF0000;
 $my-gray: rgba(46, 46, 46, 0.00);
-$primary: #684D61 !default;
-$info:  #CFD0D2 !default;
-$success: #21b799	 !default;
-$warning: #DD0915 !default;
+$my-gray-2: rgba(199, 221, 222, 0.6);
+$primary: #16A085 !default;
+$info:  #FF5733 !default;
+$success: #2980b9 !default;
+$warning: #C70039 !default;
 $danger: rgba(80, 80, 80, 0.97) !default;
 
 $primary-light: tint($primary, 30%);

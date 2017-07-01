@@ -1,0 +1,88 @@
+.business-card{
+  min-height: 150px;
+  .content{
+    .notApplicable{
+      font-size:30px;
+      font-weight: $font-ultraBold;
+      padding-top: 20px;
+    }
+    min-height: 150px;
+    padding-left: 25px;
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: $my-gray-2;
+    border-radius: 5px;
+  }
+  padding-bottom: 20px;
+  .detail-heading{
+    font-size: 15px;
+    color: $label-text;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 3px;
+    font-weight: bold;
+  }
+  .logo{
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: left;
+  }
+  .details{
+    padding-top: 10px;
+    .name{
+      padding-left: 20px;
+      padding-top: 5px;
+      font-size: 20px;
+      font-weight: $font-ultraBold;
+      color: $label-text;
+    }
+    .country{
+      padding-top: 8px;
+      .flag{
+        float: left;
+        padding-right: 5px;
+      }
+      .name{
+        height: 20px;
+        padding-top: 4px;
+        padding-left: 3px;
+        color: $label-text;
+        font-weight: $font-bold;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .website{
+    .label{
+      margin-left: -10px;
+      width: 100%;
+      color: $primary;
+      font-size: 14px;
+    }
+    .url{
+      a{
+        color: $label-text;
+        text-decoration: none;
+      }
+
+    }
+  }
+
+  .primary-contact{
+    .label{
+      margin-left: -10px;
+      width: 100%;
+      color: $primary;
+      font-size: 14px;
+    }
+    .contact{
+
+    }
+  }
+
+
+
+}

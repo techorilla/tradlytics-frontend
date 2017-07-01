@@ -16,11 +16,14 @@
     function businessPartner(Restangular, apiEndPoints, modalFactory){
 
         var businessPartner = {};
+        var businessPartnerListIndex = { index: 'A'};
         var bpAPI = Restangular.all(apiEndPoints.bp.main);
 
         return {
-
+            getBusinessPartnerListIndex: getBusinessPartnerListIndex,
+            setBusinessPartnerListIndex: setBusinessPartnerListIndex,
             addBusinessBasic: addBusinessBasic,
+            deleteBusinessPartner: deleteBusinessPartner,
             updateBusinessBasic: updateBusinessBasic,
             deleteBusiness: deleteBusiness,
             saveBusinessLocations: saveBusinessLocations,
@@ -58,6 +61,16 @@
 
 
         };
+
+        function getBusinessPartnerListIndex(){
+            return businessPartnerListIndex.index;
+        }
+
+        function setBusinessPartnerListIndex(index){
+            return businessPartnerListIndex.index = index
+        }
+
+
 
         function getBusinessSettings(){
             return bpAPI.customGET(apiEndPoints.bp.self)
@@ -249,6 +262,11 @@
 
         function getBusinessComplete(id){
             return bpAPI.customGET(apiEndPoints.bp.basic, {'bpId': id});
+        }
+
+
+        function deleteBusinessPartner(businessId){
+            return bpAPI.customDELETE(apiEndPoints.bp.basic+'/'+businessId)
         }
 
         function addBusinessBasic(imagesData, business){

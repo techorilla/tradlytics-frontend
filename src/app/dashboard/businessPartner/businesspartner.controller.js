@@ -13,7 +13,7 @@
         .controller('BusinessPartner', BusinessPartner);
 
     /* @ngInject */
-    function BusinessPartner(fileReader, $state, $stateParams, $q, businessPartner, dropDownConfig, $filter,
+    function BusinessPartner(authentication, $state, $stateParams, $q, businessPartner, dropDownConfig, $filter,
                              deModal, $scope, allBusiness, toastr, loaderModal, $timeout){
         var vm = this;
         init();
@@ -59,6 +59,7 @@
             vm.addBusinessAddress = addBusinessAddress;
             vm.isPrimaryChange = isPrimaryChange;
 
+            vm.deleteBusinessPartner = deleteBusinessPartner;
             vm.removeBusinessLocation = removeBusinessLocation;
             vm.removeBusinessBank = removeBusinessBank;
             vm.removeContactPerson = removeContactPerson;
@@ -66,6 +67,9 @@
             vm.removeBusinessBank = removeBusinessBank;
 
             vm.onCountryDropDownChange = onCountryDropDownChange;
+            vm.userData = authentication.getUserData().data;
+            vm.deleteRights = vm.userData.businessAdmin;
+
 
             vm.uploadBusinessLogo = uploadBusinessLogo;
             vm.removeBusinessLogo = removeBusinessLogo;
@@ -97,7 +101,7 @@
             vm.setCurrentIndex = setCurrentIndex;
 
             vm.alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
-            vm.currentIndex = 'A';
+            vm.currentIndex = businessPartner.getBusinessPartnerListIndex();
 
             if($state.current.name==='dashboard.businessPartner.form'){
                 if($stateParams.id==='new'){
@@ -116,6 +120,21 @@
 
         }
 
+        function deleteBusinessPartner(business){
+            businessPartner.deleteBusinessPartner(business.bpId).then(function(res){
+                if(res.success){
+                    var index = _.findIndex(vm.allBusiness, function(bp){
+                       return (bp.bp_id ===  business.bp_id);
+                    });
+                    vm.allBusiness.splice(index, 1);
+                    toastr.success(res.message);
+                }
+                else{
+                    toastr.error(res.message);
+                }
+            })
+        }
+
         function setCurrentIndex(alpha){
             loaderModal.open();
             vm.currentIndex = alpha;
@@ -123,6 +142,7 @@
                 loaderModal.close();
                 vm.allBusiness = res.businessList.list;
                 vm.allBusinessCount = res.businessList.count;
+                businessPartner.setBusinessPartnerListIndex(vm.currentIndex);
                 filterChanged()
             });
         }

@@ -14,19 +14,20 @@
 //  height: 100%;
 //}
 
-$text-color: #ffffff;
+$text-color: #2C3E50;
+$text-color-dark: #FFFFFF;
 
 
 
 .auth-main {
   .form-control, .form-control:focus {
-    @include placeholderStyle($text-color, 0.9);
+    @include placeholderStyle($text-color-dark, 0.9);
     background-color: rgba(0, 0, 0, .4);
     border-radius: 5px;
-    color: $text-color;
+    color: $text-color-dark;
   }
   .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    @include placeholderStyle($text-color, 0.6);
+    @include placeholderStyle($text-color-dark, 0.6);
   }
   display: flex;
   align-items: center;
@@ -125,7 +126,7 @@ a.forgot-pass {
     }
   }
   &:before, &:after {
-    border-top: solid 1px $text-color;
+    border-top: solid 1px $text-color-dark;
     content: "";
     height: 1px;
     width: 35%;

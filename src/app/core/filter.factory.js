@@ -36,7 +36,7 @@
          */
 
         function getTabFilters(endPoint, params){
-            return settings.dropDown[crud.READ](endPoint, params);
+            return settings.dropDown[crud.READ](endPoint, params, true);
         }
 
     }

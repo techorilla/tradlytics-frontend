@@ -127,7 +127,7 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom: 1px solid transparent;
-  background-color: $primary-light;
+  background-color: $body-bg;
   a {
     color: $label-text;
     &:hover {
@@ -161,7 +161,7 @@
 
 .blur-theme {
   .nav.nav-tabs {
-    background-color: $danger;
+    background-color: $body-bg;
     a {
       color: $default-text;
       &:hover {
@@ -175,7 +175,11 @@
       color: $default-text;
       background-color: rgba(0, 0, 0, 0.25);
     }
+    &:active{
+      background-color: $primary;
+    }
   }
+
 }
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {

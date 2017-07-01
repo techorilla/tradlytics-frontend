@@ -18,7 +18,8 @@
         .module('app.authentication').factory('authentication', authentication);
 
 
-    function authentication(Restangular, apiEndPoints, $state, $http, $cookies, toastr, httpStatus, utilities, $auth, loaderModal){
+    function authentication(Restangular, apiEndPoints, $state, $http, $cookies, toastr, httpStatus, utilities,
+                            $auth, localStorageService, loaderModal){
         var authAPI = Restangular.all(apiEndPoints.authentication.basic);
         var loginApi = Restangular.all(apiEndPoints.login);
         var logOutApi = Restangular.all(apiEndPoints.logout);
@@ -74,11 +75,17 @@
                 'username':username,
                 'password': password
             }).then(function(response){
-                console.log(response);
                 userData.data = response['userData'];
                 $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
                 $http.defaults.headers.put['X-CSRFToken'] = $cookies.get('csrftoken');
-                $state.go('dashboard.main');
+                var lastPage = localStorageService.get('lastState');
+                if(lastPage.stateOnLogin && lastPage.stateOnLogin !== "login"){
+                    $state.go(lastPage.stateOnLogin,lastPage.stateParamsOnLogin);
+                }
+                else{
+                    $state.go('dashboard.main');
+                }
+
             }, function(error){
                 if(error['data']==='INVALID_CREDENTIALS' && error['status'] === httpStatus.NOT_FOUND){
                     toastr.error('You username or password seems to be incorrect!','Invalid Credentials')
@@ -92,6 +99,11 @@
         function logout(){
             logOutApi.post().then(function(response){
                 if(response['success']){
+                    var lastState = {
+                        stateOnLogin: $state.current.name,
+                        stateParamsOnLogin: $state.params
+                    };
+                    localStorageService.set('lastState',lastState);
                     $state.go('login')
                 }
             });

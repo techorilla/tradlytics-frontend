@@ -1,21 +1,23 @@
 .dg-datePicker{
   cursor: pointer;
   padding: 10px 0px;
+
   .dg-filterDropdown{
-    background: $sidebar;
-    //border: 1px solid #ccc;
-    border: 1px solid $sidebar;
-    box-shadow: 0px 0.5px 0px 1px $sidebar ;
+    background: red;
+    border: 1px solid $sidebar !important;
+    background:$body-bg !important;
+    box-shadow: 0.5px 0.5px 0.5px 1px $my-gray-2 !important;
     padding: 5px 25px 5px 35px;
     position: relative;
     border-radius: 5px;
     font-weight: 600;
     cursor: pointer;
-    color: $label-text
+    color: $label-text !important;
   }
   &:after{
     font-family: 'FontAwesome';
     position: absolute;
+    color: $primary;
     content: "\f0d7";
     top: 20px;
     z-index: 10;
@@ -48,13 +50,13 @@
     position: relative;
     padding-bottom: 5px;
     .dg-filterDropdownField{
-      border: 1px solid $sidebar;
-      box-shadow: 0px 0.5px 0px 1px $sidebar;
+      border: 1px solid $my-gray-2;
+      box-shadow: 0px 0.5px 0px 1px $my-gray-2;
       padding:5px 25px 5px 12px;
       position: relative;
       border-radius:5px;
       font-weight: 600;
-      background: $my-gray; /* Old browsers */
+      background: $body-bg; /* Old browsers */
       .filter-count{
         padding: 1px 7px 1px 7px;
         border-radius: 2px;
@@ -72,10 +74,11 @@
         position: absolute;
         right: 9px;
         top: 11px;
+        color: $primary;
       }
     }
     .dg-filterDropdownMenu{
-      background:$sidebar;
+      background:$body-bg;
       border:1px solid $sidebar;
       border-radius:5px;
       position: relative;
@@ -109,7 +112,7 @@
             margin-left:30px;
             display:block;
             line-height: 15px;
-            font-size:10px;
+            font-size:12px;
           }
         }
         &.dg-head{

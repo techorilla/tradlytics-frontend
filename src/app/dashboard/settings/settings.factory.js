@@ -39,13 +39,15 @@
             return tranStatusAPI.customPOST({name:name}, endPoint)
         }
 
-        function dropDownRead(endPoint, query){
+        function dropDownRead(endPoint, query, tabFilter){
             if(typeof query === 'object' ){
-                return tranStatusAPI.customGET(endPoint, query)
+                return tranStatusAPI.customGET(endPoint, query, {
+                    tabFilter:tabFilter,
+                })
             }
             else{
                 query = (query) ? query : 'all';
-                return tranStatusAPI.customGET(endPoint, {q: query})
+                return tranStatusAPI.customGET(endPoint, {q: query, tabFilter:tabFilter})
             }
         }
 

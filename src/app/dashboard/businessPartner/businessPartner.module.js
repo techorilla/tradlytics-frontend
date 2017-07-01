@@ -37,7 +37,7 @@
                         else{
                             loaderModal.open();
 
-                            return businessPartner.getBusinessPartnerList('A').then(function(res){
+                            return businessPartner.getBusinessPartnerList(businessPartner.getBusinessPartnerListIndex()).then(function(res){
                                 loaderModal.close();
                                 return res.businessList;
                             });

@@ -1,39 +1,67 @@
-<div class="col-md-12">
+<div class="col-md-12 transactionView">
     <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row wizard-containers">
-                    <h3 class="with-line">Transaction Details <button class="btn btn-xs btn-success" ng-click="vm.editTransactionDetails()">Edit</button></h3>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-4">
-                            <div class="detail-heading">Buyer Details</div>
-                            <div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="detail-heading">Seller Details</div>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="detail-heading">Contractual Buyer</div>
-                        </div>
-
-                        <div class="col-xs-12 col-md-4">
-                            <div class="detail-heading">Product Details</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row transactionNo">
+            <div class="col-xs-12 col-md-6">
+                <h3 class="with-line">File No</h3>
+                <div ng-bind="vm.transaction.basic.fileNo" class="number"></div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <h3 class="with-line">Contract No</h3>
+                <div class="number" ng-bind="vm.transaction.basic.contractNo ? vm.transaction.basic.contractNo : 'NA'"></div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="row wizard-containers">
+                    <h3 class="with-line">Transaction Details <button class="btn btn-xs btn-success" ng-click="vm.editTransactionDetails(vm.transactionId)">Edit</button></h3>
+                    <div class="row">
+                        <business-card
+                                business="vm.transaction.basic.buyer"
+                                business-type="Buyer">
+
+                        </business-card>
+
+                        <business-card
+                                business="vm.transaction.basic.seller"
+                                business-type="Seller">
+
+                        </business-card>
+
+                        <business-card
+                                business="vm.transaction.basic.contractualBuyer"
+                                business-type="Contractual Buyer">
+
+                        </business-card>
+
+                        <product-card product-item="vm.transaction.basic.productItem"></product-card>
+
+                        <business-card
+                                business="vm.transaction.basic.commission.buyerBroker"
+                                business-type="Buyer Broker"></business-card>
+
+                        <business-card
+                                business="vm.transaction.basic.commission.sellerBroker"
+                                business-type="Seller Broker">
+
+                        </business-card>
+
+                        <commission-card commission="vm.transaction.basic.commission">
+
+                        </commission-card>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row wizard-containers">
                     <h3 class="with-line">Transaction Documents
-                    <button class="btn btn-xs btn-success" ng-click="vm.addNewDocument()"> Add New</button>
+                        <button class="btn btn-xs btn-success" ng-click="vm.addNewDocument()"> Add New</button>
                     </h3>
                     <div ng-show="vm.addingDocument" class="row">
 
@@ -68,22 +96,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="doc in vm.transaction.files">
-                                        <td></td>
-                                        <td ng-bind="doc.fileName"></td>
-                                        <td ng-bind="doc.uploadedBy"></td>
-                                        <td ng-bind="doc.uploadedAt | date: vm.appFormats.date"></td>
-                                        <td>
-                                            <div class="buttons">
-                                                <button class="btn btn-success editable-table-button btn-xs"
-                                                        ng-click="vm.openTradeDoc(row.fileId)">Open</button>
-                                                <button class="btn btn-primary editable-table-button btn-xs"
-                                                        ng-click="vm.downloadTradeDoc(doc.fileId, doc.fileName, doc.extension)">Download</button>
-                                                <button class="btn btn-warning editable-table-button btn-xs"
-                                                        ng-click="vm.deleteTradeDoc(doc.fileId)">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tr ng-repeat="doc in vm.transaction.files">
+                                    <td></td>
+                                    <td ng-bind="doc.fileName"></td>
+                                    <td ng-bind="doc.uploadedBy"></td>
+                                    <td ng-bind="doc.uploadedAt | date: vm.appFormats.date"></td>
+                                    <td>
+                                        <div class="buttons">
+                                            <button class="btn btn-success editable-table-button btn-xs"
+                                                    ng-click="vm.openTradeDoc(row.fileId)">Open</button>
+                                            <button class="btn btn-primary editable-table-button btn-xs"
+                                                    ng-click="vm.downloadTradeDoc(doc.fileId, doc.fileName, doc.extension)">Download</button>
+                                            <button class="btn btn-warning editable-table-button btn-xs"
+                                                    ng-click="vm.deleteTradeDoc(doc.fileId)">Delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -98,18 +126,52 @@
             <div class="col-md-12">
                 <div class="row wizard-containers">
                     <h3 class="with-line">Shipment</h3>
-                    <div class="col-md-12">
-                        <div>Not Shipped</div>
-                        <div>Approbation Recieved</div>
-                        <div>Shipped</div>
-                        <div>Shipment Extended</div>
-                        <div>Washout</div>
-                        <div>Arrived at Port</div>
-                        <div>Completed</div>
-                    </div>
+                    <div ba-panel
+                         ba-panel-class="tabs-panel xsmall-panel with-scroll">
+                        <uib-tabset class="tabs-left">
+                            <uib-tab heading="Not Shipped">
 
+                            </uib-tab>
+
+                            <uib-tab heading="Approbation Recieved">
+
+                            </uib-tab>
+
+                            <uib-tab heading="Shipment Extended">
+
+                            </uib-tab>
+
+                            <uib-tab heading="Washout">
+
+                            </uib-tab>
+
+                            <ui-tab heading="Arrived at Port">
+
+                            </ui-tab>
+
+                            <uib-tab heading="Completed"></uib-tab>
+
+                            <uib-tab></uib-tab>
+
+                        </uib-tabset>
+                    </div>
                 </div>
             </div>
+            <!--<div class="col-md-12">-->
+            <!--<div class="row wizard-containers">-->
+            <!--<h3 class="with-line">Shipment</h3>-->
+            <!--<div class="col-md-12">-->
+            <!--<div>Not Shipped</div>-->
+            <!--<div>Approbation Recieved</div>-->
+            <!--<div>Shipped</div>-->
+            <!--<div>Shipment Extended</div>-->
+            <!--<div>Washout</div>-->
+            <!--<div>Arrived at Port</div>-->
+            <!--<div>Completed</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--</div>-->
         </div>
 
 

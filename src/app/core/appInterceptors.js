@@ -21,7 +21,7 @@
         });
     }
 
-    function restInterceptors(Restangular, httpStatus, $state, loaderModal) {
+    function restInterceptors(Restangular, httpStatus, $state, loaderModal, localStorageService) {
 
         Restangular.setErrorInterceptor(errorInterceptor);
         Restangular.addResponseInterceptor(responseInterceptor);
@@ -30,7 +30,6 @@
         function requestInterceptor(element, operation, route, url, headers, params, httpConfig){
             var today = new Date();
             var timezoneHourDifference = (today.getTimezoneOffset()/60);
-            console.log(element, operation, route, url, headers, params, httpConfig);
             var extendedHeader = {
                 'Hour-Difference': timezoneHourDifference
             };
@@ -44,8 +43,13 @@
 
         function errorInterceptor(response, deferred, responseHandler){
             if(response.status === httpStatus.FORBIDDEN) {
-                loaderModal.close();
+                var lastState = {
+                    stateOnLogin: $state.current.name,
+                    stateParamsOnLogin: $state.params
+                };
+                localStorageService.set('lastState',lastState);
                 $state.go('login');
+                loaderModal.close();
                 return false;
             }
             return true;

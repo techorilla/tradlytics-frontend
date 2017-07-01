@@ -56,7 +56,7 @@
     };
 
     vm.nextTabAndExit = function(){
-      vm.tabs[vm.tabNum+1].submit().then(function(res){
+      vm.tabs[vm.tabNum].submit().then(function(res){
         if(res.success){
           toastr.success(res.message);
           $scope.onCancel({});

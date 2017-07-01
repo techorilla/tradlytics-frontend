@@ -8,7 +8,7 @@
         .controller('TransactionView', transactionView);
 
     /* @ngInject */
-    function transactionView(Upload, tradeBook, toastr, $stateParams, apiEndPoints, trade, utilities, appFormats){
+    function transactionView(Upload, tradeBook, toastr, $stateParams, apiEndPoints, trade, utilities, appFormats, $state){
         var vm = this;
         _init();
 
@@ -32,12 +32,12 @@
             vm.deleteTradeDoc = deleteTradeDoc;
             vm.downloadTradeDoc = downloadTradeDoc;
             vm.editTransactionDetails = editTransactionDetails;
-
+            console.log(vm.transaction );
 
         }
 
-        function editTransactionDetails(){
-            $state.go('dashboard.transaction', {id: $stateParams.id});
+        function editTransactionDetails(transactionId){
+            $state.go('dashboard.transaction', {id: transactionId});
         }
 
         function openTradeDoc(){

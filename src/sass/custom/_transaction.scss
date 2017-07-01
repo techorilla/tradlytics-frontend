@@ -31,3 +31,13 @@
   padding-bottom: 3px;
   font-weight: bold;
 }
+
+.transactionView{
+  .transactionNo{
+    .number{
+      font-weight: $font-ultraBold;
+      font-size: 20px;
+      color: $primary;
+    }
+  }
+}

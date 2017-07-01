@@ -4,7 +4,7 @@
 
     .priceItem {
       padding: 30px 30px 30px 30px;
-      background: $sidebar;
+      background: $my-gray-2;
       min-height: 520px;
       color: $sidebar-text;
       border: 1px solid $border;
@@ -42,7 +42,7 @@
           font-weight: 700;
           font-size: 55px;
           line-height: 1;
-          color: #f6f6f6;
+          color: $text-color;
           top: 25px;
           padding-bottom: 20px;
         }
@@ -53,7 +53,7 @@
           font-weight: 700;
           font-size: 55px;
           line-height: 1;
-          color: #f6f6f6;
+          color: $text-color;
         }
         .metric{
           display: block;

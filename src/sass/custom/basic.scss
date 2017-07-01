@@ -229,9 +229,9 @@ text-angular{
       cursor: pointer;
       font-weight: bold;
       float: left;
-      color: aliceblue;
+      color: $text-color;
       width: 30px;
-      background: $danger;
+      background: $body-bg;
       margin-right: 5px;
       margin-left: 5px;
       padding: 5px 5px 5px 5px;
