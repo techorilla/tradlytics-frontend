@@ -39,15 +39,13 @@
                 <div class="col-sm-9">
                     <input type="text"
                            name="businessWebsite"
-                           ng-pattern="/^(http:\/\/|https:\/\/)?[_a-z0-9]+(\.[_a-z0-9]+)*[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,7})$/"
                            ng-model="vm.business.website"
                            class="form-control"
                            id="businessWebsite" placeholder="Business Website">
-                    <ng-messages for="vm.profileForm.businessWebsite.$error"
-                                 ng-if='(vm.basicInfoForm.$submitted && vm.basicInfoForm.businessWebsite.$invalid) ||
-                                            (vm.basicInfoForm.businessWebsite.$invalid && vm.basicInfoForm.businessWebsite.$dirty)'>
-                        <div ng-message="pattern" class="errorValidation">Please enter a valid website.</div>
-                    </ng-messages>
+                    <!--<ng-messages for="vm.basicInfoForm.businessWebsite.$error"-->
+                                 <!--ng-if='(vm.basicInfoForm.$submitted || vm.basicInfoForm.businessWebsite.$dirty)'>-->
+                        <!--<div ng-message="pattern" class="errorValidation">Please enter a valid website.</div>-->
+                    <!--</ng-messages>-->
 
                 </div>
             </div>

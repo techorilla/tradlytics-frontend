@@ -1,4 +1,61 @@
-<div class="col-md-8 col-xs-12 commissionCard">
+<div class="col-md-offset-4 col-md-8 col-xs-12 commissionCard">
 
+    <div class="content">
+        <div class="col-xs-12 col-md-6">
+            <div class="heading-1">Quanity</div>
+            <div class="value" ng-bind="commission.quantity"></div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="heading-1">Price</div>
+            <div class="value" ng-bind="commission.price"></div>
+        </div>
+
+        <div>
+            <div class="col-xs-12">
+                <div class="heading-1">Commission Details</div>
+            </div>
+
+            <div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="heading-2">Commission Type</div>
+                    <div ng-bind="commission.commissionType"></div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="heading-2">Commission</div>
+                    <div ng-bind="commission.commission"></div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="heading-2">Buyer Broker Commission Type</div>
+                    <div ng-bind="commission.buyerBrokerCommissionType ? commission.buyerBrokerCommissionType : 'NA' "></div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="heading-2">Buyer Broker Commission</div>
+                    <div ng-bind="commission.buyerBrokerCommission ? commission.buyerBrokerCommission : 'NA'"></div>
+                </div>
+
+                <div class="col-md-offset-6 col-md-6  col-xs-12">
+                    <div class="heading-2">Discount</div>
+                    <div ng-bind="commission.discount"></div>
+                </div>
+
+                <div class="col-md-offset-6 col-md-6  col-xs-12">
+                    <div class="heading-2">Difference</div>
+                    <div ng-bind="commission.difference"></div>
+                </div>
+
+                <div class="col-md-offset-6 col-md-6  col-xs-12">
+                    <div class="heading-2">Expected Commission</div>
+                    <div ng-bind="commission.expectedCommission"></div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
 
 </div>

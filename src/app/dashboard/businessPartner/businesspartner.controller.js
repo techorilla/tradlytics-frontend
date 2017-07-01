@@ -83,7 +83,12 @@
                 {name:'Last Transaction On', stSort:'bp_Cont_fullName', stPlaceholder:''},
                 {name:'Actions'}
             ];
-
+            dropDownConfig.prepareByTypesDropDown(vm.bpTypeConfig, vm.bpTypeOptions);
+            dropDownConfig.prepareContactNumberTypeDropDown(vm.contactTypeConfig, vm.contactTypeOptions);
+            dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions, onCountryDropDownChange, 1);
+            dropDownConfig.prepareCountryDropDown(vm.bankCountryConfig, vm.countryOptions, onBankCountryDropDownChange, 1);
+            dropDownConfig.prepareRegionDropDown(vm.stateConfig, null, null, onRegionDropDownChange);
+            dropDownConfig.prepareCityDropDown(vm.cityConfig, null, null, null, 1);
             vm.saveBusiness = saveBusiness;
             vm.onSaveBusinessCallBack = onSaveBusinessCallBack;
             vm.onSaveBusinessBank = onSaveBusinessBank;
@@ -112,13 +117,6 @@
                     });
                 }
             }
-
-            dropDownConfig.prepareByTypesDropDown(vm.bpTypeConfig, vm.bpTypeOptions);
-            dropDownConfig.prepareContactNumberTypeDropDown(vm.contactTypeConfig, vm.contactTypeOptions);
-            dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions, onCountryDropDownChange, 1);
-            dropDownConfig.prepareCountryDropDown(vm.bankCountryConfig, vm.countryOptions, onBankCountryDropDownChange, 1);
-            dropDownConfig.prepareRegionDropDown(vm.stateConfig, null, null, onRegionDropDownChange);
-            dropDownConfig.prepareCityDropDown(vm.cityConfig, null, null, null, 1);
 
         }
 
@@ -158,7 +156,7 @@
         }
 
         function saveBusiness(imagesData, business, form){
-            if(!business.bpId){
+                        if(!business.bpId){
                 return businessPartner.addBusinessBasic(imagesData, business);
             }
             else{
@@ -342,7 +340,7 @@
         }
 
         function getFile(picture){
-            deModal.getFile(picture, $scope, 1, [{w: 200,h: 200}], {width:200, height:200}, function(imagesData){
+            deModal.getFile(picture, $scope, null, null, null, function(imagesData){
                 vm.businessLogo = imagesData.croppedImage;
                 vm.imagesData = imagesData;
             });

@@ -88,15 +88,23 @@
                 animation: true,
                 templateUrl: modalTemplates.IMAGE_CROP_WINDOW,
                 controller: function($scope, image, aspectRatio, $uibModalInstance){
-                    $scope.aspectRatio = aspectRatio;
+                    if(aspectRatio){
+                        $scope.aspectRatio = aspectRatio;
+                    }
+                    if(cropSize){
+                        $scope.cropper = {
+                            w: cropSize.width,
+                            h: cropSize.height
+                        };
+                    }
+                    if(imageSizes){
+                        $scope.resultImageSizes=imageSizes[0];
+                    }
+
                     $scope.croppedImages = [];
                     $scope.croppedImage = '';
                     $scope.image = image;
-                    $scope.cropper = {
-                        w: cropSize.width,
-                        h: cropSize.height
-                    };
-                    $scope.resultImageSizes=imageSizes[0];
+
                     $scope.saveImage = function () {
                         console.log($scope.croppedImages, $scope.blob);
                         $uibModalInstance.close({

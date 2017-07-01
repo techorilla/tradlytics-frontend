@@ -3,7 +3,7 @@
     <div class="dg-pageHeaderTop clearfix">
         <h1 class="dg-pageTitle"><span class="dg-pageMiniTitle">{{rootScope.headerSubTitle}}</span>{{rootScope.headerTitle}}</h1>
         <ul class="dg-pageExtraLinks">
-            <li ui-sref="{{button.state}}" ng-repeat="button in rootScope.headerAnchor"><a>{{button.text}}</a></li>
+            <li class="button" ui-sref="{{button.state}}" ng-repeat="button in rootScope.headerAnchor"><a>{{button.text}}</a></li>
         </ul>
     </div>
 

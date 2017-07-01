@@ -37,8 +37,7 @@
             _init();
             function _init(){
                 scope.appConstants = appConstants;
-                scope.businessLogo = $filter('businessLogo')(scope.business.logo);
-                console.log(scope.business);
+                scope.businessLogo = $filter('businessLogo')(scope.business ? scope.business.logo : null);
             }
 
         }

@@ -40,6 +40,7 @@
             _init();
             function _init(){
                 scope.rootScope = $rootScope;
+                console.log($rootScope);
             }
             scope.goToBack = utilities.goBackState;
         }

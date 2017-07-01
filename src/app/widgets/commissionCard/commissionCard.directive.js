@@ -36,8 +36,6 @@
             _init();
             function _init(){
                 scope.appConstants = appConstants;
-                scope.productImage = $filter('productPicture')(scope.productItem.image);
-                console.log(scope.business);
             }
 
         }

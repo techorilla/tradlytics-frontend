@@ -18,7 +18,7 @@
   .detail-heading{
     font-size: 15px;
     color: $label-text;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid $body-bg;
     padding-bottom: 3px;
     font-weight: bold;
   }

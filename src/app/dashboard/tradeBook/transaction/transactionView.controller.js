@@ -32,7 +32,12 @@
             vm.deleteTradeDoc = deleteTradeDoc;
             vm.downloadTradeDoc = downloadTradeDoc;
             vm.editTransactionDetails = editTransactionDetails;
+            vm.createWatsappCopy = createWatsappCopy;
             console.log(vm.transaction );
+
+        }
+
+        function createWatsappCopy(transaction){
 
         }
 

@@ -1,15 +1,43 @@
+
+
+<div class="row">
+    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm" >
+        <button class="btn btn-primary"  ng-click="vm.createWatsappCopy(vm.transaction)">
+            <i class="fa fa-whatsapp" aria-hidden="true"></i> &nbsp; Copy for Watsapp
+        </button>
+    </div>
+</div>
+
 <div class="col-md-12 transactionView">
     <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
 
         <div class="row transactionNo">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-2">
                 <h3 class="with-line">File No</h3>
                 <div ng-bind="vm.transaction.basic.fileNo" class="number"></div>
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-2">
                 <h3 class="with-line">Contract No</h3>
                 <div class="number" ng-bind="vm.transaction.basic.contractNo ? vm.transaction.basic.contractNo : 'NA'"></div>
             </div>
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Expected Commission</h3>
+                <div ng-bind="'USD ' + vm.transaction.commission.expectedCommission" class="number"></div>
+            </div>
+
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Net Commission</h3>
+                <div class="number">NA</div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <h3 class="with-line">Shipment</h3>
+                <div class="number">{{vm.transaction.basic.shipmentStart | date: vm.appFormats.FullDate}} - {{vm.transaction.basic.shipmentEnd  | date: vm.appFormats.FullDate}}</div>
+            </div>
+
+
         </div>
 
         <div class="row">
@@ -47,7 +75,7 @@
 
                         </business-card>
 
-                        <commission-card commission="vm.transaction.basic.commission">
+                        <commission-card commission="vm.transaction.commission">
 
                         </commission-card>
 

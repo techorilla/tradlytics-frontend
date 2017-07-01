@@ -149,7 +149,7 @@
   var appFormats = {
     ShipmentMonth: 'MMMM, yyyy',
     Date: 'MMM dd, yyyy',
-    FullDate: 'MMMM D, YYYY',
+    FullDate: 'MMMM dd, yyyy',
     DateAsFilter: 'date:"dd-MMM-yyyy"',
     Time: 'MMM dd, yyyy hh:mm a ',
     DBDate:'yyyy-MM-dd HH:mm:ss',

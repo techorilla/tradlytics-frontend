@@ -31,7 +31,10 @@
             $rootScope.pageTitle = toState.title || 'Doni Enterprises';
             $rootScope.bgBackgroundClass = toState.bgBackgroundClass || '';
             if(toState.pageHeader){
-                $rootScope.headerTitle = toState.pageHeader.title;
+                if(toState.pageHeader.title){
+                    $rootScope.headerTitle = toState.pageHeader.title;
+                }
+
                 $rootScope.headerSubTitle = toState.pageHeader.subTitle;
                 $rootScope.headerAnchor = (toState.pageHeader.headerAnchor) ? toState.pageHeader.headerAnchor : [];
                 $rootScope.goBack = toState.pageHeader.goBack || false;
