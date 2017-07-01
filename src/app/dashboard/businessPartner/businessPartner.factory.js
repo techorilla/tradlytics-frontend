@@ -279,7 +279,8 @@
                 'name': business.name,
                 'website': business.website,
                 'ntn': business.ntn,
-                'bpType': business.bpType
+                'bpType': business.bpType,
+                'databaseId': business.databaseId
             }));
 
             return bpAPI.withHttpConfig({
@@ -304,7 +305,8 @@
                 'name': business.name,
                 'website': business.website,
                 'ntn': business.ntn,
-                'bpType': business.bpType
+                'bpType': business.bpType,
+                'databaseId': business.databaseId
             }));
 
             return bpAPI.withHttpConfig({

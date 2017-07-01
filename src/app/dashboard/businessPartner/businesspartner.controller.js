@@ -83,12 +83,7 @@
                 {name:'Last Transaction On', stSort:'bp_Cont_fullName', stPlaceholder:''},
                 {name:'Actions'}
             ];
-            dropDownConfig.prepareByTypesDropDown(vm.bpTypeConfig, vm.bpTypeOptions);
-            dropDownConfig.prepareContactNumberTypeDropDown(vm.contactTypeConfig, vm.contactTypeOptions);
-            dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions, onCountryDropDownChange, 1);
-            dropDownConfig.prepareCountryDropDown(vm.bankCountryConfig, vm.countryOptions, onBankCountryDropDownChange, 1);
-            dropDownConfig.prepareRegionDropDown(vm.stateConfig, null, null, onRegionDropDownChange);
-            dropDownConfig.prepareCityDropDown(vm.cityConfig, null, null, null, 1);
+
             vm.saveBusiness = saveBusiness;
             vm.onSaveBusinessCallBack = onSaveBusinessCallBack;
             vm.onSaveBusinessBank = onSaveBusinessBank;
@@ -117,6 +112,13 @@
                     });
                 }
             }
+
+            dropDownConfig.prepareByTypesDropDown(vm.bpTypeConfig, vm.bpTypeOptions);
+            dropDownConfig.prepareContactNumberTypeDropDown(vm.contactTypeConfig, vm.contactTypeOptions);
+            dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions, onCountryDropDownChange, 1);
+            dropDownConfig.prepareCountryDropDown(vm.bankCountryConfig, vm.countryOptions, onBankCountryDropDownChange, 1);
+            dropDownConfig.prepareRegionDropDown(vm.stateConfig, null, null, onRegionDropDownChange);
+            dropDownConfig.prepareCityDropDown(vm.cityConfig, null, null, null, 1);
 
         }
 
