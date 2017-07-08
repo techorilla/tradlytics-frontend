@@ -18,7 +18,6 @@
     var chart = makeChart();
 
     $scope.$watch('chartData', function(){
-      console.log($scope.chartData);
       chart = makeChart();
     });
 
@@ -28,18 +27,29 @@
     function makeChart(){
       var graphs = [];
       angular.forEach($scope.chartValues, function(val, key){
-        console.log(val);
         graphs.push({
           id: 'g'+key,
-          bullet: 'none',
+          bullet: (chartType==='line') ? "round" :'none',
           useLineColorForBulletBorder: true,
           lineColor: chartColors[key],
-          lineThickness: 1,
+          lineThickness: (chartType==='line') ? 2 : 1,
           negativeLineColor: layoutColors.danger,
           type: chartType,
           valueField: val,
-          fillAlphas: 1,
-          fillColorsField: 'lineColor'
+          fillAlphas: (chartType==='line') ? 0 : 1,
+          fillColorsField:  'lineColor',
+
+          balloon:{
+            "drop":true,
+            "adjustBorderColor":false,
+            "color":"#ffffff"
+          },
+          bulletBorderAlpha: 1,
+          bulletColor: "#FFFFFF",
+          bulletSize: 5,
+          hideBulletsCount: 50,
+          balloonText: "<span style='font-size:18px;'>[[value]]</span>"
+
         });
       });
 
@@ -89,14 +99,14 @@
     }
 
 
-    function zoomChart() {
-      chart.zoomToDates(new Date(2013, 3), new Date(2014, 0));
-    }
-
-    chart.addListener('rendered', zoomChart);
-    zoomChart();
-    if (chart.zoomChart) {
-      chart.zoomChart();
-    }
+    // function zoomChart() {
+    //   chart.zoomToDates(new Date(2013, 3), new Date(2014, 0));
+    // }
+    //
+    // chart.addListener('rendered', zoomChart);
+    // zoomChart();
+    // if (chart.zoomChart) {
+    //   chart.zoomChart();
+    // }
   }
 })();

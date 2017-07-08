@@ -1,0 +1,20 @@
+<filter-bar
+        date-picker-needed="true"
+
+        date-picker="vm.dateRange"
+        on-date-change="vm.onDateRangeChanged(dateRange)">
+</filter-bar>
+
+
+<div class="col-xlg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" ba-panel>
+    <div class="row">
+        <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-7 col-xs-12"
+             ba-panel
+             ba-panel-title="Exchange Rate Graph"
+             ba-panel-class="medium-panel">
+
+            <line-chart ng-if="vm.showGraph" chart-data="vm.graphData" chart-values="vm.chartValues" chart-type="vm.chartType"></line-chart>
+
+        </div>
+    </div>
+</div>

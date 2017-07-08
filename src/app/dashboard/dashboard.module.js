@@ -17,7 +17,8 @@
         'app.dashboard.pricing',
         'app.dashboard.manifest',
         'app.dashboard.documentCreator',
-        'app.dashboard.shipping'
+        'app.dashboard.shipping',
+        'app.dashboard.currencyExchange'
     ]).config(routeConfig);
 
 

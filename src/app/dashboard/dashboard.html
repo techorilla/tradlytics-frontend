@@ -7,7 +7,7 @@
         <div class="details">
             <div class="heading">USD Exchange Rate</div>
             <div class="card-refresh"><i class="fa fa-refresh" aria-hidden="true"></i></div>
-            <div class="value">
+            <div class="value cursor-pointer"  ng-click="vm.goToCurrencyDashboard('USD', 'PKR')">
                 <div class="currency" ng-bind="vm.completeReport.usdExchange.outCurrency"></div>
                 <div class="rate" ng-bind="vm.completeReport.usdExchange.currentValue | number: 2"></div>
                 <div class="change">

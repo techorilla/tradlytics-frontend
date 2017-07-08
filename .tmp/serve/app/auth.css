@@ -338,12 +338,12 @@ button.btn.btn-default {
   border-width: 1px;
   color: #2C3E50;
   background: rgba(46, 46, 46, 0);
-  border-color: #8c9195; }
+  border-color: #787a7d; }
   button.btn.btn-default.disabled, button.btn.btn-default[disabled], fieldset[disabled] button.btn.btn-default, button.btn.btn-default.disabled:hover, button.btn.btn-default[disabled]:hover,
   fieldset[disabled] button.btn.btn-default:hover, button.btn.btn-default.disabled:focus, button.btn.btn-default[disabled]:focus, fieldset[disabled] button.btn.btn-default:focus, button.btn.btn-default.disabled.focus, button.btn.btn-default[disabled].focus, fieldset[disabled] button.btn.btn-default.focus, button.btn.btn-default.disabled:active, button.btn.btn-default[disabled]:active, fieldset[disabled] button.btn.btn-default:active, button.btn.btn-default.disabled.active, button.btn.btn-default[disabled].active,
   fieldset[disabled] button.btn.btn-default.active {
     background: rgba(46, 46, 46, 0);
-    border-color: #989da1; }
+    border-color: #848689; }
     button.btn.btn-default.disabled:hover, button.btn.btn-default[disabled]:hover, fieldset[disabled] button.btn.btn-default:hover, button.btn.btn-default.disabled:hover:hover, button.btn.btn-default[disabled]:hover:hover,
     fieldset[disabled] button.btn.btn-default:hover:hover, button.btn.btn-default.disabled:focus:hover, button.btn.btn-default[disabled]:focus:hover, fieldset[disabled] button.btn.btn-default:focus:hover, button.btn.btn-default.disabled.focus:hover, button.btn.btn-default[disabled].focus:hover, fieldset[disabled] button.btn.btn-default.focus:hover, button.btn.btn-default.disabled:active:hover, button.btn.btn-default[disabled]:active:hover, fieldset[disabled] button.btn.btn-default:active:hover, button.btn.btn-default.disabled.active:hover, button.btn.btn-default[disabled].active:hover,
     fieldset[disabled] button.btn.btn-default.active:hover {
@@ -351,7 +351,7 @@ button.btn.btn-default {
               transform: none; }
   button.btn.btn-default:hover, button.btn.btn-default:focus, button.btn.btn-default.focus, button.btn.btn-default:active, button.btn.btn-default.active {
     background: rgba(46, 46, 46, 0);
-    border-color: #74797d; }
+    border-color: #606265; }
   button.btn.btn-default:active, button.btn.btn-default:target {
     background-color: rgba(46, 46, 46, 0);
     color: #2C3E50; }
@@ -1055,7 +1055,7 @@ tags-input .tags.focused {
   box-shadow: 0 0 3px 1px rgba(46, 46, 46, 0.93); }
 
 tags-input .autocomplete {
-  background: #8c9195; }
+  background: #787a7d; }
   tags-input .autocomplete .suggestion-item {
     background: transparent;
     color: #fff;
@@ -1075,7 +1075,7 @@ tags-input .autocomplete {
     max-height: 280px;
     overflow-y: auto;
     position: relative;
-    background: #8c9195 !important; }
+    background: #787a7d !important; }
 
 tags-input .tags {
   color: #2C3E50;

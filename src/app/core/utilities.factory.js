@@ -70,7 +70,7 @@
             _.forEach(graphData, function(value, key){
                 value['date'] = new Date(value['date']);
             });
-            return graphData
+            return $filter('orderBy')(graphData, 'date')
         }
 
         function goBackState(){

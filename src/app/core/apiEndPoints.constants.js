@@ -112,6 +112,10 @@
             homeSlider: 'homeSlider',
             team: 'team',
             dashboard:'dashboard'
+        },
+        currencyExchange: {
+            main:'currency_exchange',
+            dashboard:'dashboard'
         }
 
     };
