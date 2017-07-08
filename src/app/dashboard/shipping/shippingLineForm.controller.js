@@ -13,6 +13,7 @@
         function saveShippingLine(formObj, lineObj, imagesData, addAnother){
 
             function saveShippingLineCallBack(res){
+
                 if(res.success){
                     toastr.success('Created Successfully',res.message);
                     if(addAnother){
@@ -28,10 +29,13 @@
                 else{
                     toastr.error('Updated Successfully', res.message);
                 }
+                loaderModal.close();
             }
 
             if(formObj.$valid){
+                loaderModal.open();
                 if(lineObj.id){
+
                     shipping.updateShippingLine(lineObj, imagesData).then(saveShippingLineCallBack);
                 }
                 else{
