@@ -44,6 +44,7 @@
         }
 
         function submit() {
+          console.log('hello');
           $scope.form && $scope.form.$setSubmitted(true);
           if($scope.form && $scope.form.$valid){
             return $scope.onNext({form: $scope.form});

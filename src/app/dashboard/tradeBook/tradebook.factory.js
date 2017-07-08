@@ -34,10 +34,36 @@
             deleteTradeNote: deleteTradeNote,
             getAllNotesForTrade: getAllNotesForTrade,
             deleteTransactionDocument: deleteTransactionDocument,
-            downloadTradeDocument: downloadTradeDocument
+            downloadTradeDocument: downloadTradeDocument,
+            activateShipmentStatus: activateShipmentStatus,
+            changeCompleteStatus: changeCompleteStatus,
+            changeWashoutStatus: changeWashoutStatus
 
 
         };
+
+        function changeWashoutStatus(transactionId, status, isWashOutAt){
+            return transactionAPI.customPOST({
+                'transactionId': transactionId,
+                'status': status,
+                'isWashOutAt': isWashOutAt
+            }, apiEndPoints.transaction.washout);
+        }
+
+        function changeCompleteStatus(transactionId, isComplete){
+            return transactionAPI.customPOST({
+                'transactionId': transactionId,
+                'isComplete': isComplete
+            }, apiEndPoints.transaction.completeStatus);
+        }
+
+        function activateShipmentStatus(shipmentStatus, status, transactionId){
+            return transactionAPI.customPOST({
+                'shipmentStatus': shipmentStatus,
+                'status': status,
+                'transactionId': transactionId
+            }, apiEndPoints.transaction.shipmentStatus)
+        }
 
         function downloadTradeDocument(docId, fileName, fileType){
             return transactionAPI.customGET(apiEndPoints.transaction.document+'/'+docId).then(function(res){

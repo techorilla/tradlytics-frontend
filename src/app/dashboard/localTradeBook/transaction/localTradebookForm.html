@@ -1,0 +1,178 @@
+<div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
+    <form name="vm.localTransactionForm" novalidate>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="with-line">Transaction Information
+                    <button type="button" ng-if="vm.transaction.basic.productItemId" ng-click="vm.changeProductSpecs()" class="btn pull-right btn-xs btn-success">Change Product Specs</button>
+                </h3>
+                <div class="row wizard-containers">
+                    <div class="row">
+                        <div class="form-group col-md-4 clearfix">
+                            <label class="col-sm-3 control-label">Date</label>
+                            <div class="col-sm-9">
+                                <date-picker-input date="vm.localTransaction.date" name="date">
+                                </date-picker-input>
+                                <ng-messages for="vm.localTransactionForm.date.$error"
+                                             ng-show='(vm.localTransactionForm.$submitted && vm.localTransactionForm.date.$invalid) ||
+                                            (vm.localTransactionForm.date.$invalid && vm.localTransactionForm.date.$dirty)' role="alert">
+                                    <ng-message class="errorValidation" when="required">Please enter shipment start date.</ng-message>
+                                </ng-messages>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 clearfix">
+                            <label for="buyer" class="col-sm-3 control-label">Buyer</label>
+                            <div class="col-sm-9">
+                                <selectize
+                                        ng-required="true"
+                                        placeholder="Buyer"
+                                        name="buyer"
+                                        id="buyer"
+                                        ng-change="vm.transaction.basic.contractualBuyerId = (vm.transaction.basic.contractualBuyerId) ? (vm.transaction.basic.contractualBuyerId) : vm.transaction.basic.buyerId"
+                                        config="vm.buyerConfig"
+                                        options='vm.buyerOptions.list'
+                                        ng-model="vm.transaction.basic.buyerId">
+                                </selectize>
+                                <ng-messages for="vm.localTransactionForm.buyer.$error"
+                                             ng-if='(vm.localTransactionForm.$submitted || vm.localTransactionForm.buyer.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please select Buyer</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 clearfix">
+                            <label for="seller" class="col-sm-3 control-label">Seller</label>
+                            <div class="col-sm-9">
+                                <selectize
+                                        placeholder="Seller"
+                                        ng-required="true"
+                                        name="seller"
+                                        id="seller"
+                                        config="vm.sellerConfig"
+                                        options='vm.sellerOptions.list'
+                                        ng-model="vm.transaction.basic.sellerId">
+                                </selectize>
+                                <ng-messages for="vm.localTransactionForm.seller.$error"
+                                             ng-if='(vm.localTransactionForm.$submitted && vm.localTransactionForm.seller.$invalid) ||
+                                            (vm.localTransactionForm.seller.$invalid && vm.localTransactionForm.seller.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please select seller.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 clearfix">
+                            <label for="productItem" class="col-sm-3 control-label">Product Item</label>
+                            <div class="col-sm-9">
+                                <selectize
+                                        ng-required="true"
+                                        name="productItem"
+                                        id="productItem"
+                                        config="vm.productItemConfig"
+                                        options='vm.productItemOptions.list'
+                                        ng-model="vm.transaction.basic.productItemId">
+                                </selectize>
+                                <ng-messages for="vm.localTransactionForm.productItem.$error"
+                                             ng-if='(vm.localTransactionForm.$submitted && vm.localTransactionForm.productItem.$invalid) ||
+                                            (vm.localTransactionForm.productItem.$invalid && vm.localTransactionForm.productItem.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter product item.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-md-4  clearfix">
+                            <label for="quantityMetric" class="col-sm-3 control-label">Quantity Metric</label>
+                            <div class="col-sm-9">
+                                <selectize
+                                        ng-required="true"
+                                        placeholder="Quantity Metric"
+                                        name="quantityMetric"
+                                        id="quantityMetric"
+                                        config="vm.quantityMetricConfig"
+                                        options='vm.quantityMetricOptions.list'
+                                        ng-model="vm.transaction.basic.quantityMetricId">
+                                </selectize>
+                                <ng-messages for="vm.localTransactionForm.quantityMetric.$error"
+                                             ng-if='(vm.localTransactionForm.$submitted && vm.localTransactionForm.quantityMetric.$invalid) ||
+                                            (vm.localTransactionForm.quantityMetric.$invalid && vm.localTransactionForm.quantityMetric.$dirty)'>
+                                    <div ng-message="required" class="errorValidation">Please enter quantity metric.</div>
+                                </ng-messages>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4 clearfix">
+                            <label class="col-sm-3 control-label">Quantity ({{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT' }})</label>
+                            <div class="col-sm-9">
+                                <input
+                                        required
+                                        ng-pattern="/^[0-9.]+$/i"
+                                        ng-model="vm.transaction.basic.quantity"
+                                        class="form-control"
+                                        name="quantity"
+                                        placeholder="Quantity in {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT'}}"/>
+
+                                <ng-messages for="vm.localTransactionForm.quantity.$error"
+                                             ng-show='(vm.localTransactionForm.$submitted || vm.localTransactionForm.quantity.$dirty)' role="alert">
+                                    <ng-message class="errorValidation" when="required">Please enter quantity value.</ng-message>
+                                    <ng-message class="errorValidation" when="pattern">Quantity can only have numbers.</ng-message>
+                                </ng-messages>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4  clearfix">
+                            <label class="col-sm-3 control-label">Price (US$ / {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT' }})</label>
+                            <div class="col-sm-9">
+                                <input
+                                        required
+                                        ng-pattern="/^[0-9.]+$/i"
+                                        ng-model="vm.transaction.basic.price"
+                                        class="form-control"
+                                        name="price"
+                                        placeholder="Price US$ / {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT'}}"/>
+
+                                <ng-messages for="vm.localTransactionForm.price.$error"
+                                             ng-show='(vm.localTransactionForm.$submitted && vm.localTransactionForm.price.$invalid) ||
+                                            (vm.localTransactionForm.price.$invalid && vm.localTransactionForm.price.$dirty)' role="alert">
+                                    <ng-message class="errorValidation" when="required">Please enter price value.</ng-message>
+                                    <ng-message class="errorValidation" when="pattern">Price can only have numbers.</ng-message>
+                                </ng-messages>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4 col-md-offset-8">
+                            <label class="col-sm-3 control-label">Local Trade File ID</label>
+                            <div class="col-sm-9">
+                                <input
+                                        ng-model="vm.transaction.basic.fileId"
+                                        class="form-control"
+                                        name="fileId"
+                                        placeholder="Local File Id"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4  col-md-offset-8">
+                            <label class="col-sm-3 control-label">International File ID</label>
+                            <div class="col-sm-9">
+                                <input
+                                        ng-model="vm.transaction.basic.fileId"
+                                        class="form-control"
+                                        name="fileId"
+                                        placeholder="International File Id"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-md-12 clearfix">
+                            <label class="col-sm-12 control-label">Other Information</label>
+                            <div class="col-sm-12">
+                                <textarea
+                                        ng-model="vm.localTransactionForm.basic.otherInfo"
+                                        class="form-control">
+                                </textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -281,6 +281,7 @@
                     formObj.$setValidity(att, true);
                 }
             }
+            formObj.$setSubmitted(false);
             formObj.$setPristine(true);
         }
     }

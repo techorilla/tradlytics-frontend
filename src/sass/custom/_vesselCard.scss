@@ -1,0 +1,31 @@
+.vesselCard{
+  margin-top: 20px;
+  .content{
+    min-height: 150px;
+    padding-bottom: 10px;
+    background: $body-bg;
+    .details{
+
+    }
+    .detail-heading{
+      font-size:16px;
+      font-weight:$font-ultraBold;
+      text-align: center;
+      color: $sidebar-text;
+      background: $my-gray-2;
+      height: 60px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .button-row{
+      position: relative;
+      bottom: 5px;
+      text-align:center;
+      .btn{
+        border-radius: 0px !important;
+
+      }
+    }
+  }
+}

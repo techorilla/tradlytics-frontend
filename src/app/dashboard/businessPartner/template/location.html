@@ -47,11 +47,11 @@
                             options='vm.countryOptions.list'
                             ng-model="location.country">
                     </selectize>
-                    <ng-messages for="vm.locationInfoForm['locationCountry_{{$index}}'].$error"
-                                 ng-if='(vm.locationInfoForm.$submitted && vm.locationInfoForm["locationCountry_"+$index].$invalid) ||
-                                            (vm.locationInfoForm["locationCountry_"+$index].$invalid && vm.locationInfoForm["locationCountry_"+$index].$dirty)'>
-                        <div ng-message="required" class="errorValidation">Please select a country.</div>
-                    </ng-messages>
+                    <div ng-messages="vm.locationInfoForm['locationCountry_'+$index].$error" class="ng-messages"
+                         ng-show='(vm.locationInfoForm.$submitted || vm.locationInfoForm["locationCountry_{{$index}}"].$dirty)'>
+                        <div class="errorValidation" ng-message="required">Please enter location country.</div>
+                    </div>
+
 
                 </div>
             </div>
@@ -69,6 +69,10 @@
                             options='location.stateOptions.list'
                             ng-model="location.state">
                     </selectize>
+                    <div ng-messages="vm.locationInfoForm['locationState_'+$index].$error" class="ng-messages"
+                         ng-show='(vm.locationInfoForm.$submitted || vm.locationInfoForm["locationState_{{$index}}"].$dirty)'>
+                        <div class="errorValidation" ng-message="required">Please enter location state.</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group row clearfix">
@@ -85,6 +89,10 @@
                             options='location.cityOptions.list'
                             ng-model="location.city">
                     </selectize>
+                    <div ng-messages="vm.locationInfoForm['locationCity_'+$index].$error" class="ng-messages"
+                         ng-show='(vm.locationInfoForm.$submitted || vm.locationInfoForm["locationCity_{{$index}}"].$dirty)'>
+                        <div class="errorValidation" ng-message="required">Please enter location city.</div>
+                    </div>
                 </div>
             </div>
         </div>

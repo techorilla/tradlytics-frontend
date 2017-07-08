@@ -1,9 +1,12 @@
 
 
 <div class="row">
-    <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm" >
+    <div class="col-md-12 marginBottom10px">
         <button class="btn btn-primary"  ng-click="vm.createWatsappCopy(vm.transaction)">
-            <i class="fa fa-whatsapp" aria-hidden="true"></i> &nbsp; Copy for Watsapp
+            <i class="fa fa-whatsapp" aria-hidden="true"></i> &nbsp;Copy for Watsapp
+        </button>
+        <button class="btn btn-success"  ng-click="vm.createTransactionInvoice(vm.transaction)">
+            <i class="fa fa-list-alt" aria-hidden="true"></i> Create Invoice
         </button>
     </div>
 </div>
@@ -12,18 +15,18 @@
     <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
 
         <div class="row transactionNo">
-            <div class="col-xs-12 col-md-2">
+            <div class="col-xs-12 col-md-1">
                 <h3 class="with-line">File No</h3>
                 <div ng-bind="vm.transaction.basic.fileNo" class="number"></div>
             </div>
-            <div class="col-xs-12 col-md-2">
+            <div class="col-xs-12 col-md-1">
                 <h3 class="with-line">Contract No</h3>
                 <div class="number" ng-bind="vm.transaction.basic.contractNo ? vm.transaction.basic.contractNo : 'NA'"></div>
             </div>
 
             <div class="col-xs-12 col-md-2">
                 <h3 class="with-line">Expected Commission</h3>
-                <div ng-bind="'USD ' + vm.transaction.commission.expectedCommission" class="number"></div>
+                <div ng-bind="'USD ' + (vm.transaction.commission.expectedCommission | number : 2)" class="number"></div>
             </div>
 
 
@@ -34,7 +37,15 @@
 
             <div class="col-xs-12 col-md-4">
                 <h3 class="with-line">Shipment</h3>
-                <div class="number">{{vm.transaction.basic.shipmentStart | date: vm.appFormats.FullDate}} - {{vm.transaction.basic.shipmentEnd  | date: vm.appFormats.FullDate}}</div>
+                <div class="number">{{vm.transaction.basic.shipmentStart | date: vm.appFormats.FullDate2}} - {{vm.transaction.basic.shipmentEnd  | date: vm.appFormats.FullDate2}}</div>
+            </div>
+
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Status</h3>
+                <button class="btn"
+                        ng-class="{'btn-danger':!vm.transaction.isComplete, 'btn-primary':vm.transaction.isComplete}"
+                        ng-click="vm.changeCompleteStatus(vm.transactionId, !vm.transaction.isComplete)">Transaction Complete</button>
             </div>
 
 
@@ -74,6 +85,8 @@
                                 business-type="Seller Broker">
 
                         </business-card>
+
+                        <trade-wash-out-card trade="vm.transaction"></trade-wash-out-card>
 
                         <commission-card commission="vm.transaction.commission">
 
@@ -150,60 +163,145 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row shipment">
             <div class="col-md-12">
                 <div class="row wizard-containers">
                     <h3 class="with-line">Shipment</h3>
-                    <div ba-panel
-                         ba-panel-class="tabs-panel xsmall-panel with-scroll">
-                        <uib-tabset class="tabs-left">
-                            <uib-tab heading="Not Shipped">
+                    <div class="row shipmentCard">
+                        <div class="tab-container">
+                            <div class="col-md-3 col-xs-12" >
+                                <div class="button tab"
+                                     ng-class="{'active': vm.transaction.shipment.notShipped.active}">
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.NOT_SHIPPED, true, vm.transactionId)"
+                                            ng-show="!vm.transaction.shipment.notShipped.active"
+                                            class="btn btn-xs btn-success activate">Activate</button>
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.NOT_SHIPPED, false, vm.transactionId)"
+                                            ng-show="vm.transaction.shipment.notShipped.active"
+                                            class="btn btn-xs btn-warning activate">Deactivate</button>
+                                    Not Shipped&nbsp;<i class="fa fa-ship" aria-hidden="true"></i>
+                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                </div>
 
-                            </uib-tab>
+                                <div class="detail">
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Reason</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Shipment Extension</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                </div>
 
-                            <uib-tab heading="Approbation Recieved">
+                                <div class="form">
 
-                            </uib-tab>
+                                </div>
 
-                            <uib-tab heading="Shipment Extended">
+                            </div>
+                            <div class="col-md-3 col-xs-12"                                 >
+                                <div class="button tab" ng-class="{'active': vm.transaction.shipment.approbationReceived.active }">
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.APPROBATION_RECEIVED, true, vm.transactionId)"
+                                            ng-show="!vm.transaction.shipment.approbationReceived.active"
+                                            class="btn btn-xs btn-success activate">Activate</button>
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.APPROBATION_RECEIVED, false, vm.transactionId)"
+                                            ng-show="vm.transaction.shipment.approbationReceived.active"
+                                            class="btn btn-xs btn-warning activate">Deactivate</button>
+                                    Approbation Received
+                                    &nbsp;<i class="fa fa-ship" aria-hidden="true"></i>
 
-                            </uib-tab>
+                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                </div>
+                                <div class="detail">
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Expected Shipment</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">In Transit</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                </div>
 
-                            <uib-tab heading="Washout">
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                                <div class="button tab" ng-class="{'active': vm.transaction.shipment.shipped.active }">
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.SHIPPED, true, vm.transactionId)"
+                                            ng-show="!vm.transaction.shipment.shipped.active"
+                                            class="btn btn-xs btn-success activate">Activate</button>
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.SHIPPED, false, vm.transactionId)"
+                                            ng-show="vm.transaction.shipment.shipped.active"
+                                            class="btn btn-xs btn-warning activate">Deactivate</button>
+                                    Shipped
+                                    <i class="fa fa-ship" aria-hidden="true"></i>
+                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                </div>
+                                <div class="detail">
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Date Shipped</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Expected Arrival</h3>
+                                        <div class="number">NA</div>
+                                    </div>
 
-                            </uib-tab>
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Transit Ports</h3>
+                                        <div class="number">NA</div>
+                                    </div>
 
-                            <ui-tab heading="Arrived at Port">
+                                </div>
 
-                            </ui-tab>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                                <div class="button tab" ng-class="{'active': vm.transaction.shipment.arrivedAtPort.active }">
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.ARRIVED_AT_PORT, true, vm.transactionId)"
+                                            ng-show="!vm.transaction.shipment.arrivedAtPort.active"
+                                            class="btn btn-xs btn-success activate">Activate</button>
+                                    <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.ARRIVED_AT_PORT, false, vm.transactionId)"
+                                            ng-show="vm.transaction.shipment.arrivedAtPort.active"
+                                            class="btn btn-xs btn-warning activate">Deactivate</button>
+                                    Arrived at Port
+                                    &nbsp;<i class="fa fa-ship" aria-hidden="true"></i>
+                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                </div>
 
-                            <uib-tab heading="Completed"></uib-tab>
+                                <div class="detail">
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">B/L No.</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Quantity Shipped</h3>
+                                        <div class="number">NA</div>
+                                    </div>
 
-                            <uib-tab></uib-tab>
+                                    <div class="col-xs-12 col-md-6">
+                                        <h3 class="with-line">Shipping Line</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <h3 class="with-line">Vessel/Voyage No.</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <h3 class="with-line">Port of Loading</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <h3 class="with-line">Port of Destination</h3>
+                                        <div class="number">NA</div>
+                                    </div>
 
-                        </uib-tabset>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
-            <!--<div class="col-md-12">-->
-            <!--<div class="row wizard-containers">-->
-            <!--<h3 class="with-line">Shipment</h3>-->
-            <!--<div class="col-md-12">-->
-            <!--<div>Not Shipped</div>-->
-            <!--<div>Approbation Recieved</div>-->
-            <!--<div>Shipped</div>-->
-            <!--<div>Shipment Extended</div>-->
-            <!--<div>Washout</div>-->
-            <!--<div>Arrived at Port</div>-->
-            <!--<div>Completed</div>-->
-            <!--</div>-->
-
-            <!--</div>-->
-            <!--</div>-->
         </div>
-
-
-
 
         <div class="row">
             <div class="col-md-12">
@@ -275,5 +373,37 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row wizard-containers">
+                    <h3 class="with-line">Change Logs</h3>
+                    <div class="row">
+                        <div class="horizontal-scroll">
+                            <table class="table table-striped" st-table="smartTableData">
+                                <thead>
+                                <tr class="sortable table-header">
+                                    <th><span class="count">{{vm.transaction.changeLogs.length}}</span></th>
+                                    <th>Log Time</th>
+                                    <th>Change By</th>
+                                    <th>Log</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="log in vm.transaction.changeLogs">
+                                    <td></td>
+                                    <td ng-bind=" log.changeTime | date:vm.appFormats.Time"></td>
+                                    <td ng-bind="log.changeByUserName"></td>
+                                    <td ng-bind-html="log.description"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

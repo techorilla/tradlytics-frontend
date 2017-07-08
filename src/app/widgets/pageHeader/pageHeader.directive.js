@@ -40,9 +40,13 @@
             _init();
             function _init(){
                 scope.rootScope = $rootScope;
-                console.log($rootScope);
+                scope.goToState = goToState;
+                scope.goToBack = utilities.goBackState;
             }
-            scope.goToBack = utilities.goBackState;
+
+            function goToState(state){
+                $state.go(state);
+            }
         }
     }
 

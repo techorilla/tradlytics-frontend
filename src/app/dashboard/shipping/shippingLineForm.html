@@ -1,0 +1,103 @@
+<div ba-panel ba-panel-class="profile-page">
+    <div class="panel-content">
+        <form  name="vm.shippingLineForm" novalidate>
+            <h3 class="with-line">Shipping Line Information</h3>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group row clearfix">
+                        <div class="col-sm-12">
+                            <div class="userpic">
+                                <div class="userpic-wrapper">
+                                    <img ng-src="{{ vm.shippingLineLogo }}" ng-click="vm.uploadPicture(event)">
+                                </div>
+                                <i class="ion-ios-close-outline" ng-click="vm.removeLogo()" ng-if="!vm.noLogo"></i>
+                                <a href class="change-userpic" ng-click="vm.uploadLogo(event)">Change Shipping Line Logo</a>
+                                <input type="file" ng-show="false" id="uploadFile" ng-file-select="vm.onFileSelect($files)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label for="lineCode">Shipping Line Code</label>
+                        <input autocomplete="false"
+                               type="text"
+                               class="form-control"
+                               id="lineCode"
+                               name="lineCode"
+                               placeholder="Shipping Line Code"
+                               ng-model="vm.shippingObj.codeName" required>
+                        <ng-messages for="vm.shippingLineForm.lineCode.$error"
+                                     ng-if='(vm.shippingLineForm.$submitted || vm.shippingLineForm.lineCode.$dirty)'>
+                            <div ng-message="required" class="errorValidation">Please enter line code name.</div>
+                        </ng-messages>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lineCode">Shipping Line Name</label>
+                        <input autocomplete="false"
+                               type="text"
+                               class="form-control"
+                               id="lineName"
+                               name="lineName"
+                               placeholder="Shipping Line Name"
+                               ng-model="vm.shippingObj.name" required>
+                        <ng-messages for="vm.shippingLineForm.lineName.$error"
+                                     ng-if='(vm.shippingLineForm.$submitted || vm.shippingLineForm.lineName.$dirty)'>
+                            <div ng-message="required" class="errorValidation">Please enter line name.</div>
+                        </ng-messages>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label for="lineCode">Shipping Line Website</label>
+                        <input autocomplete="false"
+                               type="text"
+                               class="form-control"
+                               id="lineWebsite"
+                               name="lineWebsite"
+                               placeholder="Shipping Line Website"
+                               ng-model="vm.shippingObj.website">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lineCode">Shipping Line Tracking URL</label>
+                        <input autocomplete="false"
+                               type="text"
+                               class="form-control"
+                               id="lineTrackingWebsite"
+                               name="lineTrackingWebsite"
+                               placeholder="Shipping Line Tracking URL"
+                               ng-model="vm.shippingObj.trackingWebsite">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <button class="btn btn-success"
+                            type="submit"
+                            ng-if="!vm.shippingObj.id"
+                            ng-click="vm.saveShippingLine(vm.shippingLineForm, vm.shippingObj, vm.imagesData, true)">
+                        Add New Shipping Line And Add Another
+                    </button>
+
+                    <button class="btn btn-primary"
+                            type="submit"
+                            ng-click="vm.saveShippingLine(vm.shippingLineForm, vm.shippingObj, vm.imagesData, false)">
+                        {{(!vm.shippingObj.id ? 'Add New Shipping Line' : 'Update Shipping Line')}}
+                    </button>
+
+
+
+                    <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+                </div>
+            </div>
+    </div>
+</div>

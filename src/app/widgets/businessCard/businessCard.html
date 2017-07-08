@@ -5,7 +5,7 @@
             <div class="notApplicable">NA</div>
         </div>
         <div ng-if="business">
-            <div class="row">
+            <div class="col-xs-12">
                 <div class="logo">
                     <img width="60" height="60" ng-src="{{businessLogo}}" >
                 </div>
@@ -19,15 +19,16 @@
             </div>
 
             <div class="row">
-                <div class="website col-md-6 col-xs-12">
+                <div class="website col-md-offset-2 col-md-4 col-xs-12">
                     <div class="label">Website</div>
                     <div class="url"><a href="{{business.website}}" target="_blank">{{business.website}}</a></div>
                 </div>
-                <div class="primary-contact col-md-6 col-xs-12">
+                <div class="primary-contact col-md-4 col-xs-12">
                     <div class="label">Primary Contact</div>
                     <div class="contact">{{(business.primaryContact) ? business.primaryContact : 'No Primary Contact Entered'}}</div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

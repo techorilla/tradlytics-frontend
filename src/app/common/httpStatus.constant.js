@@ -125,7 +125,8 @@
      * @ngdoc property
      * @name httpStatus.#INTERNAL_SERVER_ERROR
      * @propertyOf app.core.constant:httpStatus
-     * @returns {number} 500
+     * @returns {number}
+     * 500
      */
     INTERNAL_SERVER_ERROR: 500,
 
@@ -149,7 +150,8 @@
   var appFormats = {
     ShipmentMonth: 'MMMM, yyyy',
     Date: 'MMM dd, yyyy',
-    FullDate: 'MMMM dd, yyyy',
+    FullDate2: 'MMMM dd, yyyy',
+    FullDate: 'MMMM D, YYYY',
     DateAsFilter: 'date:"dd-MMM-yyyy"',
     Time: 'MMM dd, yyyy hh:mm a ',
     DBDate:'yyyy-MM-dd HH:mm:ss',
@@ -183,6 +185,13 @@
     DROP_DOWN:'drop_down'
   };
 
+  var shipmentStatus = {
+    NOT_SHIPPED: 'NOT_SHIPPED',
+    APPROBATION_RECEIVED: 'APPROBATION_RECEIVED',
+    SHIPPED: 'SHIPPED',
+    ARRIVED_AT_PORT: 'ARRIVED_AT_PORT'
+  };
+
   angular
       .module('app.common')
       .constant('images', images)
@@ -192,6 +201,7 @@
       .constant('appEvents', appEvents)
       .constant('appTabFilter', appTabFilter)
       .constant('read', read)
-      .constant('appConstants', appConstants);
+      .constant('appConstants', appConstants)
+      .constant('shipmentStatus', shipmentStatus);
 
 }());

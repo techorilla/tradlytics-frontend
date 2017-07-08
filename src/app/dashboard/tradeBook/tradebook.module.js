@@ -25,7 +25,7 @@
                     title:'Trade Book',
                     headerAnchor: [
                         {
-                            text: 'Add new Transaction',
+                            text: 'Add New Transaction',
                             state: 'dashboard.transaction({id:"new"})'
                         }
                     ]

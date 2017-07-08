@@ -1,0 +1,16 @@
+<div class="vesselCard col-md-{{colSize}}"  ng-class="{'isBroken': vessel.broken}">
+    <div class="content">
+        <div class="detail-heading" ng-bind="vessel.first_name"></div>
+        <div class="detail">
+            <div ng-bind="vessel.first_name"></div>
+            <div ng-bind="vessel.imoNumber"></div>
+            <div ng-bind="vessel.operator"></div>
+        </div>
+
+    </div>
+    <div class="button-row">
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-warning">Delete</button>
+    </div>
+
+</div>

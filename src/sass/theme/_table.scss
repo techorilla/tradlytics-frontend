@@ -1,13 +1,28 @@
 .titled-text{
   font-weight: 600;
-  color: $success;
+  color: $sidebar-text;
+}
+
+.horizontal-scroll-table-wrapper{
+  overflow-x: scroll;
+  .product{
+    min-width: 150px;
+
+  }
+  .business{
+    min-width: 350px;
+  }
 }
 
 .table {
+  table-layout: auto;
   tr{
     .titled{
       font-weight: 600;
-      color: $success;
+      color: $sidebar-text;
+    }
+    .date{
+      min-width: 100px;
     }
     .business{
       div{
@@ -233,6 +248,8 @@ input.search-input {
   max-height: 214px;
 }
 
+
+
 .pagination > li > a, .pagination > li > span {
   background: transparent;
 }
@@ -300,6 +317,10 @@ input.search-input {
 .black-muted-bg {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+
+
+
 
 .table-hover {
   > tbody > tr:hover {

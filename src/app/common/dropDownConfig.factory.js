@@ -37,8 +37,135 @@
       prepareByTypesDropDown: prepareByTypesDropDown,
       prepareContactNumberTypeDropDown: prepareContactNumberTypeDropDown,
       preparePackagingConfig: preparePackagingConfig,
-      prepareCommissionTypeConfig: prepareCommissionTypeConfig
+      prepareCommissionTypeConfig: prepareCommissionTypeConfig,
+      prepareInternationalTradeConfig: prepareInternationalTradeConfig,
+
+      prepareShippingLineConfig: prepareShippingLineConfig,
+      prepareShippingPortConfig: prepareShippingPortConfig,
+      prepareShippingVesselConfig: prepareShippingVesselConfig
     };
+
+
+    function prepareShippingVesselConfig(){
+
+    }
+
+
+    function prepareShippingPortConfig(shippingPortConfig, shippingPortOptions){
+
+      function shippingPortItem(){
+        return '<div>' +
+            '<span class="dropdownLabel">' + item.name + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.loCode  + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.country + '</span>' +
+            '</div>';
+      }
+
+      var dropDown = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(shippingPortOptions.list, function(port) { return port.id == value; });
+          shippingPortOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'id',
+        sortField: 'name',
+        searchField: ['name', 'loCode', 'country'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: shippingPortItem,
+          option: shippingPortItem
+        }
+      };
+      utilities.cloneIntoEmptyObject(shippingPortConfig, dropDown);
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.ports).then(function (response){
+        return utilities.cloneIntoEmptyObject(shippingPortOptions, response.list);
+      });
+    }
+
+
+    function prepareShippingLineConfig(shippingLineConfig, shippingLineOptions){
+
+      function shippingLineItem(item, escape){
+        return '<div>' +
+            '<span class="dropdownLabel">' + item.name + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.codeName  + '</span>'
+            '</div>';
+      }
+
+      var dropDown = {
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(shippingLineOptions.list, function(line) { return line.id == value; });
+          shippingLineOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        },
+        valueField: 'id',
+        sortField: 'name',
+        searchField: ['name', 'codeName'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: shippingLineItem,
+          option: shippingLineItem
+        }
+      };
+      utilities.cloneIntoEmptyObject(shippingLineConfig, dropDown);
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.shippingLine).then(function (response){
+        return utilities.cloneIntoEmptyObject(shippingLineOptions, response.list);
+      });
+    }
+
+    function prepareInternationalTradeConfig(transactionFileConfig, transactionFileOption){
+
+      function getTransactionFileItem(){
+
+      }
+
+      function getTransactionFileOption(){
+
+      }
+
+      function getInternationalTradeItems(query, callback){
+        if(query.length!==3){
+          return callback();
+        }
+        $.ajax({
+          url: appConstants.HOST+'/ransaction/list/dropdown/',
+          type: 'GET',
+          dataType: 'json',
+          data: {
+            q: query,
+            page_limit: 10
+          },
+          error: function() {
+            callback();
+          },
+          success: function(res) {
+            callback(res.transactionList);
+          }
+        });
+
+      }
+
+      var config = {
+        valueField: 'id',
+        searchField: ['fileNo'],
+        maxItems:1,
+        create: false,
+        persist: false,
+        render: {
+          item: getTransactionFileItem,
+          option: getTransactionFileOption
+        },
+        load:getInternationalTradeItems
+      };
+
+      utilities.cloneIntoEmptyObject(transactionFileConfig, config);
+    }
 
     function preparePackagingConfig(packagingConfig, packagingOption){
       utilities.cloneIntoEmptyObject(packagingConfig, getBasicDropDownConfig());

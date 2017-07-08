@@ -34,15 +34,7 @@
             vm.selectedOrigin = [];
             vm.bpToRemove = [];
             vm.searchBusinessPartner = '';
-            vm.countryConfig = {};
-            vm.bankCountryConfig = {};
-            vm.countryOptions = {};
-            vm.stateConfig = {};
-            vm.cityConfig = {};
-            vm.bpTypeConfig = {};
-            vm.bpTypeOptions = {};
-            vm.contactTypeConfig = {};
-            vm.contactTypeOptions = {};
+
             vm.allBusiness = allBusiness.list;
             vm.allBusinessCount = allBusiness.count;
             console.log(allBusiness);
@@ -83,12 +75,7 @@
                 {name:'Last Transaction On', stSort:'bp_Cont_fullName', stPlaceholder:''},
                 {name:'Actions'}
             ];
-            dropDownConfig.prepareByTypesDropDown(vm.bpTypeConfig, vm.bpTypeOptions);
-            dropDownConfig.prepareContactNumberTypeDropDown(vm.contactTypeConfig, vm.contactTypeOptions);
-            dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions, onCountryDropDownChange, 1);
-            dropDownConfig.prepareCountryDropDown(vm.bankCountryConfig, vm.countryOptions, onBankCountryDropDownChange, 1);
-            dropDownConfig.prepareRegionDropDown(vm.stateConfig, null, null, onRegionDropDownChange);
-            dropDownConfig.prepareCityDropDown(vm.cityConfig, null, null, null, 1);
+
             vm.saveBusiness = saveBusiness;
             vm.onSaveBusinessCallBack = onSaveBusinessCallBack;
             vm.onSaveBusinessBank = onSaveBusinessBank;
@@ -107,16 +94,40 @@
                 if($stateParams.id==='new'){
                     vm.business = businessPartner.getNewBusinessObj();
                     vm.businessLogo = $filter('businessLogo')(vm.business.logo);
+
                 }
                 else{
                     loaderModal.open();
                     businessPartner.getBusinessComplete($stateParams.id).then(function(res){
                         vm.business = angular.copy(res.business);
+
                         loaderModal.close();
                         vm.businessLogo = $filter('businessLogo')(vm.business.logo);
                     });
+
+
+
                 }
             }
+
+            vm.countryConfig = {};
+            vm.bankCountryConfig = {};
+            vm.countryOptions = {};
+            vm.stateConfig = {};
+            vm.cityConfig = {};
+            vm.bpTypeConfig = {};
+            vm.bpTypeOptions = {};
+            vm.contactTypeConfig = {};
+            vm.contactTypeOptions = {};
+
+            dropDownConfig.prepareByTypesDropDown(vm.bpTypeConfig, vm.bpTypeOptions);
+            dropDownConfig.prepareContactNumberTypeDropDown(vm.contactTypeConfig, vm.contactTypeOptions);
+            dropDownConfig.prepareCountryDropDown(vm.countryConfig, vm.countryOptions, onCountryDropDownChange, 1);
+            dropDownConfig.prepareCountryDropDown(vm.bankCountryConfig, vm.countryOptions, onBankCountryDropDownChange, 1);
+            dropDownConfig.prepareRegionDropDown(vm.stateConfig, null, null, onRegionDropDownChange);
+            dropDownConfig.prepareCityDropDown(vm.cityConfig, null, null, null, 1);
+
+
 
         }
 
@@ -189,6 +200,7 @@
         }
 
         function saveBusinessBanks(business){
+            console.log('hello');
             var banks = angular.copy(business.banks);
             return businessPartner.saveBusinessBanks(business.bpId, banks);
         }
@@ -211,7 +223,7 @@
         function onBankCountryDropDownChange(value){
             if(value){
                 angular.forEach(vm.business.banks, function(bank, key){
-                    if(bank.country === value){
+                    if(bank.accountCountry === value){
                         bank.cityOptions.list = [];
                         if(value === ''){
                             bank.city = null;

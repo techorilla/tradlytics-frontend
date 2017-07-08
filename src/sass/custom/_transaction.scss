@@ -34,9 +34,12 @@
 
 .transactionView{
   .transactionNo{
+    background: $my-gray-2;
+    overflow: hidden;
+    min-height: 150px;
     .number{
       font-weight: $font-ultraBold;
-      font-size: 20px;
+      font-size: 24px;
       color: $primary;
     }
   }

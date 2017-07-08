@@ -1,0 +1,49 @@
+<div class="col-md-4 col-xs-12 commissionCard">
+    <div class="detail-heading">Washout Status
+        <button class="btn-xs btn btn-warning" ng-show="!trade.washOut.status && !showForm" ng-click="showWashOutForm('add')">Washout Transaction</button>
+        <button class="btn-xs btn btn-success" ng-show="trade.washOut.status && !showForm" ng-click="saveWashOutDetails(washOutForm, trade,false, 0.00, false)">Un Washout Transaction</button>
+        <button class="btn-xs btn btn-primary" ng-show="trade.washOut.status && !showForm" ng-click="showWashOutForm('edit')">Edit</button>
+    </div>
+    <div class="content">
+        <div ng-if="!showForm" class="col-md-12 col-xs-12 detail">
+            <div class="heading-2">Status</div>
+            <div class="value" ng-bind-html="trade.washOut.washOutStr"></div>
+        </div>
+        <div ng-show="showForm"  class="col-md-12 col-xs-12">
+            <form name="washOutForm" novalidate>
+
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Washout Price in <span class="titled">USD</span></label>
+                            <input type="text"
+                                   ng-model="washOutValue"
+                                   ng-required="true"
+                                   name="washOutValue"
+                                   class="form-control" id="loCode" placeholder="Washout Price in USD">
+                            <ng-messages for="washOutForm.washOutValue.$error"
+                                         ng-if='(washOutForm.$submitted || washOutForm.washOutValue.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter a washout price</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+
+                        <div class="form-group">
+                            <button type="submit" ng-if="!vm.portObj.id"
+                                    ng-click="saveWashOutDetails(washOutForm, trade, true, washOutValue, true)"
+                                    class="btn btn-primary btn-with-icon save-profile">
+                                <i class="ion-android-checkmark-circle"></i> {{trade.washOut.status ? 'Updated Washout value' : 'Washout Transaction'}}
+                            </button>
+
+                            <button type="button" ng-click="cancelWashingOut()"
+                                    class="btn btn-danger btn-with-icon save-profile">
+                                <i class="ion-android-cancel"></i>Cancel
+                            </button>
+                        </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

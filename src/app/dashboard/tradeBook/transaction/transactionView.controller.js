@@ -8,12 +8,14 @@
         .controller('TransactionView', transactionView);
 
     /* @ngInject */
-    function transactionView(Upload, tradeBook, toastr, $stateParams, apiEndPoints, trade, utilities, appFormats, $state){
+    function transactionView(Upload, tradeBook, toastr, $stateParams, apiEndPoints, trade, utilities,
+                             appFormats, $state, shipmentStatus){
         var vm = this;
         _init();
 
         function _init(){
             vm.appFormats = appFormats;
+            vm.shipmentStatus = shipmentStatus;
             vm.addingNote=false;
             vm.updateNote=false;
             vm.transactionId = $stateParams.id;
@@ -33,9 +35,60 @@
             vm.downloadTradeDoc = downloadTradeDoc;
             vm.editTransactionDetails = editTransactionDetails;
             vm.createWatsappCopy = createWatsappCopy;
-            console.log(vm.transaction );
+            vm.activateShipmentStatus = activateShipmentStatus;
+            vm.editNotShipped = editNotShipped;
+            vm.editApprobationReceived = editApprobationReceived;
+            vm.editShipped = editShipped;
+            vm.activateShipment = activateShipment;
+            vm.changeCompleteStatus = changeCompleteStatus;
+
+            vm.productConfig = {};
+            vm.productOptions = {};
+
 
         }
+
+        function changeCompleteStatus(transactionId, isComplete){
+            tradeBook.changeCompleteStatus(transactionId, isComplete).then(function(res){
+                if(res.success){
+                    vm.transaction = res.transactionObj;
+                    toastr.success(res.message)
+                }
+                else{
+                    toastr.error(res.message);
+                }
+            });
+        }
+
+        function activateShipmentStatus(shipmentStatus, status, transactionId){
+            tradeBook.activateShipmentStatus(shipmentStatus, status, transactionId).then(function(res){
+                if(res.success){
+                    vm.transaction = res.transactionObj;
+                    toastr.success(res.message, 'Shipment Status Updated')
+                }
+                else{
+                    toastr.error(res.message,'Error Changing Shipment Status');
+                }
+            });
+        }
+
+        function editNotShipped(){
+
+        }
+
+        function editApprobationReceived(){
+
+        }
+
+        function editShipped(){
+
+        }
+
+
+        function activateShipment(){
+
+        }
+
 
         function createWatsappCopy(transaction){
 

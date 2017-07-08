@@ -1,0 +1,57 @@
+<div class="col-md-6" ba-panel ba-panel-title="All Vessels ({{vm.vesselList.length}})">
+
+    <div class="searchFormContainer">
+        <form name="vm.vesselSearch">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="vesselName">SearchBy</label>
+                        <selectize
+                                name="vesselOperator"
+                                config="vm.shippingLineConfig"
+                                options='vm.shippingLineOptions.list'
+                                ng-model="vm.vesselObj.shippingLineId">
+                        </selectize>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="vesselName">Search Query</label>
+                        <input autocomplete="false"
+                               type="text"
+                               class="form-control"
+                               id="vesselName"
+                               name="vesselName"
+                               placeholder="Vessel Name"
+                               ng-model="vm.vesselObj.imoNumber" required>
+                        <ng-messages for="vm.shippingVesselForm.vesselName.$error"
+                                     ng-if='(vm.shippingVesselForm.$submitted || vm.shippingVesselForm.vesselName.$dirty)'>
+                            <div ng-message="required" class="errorValidation">Please enter vessel name.</div>
+                        </ng-messages>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary">Search Vessel</button>
+                    <button class="btn btn-danger">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <div ba-panel ba-panel-title="All Vessels">
+
+        <vessel-card ng-repeat="vessel in vm.vesselList"
+        col-size="4"
+        vessel="vessel">
+        </vessel-card>
+    </div>
+
+</div>

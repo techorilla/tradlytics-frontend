@@ -46,18 +46,23 @@
         manifest: 'manifest',
         manifestDashboard: 'manifest/dashboard',
         transaction:{
-          main:'transactions',
-          list: 'list',
-          basic: 'basic',
-          commission: 'commission',
-          contract: 'contract',
-          document: 'document',
-          note: 'note',
-          secondary: 'secondary'
+            main:'transactions',
+            list: 'list',
+            basic: 'basic',
+            commission: 'commission',
+            contract: 'contract',
+            document: 'document',
+            note: 'note',
+            secondary: 'secondary',
+            shipmentStatus: 'shipmentStatus',
+            completeStatus: 'completeStatus',
+            washout: 'washout'
         },
         shipping:{
-          main: 'shipping',
-          ports: 'ports'
+            main: 'shipping',
+            ports: 'ports',
+            shippingLine: 'line',
+            shippingVessel: 'vessel'
         },
         tabFilters: 'tabFilters',
         pricing: 'pricing',
@@ -88,7 +93,10 @@
             priceMarket: 'price_market',
             shipmentMonth: 'shipment_month',
             priceMetric: 'price_metric',
-            business: 'business'
+            business: 'business',
+            shippingLine: 'shipping_line',
+            ports: 'ports',
+            vessel: 'vessel'
         },
         product: 'product',
         productTags:'product_tags',

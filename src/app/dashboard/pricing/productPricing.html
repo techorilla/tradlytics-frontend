@@ -28,8 +28,7 @@
                                             ng-model="vm.marketPriceObj.productItemId">
                                     </selectize>
                                     <ng-messages for="vm.marketPriceForm.productItem.$error"
-                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm.productItem.$invalid) ||
-                                            (vm.marketPriceForm.productItem.$invalid && vm.marketPriceForm.productItem.$dirty)'>
+                                                 ng-if='(vm.marketPriceForm.$submitted || vm.marketPriceForm.productItem.$dirty)'>
                                         <div ng-message="required" class="errorValidation">Please enter product item.</div>
                                     </ng-messages>
                                 </div>
@@ -60,8 +59,7 @@
                                             ng-model="vm.marketPriceObj.priceMarketId">
                                     </selectize>
                                     <ng-messages for="vm.marketPriceForm.priceMarket.$error"
-                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm.priceMarket.$invalid) ||
-                                            (vm.marketPriceForm.priceMarket.$invalid && vm.marketPriceForm.priceMarket.$dirty)'>
+                                                 ng-if='(vm.marketPriceForm.$submitted || vm.marketPriceForm.priceMarket.$dirty)'>
                                         <div ng-message="required" class="errorValidation">Please enter price market.</div>
                                     </ng-messages>
                                 </div>
@@ -90,8 +88,7 @@
                                             ng-model="vm.marketPriceObj.priceMetricId">
                                     </selectize>
                                     <ng-messages for="vm.marketPriceForm.priceMarket.$error"
-                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm.priceMetric.$invalid) ||
-                                            (vm.marketPriceForm.priceMetric.$invalid && vm.marketPriceForm.priceMetric.$dirty)'>
+                                                 ng-if='(vm.marketPriceForm.$submitted || vm.marketPriceForm.priceMetric.$dirty)'>
                                         <div ng-message="required" class="errorValidation">Please enter price metric.</div>
                                     </ng-messages>
                                 </div>
@@ -135,11 +132,11 @@
                                             options='vm.shipmentMonthOptions.list'
                                             ng-model="price.shipmentMonths">
                                     </selectize>
-                                    <ng-messages for="vm.marketPriceForm['shipmentMonth_{{$index}}'].$error"
-                                                 ng-if='(vm.marketPriceForm.$submitted && vm.marketPriceForm["shipmentMonth_"+$index].$invalid) ||
-                                            (vm.marketPriceForm["shipmentMonth_"+$index].$invalid && vm.marketPriceForm["shipmentMonth_"+$index].$dirty)'>
-                                        <div ng-message="required" class="errorValidation">Please enter shipment month.</div>
-                                    </ng-messages>
+
+                                    <div ng-messages="vm.marketPriceForm['shipmentMonth_'+$index].$error" class="ng-messages"
+                                         ng-show='(vm.marketPriceForm.$submitted || vm.marketPriceForm["shipmentMonth_{{$index}}"].$dirty)'>
+                                        <div class="errorValidation" ng-message="required">Please enter shipment month.</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -149,19 +146,18 @@
                                 <label class="col-xs-4">Price ({{vm.currentCurrency}} / {{vm.marketPriceObj.priceMetricId ?  vm.marketPriceObj.priceMetricId : 'FCL' }})</label>
                                 <div class="col-xs-8">
                                     <input
-                                            required
+                                            ng-required="true"
                                             ng-pattern="/^[0-9]+(\.[0-9][0-9])$/i"
                                             ng-model="price.priceValue"
                                             class="form-control"
                                             name="{{'priceValue_'+$index}}"
                                             placeholder="Market price in {{vm.currentCurrency}}"/>
 
-                                    <ng-messages for="vm.marketPriceForm['priceValue_{{$index}}'].$error"
-                                                 ng-show='(vm.marketPriceForm.$submitted && vm.marketPriceForm["priceValue_"+$index].$invalid) ||
-                                            (vm.marketPriceForm["priceValue_"+$index].$invalid && vm.marketPriceForm["priceValue_"+$index].$dirty)' role="alert">
-                                        <ng-message class="errorValidation" when="required">Please enter price value.</ng-message>
-                                        <ng-message class="errorValidation" when="pattern">Price should be number in two decimals.</ng-message>
-                                    </ng-messages>
+                                    <div ng-messages="vm.marketPriceForm['priceValue_'+$index].$error" class="ng-messages"
+                                         ng-show='(vm.marketPriceForm.$submitted || vm.marketPriceForm["priceValue_{{$index}}"].$dirty)'>
+                                        <div class="errorValidation" ng-message="required">Please enter price value.</div>
+                                        <div class="errorValidation" ng-message="pattern">Price should be number in two decimals.</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -282,7 +278,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="10">
+                        <td colspan="12">
                             <div class="priceDetails row"  ng-show="row.showDetails" >
                                 <div class="col-md-4 comments">
                                     <div class="label col-md-12">Comments</div>

@@ -1,0 +1,39 @@
+<div class="shippingLineCard col-md-{{colSize}}" ng-class="{'hidden':hide}">
+    <div class="content">
+        <div class="detail">
+            <div class="logo">
+                <img width="100" height="100" ng-src="{{logo}}" >
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="label-text">Name</div>
+                    <div class="detail-text" ng-bind="shippingLine.name"></div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="label-text">Code Name</div>
+                    <div class="detail-text" ng-bind="shippingLine.codeName"></div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="label-text">Website</div>
+                    <div ng-if="!shippingLine.website" class="detail-text" ng-bind="'No website entered'"></div>
+                    <div ng-if="shippingLine.website" class="detail-text"><a target="_blank" href="shippingLine.website">{{shippingLine.website}}</a></div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="label-text">Vessel Count</div>
+                    <div class="detail-text" ng-bind="shippingLine.vesselCount"></div>
+                </div>
+            </div>
+
+
+
+            <div class="button-row col-xs-12">
+                <button class="btn btn-xs btn-primary" ng-click="editShippingLine(shippingLine.id)">Edit</button>
+                <button class="btn btn-xs btn-warning" ng-click="deleteShippingLine(shippingLine.id)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

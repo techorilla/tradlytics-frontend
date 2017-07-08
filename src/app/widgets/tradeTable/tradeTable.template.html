@@ -1,8 +1,8 @@
 <div class="row ">
     <div class="col-md-12">
         <div ba-panel ba-panel-title="Trade Book" ba-panel-class="with-scroll">
-            <div>
-                <table class="table">
+            <div class="horizontal-scroll-table-wrapper">
+                <table class="table table-striped">
 
                     <thead>
                     <tr class="sortable table-header"  ng-if="listData.length!==0">
@@ -14,31 +14,32 @@
                         <th>No transaction have been added with in the given date range and filters.</th>
                     </tr>
                     </thead>
-                    <tbody ng-repeat="row in displayList">
+                    <tbody ng-repeat="row in displayList"   ng-if="listData.length!==0">
 
                     <tr>
                         <td ng-click="toggleNotes(row)">
                             <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
                             <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
                         </td>
-                        <td  class="titled">{{row.date | date:appFormats.Date}}</td>
+                        <td  class="titled date">{{row.date | date:appFormats.Date}}</td>
                         <td><a class="titled" ui-sref="dashboard.transactionView({id:row.id})">{{row.fileNo}}</a></td>
-                        <td class="business">
-                            <div class="name" ng-bind="row.buyerName"></div>
-                            <div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>
-                            <div class="country"><img ng-if="row.buyerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.buyerCountryFlag}}"/> {{row.buyerCountry ? row.buyerCountry : 'No Origin' }}</div>
+                        <td class="business titled" ng-bind="row.buyerName  + ' | ' + (row.buyerCountry  ? row.buyerCountry : 'No Origin')">
+                            <!--<div class="name" ng-bind="row.buyerName"></div>-->
+                            <!--<div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.buyerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.buyerCountryFlag}}"/> {{row.buyerCountry ? row.buyerCountry : 'No Origin' }}</div>-->
                         </td>
-                        <td>{{row.productName}}</td>
+                        <td class="product">{{row.productName}}</td>
                         <td>{{row.productOriginName}}</td>
                         <td>{{row.quantity  | number: 2}}</td>
                         <td>{{row.price  | number: 2}}</td>
-                        <td class="business">
-                            <div class="name" ng-bind="row.sellerName"></div>
-                            <div class="contact">{{row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact'}}</div>
-                            <div class="country"><img ng-if="row.sellerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.sellerCountryFlag}}"/> {{row.sellerCountry  ? row.sellerCountry : 'No Origin' }}</div>
+                        <td class="business titled" ng-bind="row.sellerName + ' | ' + (row.sellerCountry  ? row.sellerCountry : 'No Origin') ">
+                            <!--{{row.sellerName +'|'+ (row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact')}}-->
+                            <!--<div class="name" ng-bind="row.sellerName"></div>-->
+                            <!--<div class="contact">{{row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.sellerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.sellerCountryFlag}}"/> {{row.sellerCountry  ? row.sellerCountry : 'No Origin' }}</div>-->
                         </td>
-                        <td>{{row.shipmentStart  | date:appFormats.Date}}</td>
-                        <td>{{row.shipmentEnd  | date:appFormats.Date}}</td>
+                        <td class="date">{{row.shipmentStart  | date:appFormats.Date}}</td>
+                        <td class="date">{{row.shipmentEnd  | date:appFormats.Date}}</td>
                         <td class="titled">US$ {{row.expectedCommission | number: 2}}</td>
 
                     </tr>

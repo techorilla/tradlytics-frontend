@@ -11,6 +11,7 @@
         'app.dashboard.products',
         'app.dashboard.businessPartner',
         'app.dashboard.tradeBook',
+        'app.dashboard.localTradeBook',
         'app.dashboard.settings',
         'app.dashboard.modals',
         'app.dashboard.pricing',
@@ -68,12 +69,12 @@
             title: 'Trade Book',
             icon: 'ion-social-usd',
             stateRef: 'dashboard.tradeBook'
-        });
-        baSidebarServiceProvider.addStaticItem({
-            title: 'Internal Trade Book',
-            icon: 'ion-social-usd',
-            stateRef: 'dashboard.internalTradeBook'
-        });
+        });http://localhost:3000/#!/dashboard/businessPartner
+        // baSidebarServiceProvider.addStaticItem({
+        //     title: 'Internal Trade Book',
+        //     icon: 'ion-social-usd',
+        //     stateRef: 'dashboard.internalTradeBook'
+        // });
         baSidebarServiceProvider.addStaticItem({
             title: 'Local Trade Book',
             icon: 'ion-social-usd',

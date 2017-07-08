@@ -1,21 +1,49 @@
 .commissionCard{
- .content{
-     background: $my-gray-2;
-     border-radius: 5px;
-     padding: 10px 10px 10px 10px;
-     overflow: hidden;
-     min-height: 100px;
-     .heading-1{
+    .detail-heading{
+        font-size:16px;
+        font-weight:$font-ultraBold;
+        text-align: center;
+        color:$sidebar-text;
+        background: $my-gray-2;
+        height: 60px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .content{
+        background: $body-bg;
+        padding: 20px 10px 10px 10px;
+        overflow: hidden;
+        min-height: 100px;
+        .currency, .quantityMetric{
+            font-weight: $font-ultraBold;
+            color: $text-color;
+        }
+        .detail{
+            padding-top: 20px;
+            padding-bottom: 10px;
+        }
 
-         font-weight: $font-ultraBold;
-         font-size: 18px;
-         border-bottom: 1px solid $body-bg;
-         padding-bottom: 3px;
-     }
-     .value{
-         font-size: 20px;
-         font-weight: $font-thin;
-         padding-top: 5px;
-     }
- }
+        .heading-2{
+            font-weight: $font-ultraBold;
+            font-size: 18px;
+            border-bottom: 1px solid $sidebar;
+            padding-bottom: 5px;
+        }
+
+        .heading-1{
+
+            font-weight: $font-ultraBold;
+            font-size: 18px;
+            border-bottom: 1px solid $sidebar;
+            padding-bottom: 5px;
+        }
+        .value{
+            font-size: 30px;
+            font-weight: $font-thin;
+            color: $primary;
+            padding-top: 15px;
+
+        }
+    }
 }
+

@@ -9,11 +9,19 @@
       .filter('profilePicture', profilePicture)
       .filter('productPicture', productPicture)
       .filter('itemImage', itemImage)
-      .filter('businessLogo', businessLogo);
+      .filter('businessLogo', businessLogo)
+      .filter('shippingLineLogo', shippingLineLogo);
 
   function itemImage(layoutPaths){
     return function(input, ext) {
       return (input) ? input : layoutPaths.images.root+'/theme/no-picture.png'
+    };
+  }
+
+  /** @ngInject */
+  function shippingLineLogo(layoutPaths) {
+    return function(input, ext) {
+      return (input) ? input : layoutPaths.images.root+'/theme/no-shipping-logo.png'
     };
   }
 

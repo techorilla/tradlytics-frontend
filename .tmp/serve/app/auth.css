@@ -86,9 +86,9 @@ html, body {
   min-width: 320px; }
 
 body {
-  font: 14px/16px "Montserrat", sans-serif;
+  font: 11px "Montserrat", sans-serif;
   color: #2C3E50;
-  background-color: #F0F8FF; }
+  background-color: #C0C0C0; }
   body.blur-theme::before {
     content: '';
     position: fixed;
@@ -111,7 +111,7 @@ body.mobile {
     bottom: 0;
     right: 0;
     background-attachment: inherit;
-    background-color: #F0F8FF; }
+    background-color: #C0C0C0; }
   body.mobile.blur-theme .body-bg::before {
     content: '';
     position: fixed;
@@ -278,7 +278,7 @@ a {
   outline: none; }
 
 .btn {
-  border-radius: 5px;
+  border-radius: 0px;
   transition: all 0.1s ease; }
 
 .btn:hover {
@@ -338,12 +338,12 @@ button.btn.btn-default {
   border-width: 1px;
   color: #2C3E50;
   background: rgba(46, 46, 46, 0);
-  border-color: #BDC3C7; }
+  border-color: #8c9195; }
   button.btn.btn-default.disabled, button.btn.btn-default[disabled], fieldset[disabled] button.btn.btn-default, button.btn.btn-default.disabled:hover, button.btn.btn-default[disabled]:hover,
   fieldset[disabled] button.btn.btn-default:hover, button.btn.btn-default.disabled:focus, button.btn.btn-default[disabled]:focus, fieldset[disabled] button.btn.btn-default:focus, button.btn.btn-default.disabled.focus, button.btn.btn-default[disabled].focus, fieldset[disabled] button.btn.btn-default.focus, button.btn.btn-default.disabled:active, button.btn.btn-default[disabled]:active, fieldset[disabled] button.btn.btn-default:active, button.btn.btn-default.disabled.active, button.btn.btn-default[disabled].active,
   fieldset[disabled] button.btn.btn-default.active {
     background: rgba(46, 46, 46, 0);
-    border-color: #c9cfd3; }
+    border-color: #989da1; }
     button.btn.btn-default.disabled:hover, button.btn.btn-default[disabled]:hover, fieldset[disabled] button.btn.btn-default:hover, button.btn.btn-default.disabled:hover:hover, button.btn.btn-default[disabled]:hover:hover,
     fieldset[disabled] button.btn.btn-default:hover:hover, button.btn.btn-default.disabled:focus:hover, button.btn.btn-default[disabled]:focus:hover, fieldset[disabled] button.btn.btn-default:focus:hover, button.btn.btn-default.disabled.focus:hover, button.btn.btn-default[disabled].focus:hover, fieldset[disabled] button.btn.btn-default.focus:hover, button.btn.btn-default.disabled:active:hover, button.btn.btn-default[disabled]:active:hover, fieldset[disabled] button.btn.btn-default:active:hover, button.btn.btn-default.disabled.active:hover, button.btn.btn-default[disabled].active:hover,
     fieldset[disabled] button.btn.btn-default.active:hover {
@@ -351,7 +351,7 @@ button.btn.btn-default {
               transform: none; }
   button.btn.btn-default:hover, button.btn.btn-default:focus, button.btn.btn-default.focus, button.btn.btn-default:active, button.btn.btn-default.active {
     background: rgba(46, 46, 46, 0);
-    border-color: #a5abaf; }
+    border-color: #74797d; }
   button.btn.btn-default:active, button.btn.btn-default:target {
     background-color: rgba(46, 46, 46, 0);
     color: #2C3E50; }
@@ -678,7 +678,7 @@ button.progress-button.btn.btn-danger {
   margin-bottom: 5px;
   color: #2C3E50;
   font-weight: 400;
-  font-size: 13px; }
+  font-size: 12px; }
 
 .form-control {
   color: #2C3E50;
@@ -1045,24 +1045,24 @@ label.custom-input-danger > span:hover:before {
   border: 1px solid transparent; }
 
 .bootstrap-select.btn-group.with-search.open .btn-default + .dropdown-menu .no-results {
-  color: #2C3E50; }
+  color: #dee4e8; }
 
 .bootstrap-select.btn-group .notify {
-  color: #2C3E50; }
+  color: #dee4e8; }
 
 tags-input .tags.focused {
   /* outline: none; */
   box-shadow: 0 0 3px 1px rgba(46, 46, 46, 0.93); }
 
 tags-input .autocomplete {
-  background: #BDC3C7; }
+  background: #8c9195; }
   tags-input .autocomplete .suggestion-item {
     background: transparent;
     color: #fff;
     font-weight: bold;
     font-size: 12px; }
     tags-input .autocomplete .suggestion-item.selected {
-      color: #2C3E50 !important;
+      color: #dee4e8 !important;
       background-color: rgba(84, 88, 91, 0.3) !important; }
       tags-input .autocomplete .suggestion-item.selected em {
         font-size: 14px;
@@ -1075,7 +1075,7 @@ tags-input .autocomplete {
     max-height: 280px;
     overflow-y: auto;
     position: relative;
-    background: #BDC3C7 !important; }
+    background: #8c9195 !important; }
 
 tags-input .tags {
   color: #2C3E50;

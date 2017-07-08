@@ -2,31 +2,30 @@
   min-height: 150px;
   .content{
     .notApplicable{
-      font-size:30px;
+      font-size:40px;
       font-weight: $font-ultraBold;
       padding-top: 20px;
+      padding-left: 30px;
     }
     min-height: 150px;
-    padding-left: 25px;
-    padding-right: 5px;
-    padding-top: 10px;
     padding-bottom: 10px;
-    background: $my-gray-2;
-    border-radius: 5px;
+    background: $body-bg;
   }
   padding-bottom: 20px;
   .detail-heading{
-    font-size: 15px;
-    color: $label-text;
-    border-bottom: 1px solid $body-bg;
-    padding-bottom: 3px;
-    font-weight: bold;
+    font-size:16px;
+    font-weight:$font-ultraBold;
+    text-align: center;
+    color: $sidebar-text;
+    background: $my-gray-2;
+    height: 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   .logo{
     padding-top: 10px;
     padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 35px;
     float: left;
   }
   .details{
@@ -34,7 +33,7 @@
     .name{
       padding-left: 20px;
       padding-top: 5px;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: $font-ultraBold;
       color: $label-text;
     }
@@ -50,7 +49,7 @@
         padding-left: 3px;
         color: $label-text;
         font-weight: $font-bold;
-        font-size: 14px;
+        font-size: 12px;
       }
     }
   }
@@ -60,7 +59,7 @@
       margin-left: -10px;
       width: 100%;
       color: $primary;
-      font-size: 14px;
+      font-size: 12px;
     }
     .url{
       a{
@@ -76,7 +75,7 @@
       margin-left: -10px;
       width: 100%;
       color: $primary;
-      font-size: 14px;
+      font-size: 12px;
     }
     .contact{
 

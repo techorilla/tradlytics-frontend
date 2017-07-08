@@ -28,23 +28,27 @@
     $scope.$watch(angular.bind(vm, function () {return vm.tabNum;}), calcProgress);
 
     vm.selectTab = function (tabNum) {
-      vm.tabs[vm.tabNum].submit().then(function(res){
-        if(res.success){
-          if(vm.tabs[vm.tabNum].onSubmitCallback){
-            vm.tabs[vm.tabNum].onSubmitCallback({'response':res});
+      var promise = vm.tabs[vm.tabNum].submit();
+      if(promise){
+        promise.then(function(res){
+          if(res.success){
+            if(vm.tabs[vm.tabNum].onSubmitCallback){
+              vm.tabs[vm.tabNum].onSubmitCallback({'response':res});
+            }
+            if (vm.tabs[tabNum+1].isAvailiable()) {
+              vm.tabNum = tabNum+1;
+              vm.tabs.forEach(function (t, tIndex) {
+                tIndex == vm.tabNum ? t.select(true) : t.select(false);
+              });
+            }
+            toastr.success(res.message);
           }
-          if (vm.tabs[tabNum].isAvailiable()) {
-            vm.tabNum = tabNum;
-            vm.tabs.forEach(function (t, tIndex) {
-              tIndex == vm.tabNum ? t.select(true) : t.select(false);
-            });
+          else{
+            toastr.error(res.message);
           }
-          toastr.success(res.message);
-        }
-        else{
-          toastr.error(res.message);
-        }
-      });
+        });
+      }
+
     };
 
     vm.isFirstTab = function () {
@@ -68,7 +72,7 @@
     };
 
     vm.nextTab = function () {
-      vm.selectTab(vm.tabNum + 1)
+      vm.selectTab(vm.tabNum)
     };
 
     vm.previousTab = function () {
