@@ -25,14 +25,16 @@
             </div>
 
             <div class="col-xs-12 col-md-2">
-                <h3 class="with-line">Expected Commission</h3>
-                <div ng-bind="'USD ' + (vm.transaction.commission.expectedCommission | number : 2)" class="number"></div>
+                <h3 class="with-line">Net Commission</h3>
+                <div ng-bind="'USD ' + (vm.transaction.commission.netCommission | number : 2)" class="number"></div>
             </div>
 
 
             <div class="col-xs-12 col-md-2">
-                <h3 class="with-line">Net Commission</h3>
-                <div class="number">NA</div>
+                <h3 class="with-line">Earned Commission</h3>
+                <div class="number" ng-if="!vm.transaction.shipment.arrivedAtPort.quantityShipped">NA</div>
+                <div  ng-if="vm.transaction.shipment.arrivedAtPort.quantityShipped"
+                      ng-bind="'USD ' + (vm.transaction.commission.earnedCommission | number : 2)" class="number"></div>
             </div>
 
             <div class="col-xs-12 col-md-4">
@@ -179,10 +181,10 @@
                                             ng-show="vm.transaction.shipment.notShipped.active"
                                             class="btn btn-xs btn-warning activate">Deactivate</button>
                                     Not Shipped&nbsp;<i class="fa fa-ship" aria-hidden="true"></i>
-                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                    <button class="btn-xs btn btn-primary edit-button" ng-click="vm.showNotShippedForm = true;">Edit</button>
                                 </div>
 
-                                <div class="detail">
+                                <div class="detail" ng-show="!vm.showNotShippedForm">
                                     <div class="col-xs-12 col-md-12">
                                         <h3 class="with-line">Reason</h3>
                                         <div class="number">NA</div>
@@ -193,12 +195,53 @@
                                     </div>
                                 </div>
 
-                                <div class="form">
+                                <div class="form" ng-show="vm.showNotShippedForm">
+                                    <form name="vm.notShippedForm" novalidate>
 
+
+                                            <div class="col-md-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <label class="with-line">Shipment Extension</label>
+                                                    <date-picker-input
+                                                            blank="true"
+                                                            date="vm.transaction.shipment.notShipped.shipmentExtension"
+                                                            name="date">
+                                                    </date-picker-input>
+                                                </div>
+                                            </div>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Reason</label>
+                                                <textarea type="text"
+                                                          rows="3"
+                                                          class="form-control"
+                                                          ng-models="vm.transaction.shipment.notShipped.reason"
+                                                          placeholder="Reason for Not Shipped" />
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                                <button type="submit"
+                                                        ng-click="vm.editNotShipped(vm.transaction.shipment.notShipped)"
+                                                        class="btn btn-primary btn-with-icon save-profile">
+                                                    <i class="ion-android-checkmark-circle"></i> Update Not Shipped Info
+                                                </button>
+
+                                                <button type="button"
+                                                        ng-click="vm.cancelShipmentForm(vm.notShippedForm, 'showNotShippedForm')"
+                                                        class="btn btn-danger btn-with-icon save-profile">
+                                                    <i class="ion-android-cancel"></i>Cancel
+                                                </button>
+                                            </div>
+                                    </form>
                                 </div>
 
                             </div>
-                            <div class="col-md-3 col-xs-12"                                 >
+                            <div class="col-md-3 col-xs-12">
                                 <div class="button tab" ng-class="{'active': vm.transaction.shipment.approbationReceived.active }">
                                     <button ng-click="vm.activateShipmentStatus(vm.shipmentStatus.APPROBATION_RECEIVED, true, vm.transactionId)"
                                             ng-show="!vm.transaction.shipment.approbationReceived.active"
@@ -209,9 +252,10 @@
                                     Approbation Received
                                     &nbsp;<i class="fa fa-ship" aria-hidden="true"></i>
 
-                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                    <button class="btn-xs btn btn-primary edit-button"
+                                            ng-click="vm.showApprobationRecievedForm = true;">Edit</button>
                                 </div>
-                                <div class="detail">
+                                <div class="detail" ng-show="!vm.showApprobationRecievedForm">
                                     <div class="col-xs-12 col-md-12">
                                         <h3 class="with-line">Expected Shipment</h3>
                                         <div class="number">NA</div>
@@ -221,6 +265,52 @@
                                         <div class="number">NA</div>
                                     </div>
                                 </div>
+
+                                <div class="form" ng-show="vm.showApprobationRecievedForm">
+                                    <form name="vm.approbationRecievedForm" novalidate>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Expected Shipment</label>
+                                                <date-picker-input
+                                                        blank="true"
+                                                        date="vm.transaction.shipment.approbationReceived.expected_shipment"
+                                                        name="date">
+                                                </date-picker-input>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">In Transit</label>
+                                                <date-picker-input
+                                                        blank="true"
+                                                        date="vm.transaction.shipment.approbationReceived.inTransit"
+                                                        name="date">
+                                                </date-picker-input>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <button type="submit"
+                                                    ng-click="vm.editApprobationReceived(vm.transaction.shipment.approbationReceived)"
+                                                    class="btn btn-primary btn-with-icon save-profile">
+                                                <i class="ion-android-checkmark-circle"></i> Update Approbation Recieved Info
+                                            </button>
+
+                                            <button type="button"
+                                                    ng-click="vm.cancelShipmentForm(vm.approbationRecievedForm, 'showApprobationRecievedForm')"
+                                                    class="btn btn-danger btn-with-icon save-profile">
+                                                <i class="ion-android-cancel"></i>Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
 
                             </div>
                             <div class="col-md-3 col-xs-12">
@@ -233,9 +323,17 @@
                                             class="btn btn-xs btn-warning activate">Deactivate</button>
                                     Shipped
                                     <i class="fa fa-ship" aria-hidden="true"></i>
-                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                    <button
+                                            ng-click="vm.showShippedForm = true;"
+                                            class="btn-xs btn btn-primary edit-button">Edit</button>
                                 </div>
-                                <div class="detail">
+                                <div class="detail" ng-show="!vm.showShippedForm">
+
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Shipper</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+
                                     <div class="col-xs-12 col-md-12">
                                         <h3 class="with-line">Date Shipped</h3>
                                         <div class="number">NA</div>
@@ -250,7 +348,88 @@
                                         <div class="number">NA</div>
                                     </div>
 
+
+
+
                                 </div>
+
+                                <div class="form" ng-show="vm.showShippedForm">
+                                    <form name="vm.shippedForm" novalidate>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Shipper</label>
+                                                <selectize
+                                                        placeholder="Shipper"
+                                                        name="shipper"
+                                                        id="shipper"
+                                                        config="vm.shipperConfig"
+                                                        options='vm.shipperOptions.list'
+                                                        ng-model="vm.transaction.shipment.shipped.shipper.id">
+                                                </selectize>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Date Shipped</label>
+                                                <date-picker-input
+                                                        blank="true"
+                                                        date="vm.transaction.shipment.shipped.shippedOn"
+                                                        name="date">
+                                                </date-picker-input>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Expected Arrival</label>
+                                                <date-picker-input
+                                                        blank="true"
+                                                        date="vm.transaction.shipment.shipped.inTransit"
+                                                        name="date">
+                                                </date-picker-input>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Transit Ports</label>
+                                                <tags-input ng-model="vm.transaction.shipment.shipped.transitPorts"
+                                                            placeholder="Add a port"
+                                                            template="port-tag-template"
+                                                            key-property="id"
+                                                            add-from-autocomplete-only="true"
+                                                            add-on-paste="false">
+                                                    <auto-complete
+                                                            template="port-auto-complete-template"
+                                                            source="vm.loadPorts($query)"></auto-complete>
+                                                </tags-input>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <button type="submit"
+                                                    ng-click="vm.editApprobationReceived(vm.transaction.shipment.shipped)"
+                                                    class="btn btn-primary btn-with-icon save-profile">
+                                                <i class="ion-android-checkmark-circle"></i> Update Shipped Info
+                                            </button>
+
+                                            <button type="button"
+                                                    ng-click="vm.cancelShipmentForm(vm.approbationRecievedForm, 'showShippedForm')"
+                                                    class="btn btn-danger btn-with-icon save-profile">
+                                                <i class="ion-android-cancel"></i>Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
 
                             </div>
                             <div class="col-md-3 col-xs-12">
@@ -263,17 +442,18 @@
                                             class="btn btn-xs btn-warning activate">Deactivate</button>
                                     Arrived at Port
                                     &nbsp;<i class="fa fa-ship" aria-hidden="true"></i>
-                                    <button class="btn-xs btn btn-primary edit-button">Edit</button>
+                                    <button ng-click="vm.showArrivedAtPort=true;"
+                                            class="btn-xs btn btn-primary edit-button">Edit</button>
                                 </div>
 
-                                <div class="detail">
+                                <div class="detail"  ng-show="!vm.showArrivedAtPort">
                                     <div class="col-xs-12 col-md-12">
                                         <h3 class="with-line">B/L No.</h3>
                                         <div class="number">NA</div>
                                     </div>
                                     <div class="col-xs-12 col-md-12">
                                         <h3 class="with-line">Quantity Shipped</h3>
-                                        <div class="number">NA</div>
+                                        <div class="number">{{vm.transaction.shipment.arrivedAtPort.quantityShipped ? (vm.transaction.shipment.arrivedAtPort.quantityShipped | number : '2') + ' MT' : 'NA'}}</div>
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
@@ -294,6 +474,113 @@
                                     </div>
 
                                 </div>
+
+                                <div class="form" ng-show="vm.showArrivedAtPort">
+                                    <form name="vm.arrivedAtPortForm" novalidate>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">B/L No.</label>
+                                                <input type="text"
+                                                          rows="3"
+                                                          class="form-control"
+                                                          ng-model="vm.transaction.shipment.arrivedAtPort.blNo"
+                                                          placeholder="Enter BL No." />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Quantity Shipped <span class="titled">MT</span></label>
+                                                <input type="text"
+                                                       rows="3"
+                                                       class="form-control"
+                                                       ng-model="vm.transaction.shipment.arrivedAtPort.quantityShipped"
+                                                       placeholder="Enter Quantity Shipped." />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Shipping Line</label>
+                                                <selectize
+                                                        placeholder="Shipping Line"
+                                                        config="vm.shippingLineConfig"
+                                                        options='vm.shippingLineOptions.list'
+                                                        ng-model="vm.transaction.shipment.arrivedAtPort.shippingLine.id">
+                                                </selectize>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Port of Loading</label>
+                                                <selectize
+                                                        placeholder="Port of Loading"
+                                                        config="vm.portConfig"
+                                                        options='vm.portOptions.list'
+                                                        ng-model="vm.transaction.shipment.shipped.loadingPort.id">
+                                                </selectize>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Port of Destination</label>
+                                                <selectize
+                                                        placeholder="Port of Destination"
+                                                        config="vm.portConfig"
+                                                        options='vm.portOptions.list'
+                                                        ng-model="vm.transaction.shipment.shipped.destinationPort.id">
+                                                </selectize>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Vessel Voyage No.</label>
+                                                <tags-input ng-model="vm.transaction.shipment.arrivedAtPort.vessel"
+                                                            placeholder="Enter Vessel/Voyage No."
+                                                            max-tags="1"
+                                                            ng-class="{'has-tags': vm.transaction.shipment.arrivedAtPort.vessel.length>0}"
+                                                            key-property="id"
+                                                            display-property="imo_number"
+                                                            text="imo_number"
+                                                            template="vessel-tag-template"
+                                                            add-from-autocomplete-only="true"
+                                                            add-on-paste="false">
+                                                    <auto-complete
+                                                            template="vessel-auto-complete-template"
+                                                            source="vm.loadVessel($query)"></auto-complete>
+                                                </tags-input>
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <button type="submit"
+                                                    ng-click="vm.editArrivedAtPort(vm.arrivedAtPortForm, vm.transaction.shipment.arrivedAtPort, vm.transaction, vm.transactionId)"
+                                                    class="btn btn-primary btn-with-icon save-profile">
+                                                <i class="ion-android-checkmark-circle"></i> Update Arrived At Port Info
+                                            </button>
+
+                                            <button type="button"
+                                                    ng-click="vm.cancelShipmentForm(vm.arrivedAtPortForm, 'showArrivedAtPort')"
+                                                    class="btn btn-danger btn-with-icon save-profile">
+                                                <i class="ion-android-cancel"></i>Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
                             </div>
                         </div>
 
@@ -407,3 +694,49 @@
 
     </div>
 </div>
+
+
+
+
+<script type="text/ng-template" id="vessel-tag-template">
+    <div class="tag-template">
+        <div class="right-panel">
+            <span class="titled">{{$getDisplayText()}}</span>
+            <span>{{data.first_name}}</span>
+            <span>{{data.mmsi_number ? data.mmsi_number : 'NA' }}</span>
+            <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vessel-auto-complete-template">
+    <div class="autocomplete-template">
+        <div class="right-panel">
+            <span class="titled" ng-bind-html="$highlight($getDisplayText())"></span>
+            <span>{{data.first_name}}</span>
+            <span>{{data.mmsi_number ? data.mmsi_number : 'NA' }}</span>
+        </div>
+    </div>
+</script>
+
+
+
+<script type="text/ng-template" id="port-tag-template">
+    <div class="tag-template">
+        <div class="right-panel">
+            <span>{{$getDisplayText()}}</span>
+            <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="port-auto-complete-template">
+    <div class="autocomplete-template">
+        <div class="right-panel">
+            <span class="titled">{{data.loCode}}</span>
+            <span> | {{data.name}}</span>
+            <span> | {{data.country}}</span>
+        </div>
+    </div>
+</script>
+

@@ -1,0 +1,39 @@
+tags-input.has-tags .tags input{
+  display: none !important;
+}
+
+tags-input{
+
+  .autocomplete{
+    .suggestion-item.selected em {
+      font-size: 14px;
+      color: #fff;
+      background-color: $sidebar;
+    }
+  }
+
+
+  .tag-template, .autocomplete-template{
+    .right-panel{
+
+      span:not(:last-child):after {
+        content: " | ";
+        font-weight: $font-ultraBold;
+        font-size: 14px;
+        color: $primary;
+      }
+
+      span{
+        font-size: 10px;
+        color: $sidebar-text;
+        font-weight: $font-bold;
+        &.titled{
+          font-size: 14px;
+          color: $sidebar-text;
+          font-weight: $font-ultraBold;
+        }
+      }
+    }
+  }
+}
+

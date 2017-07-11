@@ -3,7 +3,7 @@
     angular.module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    function Dashboard(completeReport, $state) {
+    function Dashboard(completeReport, $state, baSidebarService) {
         var vm = this;
         _init();
 
@@ -12,6 +12,7 @@
             console.log(vm.completeReport.usdExchange.sevenDays);
             vm.refreshCurrentDollarRate = refreshCurrentDollarRate;
             vm.goToCurrencyDashboard = goToCurrencyDashboard;
+            vm.invertSideBar = invertSideBar;
             prepareDashboard();
         }
 
@@ -21,6 +22,11 @@
 
         function refreshCurrentDollarRate(){
 
+        }
+
+        function invertSideBar(collapse){
+            console.log('hello');
+            baSidebarService.setMenuCollapsed(collapse);
         }
 
         function goToCurrencyDashboard(currencyIn, currencyOut){

@@ -116,25 +116,25 @@
 
 
 
-                <div class="form-group col-md-4  clearfix">
-                    <label for="quantityMetric" class="col-sm-3 control-label">Quantity Metric</label>
-                    <div class="col-sm-9">
-                        <selectize
-                                ng-required="true"
-                                placeholder="Quantity Metric"
-                                name="quantityMetric"
-                                id="quantityMetric"
-                                config="vm.quantityMetricConfig"
-                                options='vm.quantityMetricOptions.list'
-                                ng-model="vm.transaction.basic.quantityMetricId">
-                        </selectize>
-                        <ng-messages for="vm.transactionForm.quantityMetric.$error"
-                                     ng-if='(vm.transactionForm.$submitted && vm.transactionForm.quantityMetric.$invalid) ||
-                                            (vm.transactionForm.quantityMetric.$invalid && vm.transactionForm.quantityMetric.$dirty)'>
-                            <div ng-message="required" class="errorValidation">Please enter quantity metric.</div>
-                        </ng-messages>
-                    </div>
-                </div>
+                <!--<div class="form-group col-md-4  clearfix">-->
+                    <!--<label for="quantityMetric" class="col-sm-3 control-label">Quantity Metric</label>-->
+                    <!--<div class="col-sm-9">-->
+                        <!--<selectize-->
+                                <!--ng-required="true"-->
+                                <!--placeholder="Quantity Metric"-->
+                                <!--name="quantityMetric"-->
+                                <!--id="quantityMetric"-->
+                                <!--config="vm.quantityMetricConfig"-->
+                                <!--options='vm.quantityMetricOptions.list'-->
+                                <!--ng-model="vm.transaction.basic.quantityMetricId">-->
+                        <!--</selectize>-->
+                        <!--<ng-messages for="vm.transactionForm.quantityMetric.$error"-->
+                                     <!--ng-if='(vm.transactionForm.$submitted && vm.transactionForm.quantityMetric.$invalid) ||-->
+                                            <!--(vm.transactionForm.quantityMetric.$invalid && vm.transactionForm.quantityMetric.$dirty)'>-->
+                            <!--<div ng-message="required" class="errorValidation">Please enter quantity metric.</div>-->
+                        <!--</ng-messages>-->
+                    <!--</div>-->
+                <!--</div>-->
 
                 <div class="form-group col-md-4 clearfix">
                     <label class="col-sm-3 control-label">Quantity ({{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT' }})</label>

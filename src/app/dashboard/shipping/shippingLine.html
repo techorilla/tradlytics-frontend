@@ -1,6 +1,6 @@
 <div ba-panel ba-panel-title="All Shipping Line ({{vm.shippingLineList.length}})">
     <div>
-        <shipping-line-card ng-repeat="line in vm.shippingLineList"
+        <shipping-line-card ng-repeat="line in vm.shippingLineList | orderBy:'codeName'"
                      col-size="4"
                      delete="vm.deleteCallback(id)"
                      shipping-line="line">

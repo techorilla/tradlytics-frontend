@@ -56,13 +56,21 @@
             secondary: 'secondary',
             shipmentStatus: 'shipmentStatus',
             completeStatus: 'completeStatus',
-            washout: 'washout'
+            washout: 'washout',
+
+            arrivedAtPortInfo: 'arrived_at_port_info',
+            notShippedInfo: 'not_shipped_info',
+            shippedInfo: 'shipped_info',
+            approbationReceivedInfo: 'approbation_received_info'
+
         },
         shipping:{
             main: 'shipping',
             ports: 'ports',
             shippingLine: 'line',
-            shippingVessel: 'vessel'
+            shippingVessel: 'vessel',
+            shippingVesselTag: 'vessel_tag',
+            portTag: 'port_tag'
         },
         tabFilters: 'tabFilters',
         pricing: 'pricing',
@@ -116,6 +124,11 @@
         currencyExchange: {
             main:'currency_exchange',
             dashboard:'dashboard'
+        },
+        accounts: {
+            main: 'main',
+            dashboard: 'dashboard',
+            commissionFlow: 'commission_flow',
         }
 
     };

@@ -42,7 +42,8 @@
 
       prepareShippingLineConfig: prepareShippingLineConfig,
       prepareShippingPortConfig: prepareShippingPortConfig,
-      prepareShippingVesselConfig: prepareShippingVesselConfig
+      prepareShippingVesselConfig: prepareShippingVesselConfig,
+
     };
 
 
@@ -53,7 +54,7 @@
 
     function prepareShippingPortConfig(shippingPortConfig, shippingPortOptions){
 
-      function shippingPortItem(){
+      function shippingPortItem(item, escape){
         return '<div>' +
             '<span class="dropdownLabel">' + item.name + '</span>' +
             '<span class="dropdownCaption">' + ' | '+ item.loCode  + '</span>' +

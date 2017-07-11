@@ -37,9 +37,25 @@
             updateShippingLine: updateShippingLine,
             deleteShippingLine: deleteShippingLine,
             getNewShippingLineObj: getNewShippingLineObj,
-            getShippingLineObj: getShippingLineObj
+            getShippingLineObj: getShippingLineObj,
+
+            getPortTags: getPortTags,
+            getVesselTags: getVesselTags
+
+
+
 
         };
+
+
+        function getPortTags(query){
+            return shippingAPI.customGET(apiEndPoints.shipping.portTag, {'query': query});
+        }
+
+        function getVesselTags(query){
+            return shippingAPI.customGET(apiEndPoints.shipping.shippingVesselTag, {'query': query});
+        }
+
 
         function getNewShippingLineObj(){
             return {

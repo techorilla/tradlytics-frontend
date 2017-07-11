@@ -1,14 +1,14 @@
 <div class="body-bg"></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
 
-    <ba-sidebar></ba-sidebar>
+    <ba-sidebar ng-mouseover="vm.invertSideBar(false)"></ba-sidebar>
     <page-top></page-top>
 
     <div class="al-main">
         <div class="al-content">
             <!--<content-top></content-top>-->
             <page-header go-back="true"></page-header>
-            <div ui-view="content"></div>
+            <div ui-view="content" ng-mouseover="vm.invertSideBar(true)"></div>
         </div>
     </div>
 

@@ -253,3 +253,13 @@ text-angular{
   }
 }
 
+
+label{
+  &.with-line{
+    .titled{
+      font-weight: $font-bold;
+      color: $primary;
+    }
+  }
+}
+

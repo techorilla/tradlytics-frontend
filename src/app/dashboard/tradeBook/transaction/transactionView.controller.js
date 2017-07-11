@@ -9,11 +9,36 @@
 
     /* @ngInject */
     function transactionView(Upload, tradeBook, toastr, $stateParams, apiEndPoints, trade, utilities,
-                             appFormats, $state, shipmentStatus){
+                             appFormats, $state, shipmentStatus, dropDownConfig, shipping, loaderModal){
         var vm = this;
         _init();
 
         function _init(){
+
+            //shipment Form
+            vm.showNotShippedForm = false;
+            vm.showApprobationRecievedForm = false;
+            vm.showShippedForm = false;
+            vm.showArrivedAtPort = false;
+            vm.loadVessel = loadVessel;
+
+
+            vm.cancelShipmentForm = cancelShipmentForm;
+
+            vm.shipperConfig = {};
+            vm.shipperOptions = {};
+
+
+            vm.shippingLineConfig = {};
+            vm.shippingLineOptions = {};
+            vm.portConfig = {};
+            vm.portOptions = {};
+
+            dropDownConfig.prepareShippingLineConfig(vm.shippingLineConfig, vm.shippingLineOptions);
+            dropDownConfig.prepareShippingPortConfig(vm.portConfig, vm.portOptions);
+            dropDownConfig.prepareBusinessDropDown(vm.shipperConfig, vm.shipperOptions, 'Shipper');
+
+
             vm.appFormats = appFormats;
             vm.shipmentStatus = shipmentStatus;
             vm.addingNote=false;
@@ -36,19 +61,41 @@
             vm.editTransactionDetails = editTransactionDetails;
             vm.createWatsappCopy = createWatsappCopy;
             vm.activateShipmentStatus = activateShipmentStatus;
+
             vm.editNotShipped = editNotShipped;
             vm.editApprobationReceived = editApprobationReceived;
             vm.editShipped = editShipped;
+            vm.editArrivedAtPort = editArrivedAtPort;
+
+            vm.loadPorts = loadPorts;
+
+
             vm.activateShipment = activateShipment;
             vm.changeCompleteStatus = changeCompleteStatus;
 
             vm.productConfig = {};
             vm.productOptions = {};
+        }
 
+        function loadVessel(query){
+            return shipping.getVesselTags(query).then(function(res){
+                return res.data
+            });
+        }
 
+        function loadPorts(query){
+            return shipping.getPortTags(query).then(function(res){
+                return res.data
+
+            });
+        }
+
+        function cancelShipmentForm(form, flag){
+            vm[flag] = false;
         }
 
         function changeCompleteStatus(transactionId, isComplete){
+            loaderModal.open();
             tradeBook.changeCompleteStatus(transactionId, isComplete).then(function(res){
                 if(res.success){
                     vm.transaction = res.transactionObj;
@@ -57,31 +104,53 @@
                 else{
                     toastr.error(res.message);
                 }
+                loaderModal.close();
             });
         }
 
         function activateShipmentStatus(shipmentStatus, status, transactionId){
+            loaderModal.open();
             tradeBook.activateShipmentStatus(shipmentStatus, status, transactionId).then(function(res){
                 if(res.success){
                     vm.transaction = res.transactionObj;
-                    toastr.success(res.message, 'Shipment Status Updated')
+                    toastr.success(res.message, 'Shipment Status Updated');
                 }
                 else{
                     toastr.error(res.message,'Error Changing Shipment Status');
                 }
+                loaderModal.close();
             });
         }
 
-        function editNotShipped(){
-
+        function editNotShipped(formObj, dataObj, transactionId){
+            tradeBook.updateNotShippedInfo(dataObj, transactionId);
         }
 
-        function editApprobationReceived(){
-
+        function editApprobationReceived(formObj, dataObj, transactionId){
+            tradeBook.updateApprobationReceivedInfo(dataObj, transactionId);
         }
 
-        function editShipped(){
+        function editShipped(formObj, dataObj, transactionId){
+            tradeBook.updateShippedInfo(dataObj, transactionId);
+        }
 
+        function editArrivedAtPort(formObj, arrivedObj, transactionObj, transactionId){
+            var expectedCommission = null;
+            if(arrivedObj.quantityShipped){
+                expectedCommission = tradeBook.calculateCommission(transactionObj, parseFloat(arrivedObj.quantityShipped))
+            }
+            loaderModal.open();
+            return tradeBook.updateArrivedAtPortInfo(arrivedObj, transactionId, expectedCommission).then(function(res){
+                if(res.success){
+                    vm.transaction = res.transactionObj;
+                    toastr.success(res.message, 'Shipment Information Updated!');
+                    cancelShipmentForm(formObj, 'showArrivedAtPort');
+                }
+                else{
+                    toastr.error(res.message);
+                }
+                loaderModal.close();
+            });
         }
 
 

@@ -18,7 +18,8 @@
         'app.dashboard.manifest',
         'app.dashboard.documentCreator',
         'app.dashboard.shipping',
-        'app.dashboard.currencyExchange'
+        'app.dashboard.currencyExchange',
+        'app.dashboard.accounts'
     ]).config(routeConfig);
 
 
@@ -94,7 +95,7 @@
         baSidebarServiceProvider.addStaticItem({
             title: 'Accounts',
             icon: 'ion-calculator',
-            stateRef: 'dashboard.accounts'
+            stateRef: 'dashboard.accounts.main'
         });
         baSidebarServiceProvider.addStaticItem({
             title: 'Website',

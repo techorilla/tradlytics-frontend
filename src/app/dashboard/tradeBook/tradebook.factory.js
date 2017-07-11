@@ -37,10 +37,46 @@
             downloadTradeDocument: downloadTradeDocument,
             activateShipmentStatus: activateShipmentStatus,
             changeCompleteStatus: changeCompleteStatus,
-            changeWashoutStatus: changeWashoutStatus
+            changeWashoutStatus: changeWashoutStatus,
+
+
+            updateShippedInfo: updateShippedInfo,
+            updateNotShippedInfo: updateNotShippedInfo,
+            updateApprobationReceivedInfo: updateApprobationReceivedInfo,
+            updateArrivedAtPortInfo: updateArrivedAtPortInfo
 
 
         };
+
+        function updateShippedInfo(dataObj, transactionId){
+            return transactionAPI.customPUT({
+                'dataObj':dataObj,
+                'transactionId': transactionId
+            }, apiEndPoints.transaction.shippedInfo);
+        }
+
+        function updateNotShippedInfo(dataObj, transactionId){
+            return transactionAPI.customPUT({
+                'dataObj':dataObj,
+                'transactionId': transactionId
+            }, apiEndPoints.transaction.notShippedInfo);
+        }
+
+        function updateApprobationReceivedInfo(dataObj, transactionId){
+            return transactionAPI.customPUT({
+                'dataObj':dataObj,
+                'transactionId': transactionId,
+
+            }, apiEndPoints.transaction.approbationReceivedInfo);
+        }
+
+        function updateArrivedAtPortInfo(dataObj, transactionId, earnedCommission){
+            return transactionAPI.customPUT({
+                'dataObj':dataObj,
+                'transactionId': transactionId,
+                'earnedCommission': earnedCommission
+            }, apiEndPoints.transaction.arrivedAtPortInfo);
+        }
 
         function changeWashoutStatus(transactionId, status, isWashOutAt){
             return transactionAPI.customPOST({
@@ -123,10 +159,10 @@
             }), apiEndPoints.transaction.basic)
         }
 
-        function calculateCommission(transactionObj){
+        function calculateCommission(transactionObj, quantity){
             var type = transactionObj.commission.typeId;
             var price = transactionObj.basic.price;
-            var quantity = transactionObj.basic.quantity;
+            var quantity = (quantity) ? quantity : transactionObj.basic.quantity;
             var comm =  transactionObj.commission.commission;
             var commIntoPrice = 0;
             var brokerCommType = transactionObj.commission.buyerBrokerCommissionTypeId;

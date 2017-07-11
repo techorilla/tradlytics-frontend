@@ -6,23 +6,23 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <div class="label-text">Name</div>
                     <div class="detail-text" ng-bind="shippingLine.name"></div>
                 </div>
 
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <div class="label-text">Code Name</div>
                     <div class="detail-text" ng-bind="shippingLine.codeName"></div>
                 </div>
 
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <div class="label-text">Website</div>
                     <div ng-if="!shippingLine.website" class="detail-text" ng-bind="'No website entered'"></div>
                     <div ng-if="shippingLine.website" class="detail-text"><a target="_blank" href="shippingLine.website">{{shippingLine.website}}</a></div>
                 </div>
 
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <div class="label-text">Vessel Count</div>
                     <div class="detail-text" ng-bind="shippingLine.vesselCount"></div>
                 </div>
