@@ -1,6 +1,6 @@
 <div ba-panel ba-panel-class="profile-page">
     <div class="panel-content">
-        <form  name="vm.shippingVesselForm" novalidate>
+        <form  name="vm.vesselForm" novalidate>
             <h3 class="with-line">Vessel Basic Information</h3>
 
             <div class="row">
@@ -16,8 +16,8 @@
                                name="imoNumber"
                                placeholder="IMO Number"
                                ng-model="vm.vesselObj.imoNumber" required>
-                        <ng-messages for="vm.shippingVesselForm.imoNumber.$error"
-                                     ng-if='(vm.shippingVesselForm.$submitted || vm.shippingVesselForm.lineCode.$dirty)'>
+                        <ng-messages for="vm.vesselForm.imoNumber.$error"
+                                     ng-if='(vm.vesselForm.$submitted || vm.vesselForm.imoNumber.$dirty)'>
                             <div ng-message="required" class="errorValidation">Please enter IMO Number.</div>
                         </ng-messages>
                     </div>
@@ -30,7 +30,7 @@
                                id="mmsi"
                                name="mmsi"
                                placeholder="MMSI Number"
-                               ng-model="vm.vesselObj.mmsiNumber">
+                               ng-model="vm.vesselObj.mmsi">
                     </div>
 
                 </div>
@@ -45,21 +45,27 @@
                                id="vesselName"
                                name="vesselName"
                                placeholder="Vessel Name"
-                               ng-model="vm.vesselObj.imoNumber" required>
-                        <ng-messages for="vm.shippingVesselForm.vesselName.$error"
-                                     ng-if='(vm.shippingVesselForm.$submitted || vm.shippingVesselForm.vesselName.$dirty)'>
+                               ng-model="vm.vesselObj.name" required>
+                        <ng-messages for="vm.vesselForm.vesselName.$error"
+                                     ng-if='(vm.vesselForm.$submitted || vm.vesselForm.vesselName.$dirty)'>
                             <div ng-message="required" class="errorValidation">Please enter vessel name.</div>
                         </ng-messages>
                     </div>
 
                     <div class="form-group">
-                        <label for="mmsi">Vessel Operator</label>
+                        <label>Vessel Operator</label>
                         <selectize
-                                name="vesselOperator"
+                                required="true"
+                                name="operator"
+                                placeholder="Select Shipping Line"
                                 config="vm.shippingLineConfig"
                                 options='vm.shippingLineOptions.list'
                                 ng-model="vm.vesselObj.shippingLineId">
                         </selectize>
+                        <ng-messages for="vm.vesselForm.operator.$error"
+                                     ng-if='(vm.vesselForm.$submitted || vm.vesselForm.operator.$dirty)'>
+                            <div ng-message="required" class="errorValidation">Please enter vessel operator shipping line.</div>
+                        </ng-messages>
                     </div>
 
                 </div>
@@ -70,8 +76,8 @@
                 <div class="col-xs-12">
                     <button class="btn btn-primary"
                             type="submit"
-                            ng-click="vm.saveShippingVessel(vm.shippingVesselForm, vm.vesselObj)">
-                        {{(!vm.shippingObj.id ? 'Add New Shipping Vessel' : 'Update Vessel Information')}}
+                            ng-click="vm.saveShippingVessel(vm.vesselForm, vm.vesselObj)">
+                        {{(vm.vesselObj.id ? 'Update Vessel Information' : 'Add New Shipping Vessel')}}
                     </button>
                     <button type="button" class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
                 </div>

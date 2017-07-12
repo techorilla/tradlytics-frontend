@@ -30,6 +30,9 @@
        if(!scope.date && !scope.blank){
            scope.date = new Date();
        }
+       else if((typeof scope.date)==='string'){
+           scope.date = new Date(scope.date);
+       }
        scope.open = function(){
            scope.isOpen = !scope.isOpen;
        }

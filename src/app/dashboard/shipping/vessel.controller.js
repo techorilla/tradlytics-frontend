@@ -8,18 +8,32 @@
         _init();
 
         function _init(){
+            vm.searchOptions = [
+                {name: 'IMO Number', id: 'imo_number'},
+                {name: 'MMSI Number', id: 'mmsi_number'},
+                {name: 'Vessel Name', id: 'vessel_name'},
+                {name: 'Shipping Line', id: 'line'}
+            ];
+            vm.searchTypeConfig = dropDownConfig.getBasicDropDownConfig(false);
+            vm.getVesselList = getVesselList;
             vm.vesselList = [];
-            getVesselList();
+            vm.searchObj = {
+                query: '',
+                queryType: 'imo_number'
+            }
+            // getVesselList();
+        }
 
-
+        function searchVessel(searchObj){
 
         }
 
-        function getVesselList(){
+        function getVesselList(searchObj){
             loaderModal.open();
-            shipping.getShippingVesselList().then(function(res){
-                vm.vesselList = res.list.splice(5,5);
+            shipping.getShippingVesselList(searchObj).then(function(res){
+                vm.vesselList = res.list;
                 loaderModal.close();
+
             });
         }
     }

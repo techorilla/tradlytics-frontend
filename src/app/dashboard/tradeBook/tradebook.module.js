@@ -59,7 +59,7 @@
                 resolve:{
                     trade: function(tradeBook, $stateParams, loaderModal, $rootScope){
                         loaderModal.open();
-                        return tradeBook.getTransactionDetail($stateParams.id).then(function(response){
+                        return tradeBook.getTransactionDetail($stateParams.id, true).then(function(response){
                             loaderModal.close();
                             $rootScope.headerTitle = response.transaction.basic.fileNo;
                             return response.transaction

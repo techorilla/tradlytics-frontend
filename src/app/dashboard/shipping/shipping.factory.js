@@ -29,6 +29,10 @@
             //shipping vessel
 
             getShippingVesselList: getShippingVesselList,
+            getShippingVesselObj: getShippingVesselObj,
+            updateShippingVesselObj: updateShippingVesselObj,
+            deleteShippingVesselObj: deleteShippingVesselObj,
+            createShippingVesselObj: createShippingVesselObj,
 
             //shipping line
 
@@ -38,6 +42,7 @@
             deleteShippingLine: deleteShippingLine,
             getNewShippingLineObj: getNewShippingLineObj,
             getShippingLineObj: getShippingLineObj,
+            getNewShippingVesselObj: getNewShippingVesselObj,
 
             getPortTags: getPortTags,
             getVesselTags: getVesselTags
@@ -46,6 +51,38 @@
 
 
         };
+
+        function getNewShippingVesselObj(){
+            return {
+                id: null,
+                name: '',
+                shippingLineId: '',
+                mmsi: null,
+                imoNumber: null
+            }
+        }
+
+        function getShippingVesselObj(id){
+            return shippingAPI.customGET(apiEndPoints.shipping.shippingVessel, {
+                id: id
+            });
+        }
+
+        function updateShippingVesselObj(vesselObj){
+            return shippingAPI.customPUT({
+                'vesselObj': vesselObj
+            }, apiEndPoints.shipping.shippingVessel);
+        }
+
+        function createShippingVesselObj(vesselObj){
+            return shippingAPI.customPOST({
+                'vesselObj': vesselObj
+            }, apiEndPoints.shipping.shippingVessel);
+        }
+
+        function deleteShippingVesselObj(id){
+            return shippingAPI.customDELETE(apiEndPoints.shipping.shippingVessel+'/'+id);
+        }
 
 
         function getPortTags(query){
@@ -118,8 +155,8 @@
         }
 
 
-        function getShippingVesselList(){
-            return shippingAPI.customGET(apiEndPoints.shipping.shippingVessel+'/list');
+        function getShippingVesselList(searchObj){
+            return shippingAPI.customPOST({'searchObj': searchObj}, apiEndPoints.shipping.shippingVessel+'/list');
         }
 
 

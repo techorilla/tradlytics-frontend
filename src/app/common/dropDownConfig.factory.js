@@ -15,6 +15,9 @@
   /* @ngInject */
   function dropDownConfig(authentication, businessPartner, utilities, settings, apiEndPoints, crud, read, appConstants){
     return {
+
+      getBasicDropDownConfig: getBasicDropDownConfig,
+
       contactTypeConfig: contactTypeConfig,
       prepareProductItemDropDown: prepareProductItemDropDown,
       prepareBusinessDropDown: prepareBusinessDropDown,
@@ -50,7 +53,6 @@
     function prepareShippingVesselConfig(){
 
     }
-
 
     function prepareShippingPortConfig(shippingPortConfig, shippingPortOptions){
 

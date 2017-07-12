@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
+            <div ba-panel ba-panel-title="" ba-panel-class="with-scroll" ng-if="vm.showForm">
                 <form name="vm.transactionForm" novalidate>
                     <div ng-include="'app/dashboard/tradeBook/transaction/templates/basic.html'"></div>
                     <!--<div ng-include="'app/dashboard/tradeBook/transaction/templates/product.html'"></div>-->

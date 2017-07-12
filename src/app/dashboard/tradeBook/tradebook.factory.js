@@ -112,9 +112,10 @@
             return transactionAPI.customDELETE(apiEndPoints.transaction.document+'/'+docId);
         }
 
-        function getTransactionDetail(tradeId){
+        function getTransactionDetail(tradeId, full){
             return transactionAPI.customGET(apiEndPoints.transaction.basic,{
-                'tradeId': tradeId
+                'tradeId': tradeId,
+                'full': full
             });
         }
 
@@ -161,20 +162,22 @@
 
         function calculateCommission(transactionObj, quantity){
             var type = transactionObj.commission.typeId;
-            var price = transactionObj.basic.price;
-            var quantity = (quantity) ? quantity : transactionObj.basic.quantity;
+            var price = parseFloat(transactionObj.basic.price);
+            var quantity = (quantity) ? parseFloat(quantity) : parseFloat(transactionObj.basic.quantity);
             var comm =  transactionObj.commission.commission;
             var commIntoPrice = 0;
             var brokerCommType = transactionObj.commission.buyerBrokerCommissionTypeId;
             var brokerIntoPrice = 0;
-            var bComm = transactionObj.commission.buyerBrokerCommission;
+            var differance = parseFloat(transactionObj.commission.difference);
+            var discount = parseFloat(transactionObj.commission.discount);
+            var bComm = parseFloat(transactionObj.commission.buyerBrokerCommission);
             if(type){
                 commIntoPrice = (parseInt(type) === 1) ? (comm) : (comm*0.01)*price;
             }
             if(brokerCommType){
                 brokerIntoPrice = (parseInt(brokerCommType)===1) ? bComm : (bComm*0.01)*price;
             }
-            var netCommission = (((commIntoPrice - brokerIntoPrice) + transactionObj.commission.difference )- transactionObj.commission.discount);
+            var netCommission = (commIntoPrice - brokerIntoPrice + differance  - discount);
 
             return (netCommission * quantity);
         }

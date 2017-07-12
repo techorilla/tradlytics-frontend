@@ -1,16 +1,21 @@
 <div class="vesselCard col-md-{{colSize}}"  ng-class="{'isBroken': vessel.broken}">
     <div class="content">
-        <div class="detail-heading" ng-bind="vessel.first_name"></div>
-        <div class="detail">
-            <div ng-bind="vessel.first_name"></div>
-            <div ng-bind="vessel.imoNumber"></div>
-            <div ng-bind="vessel.operator"></div>
+        <div class="details col-xs-12">
+            <div class="name" ng-bind="vessel.first_name"></div>
+            <div class="imo" ng-bind="vessel.imoNumber"></div>
+            <div ng-if="!vessel.shippingLine" class="operator" ng-bind="vessel.operator"></div>
+            <div ng-if="vessel.shippingLine">
+                <div class="logo">
+                    <img width="100" height="100" ng-src="{{logo}}" >
+                </div>
+                <div ng-bind="vessel.shippingLine.name"></div>
+                <div ng-bind="vessel.shippingLine.code"></div>
+            </div>
         </div>
-
-    </div>
-    <div class="button-row">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-warning">Delete</button>
+        <div class="button-row col-xs-12">
+            <button class="btn btn-xs btn-primary" ng-click="editVesselDetails(vessel.id)">Edit</button>
+            <button class="btn btn-xs btn-warning">Delete</button>
+        </div>
     </div>
 
 </div>

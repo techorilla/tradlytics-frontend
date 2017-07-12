@@ -1,9 +1,16 @@
 .datePickerInput{
   position: relative;
+  input{
+    height: 32px;
+  }
   .input-group-btn{
     position: absolute;
     top: 0px;
     right: 35px;
+
+    .btn{
+      height: 30px;
+    }
 
     .btn-success{
       background: $primary;
