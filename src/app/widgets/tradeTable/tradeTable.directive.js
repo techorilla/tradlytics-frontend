@@ -121,7 +121,8 @@
                     'Seller',
                     'Shipment Start',
                     'Shipment End',
-                    'Expected Commission'
+                    'Expected Commission',
+                    'Actual Commission'
                 ];
                 scope.heading = intTradeHeading;
                 angular.forEach(scope.listData, function(val,key){

@@ -26,13 +26,14 @@
 
     function link(scope, elem, attrs){
        scope.isOpen = false;
-       scope.dateFormat = 'dd-MMMM-yyyy';
+
        if(!scope.date && !scope.blank){
            scope.date = new Date();
        }
        else if((typeof scope.date)==='string'){
            scope.date = new Date(scope.date);
        }
+       scope.dateFormat = 'dd-MMMM-yyyy';
        scope.open = function(){
            scope.isOpen = !scope.isOpen;
        }

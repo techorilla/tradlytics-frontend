@@ -78,11 +78,11 @@
             }, apiEndPoints.transaction.arrivedAtPortInfo);
         }
 
-        function changeWashoutStatus(transactionId, status, isWashOutAt){
+        function changeWashoutStatus(transactionId, status, washOut){
+            washOut.isWashout = status;
             return transactionAPI.customPOST({
                 'transactionId': transactionId,
-                'status': status,
-                'isWashOutAt': isWashOutAt
+                'washOut': washOut
             }, apiEndPoints.transaction.washout);
         }
 

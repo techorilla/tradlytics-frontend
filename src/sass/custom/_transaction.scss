@@ -36,11 +36,18 @@
   .transactionNo{
     background: $my-gray-2;
     overflow: hidden;
-    min-height: 150px;
+    padding-bottom: 20px;
+
+    .with-line{
+      font-size: 9px;
+      border-bottom: 1px solid $border-light;
+      font-weight: $font-ultraBold;
+    }
     .number{
       font-weight: $font-ultraBold;
-      font-size: 24px;
+      font-size: 14px;
       color: $primary;
+      text-overflow: hidden;
     }
   }
 }

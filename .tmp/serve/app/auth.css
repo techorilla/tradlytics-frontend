@@ -88,7 +88,7 @@ html, body {
 body {
   font: 11px "Montserrat", sans-serif;
   color: #ffffff;
-  background-color: #C0C0C0; }
+  background-color: #BCC6CC; }
   body.blur-theme::before {
     content: '';
     position: fixed;
@@ -111,7 +111,7 @@ body.mobile {
     bottom: 0;
     right: 0;
     background-attachment: inherit;
-    background-color: #C0C0C0; }
+    background-color: #BCC6CC; }
   body.mobile.blur-theme .body-bg::before {
     content: '';
     position: fixed;

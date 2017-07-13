@@ -41,7 +41,7 @@
                         <td class="date">{{row.shipmentStart  | date:appFormats.Date}}</td>
                         <td class="date">{{row.shipmentEnd  | date:appFormats.Date}}</td>
                         <td class="titled">US$ {{row.netCommission | number: 2}}</td>
-                        <td class="titled">( {{(row.earnedCommission) ?  ('US$ ' + row.netCommission | number: 2) : 'NA'}})</td>
+                        <td class="titled">{{(row.earnedCommission) ?  ('US$ ' + row.earnedCommission | number: 2) : 'NA'}}</td>
 
 
                     </tr>

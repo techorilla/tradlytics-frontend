@@ -15,37 +15,46 @@
     <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
 
         <div class="row transactionNo">
-            <div class="col-xs-12 col-md-1">
+
+            <div class="col-xs-12 col-md-3">
+                <h3 class="with-line">Transaction Date</h3>
+                <div ng-bind="vm.transaction.basic.date | date: vm.appFormats.FullDate2" class="number"></div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <h3 class="with-line">Transaction</h3>
+                <div ng-bind="vm.transaction.basic.fileNo" class="number"></div>
+            </div>
+            <div class="col-xs-12 col-md-3">
                 <h3 class="with-line">File No</h3>
                 <div ng-bind="vm.transaction.basic.fileNo" class="number"></div>
             </div>
-            <div class="col-xs-12 col-md-1">
+            <div class="col-xs-12 col-md-3">
                 <h3 class="with-line">Contract No</h3>
                 <div class="number" ng-bind="vm.transaction.basic.contractNo ? vm.transaction.basic.contractNo : 'NA'"></div>
             </div>
 
-            <div class="col-xs-12 col-md-2">
-                <h3 class="with-line">Net Commission</h3>
+            <div class="col-xs-12 col-md-3">
+                <h3 class="with-line">Expected Commission</h3>
                 <div ng-bind="'USD ' + (vm.transaction.commission.netCommission | number : 2)" class="number"></div>
             </div>
 
 
-            <div class="col-xs-12 col-md-2">
-                <h3 class="with-line">Earned Commission</h3>
+            <div class="col-xs-12 col-md-3">
+                <h3 class="with-line">Actual Commission</h3>
                 <div class="number" ng-if="!vm.transaction.shipment.arrivedAtPort.quantityShipped">NA</div>
                 <div  ng-if="vm.transaction.shipment.arrivedAtPort.quantityShipped"
                       ng-bind="'USD ' + (vm.transaction.commission.earnedCommission | number : 2)" class="number"></div>
             </div>
 
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-3">
                 <h3 class="with-line">Shipment</h3>
                 <div class="number">{{vm.transaction.basic.shipmentStart | date: vm.appFormats.FullDate2}} - {{vm.transaction.basic.shipmentEnd  | date: vm.appFormats.FullDate2}}</div>
             </div>
 
 
-            <div class="col-xs-12 col-md-2">
+            <div class="col-xs-12 col-md-3">
                 <h3 class="with-line">Status</h3>
-                <button class="btn"
+                <button class="btn btn-xs"
                         ng-class="{'btn-danger':!vm.transaction.isComplete, 'btn-primary':vm.transaction.isComplete}"
                         ng-click="vm.changeCompleteStatus(vm.transactionId, !vm.transaction.isComplete)">Transaction Complete</button>
             </div>
@@ -88,7 +97,9 @@
 
                         </business-card>
 
-                        <trade-wash-out-card trade="vm.transaction"></trade-wash-out-card>
+                        <trade-wash-out-card trade="vm.transaction">
+
+                        </trade-wash-out-card>
 
                         <commission-card commission="vm.transaction.commission">
 
