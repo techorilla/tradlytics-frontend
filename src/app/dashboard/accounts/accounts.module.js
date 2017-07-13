@@ -34,9 +34,34 @@
                         {
                             text: 'Commission Flow',
                             state: 'dashboard.accounts.commissionFlow'
+                        },
+                        {
+                            text: 'Invoices',
+                            state: 'dashboard.accounts.invoice'
                         }
                     ]
+                }
+            })
+
+            .state('dashboard.accounts.invoice',{
+                url:'/invoice',
+                views:{
+                    'content@dashboard.accounts':{
+                        templateUrl:'app/dashboard/accounts/invoice/invoice.html',
+                        controller: 'Invoice as vm'
+                    }
                 },
+                pageHeader:{
+                    subTitle: 'Invoices',
+                    title:'Manager',
+                    headerAnchor: [
+                        {
+                            text: 'Add New Shipping Vessel',
+                            state: 'dashboard.shipping.vessel.form({id:"new"})'
+                        }
+                    ],
+                    back: true
+                }
             })
 
             .state('dashboard.accounts.commissionFlow',{
@@ -44,7 +69,7 @@
                 views:{
                     'content@dashboard.accounts':{
                         templateUrl:'app/dashboard/accounts/commissionFlow/commissionFlow.html',
-                        controller: 'CurrencyDashboard as vm'
+                        controller: 'CommissionFlow as vm'
                     }
                 }
             });

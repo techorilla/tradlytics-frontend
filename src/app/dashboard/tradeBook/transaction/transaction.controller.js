@@ -49,11 +49,13 @@
                 intitalizeWatchers();
             }
             else{
+                loaderModal.open();
                 tradeBook.getTransactionDetail($stateParams.id, null).then(function(res){
                     vm.transaction = res.transaction;
                     vm.netCommission = vm.transaction.commission.netCommission;
                     vm.showForm = true;
                     intitalizeWatchers();
+                    loaderModal.close();
                 })
             }
 
@@ -116,10 +118,9 @@
             }
         }
 
-        function updateTransaction(transactionObj){
-            tradeBook.updateTransaction(transactionObj, vm.netCommission).then(function(response){
+        function updateTransaction(transactionForm, transactionObj){
                 if(transactionForm.$valid || true){
-                    tradeBook.addTransaction(transactionObj).then(function(response){
+                    tradeBook.updateTransaction(transactionObj, vm.netCommission).then(function(response){
                         if(response.success){
                             onSuccessFullSave(response.tradeId);
                             toastr.success(response.message);
@@ -129,7 +130,9 @@
                         }
                     })
                 }
-            })
+                else{
+                    toastr.error('Please enter missing fields');
+                }
         }
 
         function changeProductSpecs(){
