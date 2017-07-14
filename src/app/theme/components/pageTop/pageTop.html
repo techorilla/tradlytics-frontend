@@ -2,23 +2,45 @@
   <a href="#/dashboard" class="al-logo clearfix">
     <img src="assets/img/favicon-32x32.png" alt="Doni & Company">
   </a>
-    <!--<p>Doni<span>&</span>Company</p></a>-->
+  <!--<p>Doni<span>&</span>Company</p></a>-->
   <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu></a>
 
-  <div class="search">
+  <div class="search search-dropdown">
     <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
-    <input id="searchInput" type="text" ng-model="searchObj.query" placeholder="Search for...">
-  </div>
-
-  <div class="search">
-    <selectize
+    <select class="form-control"
             placeholder="Search Type"
             name="searchType"
-            config="searchTypeConfig"
-            options='searchOptions'
             ng-model="searchObj.queryType">
-    </selectize>
+      <option ng-repeat="opt in searchOptions" value="{{opt.id}}">{{opt.name}}</option>
+    </select>
   </div>
+
+
+  <div class="search">
+    <input id="searchInput" type="text"
+           class="form-control"
+           ng-model="searchObj.query" placeholder="" ng-change="searchQuery(searchObj, lastSearch)">
+    <i ng-show="loading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+  </div>
+
+  <div class="search-result" ng-show="searchResults.length > 0">
+    <div class="search-item" ng-repeat="result in searchResults" ng-if="resultType==='intFile'"
+         ng-click="goToSearchItem('dashboard.transactionView', {'id': result.file_id})">
+      <div class="detail">
+        <div class="label">FileId</div>
+        <div class="value" ng-bind="result.file_id"></div>
+      </div>
+      <div class="detail">
+        <div class="label">Contract No</div>
+        <div class="value" ng-bind="(result.contract_id ? result.contract_id : 'NA')"></div>
+      </div>
+      <div class="detail">
+        <div class="label">BL No</div>
+        <div class="value"  ng-bind="(result.shipment__bl_no ? result.shipment__bl_no : 'NA')"></div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="user-profile clearfix">
     <div class="al-user-profile" uib-dropdown>

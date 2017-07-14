@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app', [
-  'textAngularSetup',
   'app.core',
+  'textAngularSetup',
   'app.common',
   'app.theme',
   'app.modal',

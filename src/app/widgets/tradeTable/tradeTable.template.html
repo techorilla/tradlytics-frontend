@@ -22,7 +22,7 @@
                             <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
                         </td>
                         <td  class="titled date">{{row.date | date:appFormats.Date}}</td>
-                        <td><a class="titled" ui-sref="dashboard.transactionView({id:row.id})">{{row.fileNo}}</a></td>
+                        <td><a class="titled" ui-sref="dashboard.transactionView({id:row.fileNo})">{{row.fileNo}}</a></td>
                         <td class="business titled" ng-bind="row.buyerName  + ' | ' + (row.buyerCountry  ? row.buyerCountry : 'No Origin')">
                             <!--<div class="name" ng-bind="row.buyerName"></div>-->
                             <!--<div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>-->

@@ -106,7 +106,7 @@
                 tradeBook.addTransaction(transactionObj, vm.netCommission).then(function(response){
                     if(response.success){
                         toastr.success(response.message);
-                        onSuccessFullSave(response.tradeId);
+                        onSuccessFullSave(response.fileId);
                     }
                     else{
                         toastr.error(response.message);
@@ -122,7 +122,7 @@
                 if(transactionForm.$valid || true){
                     tradeBook.updateTransaction(transactionObj, vm.netCommission).then(function(response){
                         if(response.success){
-                            onSuccessFullSave(response.tradeId);
+                            onSuccessFullSave(response.fileId);
                             toastr.success(response.message);
                         }
                         else{

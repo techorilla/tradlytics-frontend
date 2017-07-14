@@ -42,7 +42,10 @@
             product:'product',
             self: 'self'
         },
-        dashboard:'dashboard',
+        dashboard: {
+            main:'dashboard',
+            searchPageTop: 'search_top'
+        },
         manifest: 'manifest',
         manifestDashboard: 'manifest/dashboard',
         transaction:{

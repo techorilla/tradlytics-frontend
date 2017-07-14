@@ -21,8 +21,6 @@
             vm.showShippedForm = false;
             vm.showArrivedAtPort = false;
             vm.loadVessel = loadVessel;
-
-
             vm.cancelShipmentForm = cancelShipmentForm;
 
             vm.shipperConfig = {};
@@ -43,7 +41,8 @@
             vm.shipmentStatus = shipmentStatus;
             vm.addingNote=false;
             vm.updateNote=false;
-            vm.transactionId = $stateParams.id;
+            vm.transactionId = trade.id;
+            console.log(vm.transactionId);
             vm.transaction = trade;
             vm.showDocument = false;
             vm.documentAdding = false;

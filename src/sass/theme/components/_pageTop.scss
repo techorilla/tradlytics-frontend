@@ -11,7 +11,59 @@
   &.scrolled {
     background-color: rgba(black, 0.85)
   }
+
+  .search-result{
+    position: fixed;
+    width: 30%;
+    background: $sidebar;
+    top:66px;
+    left: 200px;
+    box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5);
+    .search-item{
+      padding: 20px 10px 20px 20px;
+      cursor: pointer;
+      height: 60px;
+
+      &:hover{
+        background: $body-bg;
+        .detail{
+          .label{
+            color: $text-color;
+          }
+          .value{
+            color: $text-color;
+          }
+        }
+
+      }
+
+      &:not(:last-child){
+        border-bottom: 1px solid $border-light;
+      }
+
+      .detail{
+        float:left;
+        width: 25%;
+        .label{
+          padding: 0 0 0 0;
+          text-align: left;
+          font-weight: $font-bold;
+          color: $sidebar-text;
+        }
+        .value{
+          text-align: left;
+          color: $primary;
+        }
+
+      }
+
+    }
+
+
+  }
 }
+
+
 
 a.al-logo {
   color: $sidebar-text;
@@ -105,6 +157,10 @@ a.collapse-menu-link {
   background-size: cover;
 }
 
+.search-dropdown{
+  margin-left: 30px;
+}
+
 .search {
   text-shadow: none;
   color: $sidebar-text;
@@ -112,8 +168,7 @@ a.collapse-menu-link {
   line-height: 25px;
   transition: all 0.5s ease;
   white-space: nowrap;
-  overflow: hidden;
-  width: 162px;
+  overflow: visible;
   float: left;
   margin: 20px 0 0 30px;
 
@@ -126,15 +181,53 @@ a.collapse-menu-link {
     cursor: pointer;
     padding-left: 1px;
     font-size: 16px;
-    margin-right: 13px;
+    margin-right: 11px;
   }
-  input {
+  .fa-spinner{
+    position: absolute;
+    left: 660px;
+    top: 25px;
+  }
+  input{
+    width: 120px;
+    margin: 0 0 0 3px;
+    background: rgba(41, 41, 41, 0.44) !important;
+    position: absolute;
+    top: 20px;
+    left: 420px;
+    overflow: visible;
+    width: 260px;
+  }
+
+  select{
+    background: transparent;
+    padding-left: 10px;
+    margin-left: 4px;
+    position: absolute;
+    top: 20px;
+    left: 165px;
+    overflow: visible;
+    width: 260px;
+    -webkit-appearance: none;
+    option{
+      background: $sidebar;
+      padding-bottom: 5px;
+      padding-top:  5px;
+      font-size: 14px;
+      font-weight: $font-light;
+      margin-top: 3px;
+      margin-bottom: 3px;
+    }
+
+
+  }
+
+  input, select {
     background: none;
     border: none;
     outline: none;
-    width: 120px;
     padding: 0;
-    margin: 0 0 0 -3px;
+
     height: 27px;
   }
 }
