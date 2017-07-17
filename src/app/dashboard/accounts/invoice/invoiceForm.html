@@ -1,0 +1,176 @@
+<div class="row">
+    <form name="vm.invoiceForm">
+
+
+        <div class="col-md-6 pull-left">
+            <div ba-panel>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Date</label>
+                            <date-picker-input date="vm.invoiceObj.date" blank="false" name="invoiceDate">
+                            </date-picker-input>
+                            <ng-messages for="vm.invoiceForm.invoiceDate.$error"
+                                         ng-show='(vm.invoiceForm.$submitted || vm.invoiceForm.invoiceDate.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter invoice date.</ng-message>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Invoice No.</label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.invoiceNo"
+                                   ng-required="true"
+                                   name="invoiceNo"
+                                   class="form-control" id="invoiceNo" placeholder="Invoice No.">
+                            <ng-messages for="vm.invoiceForm.invoiceDate.$error"
+                                         ng-show='(vm.invoiceForm.$submitted || vm.invoiceForm.invoiceNo.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter invoice date.</ng-message>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">File No.</label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.fileNo"
+                                   ng-required="true"
+                                   ng-disabled="true"
+                                   name="quantity"
+                                   class="form-control" id="fileNo" placeholder="File No.">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Contract No.</label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.contractNo"
+                                   ng-required="true"
+                                   ng-disabled="true"
+                                   name="contractNo"
+                                   class="form-control" id="contractNo" placeholder="Contract No.">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">BL No.</label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.blNo"
+                                   ng-required="true"
+                                   ng-disabled="true"
+                                   name="blNo"
+                                   class="form-control" id="blNo" placeholder="BL No.">
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Quantity  <span class="titled">MT</span></label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.quantity"
+                                   ng-required="true"
+                                   ng-disabled="true"
+                                   name="quantity"
+                                   class="form-control" id="quantity" placeholder="Quantity">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Rate <span class="titled">USD</span></label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.price"
+                                   ng-required="true"
+                                   ng-disabled="true"
+                                   name="quantity"
+                                   class="form-control" id="rate" placeholder="Rate">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line"><span class="titled">USD</span> - <span class="titled">PKR</span></label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.conversionRate"
+                                   ng-required="true"
+                                   ng-disabled="true"
+                                   name="quantity"
+                                   class="form-control" id="conversionRate" placeholder="Rate">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-4 pull-right">
+                <business-card
+                        col-size="12"
+                        business="vm.invoiceObj.invoiceTo"
+                        business-type="Invoice To">
+                </business-card>
+        </div>
+
+
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="Invoice Details" ba-panel-class="with-scroll">
+                <div class="horizontal-scroll">
+                    <table class="table table-hover" st-table="editableTableData">
+                        <thead>
+                        <tr class="sortable">
+                            <th class="table-id"></th>
+                            <th class="table-id" st-sort="id" st-sort-default="true">S.No</th>
+                            <th class="table-id" st-sort="id" st-sort-default="true">Description</th>
+                            <th class="table-id" st-sort="id" st-sort-default="true">Amount</th>
+                            <th class="table-id" st-sort="id" st-sort-default="true">Remarks</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in vm.invoiceObj.invoiceItems track by $index">
+                            <td></td>
+                            <td ng-bind="$index+1"></td>
+                            <td ng-bind="item.name"></td>
+                            <td><input class="form-control" type="text" ng-model="item.amount"></td>
+                            <td><input class="form-control" type="text" ng-model="item.remarks"></td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="Notes" ba-panel-class="with-scroll">
+                <div class="form-group">
+                    <textarea type="text"
+                              ng-model="vm.invoiceObj.notes"
+                              name="notes"
+                              class="form-control" id="notes">
+
+                        </textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-row">
+
+        </div>
+    </form>
+
+</div>
+

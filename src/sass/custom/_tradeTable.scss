@@ -17,6 +17,7 @@
       .userImage{
         width: 45px;
         height: 45px;
+        margin-bottom: 10px;
         border-radius: 50%;
         float: left;
       }
@@ -48,7 +49,7 @@
   }
 
   .self{
-    background: rgba(33, 183, 153, 0.18);;
-    color: $text-color;
+    background: $my-gray-2;
+    color: $sidebar-text;
   }
 }

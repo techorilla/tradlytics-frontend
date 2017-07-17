@@ -129,9 +129,10 @@
             dashboard:'dashboard'
         },
         accounts: {
-            main: 'main',
+            main: 'accounts',
             dashboard: 'dashboard',
             commissionFlow: 'commission_flow',
+            invoice: 'invoice'
         }
 
     };

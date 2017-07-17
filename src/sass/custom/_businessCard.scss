@@ -1,5 +1,7 @@
 .business-card{
-  min-height: 150px;
+  height: 150px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
   .content{
     .notApplicable{
       font-size:40px;
@@ -33,7 +35,7 @@
     .name{
       padding-left: 20px;
       padding-top: 5px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: $font-ultraBold;
       color: $label-text;
     }
@@ -55,30 +57,97 @@
   }
 
   .website{
+    padding-top: 10px;
+    text-align: right;
     .label{
-      margin-left: -10px;
+      padding: 0 0 0 0;
       width: 100%;
-      color: $primary;
+      color: $label-text;
       font-size: 12px;
+      padding-bottom: 5px;
     }
     .url{
+      color: $label-text;
       a{
         color: $label-text;
         text-decoration: none;
       }
+      padding-bottom: 5px;
 
     }
   }
 
   .primary-contact{
+    text-align: right;
     .label{
-      margin-left: -10px;
+      padding: 0 0 0 0;
       width: 100%;
-      color: $primary;
+      color: $label-text;
       font-size: 12px;
+      padding-bottom: 5px;
     }
     .contact{
+      padding-bottom: 5px;
+      color: $label-text;
+    }
+  }
+}
 
+
+.product-card{
+  height: 150px;
+  overflow-y: hidden;
+  .content{
+    .notApplicable{
+      font-size:40px;
+      font-weight: $font-ultraBold;
+      padding-top: 20px;
+      padding-left: 30px;
+    }
+    min-height: 150px;
+    padding-bottom: 10px;
+    background: $body-bg;
+  }
+  padding-bottom: 20px;
+  .detail-heading{
+    font-size:16px;
+    font-weight:$font-ultraBold;
+    text-align: center;
+    color: $sidebar-text;
+    background: $my-gray-2;
+    height: 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .logo{
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-right: 35px;
+    float: left;
+  }
+  .details{
+    padding-top: 10px;
+    .name{
+      padding-left: 20px;
+      padding-top: 5px;
+      font-size: 14px;
+      font-weight: $font-ultraBold;
+      color: $label-text;
+    }
+    .country{
+      padding-top: 8px;
+      .flag{
+        float: left;
+        padding-right: 5px;
+      }
+      .name{
+        height: 20px;
+        padding-top: 4px;
+        padding-left: 3px;
+        color: $label-text;
+        font-weight: $font-bold;
+        font-size: 12px;
+      }
     }
   }
 

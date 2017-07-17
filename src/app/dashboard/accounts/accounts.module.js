@@ -54,14 +54,35 @@
                 pageHeader:{
                     subTitle: 'Invoices',
                     title:'Manager',
-                    headerAnchor: [
-                        {
-                            text: 'Add New Shipping Vessel',
-                            state: 'dashboard.shipping.vessel.form({id:"new"})'
-                        }
-                    ],
                     back: true
                 }
+            })
+
+            .state('dashboard.accounts.invoiceForm',{
+                url:'/:fileId/:invoiceId',
+                views:{
+                    'content@dashboard.accounts':{
+                        templateUrl:'app/dashboard/accounts/invoice/invoiceForm.html',
+                        controller: 'InvoiceForm as vm'
+                    }
+                },
+                resolve:{
+                    invoice: function(accounts, $stateParams, loaderModal, $rootScope){
+                        loaderModal.open();
+                        return accounts.getInvoiceObj($stateParams.fileId, $stateParams.invoiceId).then(function(response){
+                            loaderModal.close();
+                            $rootScope.headerSubTitle = 'File Id ' + $stateParams.fileId ;
+                            if($stateParams.invoiceId === 'new'){
+                                $rootScope.headerTitle = 'New Invoice';
+                            }
+                            else{
+                                $rootScope.headerTitle = 'Invoice No. ' + $stateParams.fileId;
+                            }
+
+                            return response.invoiceObj;
+                        });
+                    }
+                },
             })
 
             .state('dashboard.accounts.commissionFlow',{

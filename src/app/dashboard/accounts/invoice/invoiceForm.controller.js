@@ -10,15 +10,16 @@
 
     angular
         .module('app.dashboard.accounts')
-        .controller('Invoice', Invoice);
+        .controller('InvoiceForm', InvoiceForm);
 
     /* @ngInject */
-    function Invoice(appFormats, utilities, $filter, loaderModal, $stateParams) {
+    function InvoiceForm(appFormats, utilities, $filter, loaderModal, $stateParams, editableOptions, invoice) {
         var vm = this;
         _init();
 
         function _init(){
-
+            vm.invoiceObj = invoice;
+            console.log(vm.invoiceObj)
         }
     }
 })();

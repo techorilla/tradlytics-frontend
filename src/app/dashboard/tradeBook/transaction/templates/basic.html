@@ -7,8 +7,8 @@
         <div class="row wizard-containers">
             <div class="row">
                 <div class="form-group col-md-4 clearfix">
-                    <label class="col-sm-3 control-label">Date</label>
-                    <div class="col-sm-9">
+                    <label class="with-line control-label">Date</label>
+                    <div class="">
                         <date-picker-input date="vm.transaction.basic.date" name="date">
                         </date-picker-input>
                         <ng-messages for="vm.transactionForm.date.$error"
@@ -19,8 +19,8 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4 clearfix">
-                    <label for="buyer" class="col-sm-3 control-label">Buyer</label>
-                    <div class="col-sm-9">
+                    <label for="buyer" class=" with-line control-label">Buyer</label>
+                    <div class="">
                         <selectize
                                 ng-required="true"
                                 placeholder="Buyer"
@@ -38,8 +38,8 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4 clearfix">
-                    <label for="seller" class="col-sm-3 control-label">Seller</label>
-                    <div class="col-sm-9">
+                    <label for="seller" class="with-line control-label">Seller</label>
+                    <div class="">
                         <selectize
                                 placeholder="Seller"
                                 ng-required="true"
@@ -57,8 +57,8 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4 clearfix">
-                    <label for="productItem" class="col-sm-3 control-label">Product Item</label>
-                    <div class="col-sm-9">
+                    <label for="productItem" class="control-label with-line">Product Item</label>
+                    <div class="">
                         <selectize
                                 ng-required="true"
                                 name="productItem"
@@ -75,8 +75,8 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4 clearfix">
-                    <label for="productItem" class="col-sm-3 control-label">Contractual</label>
-                    <div class="col-sm-9">
+                    <label for="productItem" class="with-line control-label">Contractual</label>
+                    <div class="">
                         <selectize
                                 ng-required="true"
                                 placeholder="Contractual Buyer"
@@ -95,8 +95,8 @@
                 </div>
 
                 <div class="form-group col-md-4  clearfix">
-                    <label class="col-sm-3 control-label">Packaging</label>
-                    <div class="col-sm-9">
+                    <label class="with-line control-label">Packaging</label>
+                    <div class="">
                         <selectize
                                 placeholder="Packaging"
                                 ng-required="true"
@@ -136,16 +136,35 @@
                     <!--</div>-->
                 <!--</div>-->
 
-                <div class="form-group col-md-4 clearfix col-md-offset-4">
-                    <label class="col-sm-3 control-label">Quantity ({{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT' }})</label>
-                    <div class="col-sm-9">
+                <div class="form-group col-md-4 clearfix ">
+                    <label class="with-line control-label">Quantity <span class="titled">FCL</span></label>
+                    <div class="">
+                        <input
+                                required
+                                ng-pattern="/^[0-9.]+$/i"
+                                ng-model="vm.transaction.basic.quantityFcl"
+                                class="form-control"
+                                name="quantityFCL"
+                                placeholder="Quantity in FCL"/>
+
+                        <ng-messages for="vm.transactionForm.quantityFCL.$error"
+                                     ng-show='(vm.transactionForm.$submitted || vm.transactionForm.quantityFCL.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter quantity in FCL.</ng-message>
+                            <ng-message class="errorValidation" when="pattern">Quantity in FCL can only have numbers.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4 clearfix">
+                    <label class="with-line control-label">Quantity <span class="titled">MT</span></label>
+                    <div class="">
                         <input
                                 required
                                 ng-pattern="/^[0-9.]+$/i"
                                 ng-model="vm.transaction.basic.quantity"
                                 class="form-control"
                                 name="quantity"
-                                placeholder="Quantity in {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT'}}"/>
+                                placeholder="Quantity in MT"/>
 
                         <ng-messages for="vm.transactionForm.quantity.$error"
                                      ng-show='(vm.transactionForm.$submitted || vm.transactionForm.quantity.$dirty)' role="alert">
@@ -156,8 +175,8 @@
                 </div>
 
                 <div class="form-group col-md-4  clearfix">
-                    <label class="col-sm-3 control-label">Price (US$ / {{vm.transaction.basic.quantityMetricId ?  vm.transaction.basic.quantityMetricId : 'MT' }})</label>
-                    <div class="col-sm-9">
+                    <label class="with-line">Price <span class="titled">US$ / MT</span></label>
+                    <div class="">
                         <input
                                 required
                                 ng-pattern="/^[0-9.]+$/i"
@@ -180,8 +199,8 @@
                 </div>
 
                 <div class="form-group col-md-4 col-md-offset-4 clearfix">
-                    <label class="col-sm-3 control-label">File ID</label>
-                    <div class="col-sm-9">
+                    <label class="with-line control-label">File ID</label>
+                    <div class="">
                         <input
                                 required
                                 ng-model="vm.transaction.basic.fileId"
@@ -197,8 +216,8 @@
                 </div>
 
                 <div class="form-group col-md-4  clearfix">
-                    <label class="col-sm-3 control-label">Contract ID</label>
-                    <div class="col-sm-9">
+                    <label class="with-line control-label">Contract ID</label>
+                    <div class="">
                         <input
                                 ng-model="vm.transaction.basic.contractId"
                                 class="form-control"
@@ -209,8 +228,8 @@
 
 
                 <div class="form-group col-md-4 col-md-offset-4 clearfix">
-                    <label class="col-sm-3 control-label">Shipment Start</label>
-                    <div class="col-sm-9">
+                    <label class="with-line control-label">Shipment Start</label>
+                    <div class="">
                         <date-picker-input date="vm.transaction.basic.shipmentStart" name="shipmentStart">
 
                         </date-picker-input>
@@ -223,8 +242,8 @@
                 </div>
 
                 <div class="form-group col-md-4 clearfix">
-                    <label class="col-sm-3 control-label">Shipment End</label>
-                    <div class="col-sm-9">
+                    <label class=" with-line control-label">Shipment End</label>
+                    <div class="">
                         <date-picker-input date="vm.transaction.basic.shipmentEnd" name="shipmentEnd">
 
                         </date-picker-input>
@@ -240,8 +259,8 @@
 
 
                 <div class="form-group col-md-12 clearfix">
-                    <label class="col-sm-12 control-label">Other Information</label>
-                    <div class="col-sm-12">
+                    <label class="with-line control-label">Other Information</label>
+                    <div class="">
                             <textarea
                                     ng-model="vm.transactionForm.basic.otherInfo"
                                     class="form-control">

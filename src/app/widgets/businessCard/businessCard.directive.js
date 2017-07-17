@@ -25,6 +25,7 @@
             restrict: 'E',
             templateUrl: 'app/widgets/businessCard/businessCard.html',
             scope: {
+                colSize:'@',
                 business:'=',
                 businessType: '@'
             },
@@ -36,6 +37,7 @@
         function link(scope, elem, attrs){
             _init();
             function _init(){
+                scope.colSize = scope.colSize ? scope.colSize : '4';
                 scope.appConstants = appConstants;
                 scope.businessLogo = $filter('businessLogo')(scope.business ? scope.business.logo : null);
             }

@@ -9,14 +9,22 @@
     /* @ngInject */
     function accounts(Restangular, apiEndPoints, utilities) {
 
-        var accountsAPI = Restangular.all(apiEndPoints.currencyExchange.main);
+        var accountsAPI = Restangular.all(apiEndPoints.accounts.main);
 
         return {
-            getDashboardData: getDashboardData
+            getDashboardData: getDashboardData,
+            getInvoiceObj: getInvoiceObj
         };
 
         function getDashboardData(){
 
+        }
+
+        function getInvoiceObj(fileId, invoiceId){
+            return accountsAPI.customGET(apiEndPoints.accounts.invoice, {
+                'fileId': fileId,
+                'invoiceId': invoiceId
+            })
         }
 
 

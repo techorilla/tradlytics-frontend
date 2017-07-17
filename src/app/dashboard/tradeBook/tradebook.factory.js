@@ -13,7 +13,7 @@
         .factory('tradeBook', tradeBook);
 
     /* @ngInject */
-    function tradeBook(apiEndPoints, Restangular, $filter, appFormats, FileSaver, Blob, utilities){
+    function tradeBook(apiEndPoints, Restangular, $filter, appFormats, FileSaver, Blob, utilities, $http){
 
         var transactionAPI = Restangular.all(apiEndPoints.transaction.main);
 
@@ -102,9 +102,17 @@
         }
 
         function downloadTradeDocument(docId, fileName, fileType){
-            return transactionAPI.customGET(apiEndPoints.transaction.document+'/'+docId).then(function(res){
-                var data = new Blob([res], { type: fileType });
-                FileSaver.saveAs(data, fileName);
+            return transactionAPI.withHttpConfig({responseType: 'arraybuffer'}).customGET(apiEndPoints.transaction.document+'/'+docId).then(function(response){
+                var a = document.createElement('a');
+                document.body.appendChild(a);
+                a.style = 'display: none';
+                var file = new Blob([response], {type: fileType});
+                var fileURL = (window.URL || window.webkitURL).createObjectURL(file);
+                a.href = fileURL;
+                a.download = fileName;
+                a.click();
+                a.remove();
+                (window.URL || window.webkitURL).revokeObjectURL(file);
             })
         }
 
@@ -148,13 +156,11 @@
             return transactionAPI.customGET(apiEndPoints.transaction.list, dateRangeCopy);
         }
 
-        function addTransaction(transactionObj, netCommission){
-            return transactionAPI.customPOST(angular.extend(transactionObj, {
-                'netCommission': netCommission
-            }), apiEndPoints.transaction.basic);
+        function addTransaction(transactionObj){
+            return transactionAPI.customPOST(transactionObj, apiEndPoints.transaction.basic);
         }
 
-        function updateTransaction(transactionObj, netCommission){
+        function updateTransaction(transactionObj){
             return transactionAPI.customPUT(angular.extend(transactionObj, {
                 'netCommission': netCommission
             }), apiEndPoints.transaction.basic)
@@ -187,13 +193,13 @@
                 id: null,
                 basic:{
                     date: new Date(),
-                    quantityMetricId: 'FCL',
-                    quantity: 0,
+                    quantity: 0.00,
+                    quantityFcl: 0.0,
                     buyerId: null,
                     sellerId: null,
                     productItemId: null,
                     contractualBuyerId: null,
-                    price: 0,
+                    price: 0.00,
                     fileId: null,
                     contractId: null,
                     packagingId: null,

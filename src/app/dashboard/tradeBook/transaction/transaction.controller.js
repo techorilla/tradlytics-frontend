@@ -44,54 +44,20 @@
 
             if(vm.isNew){
                 vm.transaction = tradeBook.getNewTransaction();
-                vm.netCommission =  0.00;
                 vm.showForm = true;
-                intitalizeWatchers();
             }
             else{
                 loaderModal.open();
                 tradeBook.getTransactionDetail($stateParams.id, null).then(function(res){
                     vm.transaction = res.transaction;
-                    vm.netCommission = vm.transaction.commission.netCommission;
                     vm.showForm = true;
-                    intitalizeWatchers();
                     loaderModal.close();
                 })
             }
 
         }
 
-        function intitalizeWatchers(){
-            $scope.$watch('vm.transaction.commission', function(newVal, oldVal){
-                if((newVal !== oldVal)){
-                    vm.netCommission = tradeBook.calculateCommission(vm.transaction);
-                }
 
-            }, true);
-
-            $scope.$watch('vm.transaction.basic.price', function(newVal, oldVal){
-                console.log('hello');
-                if((newVal !== oldVal)){
-                    vm.netCommission = tradeBook.calculateCommission(vm.transaction);
-                }
-            });
-
-            $scope.$watch('vm.transaction.basic.quantity', function(newVal, oldVal){
-                if((newVal !== oldVal)){
-                    vm.netCommission = tradeBook.calculateCommission(vm.transaction);
-                }
-            });
-
-            $scope.$watch('vm.transaction.basic.productItemId', function(newVal, oldVal){
-                if(newVal){
-                    product.getProductSpecification(newVal).then(function(response){
-                        if(response.success){
-                            vm.transaction.productSpecification = response.specification;
-                        }
-                    })
-                }
-            });
-        }
 
         function cancel(){
             $state.go('dashboard.tradeBook');
@@ -103,7 +69,7 @@
 
         function addTransaction(transactionForm, transactionObj){
             if(transactionForm.$valid || true){
-                tradeBook.addTransaction(transactionObj, vm.netCommission).then(function(response){
+                tradeBook.addTransaction(transactionObj).then(function(response){
                     if(response.success){
                         toastr.success(response.message);
                         onSuccessFullSave(response.fileId);
@@ -120,7 +86,7 @@
 
         function updateTransaction(transactionForm, transactionObj){
                 if(transactionForm.$valid || true){
-                    tradeBook.updateTransaction(transactionObj, vm.netCommission).then(function(response){
+                    tradeBook.updateTransaction(transactionObj).then(function(response){
                         if(response.success){
                             onSuccessFullSave(response.fileId);
                             toastr.success(response.message);

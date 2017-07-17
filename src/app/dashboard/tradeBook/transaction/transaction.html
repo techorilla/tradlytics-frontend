@@ -11,12 +11,12 @@
                     <!--<div ng-include="'app/dashboard/tradeBook/transaction/templates/notes.html'"></div>-->
                     <!--<div ng-include="'app/dashboard/tradeBook/transaction/templates/documents.html'"></div>-->
 
-                    <div class="row">
-                        <div class="col-lg-12 expected-commission">
-                            <div class="commission-title">Expected Commission</div>
-                            <div class="commission-value">US$ <span class="amount" ng-class="{'minus': (vm.netCommission < 0), 'plus':(vm.netCommission > 0) }">{{vm.netCommission | number : 2 }}</span></div>
-                        </div>
-                    </div>
+                    <!--<div class="row">-->
+                        <!--<div class="col-lg-12 expected-commission">-->
+                            <!--<div class="commission-title">Expected Commission</div>-->
+                            <!--<div class="commission-value">US$ <span class="amount" ng-class="{'minus': (vm.netCommission < 0), 'plus':(vm.netCommission > 0) }">{{vm.netCommission | number : 2 }}</span></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
                     <div class="row">
                         <button type="submit" ng-if="!vm.transaction.id"

@@ -68,12 +68,19 @@
 
             vm.loadPorts = loadPorts;
 
-
+            vm.createTransactionInvoice = createTransactionInvoice;
             vm.activateShipment = activateShipment;
             vm.changeCompleteStatus = changeCompleteStatus;
 
             vm.productConfig = {};
             vm.productOptions = {};
+        }
+
+        function createTransactionInvoice(fileId){
+            $state.go('dashboard.accounts.invoiceForm',{
+                'fileId': fileId,
+                'invoiceId': 'new'
+            })
         }
 
         function loadVessel(query){
@@ -175,6 +182,7 @@
         }
 
         function deleteTradeDoc(docId){
+            loaderModal.open();
             tradeBook.deleteTransactionDocument(docId).then(function(res){
                 if(res.success){
                     toastr.success(res.message);
@@ -186,6 +194,7 @@
                 else{
                     toastr.error(res.message);
                 }
+                loaderModal.close();
             })
         }
 
@@ -197,18 +206,19 @@
             var extension = file.name.split('.');
             var ext = extension[extension.length - 1];
             if(file){
+                loaderModal.open();
                 file.upload = Upload.upload({
                     url: 'api/'+apiEndPoints.transaction.main + '/' + apiEndPoints.transaction.document + '/',
                     data: {
                         file: file,
                         name: vm.newDocumentName+'.'+ext,
                         tradeId: vm.transactionId,
-                        extension: ext,
-
+                        extension: ext
                     }
                 });
 
                 file.upload.then(function (response) {
+                    loaderModal.close();
                     if(response.data.success){
                         vm.addingDocument = false;
                         vm.transaction.files.push(response.data.fileObj);
@@ -225,6 +235,7 @@
         }
 
         function deleteTradeNote(tradeId, noteId, note, noteList){
+            loaderModal.open();
             return tradeBook.deleteTradeNote(tradeId, noteId).then(function(res){
                 if(res.success){
                     var index = _.indexOf(noteList, note);
@@ -234,7 +245,9 @@
                 else{
                     toastr.error(res.message);
                 }
+                loaderModal.close();
             });
+
         };
 
         function addTradeNote(tradeId, note, noteList, formObj){
@@ -246,6 +259,7 @@
 
                     vm.addingNote = false;
                     if(!vm.updateNote){
+                        loaderModal.open();
                         tradeBook.addTradeNote(tradeId, note).then(function(res){
                             if(res.success){
                                 toastr.success(res.message, 'Note Added');
@@ -257,12 +271,14 @@
                             }
                             vm.noteText = '';
                             utilities.resetFormValidation(formObj);
+                            loaderModal.close();
                         })
                     }
                     else{
                         var noteEdited = _.find(noteList, function(n) { return (n.editing == true); });
                         var index = _.indexOf(noteList, noteEdited);
                         tradeBook.editTradeNote(tradeId, noteEdited.noteId, note).then(function(res){
+                            loaderModal.open();
                             if(res.success){
                                 vm.updateNote = false;
                                 noteList[index] = res.note;
@@ -273,8 +289,7 @@
                             }
                             vm.noteText = '';
                             utilities.resetFormValidation(formObj);
-
-
+                            loaderModal.close();
                         })
                     }
 
