@@ -27,7 +27,17 @@
                 var number = (input > 1) ? input : input*100;
                 return $filter('number')(number, decimals) + '%';
             };
-        }]);
+        }])
+
+        .filter('positive', function() {
+            return function(input) {
+                if (!input) {
+                    return 0;
+                }
+
+                return Math.abs(input);
+            };
+        });
 
 
 
@@ -54,7 +64,7 @@
     }
 
     function selectFilter(){
-        
+
         return function(items, search, bind) {
             console.log(search, items, bind);
             if (!search) {

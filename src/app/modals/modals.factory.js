@@ -13,18 +13,73 @@
         .factory('deModal', deModal);
 
     /* @ngInject */
-    function deModal($uibModal, modalTemplates, fileReader){
+    function deModal($uibModal, modalTemplates, fileReader, tradeBook){
         return {
             openProgressModal: openProgressModal,
             openModal: openModal,
             dismissModal: dismissModal,
             openImageCropper: openImageCropper,
             getFile: getFile,
-            openProductSpecificationModal: openProductSpecificationModal
+            openProductSpecificationModal: openProductSpecificationModal,
+            openTransactionCashFlowModal: openTransactionCashFlowModal,
+            openTransactionCompleteModel: openTransactionCompleteModel
         };
 
 
         ////////////////////
+
+        function openTransactionCashFlowModal(fileId){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: modalTemplates.TRADE_COMMISSION_FLOW,
+                controller: function($scope, tradeCashFlowData, $uibModalInstance){
+                    $scope.tradeCashFlowData = tradeCashFlowData;
+                    $scope.tradeSum  = _.sumBy(tradeCashFlowData.cashFlow, function(flow) {
+                        return (flow.active) ? flow.amount : 0.00;
+                    });
+                    $scope.saveSpecs = function(){
+                        $uibModalInstance.close();
+                    };
+                },
+                size: 'lg',
+                backdrop: 'static',
+                resolve: {
+                    tradeCashFlowData: function(tradeBook){
+                        return tradeBook.getCommissionCashFlow(fileId).then(function(res){
+                            return res.data
+                        });
+                    }
+                }
+            });
+
+        }
+
+
+        function openTransactionCompleteModel(completeObj, transactionId, callback){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: modalTemplates.TRADE_COMPLETION,
+                controller: function($scope, $uibModalInstance, completeObj){
+                    $scope.completeObj = completeObj ? completeObj : {'complete': true};
+                    $scope.changeCompletion = function(completeObj){
+                        $uibModalInstance.close(completeObj);
+                    };
+                },
+                size: 'md',
+                backdrop: 'static',
+                resolve: {
+                    completeObj: function(){
+                        return completeObj;
+                    }
+                }
+
+
+            });
+
+            modalInstance.result.then(function(completeObj){
+                callback(completeObj);
+            });
+        }
 
 
         function openProductSpecificationModal(defaultSpecs, callback){

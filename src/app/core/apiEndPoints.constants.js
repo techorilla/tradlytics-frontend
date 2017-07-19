@@ -60,7 +60,7 @@
             shipmentStatus: 'shipmentStatus',
             completeStatus: 'completeStatus',
             washout: 'washout',
-
+            cashFlow: 'cash_flow',
             arrivedAtPortInfo: 'arrived_at_port_info',
             notShippedInfo: 'not_shipped_info',
             shippedInfo: 'shipped_info',
@@ -133,6 +133,11 @@
             dashboard: 'dashboard',
             commissionFlow: 'commission_flow',
             invoice: 'invoice'
+        },
+        notification:{
+            main: 'notifications',
+            unreadCount: 'api/unread_count',
+            unreadList: 'api/unread_list'
         }
 
     };

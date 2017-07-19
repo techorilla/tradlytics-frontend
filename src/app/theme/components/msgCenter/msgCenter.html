@@ -1,7 +1,7 @@
 <ul class="al-msg-center clearfix">
   <li uib-dropdown>
     <a href uib-dropdown-toggle>
-      <i class="fa fa-bell-o"></i><span>5</span>
+      <i class="fa fa-bell-o"></i><span>{{notificationObj.list.length}}</span>
 
       <div class="notification-ring"></div>
     </a>
@@ -11,19 +11,20 @@
 
       <div class="header clearfix">
         <strong>Notifications</strong>
-        <a href>Mark All as Read</a>
-        <a href>Settings</a>
+        <!--<a href>Mark All as Read</a>-->
+        <!--<a href>Settings</a>-->
       </div>
       <div class="msg-list">
-        <a href class="clearfix" ng-repeat="msg in notifications">
-          <div class="img-area"><img ng-class="{'photo-msg-item' : !msg.image}" ng-src="{{::( msg.image ||  (users[msg.userId].name | profilePicture) )}}"></div>
+        <a class="clearfix" ng-if="notificationObj.list.length===0"><div class="msg-area"><div>No Update Notifications</div></div></a>
+        <a class="clearfix" ng-repeat="msg in notificationObj.list" ng-click="goToState(msg.data.state, {id: msg.data.state_id})">
+          <div class="img-area"><img ng-class="{'photo-msg-item' : !msg.data.user_image}" ng-src="{{::( msg.data.user_image||  (msg.data.user_image | profilePicture) )}}"></div>
           <div class="msg-area">
-            <div ng-bind-html="getMessage(msg)"></div>
-            <span>{{ msg.time }}</span>
+            <div ng-bind-html="msg.verb"></div>
+            <span am-time-ago="msg.timestamp"></span>
           </div>
         </a>
       </div>
-      <a href>See all notifications</a>
+      <!--<a href>See all notifications</a>-->
     </div>
   </li>
   <li uib-dropdown>

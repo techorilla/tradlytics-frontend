@@ -45,12 +45,25 @@
         padding-bottom: 20px;
         h3.with-line{
           color: $text-color;
+          margin-bottom: 5px;
+          line-height: 30px;
+        }
+        .number{
+          height: 48px;
+          overflow: hidden;
+          color: $text-color;
+          font-weight: $font-bold;
         }
 
       }
 
       .detail{
         overflow: hidden;
+        .port-transit{
+          color: $text-color;
+          font-weight: $font-bold;
+        }
+
       }
 
       .form{

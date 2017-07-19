@@ -1,0 +1,42 @@
+<div class="modal-body">
+    <div ba-panel  ba-panel-title="Transaction Commission Cash Flow" ba-panel-class="with-scroll">
+        <div class="horizontal-scroll">
+            <table class="table table-striped" st-table="smartTableData">
+                <thead>
+                <tr class="sortable table-header">
+                    <th>Active</th>
+                    <th>Business</th>
+                    <th>Description</th>
+                    <th>Profit</th>
+                    <th>Loss</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="flow in tradeCashFlowData.cashFlow">
+                    <td>
+                        <i class="fa" ng-class="{'fa-check': flow.active, 'fa-times': !flow.active}" aria-hidden="true"></i>
+                    </td>
+                    <td  ng-bind="flow.business.name  + ' | ' + (flow.business.country  ? flow.business.country : 'No Origin')"></td>
+                    <td ng-bind="flow.description"></td>
+                    <td ng-bind="(!flow.payable ? 'USD ' + (flow.amount | positive | number: '2' )  : '')"></td>
+                    <td ng-bind="(flow.payable ? 'USD ' + (flow.amount | positive | number: '2' ) : '')"></td>
+                </tr>
+                </tbody>
+
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Net Total</td>
+                    <td ng-class="{'negative': (tradeSum<0), 'positive': (tradeSum>0)}">{{'USD ' + (tradeSum | number:'2')}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="submit" class="btn btn-default" ng-click="$dismiss()">Close</button>
+</div>

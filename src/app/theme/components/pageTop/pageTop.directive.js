@@ -21,6 +21,7 @@
       _init();
 
       function _init(){
+
         scope.loading=false;
         scope.searchResults = [];
         scope.resultType = '';
@@ -40,7 +41,10 @@
         scope.searchQuery = searchQuery;
         scope.goToSearchItem = goToSearchItem;
 
+
       }
+
+
       
       function goToSearchItem(stateName, stateParams){
         scope.searchResults = [];

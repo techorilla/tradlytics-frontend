@@ -17,6 +17,7 @@
 .table {
   table-layout: auto;
   tr{
+
     .titled{
       font-weight: 600;
       color: $sidebar-text;
@@ -438,4 +439,14 @@ input.search-input {
   .breakdown{
     float: left;
   }
+}
+
+
+.negative{
+  font-weight: $font-bold;
+  color:$warning !important;
+}
+.positive{
+  font-weight: $font-bold;
+  color:$success !important;
 }

@@ -8,7 +8,7 @@
         .controller('TransactionView', transactionView);
 
     /* @ngInject */
-    function transactionView(Upload, tradeBook, toastr, $stateParams, apiEndPoints, trade, utilities,
+    function transactionView(Upload, tradeBook, toastr, deModal, apiEndPoints, trade, utilities,
                              appFormats, $state, shipmentStatus, dropDownConfig, shipping, loaderModal){
         var vm = this;
         _init();
@@ -71,9 +71,16 @@
             vm.createTransactionInvoice = createTransactionInvoice;
             vm.activateShipment = activateShipment;
             vm.changeCompleteStatus = changeCompleteStatus;
+            vm.showTradeCashFlow = showTradeCashFlow;
 
             vm.productConfig = {};
             vm.productOptions = {};
+        }
+
+        function showTradeCashFlow(fileId){
+            deModal.openTransactionCashFlowModal(fileId, function(fileId){
+
+            });
         }
 
         function createTransactionInvoice(fileId){
@@ -96,22 +103,26 @@
             });
         }
 
-        function cancelShipmentForm(form, flag){
+        function cancelShipmentForm(flag){
             vm[flag] = false;
         }
 
-        function changeCompleteStatus(transactionId, isComplete){
-            loaderModal.open();
-            tradeBook.changeCompleteStatus(transactionId, isComplete).then(function(res){
-                if(res.success){
-                    vm.transaction = res.transactionObj;
-                    toastr.success(res.message)
-                }
-                else{
-                    toastr.error(res.message);
-                }
-                loaderModal.close();
+        function changeCompleteStatus(completeObj, transactionId){
+            deModal.openTransactionCompleteModel(completeObj, transactionId, function(completeObj){
+                loaderModal.open();
+                tradeBook.changeCompleteStatus(transactionId, completeObj).then(function(res){
+                    if(res.success){
+                        vm.transaction = res.transactionObj;
+                        toastr.success(res.message)
+                    }
+                    else{
+                        toastr.error(res.message);
+                    }
+                    loaderModal.close();
+                });
+
             });
+
         }
 
         function activateShipmentStatus(shipmentStatus, status, transactionId){
@@ -128,34 +139,52 @@
             });
         }
 
-        function editNotShipped(formObj, dataObj, transactionId){
-            tradeBook.updateNotShippedInfo(dataObj, transactionId);
+
+        function onSuccessForm(boolean, res){
+            if(res.success){
+                vm.transaction = res.transactionObj;
+                toastr.success(res.message, 'Shipment Information Updated!');
+                cancelShipmentForm(boolean);
+            }
+            else{
+                toastr.error();
+            }
+
         }
 
+        function editNotShipped(formObj, dataObj, transactionId){
+            loaderModal.open();
+            tradeBook.updateNotShippedInfo(dataObj, transactionId).then(function(res){
+                loaderModal.close();
+                onSuccessForm('showNotShippedForm', res);
+            });
+        }
+
+
         function editApprobationReceived(formObj, dataObj, transactionId){
-            tradeBook.updateApprobationReceivedInfo(dataObj, transactionId);
+            loaderModal.open();
+            tradeBook.updateApprobationReceivedInfo(dataObj, transactionId).then(function(res){
+
+                loaderModal.close();
+                onSuccessForm('showApprobationRecievedForm', res);
+            });
         }
 
         function editShipped(formObj, dataObj, transactionId){
-            tradeBook.updateShippedInfo(dataObj, transactionId);
+            loaderModal.open();
+            tradeBook.updateShippedInfo(dataObj, transactionId).then(function(res){
+                loaderModal.close();
+                onSuccessForm('showShippedForm', res);
+            });
         }
 
         function editArrivedAtPort(formObj, arrivedObj, transactionObj, transactionId){
             var expectedCommission = null;
-            if(arrivedObj.quantityShipped){
-                expectedCommission = tradeBook.calculateCommission(transactionObj, parseFloat(arrivedObj.quantityShipped))
-            }
             loaderModal.open();
             return tradeBook.updateArrivedAtPortInfo(arrivedObj, transactionId, expectedCommission).then(function(res){
-                if(res.success){
-                    vm.transaction = res.transactionObj;
-                    toastr.success(res.message, 'Shipment Information Updated!');
-                    cancelShipmentForm(formObj, 'showArrivedAtPort');
-                }
-                else{
-                    toastr.error(res.message);
-                }
                 loaderModal.close();
+                onSuccessForm('showArrivedAtPort', res);
+
             });
         }
 

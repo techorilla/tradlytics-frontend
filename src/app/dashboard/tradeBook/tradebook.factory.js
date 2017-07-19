@@ -43,10 +43,19 @@
             updateShippedInfo: updateShippedInfo,
             updateNotShippedInfo: updateNotShippedInfo,
             updateApprobationReceivedInfo: updateApprobationReceivedInfo,
-            updateArrivedAtPortInfo: updateArrivedAtPortInfo
+            updateArrivedAtPortInfo: updateArrivedAtPortInfo,
+
+
+            getCommissionCashFlow: getCommissionCashFlow
 
 
         };
+
+        function getCommissionCashFlow(fileId){
+            return transactionAPI.customGET(apiEndPoints.transaction.cashFlow, {
+                'fileId': fileId
+            })
+        }
 
         function updateShippedInfo(dataObj, transactionId){
             return transactionAPI.customPUT({
@@ -86,10 +95,10 @@
             }, apiEndPoints.transaction.washout);
         }
 
-        function changeCompleteStatus(transactionId, isComplete){
+        function changeCompleteStatus(transactionId, completeObj){
             return transactionAPI.customPOST({
                 'transactionId': transactionId,
-                'isComplete': isComplete
+                'completeObj': completeObj
             }, apiEndPoints.transaction.completeStatus);
         }
 
