@@ -170,9 +170,7 @@
         }
 
         function updateTransaction(transactionObj){
-            return transactionAPI.customPUT(angular.extend(transactionObj, {
-                'netCommission': netCommission
-            }), apiEndPoints.transaction.basic)
+            return transactionAPI.customPUT(transactionObj, apiEndPoints.transaction.basic);
         }
 
         function calculateCommission(transactionObj, quantity){

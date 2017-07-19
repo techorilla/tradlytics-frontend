@@ -97,13 +97,12 @@
 
                     <div class="col-md-6 col-xs-12">
                         <div class="form-group">
-                            <label class="with-line"><span class="titled">USD</span> - <span class="titled">PKR</span></label>
+                            <label class="with-line"><span class="titled" ng-bind="vm.invoiceObj.currency"></span> / <span class="titled">USD</span></label>
                             <input type="text"
-                                   ng-model="vm.invoiceObj.conversionRate"
+                                   ng-model="vm.invoiceObj.currencyRate"
                                    ng-required="true"
-                                   ng-disabled="true"
                                    name="quantity"
-                                   class="form-control" id="conversionRate" placeholder="Rate">
+                                   class="form-control" id="conversionRate" placeholder="Currency Rate">
                         </div>
                     </div>
 
@@ -121,6 +120,10 @@
                         business="vm.invoiceObj.invoiceTo"
                         business-type="Invoice To">
                 </business-card>
+                <product-card
+                        col-size="12"
+                        product-item="vm.invoiceObj.productItem"></product-card>
+
         </div>
 
 
@@ -133,7 +136,7 @@
                             <th class="table-id"></th>
                             <th class="table-id" st-sort="id" st-sort-default="true">S.No</th>
                             <th class="table-id" st-sort="id" st-sort-default="true">Description</th>
-                            <th class="table-id" st-sort="id" st-sort-default="true">Amount</th>
+                            <th class="table-id" st-sort="id" st-sort-default="true">Amount <span class="titled" ng-bind="vm.invoiceObj.currency"></span></th>
                             <th class="table-id" st-sort="id" st-sort-default="true">Remarks</th>
                         </tr>
                         </thead>
@@ -141,12 +144,33 @@
                         <tr ng-repeat="item in vm.invoiceObj.invoiceItems track by $index">
                             <td></td>
                             <td ng-bind="$index+1"></td>
-                            <td ng-bind="item.name"></td>
+                            <td>{{item.name}}</td>
                             <td><input class="form-control" type="text" ng-model="item.amount"></td>
                             <td><input class="form-control" type="text" ng-model="item.remarks"></td>
-
-
                         </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>Total</strong></td>
+                                <td><span class="titled" ng-bind="vm.invoiceObj.currency"></span> {{vm.invoiceObj.invoiceAmount | number : '2'}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>FCL Weight(KG)</strong></td>
+                                <td><span class="titled" ng-bind="vm.invoiceObj.currency"></span> {{(vm.invoiceObj.quantity * 1000)  | number : '2'}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>Average Rate(<span class="titled" ng-bind="vm.invoiceObj.currency +' / KG'"></span>)</strong></td>
+                                <td><span class="titled" ng-bind="vm.invoiceObj.currency"></span> {{((vm.invoiceObj.invoiceAmount / (vm.invoiceObj.quantity* 1000) ) | number : '2')}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -158,7 +182,7 @@
             <div ba-panel ba-panel-title="Notes" ba-panel-class="with-scroll">
                 <div class="form-group">
                     <textarea type="text"
-                              ng-model="vm.invoiceObj.notes"
+                              ng-model="vm.invoiceObj.note"
                               name="notes"
                               class="form-control" id="notes">
 
@@ -167,9 +191,26 @@
             </div>
         </div>
 
-        <div class="button-row">
-
+        <div class="col-md-12" ba-panel>
+            <button type="submit"
+                    ng-click=""
+                    ng-if="vm.invoiceId ==='new'"
+                    class="btn btn-primary btn-with-icon save-profile">
+                <i class="ion-android-checkmark-circle"></i> Create Invoice
+            </button>
+            <button type="submit"
+                    ng-click=""
+                    ng-if="vm.invoiceId !=='new'"
+                    class="btn btn-primary btn-with-icon save-profile">
+                <i class="ion-android-checkmark-circle"></i> Update Invoice
+            </button>
+            <button type="button" ng-click="vm.cancel(vm.fileId)"
+                    class="btn btn-danger btn-with-icon save-profile">
+                <i class="ion-android-cancel"></i>Cancel
+            </button>
         </div>
+
+
     </form>
 
 </div>

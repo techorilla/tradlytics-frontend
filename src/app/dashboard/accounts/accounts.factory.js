@@ -13,8 +13,25 @@
 
         return {
             getDashboardData: getDashboardData,
-            getInvoiceObj: getInvoiceObj
+            getInvoiceObj: getInvoiceObj,
+            createInvoice: createInvoice,
+            updateInvoice: updateInvoice
         };
+
+        function updateInvoice(fileId, invoiceObj){
+            return accountsAPI.customPUT({
+                'fileId':fileId,
+                'invoiceObj': invoiceObj
+            }, apiEndPoints.accounts.invoice);
+        }
+
+        function createInvoice(fileId, invoiceObj){
+            return accountsAPI.customPOST({
+                'fileId':fileId,
+                'invoiceObj': invoiceObj
+            }, apiEndPoints.accounts.invoice);
+
+        }
 
         function getDashboardData(){
 

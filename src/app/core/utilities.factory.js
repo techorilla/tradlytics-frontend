@@ -52,8 +52,14 @@
             convertMomentDateRange: convertMomentDateRange,
             goBackState: goBackState,
             prepareGraphData: prepareGraphData,
-            manageTextOverFlow: manageTextOverFlow
+            manageTextOverFlow: manageTextOverFlow,
+            evalMathExpressionInString: evalMathExpressionInString
         };
+
+        function evalMathExpressionInString(str){
+            var expression = str.replace(/[^0-9.*+-]/g, "")
+            return eval(expression)
+        }
 
         function uploadImage(evt){
 

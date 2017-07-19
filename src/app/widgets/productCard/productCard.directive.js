@@ -25,7 +25,8 @@
             restrict: 'E',
             templateUrl: 'app/widgets/productCard/productCard.html',
             scope: {
-                productItem:'='
+                productItem:'=',
+                colSize:'@'
             },
             replace: true
         };
@@ -35,6 +36,7 @@
         function link(scope, elem, attrs){
             _init();
             function _init(){
+                scope.colSize = scope.colSize ?  scope.colSize  : '4';
                 scope.appConstants = appConstants;
                 scope.productImage = $filter('productPicture')(scope.productItem.image);
                 console.log(scope.business);
