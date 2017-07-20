@@ -3,7 +3,7 @@
     angular.module('app.dashboard.tradeBook')
         .controller('Transaction', transaction);
 
-    function transaction(dropDownConfig, tradeBook, $scope, deModal, product, toastr, $state, loaderModal, $stateParams){
+    function transaction(dropDownConfig, tradeBook, $scope, deModal, $rootScope, toastr, $state, loaderModal, $stateParams){
         console.log('hello');
         var vm = this;
         _init();
@@ -49,6 +49,8 @@
             else{
                 loaderModal.open();
                 tradeBook.getTransactionDetail($stateParams.id, null).then(function(res){
+                    $rootScope.headerSubTitle = 'File Id ' + $stateParams.id ;
+                    $rootScope.headerTitle = 'Edit Transaction';
                     vm.transaction = res.transaction;
                     vm.showForm = true;
                     loaderModal.close();

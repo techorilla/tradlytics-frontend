@@ -70,7 +70,7 @@
                         ng-click="vm.changeCompleteStatus(vm.transactionId.completeObj, vm.transactionId)">Complete</button>
             </div>
 
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-3" ng-if="vm.transaction.onOurContract">
                 <h3 class="with-line">Invoice</h3>
                 <button class="btn btn-xs btn-success pull-left cursor-pointer"
                         ng-click="vm.goToInvoice(vm.transaction.basic.fileNo, vm.transaction.invoice.invoiceNo)" ng-if="vm.transaction.invoice">
