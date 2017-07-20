@@ -68,9 +68,18 @@
                         </div>
                     </div>
 
+                    <div class="col-md-3 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Quantity  <span class="titled">FCL</span></label>
+                            <input type="text"
+                                   ng-model="vm.invoiceObj.quantityFCL"
+                                   ng-required="true"
+                                   name="quantityFCL"
+                                   class="form-control" id="quantityFCL" placeholder="Quantity FCL">
+                        </div>
+                    </div>
 
-
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col-md-3 col-xs-12">
                         <div class="form-group">
                             <label class="with-line">Quantity  <span class="titled">MT</span></label>
                             <input type="text"
@@ -145,7 +154,7 @@
                             <td></td>
                             <td ng-bind="$index+1"></td>
                             <td>{{item.name}}</td>
-                            <td><input class="form-control" type="text" ng-model="item.amount"></td>
+                            <td><input class="form-control" ng-blur="vm.convertToDecimal(item)" type="text" ng-model="item.amount"></td>
                             <td><input class="form-control" type="text" ng-model="item.remarks"></td>
                         </tr>
                         </tbody>
@@ -193,13 +202,13 @@
 
         <div class="col-md-12" ba-panel>
             <button type="submit"
-                    ng-click=""
+                    ng-click="vm.createInvoice(vm.fileId, vm.invoiceObj)"
                     ng-if="vm.invoiceId ==='new'"
                     class="btn btn-primary btn-with-icon save-profile">
                 <i class="ion-android-checkmark-circle"></i> Create Invoice
             </button>
             <button type="submit"
-                    ng-click=""
+                    ng-click="vm.updateInvoice(vm.fileId, vm.invoiceObj)"
                     ng-if="vm.invoiceId !=='new'"
                     class="btn btn-primary btn-with-icon save-profile">
                 <i class="ion-android-checkmark-circle"></i> Update Invoice

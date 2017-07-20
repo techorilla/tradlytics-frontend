@@ -66,17 +66,22 @@
                         controller: 'InvoiceForm as vm'
                     }
                 },
+                pageHeader:{
+                    goBack: true
+                },
                 resolve:{
                     invoice: function(accounts, $stateParams, loaderModal, $rootScope){
                         loaderModal.open();
                         return accounts.getInvoiceObj($stateParams.fileId, $stateParams.invoiceId).then(function(response){
                             loaderModal.close();
-                            $rootScope.headerSubTitle = 'File Id ' + $stateParams.fileId ;
                             if($stateParams.invoiceId === 'new'){
                                 $rootScope.headerTitle = 'New Invoice';
+                                $rootScope.headerSubTitle = 'File Id ' + $stateParams.fileId ;
+
                             }
                             else{
-                                $rootScope.headerTitle = 'Invoice No. ' + $stateParams.fileId;
+                                $rootScope.headerSubTitle = 'File Id ' + $stateParams.fileId ;
+                                $rootScope.headerTitle = 'Invoice No. ' + $stateParams.invoiceId;
                             }
 
                             return response.invoiceObj;

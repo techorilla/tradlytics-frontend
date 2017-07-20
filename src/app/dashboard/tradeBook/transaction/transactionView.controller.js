@@ -72,6 +72,7 @@
             vm.activateShipment = activateShipment;
             vm.changeCompleteStatus = changeCompleteStatus;
             vm.showTradeCashFlow = showTradeCashFlow;
+            vm.goToInvoice = goToInvoice;
 
             vm.productConfig = {};
             vm.productOptions = {};
@@ -101,6 +102,10 @@
                 return res.data
 
             });
+        }
+
+        function goToInvoice(fileId, invoiceId){
+            $state.go('dashboard.accounts.invoiceForm', {fileId: fileId, invoiceId: invoiceId})
         }
 
         function cancelShipmentForm(flag){

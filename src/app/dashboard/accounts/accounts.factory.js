@@ -18,18 +18,22 @@
             updateInvoice: updateInvoice
         };
 
-        function updateInvoice(fileId, invoiceObj){
-            return accountsAPI.customPUT({
+        function updateInvoice(fileId, invoiceObj, callback){
+            accountsAPI.customPUT({
                 'fileId':fileId,
                 'invoiceObj': invoiceObj
-            }, apiEndPoints.accounts.invoice);
+            }, apiEndPoints.accounts.invoice).then(function(res){
+                callback(res)
+            });
         }
 
-        function createInvoice(fileId, invoiceObj){
-            return accountsAPI.customPOST({
+        function createInvoice(fileId, invoiceObj, callback){
+            accountsAPI.customPOST({
                 'fileId':fileId,
                 'invoiceObj': invoiceObj
-            }, apiEndPoints.accounts.invoice);
+            }, apiEndPoints.accounts.invoice).then(function(res){
+                callback(res);
+            });
 
         }
 

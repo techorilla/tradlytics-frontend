@@ -13,7 +13,7 @@
         .controller('InvoiceForm', InvoiceForm);
 
     /* @ngInject */
-    function InvoiceForm(appFormats, utilities, $filter, $stateParams, $scope, $state, invoice) {
+    function InvoiceForm($filter, utilities, accounts, $stateParams, $scope, $state, invoice, toastr) {
         var vm = this;
         _init();
 
@@ -24,24 +24,32 @@
             vm.createInvoice = createInvoice;
             vm.updateInvoice = updateInvoice;
             vm.invoiceObj.invoiceAmount = calculateInvoiceTotal(vm.invoiceObj.invoiceItems);
+            vm.convertToDecimal = convertToDecimal;
             vm.cancel = cancel;
             initializeWatcher();
+        }
+
+        function convertToDecimal(item){
+            item.amount  = $filter('number')(item.amount,2);
         }
 
         function cancel(fileId){
             $state.go('dashboard.transactionView', {'id': fileId});
         }
 
+        function onSuccessInvoice(res){
+            if(res.success){
+                toastr.success(res.message);
+                cancel(vm.fileId);
+            }
+        }
+
         function updateInvoice(fileId, invoiceObj){
-            accounts.updateInvoice(fileId, invoiceObj).then(function(res){
-                console.log(res);
-            });
+            accounts.updateInvoice(fileId, invoiceObj, onSuccessInvoice)
         }
 
         function createInvoice(fileId, invoiceObj){
-            accounts.createInvoice(fileId, invoiceObj).then(function(res){
-                console.log(res);
-            });
+            accounts.createInvoice(fileId, invoiceObj, onSuccessInvoice)
         }
 
         function initializeWatcher(){

@@ -34,8 +34,9 @@
                 if(toState.pageHeader.title){
                     $rootScope.headerTitle = toState.pageHeader.title;
                 }
-
-                $rootScope.headerSubTitle = toState.pageHeader.subTitle;
+                if(toState.pageHeader.subTitle){
+                    $rootScope.headerSubTitle = toState.pageHeader.subTitle;
+                }
                 $rootScope.headerAnchor = (toState.pageHeader.headerAnchor) ? toState.pageHeader.headerAnchor : [];
                 $rootScope.goBack = toState.pageHeader.goBack || false;
             }
