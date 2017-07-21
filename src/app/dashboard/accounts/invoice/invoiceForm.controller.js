@@ -30,7 +30,9 @@
         }
 
         function convertToDecimal(item){
-            item.amount  = $filter('number')(item.amount,2);
+            if(item.amount) {
+                item.amount = $filter('number')(item.amount, 2);
+            }
         }
 
         function cancel(fileId){

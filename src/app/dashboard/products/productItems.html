@@ -1,12 +1,22 @@
 
 <div class="row">
-
     <div class="col-md-6 marginBottom10px" ng-if="!vm.showForm">
         <button class="btn btn-primary" data-toggle="modal"
                 ng-click="vm.addNewProductItem()">
             Add New Product Item
         </button>
     </div>
+</div></div>
+
+
+<filter-bar ng-show="!vm.showForm"
+        country="true"
+        product="true"
+        on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)"
+        on-country-selected-changed="vm.onCountrySelectedChanged(selectedList)">
+</filter-bar>
+
+<div class="row">
 
     <div class="col-md-12">
         <div ba-panel ba-panel-class="profile-page" ng-if="vm.showForm">
@@ -144,7 +154,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="row in vm.allProductItems | orderBy:'productName'">
+                    <tr ng-repeat="row in vm.allProductItems | orderBy:'productName'  | selectedRows:vm.productItemToRemove:'id'">
                         <td class="titled" ng-bind="row.productName"></td>
                         <td>
                             <img width="18" src="{{vm.appConstants.HOST + row.productOriginFlag}}"/>&nbsp;
