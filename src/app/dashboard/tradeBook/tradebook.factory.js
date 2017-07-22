@@ -46,10 +46,15 @@
             updateArrivedAtPortInfo: updateArrivedAtPortInfo,
 
 
-            getCommissionCashFlow: getCommissionCashFlow
+            getCommissionCashFlow: getCommissionCashFlow,
+            getTradebookDashbordData: getTradebookDashbordData
 
 
         };
+
+        function getTradebookDashbordData(){
+            return transactionAPI.customGET(apiEndPoints.transaction.dashboard)
+        }
 
         function getCommissionCashFlow(fileId){
             return transactionAPI.customGET(apiEndPoints.transaction.cashFlow, {

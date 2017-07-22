@@ -29,8 +29,16 @@
             addProductItemPrice: addProductItemPrice,
             updateProductItemPrice: updateProductItemPrice,
             deleteProductItemPrice: deleteProductItemPrice,
-            getAllProductPriceSummary: getAllProductPriceSummary
+            getAllProductPriceSummary: getAllProductPriceSummary,
+
+            getProductPricingAnalytics: getProductPricingAnalytics
         };
+
+        function getProductPricingAnalytics(dateRange, productItemId){
+            return pricingAPI.customPOST(angular.merge(dateRange, {
+                'productItemId': productItemId
+            }), apiEndPoints.productItem+'/analytics')
+        }
 
         function getAllProductPriceSummary(){
             return pricingAPI.customGET(apiEndPoints.pricingSummary);
@@ -38,14 +46,6 @@
 
         function getAllProductItemPrice(dataRange){
             return pricingAPI.customGET(apiEndPoints.productItem, dataRange)
-        }
-
-        function onDateRangeChanged(dateRange){
-            loaderModal.open();
-            return pricing.getAllProductItemPrice(dateRange).then(function(res){
-                loaderModal.close();
-                return res.data.allPrices;
-            })
         }
 
         function addProductItemPrice(marketPriceObj, callback){

@@ -50,6 +50,7 @@
         manifestDashboard: 'manifest/dashboard',
         transaction:{
             main:'transactions',
+            dashboard: 'dashboard',
             list: 'list',
             basic: 'basic',
             commission: 'commission',

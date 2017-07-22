@@ -16,6 +16,42 @@
     function configuration($stateProvider){
 
         $stateProvider
+            .state('dashboard.tradeDashboard', {
+                url:'/tradeDashboard',
+                subNav: true,
+                subNavTitle: 'Trade Book',
+                pageHeader:{
+                    subTitle: 'Dashboard',
+                    title:'International Trades',
+                    headerAnchor: [
+                        {
+                            text: 'Add New Transaction',
+                            state: 'dashboard.transaction({id:"new"})'
+                        },
+                        {
+                            text: 'Trade Book',
+                            state: 'dashboard.tradeBook'
+                        },
+
+                    ]
+                },
+                views:
+                {
+                    'content@dashboard':{
+                        templateUrl: 'app/dashboard/tradeBook/tradeDashboard/tradeDashboard.html',
+                        controller: 'TradeDashboard as vm'
+                    }
+                },
+                resolve:{
+                    dashboardData: function(tradeBook, $stateParams, loaderModal, $rootScope){
+                        loaderModal.open();
+                        return tradeBook.getTradebookDashbordData().then(function(response){
+                            loaderModal.close();
+                            return response.dashboardData
+                        });
+                    }
+                }
+            })
             .state('dashboard.tradeBook', {
                 url:'/tradeBook',
                 subNav: true,

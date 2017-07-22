@@ -20,7 +20,7 @@
         }
 
         function productPriceReport(productItemId){
-            $state.go('dashboard.productPriceAnalytics', {'productItemId': productItemId});
+            $state.go('dashboard.pricing.priceAnalytics', {'productItemId': productItemId});
         }
 
         function filterChanged(){

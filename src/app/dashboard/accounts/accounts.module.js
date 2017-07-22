@@ -33,7 +33,7 @@
                     headerAnchor: [
                         {
                             text: 'Commission Flow',
-                            state: 'dashboard.accounts.commissionFlow'
+                            state: 'dashboard.accounts.taccounts'
                         },
                         {
                             text: 'Invoices',
@@ -90,12 +90,12 @@
                 },
             })
 
-            .state('dashboard.accounts.commissionFlow',{
+            .state('dashboard.accounts.taccounts',{
                 url:'/commissionFlow',
                 views:{
                     'content@dashboard.accounts':{
-                        templateUrl:'app/dashboard/accounts/commissionFlow/commissionFlow.html',
-                        controller: 'CommissionFlow as vm'
+                        templateUrl:'app/dashboard/accounts/taccounts/taccounts.html',
+                        controller: 'TAccounts as vm'
                     }
                 }
             });

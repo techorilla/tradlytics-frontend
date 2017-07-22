@@ -70,7 +70,7 @@
         baSidebarServiceProvider.addStaticItem({
             title: 'Trade Book',
             icon: 'ion-social-usd',
-            stateRef: 'dashboard.tradeBook'
+            stateRef: 'dashboard.tradeDashboard'
         });http://localhost:3000/#!/dashboard/businessPartner
         // baSidebarServiceProvider.addStaticItem({
         //     title: 'Internal Trade Book',

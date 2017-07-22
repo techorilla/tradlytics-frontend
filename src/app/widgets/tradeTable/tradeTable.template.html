@@ -14,7 +14,7 @@
                         <th>No transaction have been added with in the given date range and filters.</th>
                     </tr>
                     </thead>
-                    <tbody ng-repeat="row in displayList"   ng-if="listData.length!==0">
+                    <tbody ng-repeat="row in displayList | orderBy:'fileNo'"   ng-if="listData.length!==0">
 
                     <tr>
                         <td ng-click="toggleNotes(row)">

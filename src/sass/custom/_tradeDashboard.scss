@@ -1,0 +1,17 @@
+.tradeDashboard{
+ .trade-count{
+   .description{
+     font-size: 12px;
+     padding: 0px 0 0 30px;
+     .title{
+       padding-top: 3px;
+       color: $primary;
+       font-weight: $font-bold;
+     }
+     .description-stats{
+       font-size: 16px;
+       font-weight: $font-bold;
+     }
+   }
+ }
+}

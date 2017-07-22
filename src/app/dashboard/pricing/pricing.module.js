@@ -97,6 +97,16 @@
                         controller:'ProductPricing as vm'
                     }
                 }
+            })
+            .state('dashboard.pricing.priceAnalytics', {
+                url: 'pricing/analytics/:productItemId',
+                title:'Pricing Analytics',
+                views: {
+                    'pricing@dashboard.pricing':{
+                        templateUrl:'app/dashboard/pricing/priceAnalytics.html',
+                        controller:'PriceAnalytics as vm'
+                    }
+                }
             });
 
         $urlRouterProvider.when('/pricing','/pricing/market');
