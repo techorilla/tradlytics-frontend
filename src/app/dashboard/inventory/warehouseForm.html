@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-md-12">
+        <div ba-panel>
+            <div class="panel-content">
+                <form name="vm.warehouseForm" novalidate>
+                    <div class="row">
+
+                        <div class="form-group col-md-12 clearfix">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-model="vm.warehouseObj.selfWarehouse">
+                                    <span>Own Warehouse</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6 clearfix">
+                            <label class="with-line control-label">Warehouse Name</label>
+                            <input
+                                    ng-required="true"
+                                    ng-model="vm.warehouseObj.name"
+                                    class="form-control"
+                                    name="wh_name"
+                                    placeholder="Warehouse Name"/>
+                            <ng-messages for="vm.warehouseForm.wh_name.$error"
+                                         ng-show='(vm.warehouseForm.$submitted || vm.warehouseForm.wh_name.$dirty)'>
+                                <ng-message class="errorValidation" when="required">Please enter warehouse name.</ng-message>
+                            </ng-messages>
+                        </div>
+
+                        <div class="form-group col-md-6 clearfix">
+                            <label class="with-line control-label">No. of <span class="titled">Lots</span></label>
+                            <input
+                                    ng-required="true"
+                                    ng-pattern="/^[0-9]+$/i"
+                                    ng-model="vm.warehouseObj.lots"
+                                    class="form-control"
+                                    name="wh_lots"
+                                    placeholder="Warehouse Lots"/>
+                            <ng-messages for="vm.warehouseForm.wh_lots.$error"
+                                         ng-show='(vm.warehouseForm.$submitted || vm.warehouseForm.wh_lots.$dirty)'>
+                                <ng-message class="errorValidation" when="required">Please enter warehouse lots.</ng-message>
+                                <ng-message class="errorValidation" when="pattern">Warehouse Lot No. can only have number as input</ng-message>
+                            </ng-messages>
+                        </div>
+
+
+
+                        <div class="form-group col-md-6 clearfix">
+                            <label class="with-line control-label">Address</label>
+                            <textarea
+                                    ng-model="vm.warehouseObj.address"
+                                    class="form-control"
+                                    name="name"
+                                    placeholder="Warehouse Address"/>
+                            <br/>
+                            <label class="with-line control-label">Contact Details</label>
+                            <textarea
+                                    ng-model="vm.warehouseObj.contact"
+                                    class="form-control"
+                                    name="name"
+                                    placeholder="Warehouse Contact Details"/>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="with-line control-label">Total Capacity <span class="titled">Kgs</span></label>
+                            <input
+                                    required
+                                    ng-pattern="/^[0-9.]+$/i"
+                                    ng-model="vm.warehouseObj.totalCapacity"
+                                    class="form-control"
+                                    name="totalCapacity"
+                                    placeholder="Warehouse Total Capacity"/>
+                            <ng-messages for="vm.warehouseForm.totalCapacity.$error"
+                                         ng-show='(vm.warehouseForm.$submitted || vm.warehouseForm.totalCapacity.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter warehouse total capacity in kgs.</ng-message>
+                                <ng-message class="errorValidation" when="pattern">Total Quantity in Kgs can only aceept numbers</ng-message>
+                            </ng-messages>
+                        </div>
+
+                        <div class="form-group col-md-6 col-md-offset-6">
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <button type="submit" ng-click="vm.saveWarehouse(vm.isNew, vm.warehouseForm, vm.warehouseObj)"
+                                class="btn btn-primary btn-with-icon">
+                            <i class="ion-android-checkmark-circle"></i>{{vm.isNew ?  'Add New Warehouse': 'Update Warehouse'}}
+                        </button>
+                        <button type="button" ng-click="vm.cancel()"
+                                class="btn btn-danger btn-with-icon">
+                            <i class="ion-android-cancel"></i>Cancel
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

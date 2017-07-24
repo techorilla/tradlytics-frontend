@@ -19,7 +19,8 @@
         'app.dashboard.documentCreator',
         'app.dashboard.shipping',
         'app.dashboard.currencyExchange',
-        'app.dashboard.accounts'
+        'app.dashboard.accounts',
+        'app.dashboard.inventory'
     ]).config(routeConfig);
 
 
@@ -68,15 +69,15 @@
             stateRef: 'dashboard.pricing.dashboard'
         });
         baSidebarServiceProvider.addStaticItem({
+            title: 'Inventory',
+            icon: 'ion-clipboard',
+            stateRef: 'dashboard.inventory.dashboard'
+        });
+        baSidebarServiceProvider.addStaticItem({
             title: 'Trade Book',
             icon: 'ion-social-usd',
             stateRef: 'dashboard.tradeDashboard'
-        });http://localhost:3000/#!/dashboard/businessPartner
-        // baSidebarServiceProvider.addStaticItem({
-        //     title: 'Internal Trade Book',
-        //     icon: 'ion-social-usd',
-        //     stateRef: 'dashboard.internalTradeBook'
-        // });
+        });
         baSidebarServiceProvider.addStaticItem({
             title: 'Local Trade Book',
             icon: 'ion-social-usd',

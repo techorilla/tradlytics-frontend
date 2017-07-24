@@ -1,0 +1,53 @@
+<div class="modal-content">
+    <form name="warehouseRentChange" novalidate>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel" ng-bing="title">New Warehouse Rent</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <h3 class="with-line">Rent Applicable From</h3>
+                        <date-picker-input date="vm.warehouseRentObj.dateChange" blank="false" name="dateChange">
+                        </date-picker-input>
+                        <ng-messages for="warehouseRentChange.dateChange.$error"
+                                     ng-show='(warehouseRentChange.$submitted || warehouseRentChange.dateChange.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter date since rent is applicable.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <h3 class="with-line">Rent Per <span class="titled">50 Kg</span> Per <span class="titled">Month</span></h3>
+                        <input
+                                required
+                                ng-pattern="/^[0-9.]+$/i"
+                                ng-model="vm.warehouseRentObj.rent"
+                                class="form-control"
+                                name="rent"
+                                placeholder="Rent per 50 kg per month"/>
+                        <ng-messages for="warehouseRentChange.rent.$error"
+                                     ng-show='(warehouseRentChange.$submitted || warehouseRentChange.rent.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter current rent per 50 kg per month.</ng-message>
+                            <ng-message class="errorValidation" when="pattern">Rent can only have numbers.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button type="submit"
+                class="btn btn-primary"
+                ng-click="vm.saveNewCurrentRent(warehouseRentChange, vm.warehouseId, vm.warehouseRentObj)">Save Current Rent</button>
+    </div>
+
+    </form>
+</div>

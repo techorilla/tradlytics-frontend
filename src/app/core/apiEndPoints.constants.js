@@ -139,6 +139,14 @@
             main: 'notifications',
             unreadCount: 'api/unread_count',
             unreadList: 'api/unread_list'
+        },
+        inventory:{
+            main: 'inventory',
+            warehouse: 'warehouse',
+            warehouseRent: 'warehouse_rent',
+            dashboard: 'dashboard',
+            transaction: 'transaction'
+
         }
 
     };

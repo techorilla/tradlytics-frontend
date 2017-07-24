@@ -35,7 +35,7 @@ function browserSyncInit(baseDir, browser) {
    */
   server.middleware = proxyMiddleware('/api', {target: 'http://tramodity.com', changeOrigin: true});
   // server.middleware = proxyMiddleware('/api', {target: 'http://127.0.0.1:8000', changeOrigin: true});
-  //
+
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,

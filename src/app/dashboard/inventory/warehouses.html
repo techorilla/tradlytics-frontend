@@ -1,0 +1,37 @@
+<div ba-panel ba-panel-class="with-scroll">
+    <div class="horizontal-scroll">
+        <table class="table table-striped" st-table="smartTableData">
+            <thead>
+                <tr class="sortable table-header" ng-if="vm.allWarehouses.length!==0">
+                    <th colspan="2">Warehouse Name</th>
+                    <th>Owned</th>
+                    <th>Lots</th>
+                    <th>Total Capacity <span class="titled">(Kg)</span></th>
+                    <th>Consumed Capacity  <span class="titled">(Kg)</span</th>
+                    <th>Current Rent Per <strong>Kg</strong> per <strong>Month</strong></th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in vm.allWarehouses | orderBy:'name'">
+                    <td colspan="2" class="titled" ng-bind="row.name"></td>
+                    <td class="titled" ng-class="{'positive':row.selfWarehouse, 'negative':!row.selfWarehouse}">
+                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                    </td>
+                    <td ng-bind="row.lots"></td>
+                    <td ng-bind="row.totalCapacity"></td>
+                    <td ng-bind="row.consumedCapacity"></td>
+                    <td ng-bind="row.rentPer50Kg"></td>
+                    <td>
+                        <div class="buttons">
+                            <button ng-click="vm.goToWarehouseDetails(row.id)"
+                                    class="btn btn-success editable-table-button btn-xs">
+                                Detail
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
