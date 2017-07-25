@@ -1,1 +1,44 @@
-<div>Inventory Transaction</div>
+<div ba-panel
+     ba-panel-class="with-scroll">
+    <div class="horizontal-scroll">
+        <table class="table table-striped" st-table="smartTableData">
+            <thead>
+            <tr class="sortable table-header" ng-if="vm.inventoryRecords.length!==0">
+                <th>Flow</th>
+                <th>Date</th>
+                <th>Warehouse</th>
+                <th>Product</th>
+                <th>Business</th>
+                <th>Truck</th>
+                <th>Total Quantity <span class="titled">Kgs</span></th>
+                <th>Actions</th>
+
+            </tr>
+            <tr class="table-header" ng-if="vm.inventoryRecords.length===0">
+                <th>No Inventory Records have been added.</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in vm.inventoryRecords">
+                <td class="titled" ><i class="fa"
+                                       ng-class="{'fa-arrow-up':!row.positive, 'negative':!row.positive,'fa-arrow-down':row.positive, 'positive': row.positive}"
+                                       aria-hidden="true"></i>
+                </td>
+                <td ng-bind="row.date  | date:appFormats.Date"></td>
+                <td ng-bind="row.warehouse__name"></td>
+                <td ng-bind="row.product__name"></td>
+                <td ng-bind="row.transaction_business__bp_name"></td>
+                <td ng-bind="row.total_trucks"></td>
+                <td ng-bind="row.total_weight_in_kgs | number: '2'"></td>
+
+                <td>
+                    <div class="buttons">
+                        <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editRecord(row.id)">Edit</button>
+                        <!--<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

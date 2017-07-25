@@ -46,6 +46,7 @@
       prepareShippingLineConfig: prepareShippingLineConfig,
       prepareShippingPortConfig: prepareShippingPortConfig,
       prepareShippingVesselConfig: prepareShippingVesselConfig,
+      prepareWarehouseDropDown: prepareWarehouseDropDown
 
     };
 
@@ -263,6 +264,15 @@
             return utilities.cloneIntoEmptyObject(bpTypeOptions, response.list);
           });
     }
+
+    function prepareWarehouseDropDown(warehouseConfig, warehouseOptions){
+      utilities.cloneIntoEmptyObject(warehouseConfig, getBasicDropDownConfig(false, warehouseOptions));
+      settings.dropDown[crud.READ](apiEndPoints.dropDown.warehouses, read.DROP_DOWN)
+          .then(function(response){
+            return utilities.cloneIntoEmptyObject(warehouseOptions, response.list);
+          });
+    }
+
 
 
     function prepareShipmentMonthDropDown(monthConfig, monthOptions, priceDate){

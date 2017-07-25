@@ -674,11 +674,13 @@ button.progress-button.btn.btn-danger {
   margin-bottom: 0;
   padding-top: 0 !important; }
 
-.form-group label {
-  margin-bottom: 5px;
-  color: #ffffff;
-  font-weight: 400;
-  font-size: 12px; }
+.form-group {
+  margin-top: 10px; }
+  .form-group label {
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 12px; }
 
 .form-control {
   color: #ffffff;
@@ -1363,7 +1365,8 @@ tags-input .autocomplete .suggestion-item {
     padding-top: 11px;
     color: #3b3736; }
   .auth-block .form-group {
-    margin-bottom: 12px; }
+    margin-bottom: 12px;
+    margin-top: 10px; }
 
 .auth-input {
   width: 300px;

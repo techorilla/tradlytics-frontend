@@ -19,8 +19,61 @@
             getWarehouseDetails: getWarehouseDetails,
             getNewWarehouseObj: getNewWarehouseObj,
             changeCurrentWarehouseRent: changeCurrentWarehouseRent,
-            saveNewWarehouseRent: saveNewWarehouseRent
+            saveNewWarehouseRent: saveNewWarehouseRent,
+            getNewInventoryRecordObj: getNewInventoryRecordObj,
+            saveTruckInInventoryRecord: saveTruckInInventoryRecord,
+            getNewInventoryTruckObj: getNewInventoryTruckObj,
+
+            createInventoryRecord: createInventoryRecord,
+            updateInventoryRecord: updateInventoryRecord,
+
+            getInventoryRecordList: getInventoryRecordList,
+            getInventoryRecord: getInventoryRecord
         };
+
+        function getInventoryRecordList(){
+            return inventoryAPI.customGET(apiEndPoints.inventory.transaction+'/list');
+        }
+
+        function getInventoryRecord(id){
+            return inventoryAPI.customGET(apiEndPoints.inventory.transaction,{
+                id: id
+            });
+        }
+
+        function createInventoryRecord(inventoryRecord){
+            return inventoryAPI.customPOST(inventoryRecord, apiEndPoints.inventory.transaction);
+        }
+
+        function updateInventoryRecord(inventoryRecord){
+            return inventoryAPI.customPUT(inventoryRecord, apiEndPoints.inventory.transaction)
+        }
+
+
+        function getNewInventoryTruckObj(){
+            return {
+                'id': 'new',
+                'date': null,
+                'truckNo': '',
+                'weightInKg': 0.00,
+                'remarks': ''
+            }
+        }
+
+        function getNewInventoryRecordObj(){
+            return {
+                'warehouseId': null,
+                'lotNo': '',
+                'date': null,
+                'businessId': '',
+                'portClearingNo': '',
+                'fclQuantity': 0,
+                'productId': '',
+                'positive': 'True',
+                'trucks': [],
+                'removedTrucks': []
+            }
+        }
 
         function getWarehouseDetails(id, rentDetails){
             return inventoryAPI.customGET(apiEndPoints.inventory.warehouse, {
@@ -30,8 +83,45 @@
         }
 
         function saveNewWarehouseRent(id, warehouseObj){
-            var warehouseObj = angular.extend(warehouseObj, {'warehouseId': id})
+            var warehouseObj = angular.extend(warehouseObj, {'warehouseId': id});
             return inventoryAPI.customPOST(warehouseObj, apiEndPoints.inventory.warehouseRent);
+        }
+
+        function saveTruckInInventoryRecord(inventoryRecordId, callback, inventoryTruckObj, toastr){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/dashboard/inventory/inventoryTruckForm.html',
+                controller: function($scope){
+                    $scope.inventoryRecordId = inventoryRecordId;
+                    $scope.inventoryTruckObj = inventoryTruckObj;
+                    $scope.saveNewInventoryTruck = function(inventoryTruckForm, inventoryTruckId, inventoryTruckObj){
+                        if(inventoryTruckForm.$valid){
+                            modalInstance.close($scope.inventoryTruckObj);
+                        }
+                        else{
+                            toastr.error('Please Enter mandatory fields');
+                        }
+
+                    }
+                },
+                size: 'lg',
+                backdrop: 'static',
+                resolve: {
+                    inventoryRecordId: function(){
+                        return inventoryRecordId;
+                    },
+                    callback: function(){
+                        return callback;
+                    },
+                    inventoryTruckObj: function(){
+                        return inventoryTruckObj
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(inventoryTruckObj){
+                callback(inventoryTruckObj);
+            });
         }
 
         function changeCurrentWarehouseRent(warehouseId, callback){

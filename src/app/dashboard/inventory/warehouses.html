@@ -5,7 +5,6 @@
                 <tr class="sortable table-header" ng-if="vm.allWarehouses.length!==0">
                     <th colspan="2">Warehouse Name</th>
                     <th>Owned</th>
-                    <th>Lots</th>
                     <th>Total Capacity <span class="titled">(Kg)</span></th>
                     <th>Consumed Capacity  <span class="titled">(Kg)</span</th>
                     <th>Current Rent Per <strong>Kg</strong> per <strong>Month</strong></th>
@@ -18,7 +17,6 @@
                     <td class="titled" ng-class="{'positive':row.selfWarehouse, 'negative':!row.selfWarehouse}">
                         <i class="fa fa-check-square" aria-hidden="true"></i>
                     </td>
-                    <td ng-bind="row.lots"></td>
                     <td ng-bind="row.totalCapacity"></td>
                     <td ng-bind="row.consumedCapacity"></td>
                     <td ng-bind="row.rentPer50Kg"></td>

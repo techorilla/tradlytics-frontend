@@ -143,6 +143,20 @@
                     subTitle: 'Inventory',
                     title:'Dashboard',
                     goBack:true
+                },
+                resolve:{
+                    inventoryRecord: function($stateParams, inventory, loaderModal){
+                        if($stateParams.id==='new'){
+                            return inventory.getNewInventoryRecordObj();
+                        }
+                        else{
+                            return inventory.getInventoryRecord($stateParams.id).then(function(res){
+                                if(res.success){
+                                    return res.recordObj;
+                                }
+                            })
+                        }
+                    }
                 }
             })
             .state('dashboard.inventory.inventoryTransactions', {
@@ -151,7 +165,7 @@
                 views:{
                     'content@dashboard.inventory':{
                         templateUrl:'app/dashboard/inventory/inventoryTransactions.html',
-                        controller:'InventoryTransaction as vm'
+                        controller:'InventoryTransactions as vm'
                     }
                 },
                 pageHeader:{
@@ -164,6 +178,15 @@
                         }
                     ],
                     goBack:true
+                },
+                resolve:{
+                    inventoryRecords: function(inventory, loaderModal){
+                        loaderModal.open();
+                        return inventory.getInventoryRecordList().then(function(res){
+                            loaderModal.close();
+                            return res.list;
+                        })
+                    }
                 }
             });
     }

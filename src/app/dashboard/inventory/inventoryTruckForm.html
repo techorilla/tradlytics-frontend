@@ -1,0 +1,80 @@
+<div class="modal-content">
+    <form name="inventoryTruckForm" novalidate>
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+                <em class="ion-ios-close-empty sn-link-close"></em>
+            </button>
+            <h4 class="modal-title" id="myModalLabel" ng-bing="title">Inventory Truck Form</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <div class="form-group">
+                        <h3 class="with-line">Date</h3>
+                        <date-picker-input date="inventoryTruckObj.date" blank="false" name="dateChange">
+                        </date-picker-input>
+                        <ng-messages for="inventoryTruckForm.dateChange.$error"
+                                     ng-show='(inventoryTruckForm.$submitted || inventoryTruckForm.dateChange.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter date.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="form-group">
+                        <h3 class="with-line">Truck No.</h3>
+                        <input
+                                required
+                                ng-model="inventoryTruckObj.truckNo"
+                                class="form-control"
+                                name="rent"
+                                placeholder="Truck No"/>
+                        <ng-messages for="inventoryTruckForm.rent.$error"
+                                     ng-show='(inventoryTruckForm.$submitted || inventoryTruckForm.rent.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter truck no.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="form-group">
+                        <h3 class="with-line">Weight In <span class="titled">Kgs</span></h3>
+                        <input
+                                required
+                                ng-pattern="/^[0-9.]+$/i"
+                                ng-model="inventoryTruckObj.weightInKg"
+                                class="form-control"
+                                name="weightInKg"
+                                placeholder="Weight in Kgs"/>
+                        <ng-messages for="inventoryTruckForm.weightInKg.$error"
+                                     ng-show='(inventoryTruckForm.$submitted || inventoryTruckForm.weightInKg.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter weight in kg.</ng-message>
+                            <ng-message class="errorValidation" when="pattern">Weight in Kg can only have numbers.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-xs-12">
+                    <div class="form-group">
+                        <h3 class="with-line">Remarks</h3>
+                        <textarea
+                                ng-model="inventoryTruckObj.remarks"
+                                class="form-control"
+                                name="remarks"
+                                placeholder="Remarks"/>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+            <button type="submit"
+                    class="btn btn-primary"
+                    ng-click="saveNewInventoryTruck(inventoryTruckForm, inventoryRecordId, inventoryTruckObj)">Save Truck</button>
+        </div>
+
+    </form>
+</div>

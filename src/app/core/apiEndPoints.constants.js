@@ -108,7 +108,8 @@
             business: 'business',
             shippingLine: 'shipping_line',
             ports: 'ports',
-            vessel: 'vessel'
+            vessel: 'vessel',
+            warehouses: 'warehouses'
         },
         product: 'product',
         productTags:'product_tags',
