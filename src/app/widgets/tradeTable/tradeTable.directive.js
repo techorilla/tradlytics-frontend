@@ -7,7 +7,7 @@
         .directive('tradeTable', tradeTable);
 
     /* @ngInject */
-    function tradeTable(appConstants, tradeBook, toastr, appFormats, utilities) {
+    function tradeTable(appConstants, tradeBook, toastr, appFormats, utilities, loaderModal) {
         return {
             link: link,
             restrict: 'E',
@@ -29,9 +29,11 @@
                 else{
                     row.showNotes = true;
                     row.noteListLoading = true;
+                    loaderModal.open();
                     tradeBook.getAllNotesForTrade(row.id).then(function(res){
                         row.noteList = res.notesList;
                         row.noteListLoading = false;
+                        loaderModal.close();
                     });
                     angular.forEach(scope.listData, function(val,key){
                         if(val.id !== row.id){

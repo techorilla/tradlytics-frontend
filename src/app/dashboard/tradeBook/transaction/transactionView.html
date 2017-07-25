@@ -367,11 +367,21 @@
                                         <div class="number">{{vm.transaction.shipment.shipped.shipper ? (vm.transaction.shipment.shipped.shipper.name + ' - ' + vm.transaction.shipment.shipped.shipper.country ) : 'NA'}}</div>
                                     </div>
 
-                                    <div class="col-xs-12 col-md-12">
+                                    <div class="col-xs-12 col-md-6">
+                                        <h3 class="with-line">Seller Invoice No.</h3>
+                                        <div class="number">NA</div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
+                                        <h3 class="with-line">Invoice Amount <span class="titled">USD</span></h3>
+                                        <div class="number">NA</div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
                                         <h3 class="with-line">Date Shipped</h3>
                                         <div class="number">{{vm.transaction.shipment.shipped.shippedOn ? (vm.transaction.shipment.shipped.shippedOn | date: vm.appFormats.FullDate2) : 'NA'}}</div>
                                     </div>
-                                    <div class="col-xs-12 col-md-12">
+                                    <div class="col-xs-12 col-md-6">
                                         <h3 class="with-line">Expected Arrival</h3>
                                         <div class="number">{{vm.transaction.shipment.shipped.expectedArrival ? (vm.transaction.shipment.shipped.expectedArrival | date: vm.appFormats.FullDate2) : 'NA'}}</div>
                                     </div>
@@ -384,12 +394,38 @@
                                     </div>
 
 
+                                    <div class="col-xs-12 col-md-6"></div>
+
+
 
 
                                 </div>
 
                                 <div class="form" ng-if="vm.showShippedForm">
                                     <form name="vm.shippedForm" novalidate>
+
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Seller Invoice No.</label>
+                                                <input
+                                                        class="form-control"
+                                                        placeholder="Seller Invoice No."
+                                                        ng-model="vm.transaction.shipment.shipped.sellerInvoiceNo">
+                                                </input>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Invoice Amount <span class="titled">USD</span></label>
+                                                <input
+                                                        class="form-control"
+                                                        placeholder="Seller Invoice Amount"
+                                                        ng-model="vm.transaction.shipment.shipped.sellerInvoiceAmount">
+                                                </input>
+                                            </div>
+                                        </div>
 
 
                                         <div class="col-md-12 col-xs-12">
