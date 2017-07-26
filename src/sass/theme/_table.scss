@@ -73,7 +73,7 @@
   margin-bottom: 0px;
   thead{
     .table-header{
-      background: $primary;
+      background: $danger;
     }
     .table-sub-header{
       background: $primary;
@@ -88,7 +88,14 @@
     & > tr {
 
       & > th {
+        color: aliceblue;
+        border-bottom: 2px solid $border-light !important;
         //border-bottom: 1px solid $border-light;
+        .titled{
+          color:$primary;
+          font-size: 12px;
+          font-weight: $font-ultraBold;
+        }
         white-space: nowrap;
         &:first-child {
           text-align: center;
@@ -103,6 +110,7 @@
     & > tr {
       & > tr:first-child {
         padding-top: 1px;
+
       }
       & > td {
         padding: 0px 8px;

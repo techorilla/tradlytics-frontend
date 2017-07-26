@@ -1,0 +1,35 @@
+<div class="col-md-{{colSize}} warehouseCard">
+ <div class="content">
+    <div class="row">
+        <div class="col-xs-12 name" ng-bind="warehouse.name"></div>
+    </div>
+    <div class="section-row">
+        <div class="col-md-4 col-xs-12 section">
+            <div class="heading">Consumed Capacity</div>
+            <div class="number" ng-bind="warehouse.currentKgs | weight"></div>
+        </div>
+        <div class="col-md-4 col-xs-12 section">
+            <div  class="heading">Total Capacity</div>
+            <div class="number" ng-bind="warehouse.totalCapacity | weight"></div>
+
+        </div>
+        <div class="col-md-4 col-xs-12 section">
+            <div  class="heading">Consumed Percentage</div>
+            <div class="pie-chart-item">
+                <div class="number" ng-bind="(warehouse.percentageConsumed | number:'2')+'%'"></div>
+            </div>
+
+
+        </div>
+    </div>
+
+     <br/>
+
+     <div class="row button-row btn-xs">
+         <button class="btn btn-danger" ng-click="openWarehouseProductStockReport(warehouse.id, warehouse.name, warehouse.currentKgs)">
+             Product Stock Report
+         </button>
+     </div>
+
+ </div>
+</div>

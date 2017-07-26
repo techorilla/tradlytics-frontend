@@ -7,7 +7,7 @@
         .factory('inventory', inventory);
 
     /* @ngInject */
-    function inventory(Restangular, apiEndPoints, utilities, $uibModal) {
+    function inventory(Restangular, apiEndPoints, utilities, $uibModal, loaderModal) {
         var inventoryAPI = Restangular.all(apiEndPoints.inventory.main);
 
         return {
@@ -28,8 +28,18 @@
             updateInventoryRecord: updateInventoryRecord,
 
             getInventoryRecordList: getInventoryRecordList,
-            getInventoryRecord: getInventoryRecord
+            getInventoryRecord: getInventoryRecord,
+            openWarehouseProductStockReport:openWarehouseProductStockReport,
+
+            getWarehouseProductReport: getWarehouseProductReport
+
+
         };
+
+        function getWarehouseProductReport(warehouseId){
+            return inventoryAPI.customGET(apiEndPoints.inventory.warehouseProductReport, {warehouseId: warehouseId})
+        }
+
 
         function getInventoryRecordList(){
             return inventoryAPI.customGET(apiEndPoints.inventory.transaction+'/list');
@@ -48,6 +58,8 @@
         function updateInventoryRecord(inventoryRecord){
             return inventoryAPI.customPUT(inventoryRecord, apiEndPoints.inventory.transaction)
         }
+
+
 
 
         function getNewInventoryTruckObj(){
@@ -85,6 +97,43 @@
         function saveNewWarehouseRent(id, warehouseObj){
             var warehouseObj = angular.extend(warehouseObj, {'warehouseId': id});
             return inventoryAPI.customPOST(warehouseObj, apiEndPoints.inventory.warehouseRent);
+        }
+
+        function openWarehouseProductStockReport(warehouseId, warehouseName, warehouseQuantity){
+            var modelsInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/dashboard/inventory/warehouseProductStockReport.html',
+                controller: function($scope, productReport){
+                    $scope.productReport = productReport;
+                    $scope.warehouseName = warehouseName;
+                    $scope.warehouseQuantity = warehouseQuantity;
+                    $scope.totalSelfQuantity = _.sumBy(productReport, function(report){
+                        return report.selfQuantity;
+                    });
+                    $scope.totalOtherQuantity = _.sumBy(productReport, function(report){
+                        return report.otherBusinessQuantityInStock;
+                    });
+                },
+                size: 'lg',
+                backdrop: 'static',
+                resolve: {
+                    productReport: function(){
+                        loaderModal.open();
+                        return getWarehouseProductReport(warehouseId).then(function(res){
+                            loaderModal.close();
+                            console.log(res);
+                            return res.productReport;
+                        })
+                    },
+                    warehouseName: function(){
+                        return warehouseName;
+                    },
+                    warehouseQuantity: function(){
+                        return warehouseQuantity;
+                    }
+
+                }
+            });
         }
 
         function saveTruckInInventoryRecord(inventoryRecordId, callback, inventoryTruckObj, toastr){

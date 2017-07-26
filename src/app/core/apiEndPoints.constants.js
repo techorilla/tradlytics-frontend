@@ -146,7 +146,8 @@
             warehouse: 'warehouse',
             warehouseRent: 'warehouse_rent',
             dashboard: 'dashboard',
-            transaction: 'transaction'
+            transaction: 'transaction',
+            warehouseProductReport: 'warehouse_product_report'
 
         }
 

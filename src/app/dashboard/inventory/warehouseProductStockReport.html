@@ -1,0 +1,50 @@
+<div class="modal-content">
+    <form name="inventoryTruckForm" novalidate>
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+                <em class="ion-ios-close-empty sn-link-close"></em>
+            </button>
+            <h1 class="modal-title" id="myModalLabel" ng-bind="warehouseName"></h1>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="table-header">
+                                <th colspan="2">Product</th>
+                                <th>Total Quantity <span class="titled">Kg</span></th>
+                                <th>Self Quantity <span class="titled">Kg</span></th>
+                                <th>Other Business Quantity <span class="titled">Kg</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="product in productReport">
+                                <td class="titled" ng-bind="product.productName"></td>
+                                <td class="titled" ng-bind="(product.stockPercentage | number:'2')+'%'"></td>
+                                <td ng-bind="product.quantityInStock | number:'2'"></td>
+                                <td ng-bind="product.selfQuantity | number:'2'"></td>
+                                <td ng-bind="product.otherBusinessQuantityInStock | number:'2'"></td>
+                            </tr>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td class="titled">Total</td>
+                                <td class="titled" ng-bind="warehouseQuantity| number:'2'"></td>
+                                <td class="titled" ng-bind="totalSelfQuantity| number:'2'"></td>
+                                <td class="titled" ng-bind="totalOtherQuantity| number:'2'"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="$dismiss()">Close</button>
+        </div>
+
+    </form>
+</div>

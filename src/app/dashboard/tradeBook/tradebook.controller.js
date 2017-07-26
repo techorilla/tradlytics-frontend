@@ -29,7 +29,7 @@
             vm.currentPage = 1;
             vm.itemsPerPage = 10;
             vm.searchTransaction = '';
-            vm.dateRange = utilities.initialDateRange();
+            vm.dateRange = utilities.initialDateRange(30);
             vm.appFormats = appFormats;
             vm.dateFilter = [];
             vm.selectedBuyerID = [];

@@ -182,9 +182,10 @@
             return datePicker;
         }
 
-        function initialDateRange(){
+        function initialDateRange(days){
+            days = (days) ? days : 14;
             var datePicker = {};
-            datePicker.startDate = moment().subtract(14,'days').startOf('day');
+            datePicker.startDate = moment().subtract(days,'days').startOf('day');
             datePicker.endDate = moment().endOf('day');
             return datePicker;
         }

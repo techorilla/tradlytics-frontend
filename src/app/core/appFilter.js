@@ -22,6 +22,21 @@
                 return input > 0 ? input : '-'+input
             }
         })
+
+        .filter('weight', function() {
+            return function(weight, precision) {
+                if(weight===0){
+                    return '0.0 Kgs'
+                }
+                if (isNaN(parseFloat(weight)) || !isFinite(weight)) return '-';
+                if (typeof precision === 'undefined') precision = 1;
+                var units = ['Kgs', 'MT', 'KMT'],
+                    number = Math.floor(Math.log(weight) / Math.log(1000));
+
+                number = (number < units.length) ? number : (units.length-1);
+                return (weight / Math.pow(1000, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
+            }
+        })
         .filter('percentage', ['$filter', function ($filter) {
             return function (input, decimals) {
                 var number = (input > 1) ? input : input*100;

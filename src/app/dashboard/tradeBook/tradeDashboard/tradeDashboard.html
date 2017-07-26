@@ -5,7 +5,7 @@
                 <div class="pie-chart-item-container">
                     <div ba-panel>
                         <div class="pie-chart-item">
-                            <div class="chart" rel="{{ ::vm.dashboardColors.colors.success }}" data-percent="{{vm.dashboardData.tradesCount.percentageCompleted}}"> <span class="percent"></span> </div>
+                            <div class="chart" id="chart1" rel="{{ ::vm.dashboardColors.colors.success }}" data-percent="{{vm.dashboardData.tradesCount.percentageCompleted}}"> <span class="percent"></span> </div>
                             <div class="description">
                                 <div class="title">Total Trades</div>
                                 <div class="description-stats">{{::vm.dashboardData.tradesCount.total}}</div>
@@ -19,7 +19,4 @@
 
         </div>
     </div>
-
-
-
 </div>
