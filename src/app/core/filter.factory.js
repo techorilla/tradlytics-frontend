@@ -1,4 +1,4 @@
-/**
+    /**
  * @ngdoc service
  * @name app.common.filter
  * @description < description placeholder >

@@ -59,7 +59,7 @@
                     ng-if="(endPoint === apiEndPoints.dropDown.business)">
                     <input ng-change="onSingleSelectChange(value,value.selected,'id')"  type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading titled-text">{{value.name}}</span>
-                    <span class="dg-value">{{value.country}} | {{value.contactPerson ? value.contactPerson : 'No Primary Contact'  }}</span>
+                    <span class="dg-value">{{value.country ? value.country : 'No Origin'}} | {{value.contactPerson ? value.contactPerson : 'No Primary Contact'  }}</span>
                 </li>
             </ul>
         </div>

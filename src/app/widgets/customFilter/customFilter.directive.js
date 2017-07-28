@@ -25,6 +25,7 @@
       restrict: 'E',
       templateUrl: 'app/widgets/customFilter/customFilter.template.html',
       scope: {
+        page: '@',
         title:'@',
         endPoint: '@',
         heading: '@',
@@ -62,7 +63,7 @@
       function initiateFilterType(title){
         scope.isLoading = true;
         if(scope.endPoint === apiEndPoints.dropDown.business){
-          return tabFilter.getTabFilters(scope.endPoint, {'type': title}).then(onFilterSuccessCallBack);
+          return tabFilter.getTabFilters(scope.endPoint, {'type': title, 'page': scope.page}).then(onFilterSuccessCallBack);
         }
         else{
           return tabFilter.getTabFilters(scope.endPoint).then(onFilterSuccessCallBack);

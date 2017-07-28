@@ -1,4 +1,10 @@
 .commissionCard{
+    label{
+        color:$text-color;
+    }
+    .form-control{
+        color: $danger
+    }
     .detail-heading{
         font-size:16px;
         font-weight:$font-ultraBold;

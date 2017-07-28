@@ -60,10 +60,12 @@
       .filter-count{
         padding: 1px 7px 1px 7px;
         border-radius: 2px;
-        background: $primary;
+        background: $danger;
+        color: $sidebar-text;
         .fa-pulse{
           font-size: 9px;
         }
+
 
       }
       .fa-filter{
@@ -104,6 +106,26 @@
           padding:5px;
           overflow: hidden;
           //border-bottom:1px solid $primary;
+
+          //.dg-value{
+          //  float: left;
+          //  margin-left: 20px;
+          //  &.titled{
+          //    font-weight: $font-ultraBold;
+          //  }
+          //
+          //}
+          //
+          //.dg-value:after {
+          //  content:"";
+          //  position: absolute;
+          //  bottom: 0;
+          //  left: 0;
+          //  right: 0;
+          //  height: 0.5em;
+          //  border-top: 1px solid $primary;
+          //  z-index: -1;
+          //}
 
           input[type="checkbox"]{
             display:block;

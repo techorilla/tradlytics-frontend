@@ -25,6 +25,7 @@
       restrict: 'E',
       templateUrl: 'app/widgets/filterBar/filterBar.template.html',
       scope: {
+        page: '@',
         test: '=',
         datePickerNeeded:'=',
         seller:'=',

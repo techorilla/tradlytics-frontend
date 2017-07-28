@@ -26,14 +26,15 @@ $gray: #3b3736;
 $excel: #217346;
 $pdf: #FF0000;
 
+$negative: #FF0000;
 $positive: #9acd32;
 $my-gray: rgba(46, 46, 46, 0.00);
 $my-gray-2: rgba(0, 0, 0, 0.69);
 $primary: #009688 !default;
 $info:  #FF5733 !default;
-$success: #259b24 !default;
+$success: #4392aa !default;
 $warning: #C70039 !default;
-$danger: rgba(80, 80, 80, 0.97) !default;
+$danger: #6A6A6A !default;
 
 $primary-light: tint($primary, 30%);
 $info-light: tint($info, 30%);

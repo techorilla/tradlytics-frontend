@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="../bower_components/spectrum/spectrum.css" />
   <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css" />
   <link rel="stylesheet" href="../bower_components/ui-cropper/compile/minified/ui-cropper.css" />
+  <link rel="stylesheet" href="../bower_components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.css" />
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -117,7 +118,6 @@
 <script src="../bower_components/blob-polyfill/Blob.js"></script>
 <script src="../bower_components/file-saver.js/FileSaver.js"></script>
 <script src="../bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
-<script src="../bower_components/momentjs/moment.js"></script>
 <script src="../bower_components/angular-moment/angular-moment.js"></script>
 <script src="../bower_components/sifter/sifter.js"></script>
 <script src="../bower_components/microplugin/src/microplugin.js"></script>
@@ -125,6 +125,7 @@
 <script src="../bower_components/angular-selectize2/dist/angular-selectize.js"></script>
 <script src="../bower_components/spectrum/spectrum.js"></script>
 <script src="../bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
+<script src="../bower_components/momentjs/moment.js"></script>
 <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="../bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js"></script>
 <script src="../bower_components/angular-ui-validate/dist/validate.js"></script>
@@ -134,6 +135,8 @@
 <script src="../bower_components/pdfmake/build/vfs_fonts.js"></script>
 <script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
 <script src="../bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+<script src="../bower_components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+<script src="../bower_components/chartist-plugin-legend/chartist-plugin-legend.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
@@ -143,8 +146,8 @@
 <script src="app/authentication/authentication.module.js"></script>
 <script src="app/common/common.module.js"></script>
 <script src="app/core/core.module.js"></script>
-<script src="app/dashboard/dashboard.module.js"></script>
 <script src="app/landing/landing.module.js"></script>
+<script src="app/dashboard/dashboard.module.js"></script>
 <script src="app/modal/modal.module.js"></script>
 <script src="app/modals/modals.module.js"></script>
 <script src="app/pages/pages.module.js"></script>
@@ -155,8 +158,8 @@
 <script src="app/dashboard/currencyExchange/currencyExchange.module.js"></script>
 <script src="app/dashboard/documentCreator/documentCreator.module.js"></script>
 <script src="app/dashboard/internalTrade/internalTrade.module.js"></script>
-<script src="app/dashboard/inventory/inventory.module.js"></script>
 <script src="app/dashboard/localTradeBook/localTradebook.module.js"></script>
+<script src="app/dashboard/inventory/inventory.module.js"></script>
 <script src="app/dashboard/manifest/manifest.module.js"></script>
 <script src="app/dashboard/pricing/pricing.module.js"></script>
 <script src="app/dashboard/products/products.module.js"></script>
@@ -195,11 +198,13 @@
 <script src="app/dashboard/dashboard.controller.js"></script>
 <script src="app/modal/alertmodal.controller.js"></script>
 <script src="app/modal/changepassword.controller.js"></script>
+<script src="app/landing/home/home.controller.js"></script>
 <script src="app/dashboard/accounts/dashboard.controller.js"></script>
 <script src="app/dashboard/businessPartner/addbusinesspartner.controller.js"></script>
 <script src="app/dashboard/businessPartner/businesspartner.controller.js"></script>
 <script src="app/dashboard/currencyExchange/currencyDashboard.controller.js"></script>
 <script src="app/dashboard/documentCreator/documentCreator.controller.js"></script>
+<script src="app/dashboard/localTradeBook/localTradebook.controller.js"></script>
 <script src="app/dashboard/inventory/inventoryDashboard.controller.js"></script>
 <script src="app/dashboard/inventory/inventoryTransactionForm.controller.js"></script>
 <script src="app/dashboard/inventory/inventoryTransactions.controller.js"></script>
@@ -207,7 +212,6 @@
 <script src="app/dashboard/inventory/warehouseForm.controller.js"></script>
 <script src="app/dashboard/inventory/warehouseRentForm.controller.js"></script>
 <script src="app/dashboard/inventory/warehouses.controller.js"></script>
-<script src="app/dashboard/localTradeBook/localTradebook.controller.js"></script>
 <script src="app/dashboard/manifest/manifest.controller.js"></script>
 <script src="app/dashboard/manifest/manifestDashboard.controller.js"></script>
 <script src="app/dashboard/pricing/priceAnalytics.controller.js"></script>
@@ -231,7 +235,6 @@
 <script src="app/dashboard/user/user.controller.js"></script>
 <script src="app/dashboard/website/blog.controller.js"></script>
 <script src="app/dashboard/website/website.controller.js"></script>
-<script src="app/landing/home/home.controller.js"></script>
 <script src="app/dashboard/accounts/invoice/invoice.controller.js"></script>
 <script src="app/dashboard/accounts/invoice/invoiceForm.controller.js"></script>
 <script src="app/dashboard/accounts/taccounts/taccounts.controller.js"></script>
@@ -307,17 +310,17 @@
 <script src="app/widgets/clickOff/clickOff.js"></script>
 <script src="app/widgets/commissionCard/commissionCard.directive.js"></script>
 <script src="app/widgets/customFilter/customFilter.directive.js"></script>
-<script src="app/widgets/dashboardMap/DashboardMapCtrl.js"></script>
-<script src="app/widgets/dashboardMap/dashboardMap.directive.js"></script>
 <script src="app/widgets/dashboardCalendar/DashboardCalendarCtrl.js"></script>
 <script src="app/widgets/dashboardCalendar/dashboardCalendar.directive.js"></script>
+<script src="app/widgets/dashboardMap/DashboardMapCtrl.js"></script>
+<script src="app/widgets/dashboardMap/dashboardMap.directive.js"></script>
 <script src="app/widgets/dashboardPieChart/DashboardPieChartCtrl.js"></script>
 <script src="app/widgets/dashboardPieChart/dashboardPieChart.directive.js"></script>
 <script src="app/widgets/dashboardTodo/DashboardTodoCtrl.js"></script>
 <script src="app/widgets/dashboardTodo/dashboardTodo.directive.js"></script>
 <script src="app/widgets/datePickerInput/datePickerInput.directive.js"></script>
-<script src="app/widgets/docCard/docCard.directive.js"></script>
 <script src="app/widgets/deAccordian/deAccordian.directive.js"></script>
+<script src="app/widgets/docCard/docCard.directive.js"></script>
 <script src="app/widgets/filterBar/filterBar.directive.js"></script>
 <script src="app/widgets/limitTags/limitTags.directive.js"></script>
 <script src="app/widgets/lineChart/lineChart.directive.js"></script>
@@ -325,8 +328,8 @@
 <script src="app/widgets/mapBubbles/MapBubblePageCtrl.js"></script>
 <script src="app/widgets/mapBubbles/mapBubbles.directive.js"></script>
 <script src="app/widgets/ngTagsInput/ngTagsInput.directive.js"></script>
-<script src="app/widgets/pageHeader/pageHeader.directive.js"></script>
 <script src="app/widgets/numberOnlyInput/numberOnlyInput.directive.js"></script>
+<script src="app/widgets/pageHeader/pageHeader.directive.js"></script>
 <script src="app/widgets/pieCharts/dashboardPieChart.js"></script>
 <script src="app/widgets/productCard/productCard.directive.js"></script>
 <script src="app/widgets/profile/ProfileModalCtrl.js"></script>
