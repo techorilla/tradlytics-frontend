@@ -59,6 +59,10 @@
 
         }
 
+        function getPrimaryTrade(filter){
+            console.log(filter);
+        }
+
 
 
         function cancel(){

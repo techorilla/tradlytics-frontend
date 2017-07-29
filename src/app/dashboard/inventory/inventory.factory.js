@@ -30,14 +30,22 @@
             getInventoryRecordList: getInventoryRecordList,
             getInventoryRecord: getInventoryRecord,
             openWarehouseProductStockReport:openWarehouseProductStockReport,
-
+            openWarehouseBusinessStockReport: openWarehouseBusinessStockReport,
             getWarehouseProductReport: getWarehouseProductReport
 
 
         };
 
         function getWarehouseProductReport(warehouseId){
-            return inventoryAPI.customGET(apiEndPoints.inventory.warehouseProductReport, {warehouseId: warehouseId})
+            return inventoryAPI.customGET(apiEndPoints.inventory.warehouseProductReport, {
+                    warehouseId: warehouseId
+                })
+        }
+
+        function getWarehouseBusinessReport(warehouseId){
+            return inventoryAPI.customGET(apiEndPoints.inventory.warehouseBusinessReport, {
+                warehouseId: warehouseId
+            })
         }
 
 
@@ -97,6 +105,48 @@
         function saveNewWarehouseRent(id, warehouseObj){
             var warehouseObj = angular.extend(warehouseObj, {'warehouseId': id});
             return inventoryAPI.customPOST(warehouseObj, apiEndPoints.inventory.warehouseRent);
+        }
+
+        function openWarehouseBusinessStockReport(warehouseId, warehouseName, warehouseQuantity){
+            var modelsInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/dashboard/inventory/warehouseBusinessStockReport.html',
+                controller: function($scope, businessReport){
+                    $scope.businessReport = businessReport;
+                    $scope.warehouseName = warehouseName;
+                    $scope.warehouseQuantity = warehouseQuantity;
+                    $scope.totalInFlow = _.sumBy(businessReport, function(report){
+                        report.showDetails = false;
+                        return report.businessInFlow;
+                    });
+                    $scope.totalOutFlow= _.sumBy(businessReport, function(report){
+                        return report.businessOutFlow;
+                    });
+                    $scope.toggleProductDetails = function(business){
+                        console.log(business);
+
+                        business.showDetails=!business.showDetails;
+                    }
+                },
+                size: 'lg',
+                backdrop: 'static',
+                resolve: {
+                    businessReport: function(){
+                        loaderModal.open();
+                        return getWarehouseBusinessReport(warehouseId).then(function(res){
+                            loaderModal.close();
+                            return res.businessReport;
+                        })
+                    },
+                    warehouseName: function(){
+                        return warehouseName;
+                    },
+                    warehouseQuantity: function(){
+                        return warehouseQuantity;
+                    }
+
+                }
+            });
         }
 
         function openWarehouseProductStockReport(warehouseId, warehouseName, warehouseQuantity){

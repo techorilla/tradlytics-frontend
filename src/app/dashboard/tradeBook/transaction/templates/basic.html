@@ -195,10 +195,19 @@
                 </div>
 
 
-                <div class="col-md-12">
+                <div class="col-md-4">
+                    <label class="with-line control-label">Primary File ID</label>
+                    <angucomplete-alt id="primaryFileId"
+                                  placeholder="Enter File Id if Secondary trade"
+                                  pause="400"
+                                  selectedobject="testObj"
+                                  url="api/dropDown/transaction?fileId="
+                                  datafield="transactionList"
+                                  titlefield="fileId"
+                                  inputclass="form-control"/>
                 </div>
 
-                <div class="form-group col-md-4 col-md-offset-4 clearfix">
+                <div class="form-group col-md-4">
                     <label class="with-line control-label">File ID</label>
                     <div class="">
                         <input

@@ -39,6 +39,12 @@
                        title = "Products"
                        end-point="{{apiEndPoints.dropDown.product}}">
         </custom-filter>
+        <custom-filter on-selected-values-changed="onLocalTraderSelectedChanged({selectedList:selectedList, initialized: initialized})"
+                       ng-if="localTrader"
+                       page="{{page}}"
+                       title = "Local Trader"
+                       end-point="{{apiEndPoints.dropDown.business}}" filterSubType="{{appTabFilter.LOCAL_TRADER}}">
+        </custom-filter>
         <custom-filter on-selected-values-changed="onBpTypesSelectedChanged({selectedList:selectedList, initialized: initialized})"
                        title="Business Type"
                        ng-if="bpTypes" end-point="{{apiEndPoints.dropDown.bpType}}">
@@ -46,6 +52,10 @@
         <custom-filter on-selected-values-changed="onCountrySelectedChanged({selectedList:selectedList, initialized: initialized})"
                        title="Country"
                        ng-if="country" end-point="{{apiEndPoints.dropDown.country}}">
+        </custom-filter>
+        <custom-filter on-selected-values-changed="onWarehouseSelectedChanged({selectedList:selectedList, initialized: initialized})"
+                       title="Warehouse"
+                       ng-if="warehouse" end-point="{{apiEndPoints.dropDown.warehouses}}">
         </custom-filter>
         <custom-filter on-selected-values-changed="onPriceMarketSelectedChanged({selectedList:selectedList, initialized: initialized})"
                        title="Price Market"

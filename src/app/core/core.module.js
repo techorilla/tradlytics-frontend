@@ -28,6 +28,6 @@ angular.module('app.core', [
     'ui.validate',
     'satellizer',
     'ngFileUpload',
-    'infinite-scroll'
-
+    'infinite-scroll',
+    'angucomplete-alt'
 ]);

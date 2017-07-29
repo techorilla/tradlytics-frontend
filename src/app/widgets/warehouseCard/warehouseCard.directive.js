@@ -38,6 +38,7 @@
             function _init(){
                 scope.dashboardColors = baConfig;
                 scope.openWarehouseProductStockReport = inventory.openWarehouseProductStockReport;
+                scope.openWarehouseBusinessStockReport = inventory.openWarehouseBusinessStockReport;
             }
 
         }

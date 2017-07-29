@@ -25,11 +25,17 @@
 
      <br/>
 
-     <div class="row button-row btn-xs">
-         <button class="btn btn-danger" ng-click="openWarehouseProductStockReport(warehouse.id, warehouse.name, warehouse.currentKgs)">
-             Product Stock Report
-         </button>
+     <div class="row button-row">
+         <div>
+             <button class="btn btn-danger" ng-click="openWarehouseProductStockReport(warehouse.id, warehouse.name, warehouse.currentKgs)">
+                 Product Stock Summary
+             </button>
+         </div>
+         <div class="">
+             <button class="btn btn-success" ng-click="openWarehouseBusinessStockReport(warehouse.id, warehouse.name, warehouse.currentKgs)">
+                 Business Stock Summary
+             </button>
+         </div>
      </div>
-
  </div>
 </div>

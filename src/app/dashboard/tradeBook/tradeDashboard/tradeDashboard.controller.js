@@ -15,8 +15,6 @@
             vm.dashboardData = dashboardData;
             vm.dashboardColors = baConfig;
 
-
-
             vm.multiBarData = {
                 labels: ['1 Year', '6 Months', '30 Days', '7 Days'],
                 series: [

@@ -21,7 +21,27 @@
             vm.appFormats = appFormats;
             vm.inventoryRecords = inventoryRecords;
             vm.editRecord = editRecord;
+            vm.dateRange = utilities.initialDateRange(30);
+            vm.onWarehouseSelectedChanged = onWarehouseSelectedChanged;
+            vm.onProductsSelectedChanged = onProductsSelectedChanged;
+            vm.onLocalTradeSelectedChanged = onLocalTradeSelectedChanged;
         }
+
+        function onLocalTradeSelectedChanged(){
+
+        }
+
+        function onProductsSelectedChanged(){
+
+
+        }
+
+
+        function onWarehouseSelectedChanged(){
+
+        }
+
+
 
         function editRecord(id){
             $state.go('dashboard.inventory.inventoryTransactionForm', {id:id})

@@ -1,0 +1,75 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h1 class="modal-title" id="myModalLabel" ng-bind="warehouseName"></h1>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="table-header">
+                        <th></th>
+                        <th>Business</th>
+                        <th><i class="fa fa-arrow-down positive" aria-hidden="true"></i> Total In Flow <span class="titled">Kg</span></th>
+                        <th><i class="fa fa-arrow-up negative" aria-hidden="true"></i> Total Out Flow <span class="titled">Kg</span></th>
+                        <th>Current Stock <span class="titled">Kg</span></th>
+                        <th>Current Stock <span class="titled">Percentage</span></th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="business in businessReport">
+                    <tr>
+                        <td ng-click="toggleProductDetails(business)">
+                            <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!business.showDetails"></i>
+                            <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="business.showDetails"></i>
+                        </td>
+                        <td class="titled" ng-bind="business.business_name"></td>
+                        <td ng-bind="business.businessInFlow | number:'2'"></td>
+                        <td ng-bind="business.businessOutFlow | number:'2'"></td>
+                        <td ng-bind="business.quantityInStock | number:'2'"></td>
+                        <td class="titled" ng-bind="(business.quantityPercentage | number:'2')+'%'"></td>
+                    </tr>
+                    <tr ng-show="business.showDetails">
+                        <td colspan="6">
+                            <table class="table table-striped" >
+                                <thead>
+                                <tr class="table-header">
+                                    <th>Product Name</th>
+                                    <th><i class="fa fa-arrow-down positive" aria-hidden="true"></i> Product In Flow <span class="titled">Kg</span></th>
+                                    <th><i class="fa fa-arrow-up negative" aria-hidden="true"></i> Product Out Flow <span class="titled">Kg</span></th>
+                                    <th>Current Stock <span class="titled">Kg</span></th>
+                                    <th>Current Stock <span class="titled">Percentage</span></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="product in business.productFlow">
+                                    <td class="titled" ng-bind="product.product__name"></td>
+                                    <td ng-bind="product.truckInFlow | number:'2'">
+                                    <td ng-bind="product.truckOutFlow | number:'2'"></td>
+                                    <td ng-bind="product.currentQuantity | number:'2'"></td>
+                                    <td ng-bind="(product.quantityPercentage| number:'2')+'%'"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tr>
+                        <td></td>
+                        <td class="titled">Total</td>
+                        <td class="titled" ng-bind="totalInFlow| number:'2'"></td>
+                        <td class="titled" ng-bind="totalOutFlow| number:'2'"></td>
+                        <td class="titled" ng-bind="warehouseQuantity| number:'2'"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">Close</button>
+    </div>
+</div>
