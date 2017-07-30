@@ -178,15 +178,6 @@
                         }
                     ],
                     goBack:true
-                },
-                resolve:{
-                    inventoryRecords: function(inventory, loaderModal){
-                        loaderModal.open();
-                        return inventory.getInventoryRecordList().then(function(res){
-                            loaderModal.close();
-                            return res.list;
-                        })
-                    }
                 }
             });
     }

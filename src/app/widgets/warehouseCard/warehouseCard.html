@@ -6,17 +6,17 @@
     <div class="section-row">
         <div class="col-md-4 col-xs-12 section">
             <div class="heading">Consumed Capacity</div>
-            <div class="number" ng-bind="warehouse.currentKgs | weight"></div>
+            <div class="number" ng-bind-html="warehouse.currentKgs | weight"></div>
         </div>
         <div class="col-md-4 col-xs-12 section">
             <div  class="heading">Total Capacity</div>
-            <div class="number" ng-bind="warehouse.totalCapacity | weight"></div>
+            <div class="number" ng-bind-html="warehouse.totalCapacity | weight"></div>
 
         </div>
         <div class="col-md-4 col-xs-12 section">
             <div  class="heading">Consumed Percentage</div>
             <div class="pie-chart-item">
-                <div class="number" ng-bind="(warehouse.percentageConsumed | number:'2')+'%'"></div>
+                <div class="number" ng-bind-html="(warehouse.percentageConsumed | number:'2')+'<span class=\'titled\'>%</span>'"></div>
             </div>
 
 
@@ -27,7 +27,7 @@
 
      <div class="row button-row">
          <div>
-             <button class="btn btn-danger" ng-click="openWarehouseProductStockReport(warehouse.id, warehouse.name, warehouse.currentKgs)">
+             <button class="btn btn-warning" ng-click="openWarehouseProductStockReport(warehouse.id, warehouse.name, warehouse.currentKgs)">
                  Product Stock Summary
              </button>
          </div>

@@ -269,3 +269,37 @@ label{
   }
 }
 
+
+.stats-row{
+  .stats-item{
+    display: flex;
+    .icon{
+      padding-top: 15px;
+      text-align: center;
+      font-size: 40px;
+      font-weight: $font-ultraBold;
+
+    }
+
+    .stat{
+      padding-left: 20px;
+      padding-top: 10px;
+      .title{
+        font-weight: $font-ultraBold;
+        .titled{
+          color: $primary;
+        }
+      }
+      .number{
+        padding-top: 5px;
+        font-weight: $font-bold;
+        font-size: 30px;
+        .titled{
+          color:$primary;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+

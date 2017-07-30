@@ -4,9 +4,60 @@
         product="true"
         local-trader="true"
         date-picker="vm.dateRange"
-        on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)"
-        on-warehouse-selected-changed="vm.onWarehouseSelectedChanged(selectedList)">
+        on-date-change="vm.onDateRangeChanged(dateRange)"
+        on-local-trader-selected-changed="vm.onLocalTradeSelectedChanged(selectedList, initialized)"
+        on-products-selected-changed="vm.onProductsSelectedChanged(selectedList, initialized)"
+        on-warehouse-selected-changed="vm.onWarehouseSelectedChanged(selectedList, initialized)">
 </filter-bar>
+
+<div class="row stats-row">
+    <div ba-panel class="col-md-12 panel-content">
+        <div class="col-md-1 col-xs-12"></div>
+        <div class="col-md-2 col-xs-12 stats-item">
+            <div class="icon"><i class="fa fa-arrow-down positive" aria-hidden="true"></i></div>
+            <div class="stat">
+                <div class="title">Weight In Flow</div>
+                <div class="number"  ng-bind-html="(vm.weightInFlow | weight)"></div>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 stats-item">
+            <div class="icon"><i class="fa fa-arrow-up negative" aria-hidden="true"></i></div>
+            <div class="stat">
+                <div class="title">Weight Out Flow</div>
+                <div class="number" ng-bind-html="(vm.weightOutFlow | weight)"></div>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 stats-item">
+            <div class="icon"><i class="fa fa-truck positive" aria-hidden="true"></i></div>
+            <div class="stat">
+                <div class="title">Truck In flow</div>
+                <div class="number" ng-bind="vm.trucksInFlow"></div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-2 col-xs-12 stats-item">
+            <div class="icon"><i class="fa fa-truck negative" aria-hidden="true"></i></div>
+            <div class="stat">
+                <div class="title">Truck Out Flow</div>
+                <div class="number"  ng-bind="vm.trucksOutFlow"></div>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 stats-item">
+            <div class="icon"><i class="fa fa-cubes" aria-hidden="true"></i></div>
+            <div class="stat">
+                <div class="title">Weight Difference</div>
+                <div class="number" ng-class="{'positive': (vm.weightDifferance > 0), 'negative':(vm.weightDifferance < 0)}" ng-bind-html="(vm.weightDifferance | weight)"></div>
+            </div>
+        </div>
+
+        <div class="col-md-1 col-xs-12"></div>
+    </div>
+</div>
 
 <div ba-panel
      ba-panel-class="with-scroll">
@@ -17,6 +68,7 @@
                 <th>Flow</th>
                 <th>Date</th>
                 <th>Warehouse</th>
+                <th><span class="titled">Lot No</span></th>
                 <th>Product</th>
                 <th>Business</th>
                 <th>Truck</th>
@@ -29,13 +81,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="row in vm.inventoryRecords">
+            <tr ng-repeat="row in vm.filteredRecords">
                 <td class="titled" ><i class="fa"
                                        ng-class="{'fa-arrow-up':!row.positive, 'negative':!row.positive,'fa-arrow-down':row.positive, 'positive': row.positive}"
                                        aria-hidden="true"></i>
                 </td>
                 <td ng-bind="row.date  | date:appFormats.Date"></td>
                 <td ng-bind="row.warehouse__name"></td>
+                <td ng-bind="row.lot_no"></td>
                 <td ng-bind="row.product__name"></td>
                 <td ng-bind="row.transaction_business__bp_name"></td>
                 <td ng-bind="row.total_trucks"></td>

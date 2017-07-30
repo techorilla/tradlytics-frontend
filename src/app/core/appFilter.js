@@ -26,7 +26,7 @@
         .filter('weight', function() {
             return function(weight, precision) {
                 if(weight===0){
-                    return '0.0 Kgs'
+                    return '0.0 <span class="titled">Kgs</span>'
                 }
                 if (isNaN(parseFloat(weight)) || !isFinite(weight)) return '-';
                 if (typeof precision === 'undefined') precision = 1;
@@ -34,7 +34,7 @@
                     number = Math.floor(Math.log(weight) / Math.log(1000));
 
                 number = (number < units.length) ? number : (units.length-1);
-                return (weight / Math.pow(1000, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
+                return (weight / Math.pow(1000, Math.floor(number))).toFixed(precision) +  ' <span class="titled">' + units[number] + '</span>';
             }
         })
         .filter('percentage', ['$filter', function ($filter) {

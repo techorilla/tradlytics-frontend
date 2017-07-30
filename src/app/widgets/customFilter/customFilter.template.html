@@ -47,7 +47,7 @@
                            type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading"><img width="18" src="{{appConstants.STATIC_URL + value.image}}"/>&nbsp;{{value.name}}</span>
                 </li>
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name' | orderBy:'name'"
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'"
                     ng-if="endPoint===apiEndPoints.dropDown.warehouses">
                     <input ng-change="onSingleSelectChange(value,value.selected,'name')"
                            type="checkbox" ng-model="value.selected">

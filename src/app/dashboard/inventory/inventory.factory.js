@@ -49,8 +49,8 @@
         }
 
 
-        function getInventoryRecordList(){
-            return inventoryAPI.customGET(apiEndPoints.inventory.transaction+'/list');
+        function getInventoryRecordList(dateRange){
+            return inventoryAPI.customGET(apiEndPoints.inventory.transaction+'/list', dateRange);
         }
 
         function getInventoryRecord(id){
