@@ -201,6 +201,50 @@
           </div>
         </div>
       </div>
+
+      <h3 class="with-line">User Access Right</h3>
+
+      <div class="notification row clearfix">
+        <div class="col-sm-6">
+
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">Business Commission</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.rights.businessCommission"></switch>
+            </div>
+          </div>
+
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">Business Analytics</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.rights.businessAnalytics"></switch>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">Warehouse Module</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.rights.warehouseModule"></switch>
+            </div>
+          </div>
+
+          <div class="form-group row clearfix">
+            <label class="col-xs-8">User Management</label>
+
+            <div class="col-xs-4">
+              <switch color="primary" ng-model="vm.userProfile.rights.userManagement"></switch>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
       <button type="submit"
               ng-if="vm.userProfile.id"
               ng-click="vm.updateUser(vm.profileForm, vm.userProfile, vm.imagesData)"

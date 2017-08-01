@@ -72,6 +72,11 @@
                         templateUrl: 'app/dashboard/tradeBook/tradeBook.html',
                         controller: 'TradeBook as vm'
                     }
+                },
+                resolve:{
+                    pageType: function(){
+                        return 'tradeBook';
+                    }
                 }
             })
             .state('dashboard.transaction', {

@@ -53,7 +53,9 @@
             goBackState: goBackState,
             prepareGraphData: prepareGraphData,
             manageTextOverFlow: manageTextOverFlow,
-            evalMathExpressionInString: evalMathExpressionInString
+            evalMathExpressionInString: evalMathExpressionInString,
+
+            sortTableBySortType: sortTableBySortType
         };
 
         function evalMathExpressionInString(str){
@@ -61,8 +63,10 @@
             return eval(expression)
         }
 
-        function uploadImage(evt){
-
+        function sortTableBySortType(tableData, type, reverse){
+            var digitInString = ['fileNo'];
+            var filter_type = (_.indexOf(digitInString,type) > -1) ? 'digitInString': 'orderBy';
+            return $filter(filter_type)(tableData, type, reverse);
         }
 
         function manageTextOverFlow(string, size){

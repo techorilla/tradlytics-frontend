@@ -7,16 +7,21 @@
                     <thead>
                     <tr class="sortable table-header"  ng-if="listData.length!==0">
                         <th><span class="count">{{listData.length}}</span></th>
-                        <th ng-repeat="name in heading" ng-bind="name"></th>
+                        <th ng-click="sortTable(column.sort, column)"
+                            ng-class="{'sorted': (sortType === column.sort), 'up': !column.reverse && (sortType === column.sort), 'down': column.reverse && (sortType === column.sort)}"
+                            ng-repeat="column in columnHeader"  ng-bind-html="column.name">
+
+                        </th>
+
                     </tr>
 
                     <tr class="table-header" ng-if="listData.length===0">
                         <th>No transaction have been added with in the given date range and filters.</th>
                     </tr>
                     </thead>
-                    <tbody ng-repeat="row in displayList | orderBy:'-fileNo'"   ng-if="listData.length!==0">
+                    <tbody ng-repeat="row in displayList"   ng-if="listData.length!==0">
 
-                    <tr>
+                    <tr ng-if="type==='tradeBook'">
                         <td ng-click="toggleNotes(row)">
                             <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
                             <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
@@ -40,14 +45,97 @@
                         </td>
                         <td class="date">{{row.shipmentStart  | date:appFormats.Date}}</td>
                         <td class="date">{{row.shipmentEnd  | date:appFormats.Date}}</td>
-                        <td class="titled">US$ {{row.expectedCommission | number: 2}}</td>
-                        <td class="titled">{{(row.actualCommission) ?  ('US$ ' + row.actualCommission | number: 2) : 'NA'}}</td>
+                        <td class="titled" ng-if="row.expectedCommission">{{row.expectedCommission | number: 2}}</td>
+                        <td class="titled" ng-if="row.actualCommission">{{(row.actualCommission) ?  (row.actualCommission | number: 2 ) : 'NA'}}</td>
+                    </tr>
 
+                    <tr ng-if="type==='arrivedList'">
+                        <td ng-click="toggleNotes(row)">
+                            <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
+                            <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
+                        </td>
+                        <td  class="titled date">{{row.dateArrived | date:appFormats.Date}}</td>
+                        <td>{{row.dateArrived | amDifference : null : 'days'}}</td>
+                        <td><a class="titled" ui-sref="dashboard.transactionView({id:row.fileNo})">{{row.fileNo}}</a></td>
+                        <td ng-bind="row.blNo"></td>
+                        <td ng-bind="row.contractNo"></td>
+                        <td class="business titled" ng-bind="row.buyerName  + ' | ' + (row.buyerCountry  ? row.buyerCountry : 'No Origin')">
+                            <!--<div class="name" ng-bind="row.buyerName"></div>-->
+                            <!--<div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.buyerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.buyerCountryFlag}}"/> {{row.buyerCountry ? row.buyerCountry : 'No Origin' }}</div>-->
+                        </td>
+                        <td class="product">{{row.productName}}</td>
+                        <td>{{row.productOriginName}}</td>
+                        <td class="business titled" ng-bind="row.sellerName + ' | ' + (row.sellerCountry  ? row.sellerCountry : 'No Origin') ">
+                            <!--{{row.sellerName +'|'+ (row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact')}}-->
+                            <!--<div class="name" ng-bind="row.sellerName"></div>-->
+                            <!--<div class="contact">{{row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.sellerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.sellerCountryFlag}}"/> {{row.sellerCountry  ? row.sellerCountry : 'No Origin' }}</div>-->
+                        </td>
+                        <td>{{row.quantity  | number: 2}}</td>
+                        <td>{{row.price  | number: 2}}</td>
 
                     </tr>
+
+                    <tr ng-if="type==='expectedArrival'">
+                        <td ng-click="toggleNotes(row)">
+                            <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
+                            <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
+                        </td>
+                        <td  class="titled date">{{row.expectedArrival | date:appFormats.Date}}</td>
+                        <td>{{row.expectedArrival  | amDifference : null : 'days'}}</td>
+                        <td><a class="titled" ui-sref="dashboard.transactionView({id:row.fileNo})">{{row.fileNo}}</a></td>
+                        <td ng-bind="row.blNo"></td>
+                        <td ng-bind="row.contractNo"></td>
+                        <td class="business titled" ng-bind="row.buyerName  + ' | ' + (row.buyerCountry  ? row.buyerCountry : 'No Origin')">
+                            <!--<div class="name" ng-bind="row.buyerName"></div>-->
+                            <!--<div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.buyerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.buyerCountryFlag}}"/> {{row.buyerCountry ? row.buyerCountry : 'No Origin' }}</div>-->
+                        </td>
+                        <td class="product">{{row.productName}}</td>
+                        <td>{{row.productOriginName}}</td>
+                        <td class="business titled" ng-bind="row.sellerName + ' | ' + (row.sellerCountry  ? row.sellerCountry : 'No Origin') ">
+                            <!--{{row.sellerName +'|'+ (row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact')}}-->
+                            <!--<div class="name" ng-bind="row.sellerName"></div>-->
+                            <!--<div class="contact">{{row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.sellerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.sellerCountryFlag}}"/> {{row.sellerCountry  ? row.sellerCountry : 'No Origin' }}</div>-->
+                        </td>
+                        <td>{{row.quantity  | number: 2}}</td>
+                        <td>{{row.price  | number: 2}}</td>
+
+                    </tr>
+
+                    <tr ng-if="type==='expiredShipment'">
+                        <td ng-click="toggleNotes(row)">
+                            <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
+                            <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
+                        </td>
+                        <td  class="titled date">{{row.shipmentExpiration | date:appFormats.Date}}</td>
+                        <td>{{row.shipmentExpiration  | amDifference : null : 'days'}}</td>
+                        <td><a class="titled" ui-sref="dashboard.transactionView({id:row.fileNo})">{{row.fileNo}}</a></td>
+                        <td ng-bind="row.blNo"></td>
+                        <td ng-bind="row.contractNo"></td>
+                        <td class="business titled" ng-bind="row.buyerName  + ' | ' + (row.buyerCountry  ? row.buyerCountry : 'No Origin')">
+                            <!--<div class="name" ng-bind="row.buyerName"></div>-->
+                            <!--<div class="contact">{{row.buyerPrimaryContact ? row.buyerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.buyerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.buyerCountryFlag}}"/> {{row.buyerCountry ? row.buyerCountry : 'No Origin' }}</div>-->
+                        </td>
+                        <td class="product">{{row.productName}}</td>
+                        <td>{{row.productOriginName}}</td>
+                        <td class="business titled" ng-bind="row.sellerName + ' | ' + (row.sellerCountry  ? row.sellerCountry : 'No Origin') ">
+                            <!--{{row.sellerName +'|'+ (row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact')}}-->
+                            <!--<div class="name" ng-bind="row.sellerName"></div>-->
+                            <!--<div class="contact">{{row.sellerPrimaryContact ? row.sellerPrimaryContact : 'No Primary Contact'}}</div>-->
+                            <!--<div class="country"><img ng-if="row.sellerCountryFlag" width="15" src="{{appConstants.STATIC_URL + row.sellerCountryFlag}}"/> {{row.sellerCountry  ? row.sellerCountry : 'No Origin' }}</div>-->
+                        </td>
+                        <td>{{row.quantity  | number: 2}}</td>
+                        <td>{{row.price  | number: 2}}</td>
+
+                    </tr>
+
+
                     <tr ng-show="row.showNotes">
-                        <td></td>
-                        <td colspan="{{heading.length}}">
+                        <td colspan="{{8}}">
                             <div class="row" >
                                 <div class="col-xs-12 col-md-6">
                                     <div ba-panel ba-panel-class="with-scroll" class="noteList">
@@ -111,22 +199,26 @@
 
                             </div>
                         </td>
+
+                        <td col-span="{{colHeader.length-8}}"></td>
                     </tr>
                     </tbody>
-                    <tfoot>
 
-                    </tfoot>
                 </table>
             </div>
-            <ul ng-show="listData.length > 0" uib-pagination
-                ng-change="pageChanged(currentPage)"
-                total-items="listData.length"
-                ng-model="currentPage"
-                max-size="itemsPerPage"
-                class="pagination-sm push-left"
-                boundary-link-numbers="true"
-                rotate="false">
-            </ul>
+
+            <div>
+                <ul ng-show="listData.length > 0" uib-pagination
+                    ng-change="pageChanged(currentPage)"
+                    total-items="listData.length"
+                    ng-model="currentPage"
+                    max-size="itemsPerPage"
+                    class="pagination-sm push-left"
+                    boundary-link-numbers="true"
+                    rotate="false">
+                </ul>
+            </div>
+
         </div>
     </div>
 </div>

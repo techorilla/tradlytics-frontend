@@ -13,7 +13,7 @@
         .controller('TradeBook', tradeBook);
 
     /* @ngInject */
-    function tradeBook(tradeBook,documentExporter, appFormats, utilities, $filter, loaderModal){
+    function tradeBook(tradeBook,documentExporter, appFormats, utilities, $filter, loaderModal, pageType){
         var vm = this;
         init();
         /////////////////////
@@ -31,6 +31,7 @@
             vm.searchTransaction = '';
             vm.dateRange = utilities.initialDateRange(30);
             vm.appFormats = appFormats;
+            vm.columnHeader = [];
             vm.dateFilter = [];
             vm.selectedBuyerID = [];
             vm.selectedSellerID = [];
@@ -39,7 +40,7 @@
             vm.selectedTranStatus = [];
             vm.allTransactions = [];
             vm.allTransactionsList = [];
-
+            vm.pageType = pageType;
             vm.onDateRangeChanged = onDateRangeChanged;
             vm.onBuyersSelectedChanged = onBuyersSelectedChanged;
             vm.onSellersSelectedChanged = onSellersSelectedChanged;
@@ -70,9 +71,10 @@
 
         function onDateRangeChanged(dateRange, firstTime){
             loaderModal.open();
-            tradeBook.getTransactionList(dateRange).then(function(res){
+            tradeBook.getTransactionList(dateRange, 'tradeBook').then(function(res){
                 if(res.success){
                     vm.allTransactions = res.transactions;
+                    vm.columnHeader = res.columnHeader;
                     filterChanged(vm.allTransactions , firstTime);
                     loaderModal.close();
                 }

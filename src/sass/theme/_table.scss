@@ -16,6 +16,9 @@
 
 .table {
   table-layout: auto;
+  tfoot{
+    margin-bottom: 10px;
+  }
   tr{
 
     .titled{
@@ -88,6 +91,22 @@
     & > tr {
 
       & > th {
+        &.sorted:after{
+          content:'';
+          color: $warning;
+          font-size: 18px;
+          display: inline-block;
+          font: normal normal normal 14px/1 FontAwesome;
+          font-size: inherit;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+        }
+        &.down:after{
+          content: "\f063";
+        }
+        &.up:after{
+          content:"\f062";
+        }
         color: aliceblue;
         border-bottom: 2px solid $border-light !important;
         //border-bottom: 1px solid $border-light;
@@ -107,6 +126,7 @@
     }
   }
   & > tbody {
+
     & > tr {
       & > tr:first-child {
         padding-top: 1px;

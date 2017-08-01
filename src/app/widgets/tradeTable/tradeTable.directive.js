@@ -15,7 +15,8 @@
             scope: {
                 type:'@',
                 listData: '=',
-                itemsPerPage: '@'
+                itemsPerPage: '@',
+                columnHeader: '='
             },
             replace: true
         };
@@ -106,12 +107,21 @@
 
             };
 
+            function sortTable(sortType, column){
+                column.reverse = column.reverse ? true : false;
+                scope.sortType = sortType;
+                var tableData = utilities.sortTableBySortType(scope.listData, sortType, !column.reverse);
+                scope.setPagingData(scope.currentPage, tableData, scope.itemsPerPage);
+                column.reverse = !column.reverse;
+            }
+
             function _init(){
                 scope.searchTransactionByFileID = '';
                 scope.displayList = [];
                 scope.appConstants = appConstants;
                 scope.appFormats = appFormats;
                 scope.currentPage = 1;
+                scope.sortType='fileNo';
                 var intTradeHeading = [
                     'Date',
                     'File No',
@@ -132,6 +142,8 @@
                     val.note = '';
                 });
 
+                scope.sortTable = sortTable;
+
                 scope.pageChanged = function(page){
                     scope.setPagingData(page, scope.listData, scope.itemsPerPage);
                 };
@@ -145,7 +157,8 @@
 
                 scope.$watch('listData', function(newVal, oldVal){
                     if(newVal.length > 0) {
-                        scope.setPagingData(scope.currentPage, newVal, scope.itemsPerPage);
+                        var tableData = utilities.sortTableBySortType(newVal, scope.sortType, true);
+                        scope.setPagingData(scope.currentPage, tableData, scope.itemsPerPage);
                     }
                 });
             }

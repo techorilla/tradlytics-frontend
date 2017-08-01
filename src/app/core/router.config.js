@@ -18,7 +18,7 @@
     }
 
     /* @ngInject */
-    function routingEvents($rootScope){
+    function routingEvents($rootScope, $uibModalStack){
         //on routing error
         $rootScope.$on('$stateNotFound', function(event, unfoundState, fromState, fromParams){
             //do some logging and toasting
@@ -26,7 +26,7 @@
 
         //on routing error
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-
+            $uibModalStack.dismissAll();
             //do some title setting
             $rootScope.pageTitle = toState.title || 'Doni Enterprises';
             $rootScope.bgBackgroundClass = toState.bgBackgroundClass || '';

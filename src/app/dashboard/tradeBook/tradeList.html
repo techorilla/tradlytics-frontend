@@ -1,0 +1,15 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h1 class="modal-title" id="myModalLabel" ng-bind="heading"></h1>
+    </div>
+    <div class="modal-body">
+            <trade-table type="{{pageType}}" column-header="columnHeader" list-data="allTransactions" items-per-page="10">
+            </trade-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+    </div>
+</div>

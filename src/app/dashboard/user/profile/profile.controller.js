@@ -10,7 +10,7 @@
 
     /** @ngInject */
     function ProfilePage(fileReader, authentication, $filter, deModal, userProfile,
-                         utilities, dropDownConfig, toastr, $scope, user, $state) {
+                         utilities, dropDownConfig, toastr, $scope, user, $state, loaderModal) {
         var vm = this;
         _init();
 
@@ -24,6 +24,7 @@
             vm.imagesData = null;
             vm.userData = authentication.getUserData();
             vm.picture = $filter('profilePicture')(userProfile.profilePic);
+            vm.noPicture =  userProfile.profilePic ? true: false;
             vm.updateUser = updateUser;
             vm.addUser = addUser;
             vm.removePicture = removePicture;
@@ -56,12 +57,13 @@
 
         function addUser(form, userObj, images){
             if(form.$valid){
+                loaderModal.open();
                 user.addUserProfile(userObj, images).then(function(response){
                     if(response.success){
                         if(!vm.noPicture){
                             user.addProfilePic(images, response.user_id).then(function(picResp){
                                 toastr.success(response.message,'Success');
-                                cancel();
+
                             });
                         }
                     }
@@ -69,6 +71,8 @@
                         toastr.error(response.message);
                         utilities.goBackState();
                     }
+                    cancel();
+                    loaderModal.close();
                 });
             }
             else{
@@ -79,7 +83,9 @@
 
         function updateUser(form, userObj, images){
             if(form.$valid){
+                loaderModal.open();
                 user.updateUserProfile(userObj, images).then(function(response){
+                    console.log(response);
                     if(response.success){
                         if(!vm.noPicture){
                             user.addProfilePic(images, response.user_id).then(function(picResp){
@@ -87,13 +93,15 @@
                                     authentication.getUserData(true);
                                 }
                                 toastr.success(response.message,'Success');
-                                cancel();
+
                             });
                         }
                         else{
                             toastr.success(response.message,'Success');
-                            utilities.goBackState();
                         }
+                        cancel();
+                        loaderModal.close();
+
                     }
                     else{
                         toastr.error(response.message);

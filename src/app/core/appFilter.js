@@ -22,6 +22,27 @@
                 return input > 0 ? input : '-'+input
             }
         })
+        .filter('usd', function(){
+            return function(input){
+                return 'US$ ' + input.toString();
+            }
+        })
+
+        .filter('digitInString', function(){
+            return function(input, key, reverse){
+                var sorted =  _.sortBy(input, function(row){
+                    var index = row[key].search('[a-zA-Z]');
+                    var fileNo = (index == -1) ? row[key] : row[key].slice(0, index);
+                    console.log(row[key],fileNo,index);
+                    return parseInt(fileNo);
+                });
+
+
+
+                return (reverse) ? _.reverse(sorted) : sorted;
+
+            }
+        })
 
         .filter('weight', function() {
             return function(weight, precision) {

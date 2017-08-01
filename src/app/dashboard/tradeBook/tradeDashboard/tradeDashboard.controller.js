@@ -73,6 +73,12 @@
                 new Chartist.Bar('#multi-bar', vm.multiBarData, vm.multiBarOptions, vm.multiBarResponsive)
             }, 100);
 
+            vm.showTrades = showTrades
+
+        }
+
+        function showTrades(pageType, heading){
+            tradeBook.openTradeBookModal(pageType, heading);
         }
 
         function loadPieCharts() {

@@ -14,6 +14,6 @@
         on-tran-status-selected-changed="vm.onTranStatusSelectedChanged(selectedList, initialized)">
 </filter-bar>
 
-<trade-table type="int" list-data="vm.allTransactionsList" items-per-page="10">
+<trade-table type="{{vm.pageType}}" column-header="vm.columnHeader" list-data="vm.allTransactionsList" items-per-page="10">
 
 </trade-table>

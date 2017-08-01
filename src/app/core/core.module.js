@@ -29,5 +29,6 @@ angular.module('app.core', [
     'satellizer',
     'ngFileUpload',
     'infinite-scroll',
-    'angucomplete-alt'
+    'angucomplete-alt',
+    'angularMoment'
 ]);
