@@ -3,6 +3,7 @@
   color: $sidebar-text;
 }
 
+
 .horizontal-scroll-table-wrapper{
   overflow-x: scroll;
   .product{
@@ -16,6 +17,7 @@
 
 .table {
   table-layout: auto;
+
   tfoot{
     margin-bottom: 10px;
   }
@@ -128,6 +130,7 @@
   & > tbody {
 
     & > tr {
+
       & > tr:first-child {
         padding-top: 1px;
 

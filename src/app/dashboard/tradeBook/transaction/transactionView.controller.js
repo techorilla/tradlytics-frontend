@@ -9,11 +9,12 @@
 
     /* @ngInject */
     function transactionView(Upload, tradeBook, toastr, deModal, apiEndPoints, trade, utilities,
-                             appFormats, $state, shipmentStatus, dropDownConfig, shipping, loaderModal){
+                             appConstants, appFormats, $state, shipmentStatus, dropDownConfig, shipping, loaderModal){
         var vm = this;
         _init();
 
         function _init(){
+            vm.appConstants = appConstants;
 
             //shipment Form
             vm.showNotShippedForm = false;
@@ -185,6 +186,7 @@
 
         function editArrivedAtPort(formObj, arrivedObj, transactionObj, transactionId){
             var expectedCommission = null;
+            console.log(arrivedObj);
             loaderModal.open();
             return tradeBook.updateArrivedAtPortInfo(arrivedObj, transactionId, expectedCommission).then(function(res){
                 loaderModal.close();

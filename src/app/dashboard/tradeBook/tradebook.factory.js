@@ -13,7 +13,7 @@
         .factory('tradeBook', tradeBook);
 
     /* @ngInject */
-    function tradeBook(apiEndPoints, Restangular, loaderModal, appFormats, FileSaver, Blob, utilities, $http, $uibModal){
+    function tradeBook(apiEndPoints, Restangular, $state, appFormats, FileSaver, Blob, utilities, $http, $uibModal){
 
         var transactionAPI = Restangular.all(apiEndPoints.transaction.main);
 
@@ -169,6 +169,7 @@
 
         function getTransactionList(dateRange, pageType){
             var dateRangeCopy = angular.copy(dateRange);
+
             dateRangeCopy =  angular.extend(dateRangeCopy, {
                 'pageType': pageType
             });
@@ -250,37 +251,9 @@
         }
 
 
-        function openTradeBookModal(pageType, heading){
-            var modelsInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'app/dashboard/tradeBook/tradeList.html',
-                controller: function($scope, pageType, heading, data){
-                    $scope.heading = heading;
-                    $scope.pageType = pageType;
-                    $scope.allTransactions = data.transactions;
-                    $scope.columnHeader = data.columnHeader;
-                    console.log($scope.allTransactions, data);
+        function openTradeBookModal(reportType){
+            $state.go('dashboard.transactionList', {reportType:reportType})
 
-                },
-                size: 'lg',
-                backdrop: 'static',
-                resolve: {
-                    pageType: function(){
-                        return pageType;
-                    },
-                    heading: function(){
-                        return heading;
-                    },
-                    data: function(){
-                        loaderModal.open();
-                        return getTransactionList({}, pageType).then(function(res){
-                            loaderModal.close();
-                            return res
-                        });
-                    }
-
-                }
-            });
         }
 
 

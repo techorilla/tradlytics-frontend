@@ -117,7 +117,36 @@
                     subTitle: 'File No',
                     goBack: true
                 },
-            });
+            })
+            .state('dashboard.transactionList', {
+                url:'/tradeReport/:reportType',
+                title: 'Trade',
+                resolve: {
+                    reportType: function($stateParams){
+                        return $stateParams.reportType;
+                    },
+                    data: function(tradeBook,loaderModal, $stateParams){
+                        loaderModal.open();
+                        return tradeBook.getTransactionList({}, $stateParams.reportType).then(function(res){
+                            loaderModal.close();
+                            return res
+                        });
+                    }
+
+                },
+                views:{
+                    'content@dashboard':{
+                        templateUrl:'app/dashboard/tradeBook/tradeList.html',
+                        controller: 'TradeList as vm'
+                    }
+                },
+                pageHeader:{
+                    subTitle: 'File No',
+                    goBack: true
+                },
+            })
+
+        ;
 
     }
 

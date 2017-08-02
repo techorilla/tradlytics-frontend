@@ -36,6 +36,9 @@ $success: #4392aa !default;
 $warning: #C70039 !default;
 $danger: #6A6A6A !default;
 
+$primary-trans: rgba(0, 150, 136, 0.4) !default
+$info-trans : rgba(255, 87, 51, 0.4) !default;
+
 $primary-light: tint($primary, 30%);
 $info-light: tint($info, 30%);
 $success-light: tint($success, 30%);

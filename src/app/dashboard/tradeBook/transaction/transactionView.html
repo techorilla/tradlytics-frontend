@@ -16,16 +16,20 @@
     <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
 
         <div class="row transactionNo">
+            <div class="col-xs-12 col-md-12">
+                </br>
+                <button class="btn btn-xs btn-success pull-right" ng-click="vm.editTransactionDetails(vm.transaction.basic.fileNo)">Edit</button>
+            </div>
 
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-1">
                 <h3 class="with-line">Transaction Date</h3>
                 <div ng-bind="vm.transaction.basic.date | date: vm.appFormats.FullDate2" class="number"></div>
             </div>
-            <div class="col-xs-12 col-md-2">
+            <div class="col-xs-12 col-md-1">
                 <h3 class="with-line">File No</h3>
                 <div ng-bind="vm.transaction.basic.fileNo" class="number"></div>
             </div>
-            <div class="col-xs-12 col-md-2">
+            <div class="col-xs-12 col-md-1">
                 <h3 class="with-line">Contract No</h3>
                 <div class="number" ng-bind="vm.transaction.basic.contractNo ? vm.transaction.basic.contractNo : 'NA'"></div>
             </div>
@@ -40,29 +44,124 @@
                 <div ng-bind="vm.transaction.commission.quantity  | number: '2'" class="number"></div>
             </div>
 
-
-            <div class="col-xs-12 col-md-3">
-                <h3 class="with-line">Shipment</h3>
-                <div class="number">{{vm.transaction.basic.shipmentStart | date: vm.appFormats.FullDate2}} - {{vm.transaction.basic.shipmentEnd  | date: vm.appFormats.FullDate2}}</div>
-            </div>
-
-
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-2">
                 <h3 class="with-line">Expected Commission</h3>
                 <div ng-bind="'USD ' + (vm.transaction.commission.expectedCommission | number : 2)" class="number"></div>
             </div>
 
 
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-1">
                 <h3 class="with-line">Actual Commission</h3>
                 <div class="number" ng-if="!vm.transaction.commission.quantityShipped">NA</div>
                 <div  ng-if="vm.transaction.commission.quantityShipped"
                       ng-bind="'USD ' + (vm.transaction.commission.actualCommission | number : 2)" class="number"></div>
             </div>
 
+            <div class="col-xs-12 col-md-4">
+                <h3 class="with-line">Shipment</h3>
+                <div class="number">{{vm.transaction.basic.shipmentStart | date: vm.appFormats.FullDate2}} - {{vm.transaction.basic.shipmentEnd  | date: vm.appFormats.FullDate2}}</div>
+            </div>
 
 
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Buyer</h3>
+                <div class="countryFlag">
+                    <div class="flag">
+                        <img ng-if="vm.transaction.basic.buyer.countryFlag"
+                             width="30" height="30" src="{{vm.appConstants.STATIC_URL  + '/' +vm.transaction.basic.buyer.countryFlag}}">
+                        <img ng-if="!vm.transaction.basic.buyer.countryFlag"
+                             width="30" height="30" src="{{vm.transaction.basic.buyer.countryFlag | countryLogo}}">
+                    </div>
+
+                </div>
+                <div class="details">
+                    <div class="number">{{vm.transaction.basic.buyer.name}}</div>
+                    <div class="name">{{vm.transaction.basic.buyer.country}}</div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Seller</h3>
+                <div class="countryFlag">
+                    <img ng-if="vm.transaction.basic.seller.countryFlag"
+                         width="30" height="30" src="{{vm.appConstants.STATIC_URL  + '/' +vm.transaction.basic.seller.countryFlag}}">
+                    <img ng-if="!vm.transaction.basic.seller.countryFlag"
+                         width="30" height="30" src="{{vm.transaction.basic.seller.countryFlag | countryLogo}}">
+                </div>
+                <div class="details">
+                    <div class="number">{{vm.transaction.basic.seller.name}}</div>
+                    <div class="name">{{vm.transaction.basic.seller.country}}</div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Contractual Buyer</h3>
+                <div class="countryFlag">
+                    <div class="flag">
+                        <img ng-if="vm.transaction.basic.contractualBuyer.countryFlag"
+                             width="30" height="30" src="{{vm.appConstants.STATIC_URL  + '/' +vm.transaction.basic.contractualBuyer.countryFlag}}">
+                        <img ng-if="!vm.transaction.basic.contractualBuyer.countryFlag"
+                             width="30" height="30" src="{{vm.transaction.basic.contractualBuyer.countryFlag | countryLogo}}">
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="number">{{vm.transaction.basic.contractualBuyer.name}}</div>
+                    <div class="name">{{vm.transaction.basic.contractualBuyer.country}}</div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Product</h3>
+                <div class="countryFlag">
+                    <div class="flag"><img width="30" height="30" src="{{vm.appConstants.HOST  + '/' +vm.transaction.basic.productItem.countryFlag}}"></div>
+                </div>
+                <div class="details">
+                    <div class="number">{{vm.transaction.basic.productItem.name}}</div>
+                    <div class="name">{{vm.transaction.basic.productItem.country}}</div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Buyer Broker</h3>
+                <div class="number number-space" ng-if="!vm.transaction.commission.buyerBroker">NA</div>
+                <div class="countryFlag" ng-if="vm.transaction.commission.buyerBroker">
+                    <div class="flag">
+                        <img ng-if="vm.transaction.commission.buyerBroker.countryFlag"
+                             width="30" height="30" src="{{vm.appConstants.STATIC_URL  + '/' +vm.transaction.commission.buyerBroker.countryFlag}}">
+                        <img ng-if="!vm.transaction.commission.buyerBroker.countryFlag"
+                             width="30" height="30" src="{{vm.transaction.commission.buyerBroker.countryFlag | countryLogo}}">
+                    </div>
+                </div>
+                <div class="details" ng-if="vm.transaction.commission.buyerBroker">
+                    <div class="number">{{vm.transaction.commission.buyerBroker.name}}</div>
+                    <div class="name">{{vm.transaction.commission.buyerBroker.country}}</div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-2">
+                <h3 class="with-line">Seller Broker</h3>
+                <div class="number-space number" ng-if="!vm.transaction.commission.sellerBroker">NA</div>
+                <div class="countryFlag"  ng-if="vm.transaction.commission.sellerBroker">
+                    <img ng-if="vm.transaction.commission.buyerBroker.countryFlag"
+                         width="30" height="30" src="{{vm.appConstants.STATIC_URL  + '/' +vm.transaction.commission.sellerBroker.countryFlag}}">
+                    <img ng-if="!vm.transaction.commission.buyerBroker.countryFlag"
+                         width="30" height="30" src="{{vm.transaction.commission.sellerBroker.countryFlag | countryLogo}}">
+                </div>
+                <div class="details" ng-if="vm.transaction.basic.commission.sellerBroker">
+                    <div class="number">{{vm.transaction.commission.sellerBroker.name}}</div>
+                    <div class="name">{{vm.transaction.commission.sellerBroker.country}}</div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="col-xs-12 col-md-4">
                 <h3 class="with-line">Status</h3>
                 <div class="number pull-right" style="float:left;" ng-if="vm.transaction.completeObj.isComplete">{{vm.transaction.completeObj.completionDate | date: vm.appFormats.FullDate2}}</div>
                 <button class="btn btn-xs"
@@ -70,7 +169,7 @@
                         ng-click="vm.changeCompleteStatus(vm.transactionId.completeObj, vm.transactionId)">Complete</button>
             </div>
 
-            <div class="col-xs-12 col-md-3" ng-if="vm.transaction.onOurContract">
+            <div class="col-xs-12 col-md-4" ng-if="vm.transaction.onOurContract">
                 <h3 class="with-line">Invoice</h3>
                 <button class="btn btn-xs btn-success pull-left cursor-pointer"
                         ng-click="vm.goToInvoice(vm.transaction.basic.fileNo, vm.transaction.invoice.invoiceNo)" ng-if="vm.transaction.invoice">
@@ -82,43 +181,47 @@
                 </button>
             </div>
 
+            <div class="col-md-12 col-md-12">
+                <h3 class="with-line">Other Information</h3>
+                <div class="number" ng-bind="vm.transaction.basic.otherInfo ? vm.transaction.basic.otherInfo : 'NA'"></div>
+            </div>
+
 
         </div>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="row wizard-containers">
-                    <h3 class="with-line">Transaction Details <button class="btn btn-xs btn-success" ng-click="vm.editTransactionDetails(vm.transaction.basic.fileNo)">Edit</button></h3>
                     <div class="row">
-                        <business-card
-                                business="vm.transaction.basic.buyer"
-                                business-type="Buyer">
+                        <!--<business-card-->
+                                <!--business="vm.transaction.basic.buyer"-->
+                                <!--business-type="Buyer">-->
 
-                        </business-card>
+                        <!--</business-card>-->
 
-                        <business-card
-                                business="vm.transaction.basic.seller"
-                                business-type="Seller">
+                        <!--<business-card-->
+                                <!--business="vm.transaction.basic.seller"-->
+                                <!--business-type="Seller">-->
 
-                        </business-card>
+                        <!--</business-card>-->
 
-                        <business-card
-                                business="vm.transaction.basic.contractualBuyer"
-                                business-type="Contractual Buyer">
+                        <!--<business-card-->
+                                <!--business="vm.transaction.basic.contractualBuyer"-->
+                                <!--business-type="Contractual Buyer">-->
 
-                        </business-card>
+                        <!--</business-card>-->
 
-                        <product-card product-item="vm.transaction.basic.productItem"></product-card>
+                        <!--<product-card product-item="vm.transaction.basic.productItem"></product-card>-->
 
-                        <business-card
-                                business="vm.transaction.basic.commission.buyerBroker"
-                                business-type="Buyer Broker"></business-card>
+                        <!--<business-card-->
+                                <!--business="vm.transaction.basic.commission.buyerBroker"-->
+                                <!--business-type="Buyer Broker"></business-card>-->
 
-                        <business-card
-                                business="vm.transaction.basic.commission.sellerBroker"
-                                business-type="Seller Broker">
+                        <!--<business-card-->
+                                <!--business="vm.transaction.basic.commission.sellerBroker"-->
+                                <!--business-type="Seller Broker">-->
 
-                        </business-card>
+                        <!--</business-card>-->
 
                         <trade-wash-out-card trade="vm.transaction">
 
@@ -515,7 +618,8 @@
                                             class="btn btn-xs btn-warning activate">Deactivate</button>
                                     Arrived at Port
                                     &nbsp;<i class="fa fa-ship" aria-hidden="true"></i>
-                                    <button ng-click="vm.showArrivedAtPort=true;"
+                                    <button ng-show="!vm.showArrivedAtPort"
+                                            ng-click="vm.showArrivedAtPort=true;"
                                             class="btn-xs btn btn-primary edit-button">Edit</button>
                                 </div>
 
@@ -529,14 +633,26 @@
                                         <div class="number">{{vm.transaction.shipment.arrivedAtPort.quantityShipped ? (vm.transaction.shipment.arrivedAtPort.quantityShipped | number : '2') + ' MT' : 'NA'}}</div>
                                     </div>
 
-                                    <div class="col-xs-12 col-md-6">
+                                    <div class="col-xs-12 col-md-4">
                                         <h3 class="with-line">Shipping Line</h3>
                                         <div class="number">{{vm.transaction.shipment.arrivedAtPort.shippingLine.id ? vm.transaction.shipment.arrivedAtPort.shippingLine.name : 'NA'}}</div>
                                     </div>
-                                    <div class="col-xs-12 col-md-6">
-                                        <h3 class="with-line">Vessel/Voyage No.</h3>
+                                    <div class="col-xs-12 col-md-4">
+                                        <h3 class="with-line">Vessel No.</h3>
                                         <div class="number">{{(vm.transaction.shipment.arrivedAtPort.vessel.length > 0) ? (vm.transaction.shipment.arrivedAtPort.vessel[0].imo_number +' - ' + vm.transaction.shipment.arrivedAtPort.vessel[0].first_name) : 'NA'}}</div>
                                     </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <h3 class="with-line">Voyage No.</h3>
+                                        <div class="number">{{(vm.transaction.shipment.arrivedAtPort.voyageNo) ? vm.transaction.shipment.arrivedAtPort.voyageNo : 'NA'}}</div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-12">
+                                        <h3 class="with-line">Containers <span class="count" ng-bind="vm.transaction.shipment.arrivedAtPort.containers.length"></span></h3>
+                                        <div class="port-transit" ng-if="vm.transaction.shipment.arrivedAtPort.containers.length===0">NA</div>
+                                        <div class="port-transit" ng-if="vm.transaction.shipment.arrivedAtPort.containers.length!==0"
+                                             ng-repeat="container in vm.transaction.shipment.arrivedAtPort.containers"> Container No. {{ container.containerNo}}</div>
+                                    </div>
+
                                     <div class="col-xs-12 col-md-6">
                                         <h3 class="with-line">Port of Loading</h3>
                                         <div class="number">{{vm.transaction.shipment.arrivedAtPort.loadingPort.id ? vm.transaction.shipment.arrivedAtPort.loadingPort.name : 'NA'}}</div>
@@ -616,7 +732,7 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="with-line">Vessel Voyage No.</label>
+                                                <label class="with-line">Vessel No.</label>
                                                 <tags-input ng-model="vm.transaction.shipment.arrivedAtPort.vessel"
                                                             placeholder="Enter Vessel/Voyage No."
                                                             max-tags="1"
@@ -630,6 +746,33 @@
                                                     <auto-complete
                                                             template="vessel-auto-complete-template"
                                                             source="vm.loadVessel($query)"></auto-complete>
+                                                </tags-input>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Voyage No.</label>
+                                                <input type="text"
+                                                       rows="3"
+
+                                                       class="form-control"
+                                                       ng-model="vm.transaction.shipment.arrivedAtPort.voyageNo"
+                                                       placeholder="Enter Voyage No." />
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Container No.</label>
+                                                <tags-input ng-model="vm.transaction.shipment.arrivedAtPort.containers"
+                                                            display-property="containerNo"
+                                                            placeholder="Enter Container No."
+                                                            add-on-paste="true">
                                                 </tags-input>
 
                                             </div>

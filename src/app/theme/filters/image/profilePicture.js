@@ -10,6 +10,7 @@
       .filter('productPicture', productPicture)
       .filter('itemImage', itemImage)
       .filter('businessLogo', businessLogo)
+      .filter('countryLogo', countryLogo)
       .filter('shippingLineLogo', shippingLineLogo);
 
   function itemImage(layoutPaths){
@@ -29,6 +30,12 @@
   function profilePicture(layoutPaths) {
     return function(input, ext) {
       return (input) ? input : layoutPaths.images.root+'/theme/no-photo.png'
+    };
+  }
+
+  function countryLogo(layoutPaths){
+    return function(input, ext) {
+      return (input) ? input : layoutPaths.images.root+'/theme/no-business.png'
     };
   }
 

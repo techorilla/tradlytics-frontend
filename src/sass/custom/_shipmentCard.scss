@@ -1,6 +1,18 @@
 .shipment{
   min-height: 400px;
   .shipmentCard{
+    .form-group{
+      .form-control{
+        color: $sidebar !important;
+        &::placeholder {
+          color: $my-gray-2;
+        }
+      }
+      .with-line{
+        color: $sidebar;
+      }
+    }
+
     .tab-container{
       .tab{
         font-size:12px;

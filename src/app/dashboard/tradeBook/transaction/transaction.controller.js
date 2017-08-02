@@ -26,6 +26,10 @@
             vm.commissionTypeOptions = {};
             vm.brokerConfig = {};
             vm.brokerOptions = {};
+            vm.primaryFileConfig = {};
+            vm.primaryFileOptions = {};
+            vm.partialShipConfig = {};
+            vm.partialShipOptions = {};
             dropDownConfig.prepareCommissionTypeConfig(vm.commissionTypeConfig, vm.commissionTypeOptions);
             dropDownConfig.preparePackagingConfig(vm.packagingConfig, vm.packagingOptions);
             dropDownConfig.prepareProductItemDropDown(vm.productItemConfig, vm.productItemOptions);
@@ -34,6 +38,11 @@
             dropDownConfig.prepareBusinessDropDown(vm.buyerConfig, vm.buyerOptions, 'Buyer');
             dropDownConfig.prepareBusinessDropDown(vm.sellerConfig, vm.sellerOptions, 'Seller');
             dropDownConfig.prepareBusinessDropDown(vm.brokerConfig, vm.brokerOptions, 'Broker');
+            dropDownConfig.prepareInternationalFileIdAutoComplete(vm.primaryFileConfig, vm.primaryFileOptions);
+            dropDownConfig.prepareInternationalFileIdAutoComplete(vm.partialShipConfig, vm.partialShipOptions);
+
+            console.log(vm.partialShipConfig, vm.partialShipOptions);
+
 
             vm.cancel = cancel;
             vm.addTransaction = addTransaction;

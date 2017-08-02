@@ -15,9 +15,10 @@
     /* @ngInject */
     function settings(Restangular, apiEndPoints, utilities){
         
-        var tranStatusAPI = Restangular.all(apiEndPoints.dropDown.main);
+        var dropDownAPI = Restangular.all(apiEndPoints.dropDown.main);
 
         return {
+            dropDownAPI: dropDownAPI,
             getChangePasswordObj: getChangePasswordObj,
             dropDown: utilities.setupCRUD(
                 dropDownCreate,
@@ -36,27 +37,27 @@
         }
 
         function dropDownCreate(endPoint, name){
-            return tranStatusAPI.customPOST({name:name}, endPoint)
+            return dropDownAPI.customPOST({name:name}, endPoint)
         }
 
         function dropDownRead(endPoint, query, tabFilter){
             if(typeof query === 'object' ){
-                return tranStatusAPI.customGET(endPoint, query, {
+                return dropDownAPI.customGET(endPoint, query, {
                     tabFilter:tabFilter,
                 })
             }
             else{
                 query = (query) ? query : 'all';
-                return tranStatusAPI.customGET(endPoint, {q: query, tabFilter:tabFilter})
+                return dropDownAPI.customGET(endPoint, {q: query, tabFilter:tabFilter})
             }
         }
 
         function dropDownDelete(endPoint, id){
-            return tranStatusAPI
+            return dropDownAPI
         }
 
         function dropDownUpdate(endPoint, name, id){
-            return tranStatusAPI.customPUT({
+            return dropDownAPI.customPUT({
                 name: name,
                 id: id
             }, endPoint);

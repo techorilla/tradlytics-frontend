@@ -195,16 +195,29 @@
                 </div>
 
 
-                <div class="col-md-4">
-                    <label class="with-line control-label">Primary File ID</label>
-                    <angucomplete-alt id="primaryFileId"
-                                  placeholder="Enter File Id if Secondary trade"
-                                  pause="400"
-                                  selectedobject="testObj"
-                                  url="api/dropDown/transaction?fileId="
-                                  datafield="transactionList"
-                                  titlefield="fileId"
-                                  inputclass="form-control"/>
+                <div class="col-md-2">
+                    <label class="with-line control-label">Primary Transaction File ID</label>
+                    <selectize
+                            allowEmptyOption = "true"
+                            placeholder="Primary Transaction"
+                            ng-required="true"
+                            config="vm.primaryFileConfig"
+                            options='vm.primaryFileOptions.list'
+                            ng-model="vm.transaction.basic.primaryTransaction">
+                    </selectize>
+                </div>
+
+
+                <div class="col-md-2">
+                    <label class="with-line control-label">Primary Shipment File Id</label>
+                    <selectize
+                            allowEmptyOption = "true"
+                            placeholder="Primary Shipment"
+                            ng-required="true"
+                            config="vm.partialShipConfig"
+                            options='vm.partialShipOptions.list'
+                            ng-model="vm.transaction.basic.primaryShipment">
+                    </selectize>
                 </div>
 
                 <div class="form-group col-md-4">

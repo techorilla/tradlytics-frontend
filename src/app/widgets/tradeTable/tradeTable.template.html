@@ -21,7 +21,7 @@
                     </thead>
                     <tbody ng-repeat="row in displayList"   ng-if="listData.length!==0">
 
-                    <tr ng-if="type==='tradeBook'">
+                    <tr ng-if="type==='tradeBook'" ng-class="{'has-secondary': row.hasSecondary, 'is-secondary': row.isSecondary}">
                         <td ng-click="toggleNotes(row)">
                             <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
                             <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
@@ -46,10 +46,10 @@
                         <td class="date">{{row.shipmentStart  | date:appFormats.Date}}</td>
                         <td class="date">{{row.shipmentEnd  | date:appFormats.Date}}</td>
                         <td class="titled" ng-if="row.expectedCommission">{{row.expectedCommission | number: 2}}</td>
-                        <td class="titled" ng-if="row.actualCommission">{{(row.actualCommission) ?  (row.actualCommission | number: 2 ) : 'NA'}}</td>
+                        <td class="titled" ng-if="row.actualCommission !== undefined">{{(row.actualCommission) ?  (row.actualCommission | number: 2 ) : 'NA'}}</td>
                     </tr>
 
-                    <tr ng-if="type==='arrivedList'">
+                    <tr ng-if="type==='arrivedList'" ng-class="{'has-secondary': row.hasSecondary, 'is-secondary': row.isSecondary}">
                         <td ng-click="toggleNotes(row)">
                             <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
                             <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
@@ -77,7 +77,7 @@
 
                     </tr>
 
-                    <tr ng-if="type==='expectedArrival'">
+                    <tr ng-if="type==='expectedArrival'" ng-class="{'has-secondary': row.hasSecondary, 'is-secondary': row.isSecondary}">
                         <td ng-click="toggleNotes(row)">
                             <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
                             <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
@@ -105,7 +105,7 @@
 
                     </tr>
 
-                    <tr ng-if="type==='expiredShipment'">
+                    <tr ng-if="type==='expiredShipment'" ng-class="{'has-secondary': row.hasSecondary, 'is-secondary': row.isSecondary}">
                         <td ng-click="toggleNotes(row)">
                             <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
                             <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
@@ -135,7 +135,7 @@
 
 
                     <tr ng-show="row.showNotes">
-                        <td colspan="{{8}}">
+                        <td colspan="{{columnHeader.length +1}}">
                             <div class="row" >
                                 <div class="col-xs-12 col-md-6">
                                     <div ba-panel ba-panel-class="with-scroll" class="noteList">
@@ -199,8 +199,6 @@
 
                             </div>
                         </td>
-
-                        <td col-span="{{colHeader.length-8}}"></td>
                     </tr>
                     </tbody>
 

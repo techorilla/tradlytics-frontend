@@ -109,7 +109,8 @@
             shippingLine: 'shipping_line',
             ports: 'ports',
             vessel: 'vessel',
-            warehouses: 'warehouses'
+            warehouses: 'warehouses',
+            transaction: 'transaction'
         },
         product: 'product',
         productTags:'product_tags',

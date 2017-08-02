@@ -29,10 +29,6 @@
             vm.multiBarOptions = {
                 fullWidth: true,
                 plugins: [
-                    Chartist.plugins.tooltip({
-                        appendToBody: true,
-                        class: 'chartist-tool-tip'
-                    }),
                     Chartist.plugins.legend()
                 ],
                 height: "400px",

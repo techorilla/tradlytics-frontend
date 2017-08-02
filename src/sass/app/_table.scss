@@ -1,3 +1,10 @@
 .table-panel {
   height: 295px;
 }
+
+.has-secondary{
+  background: $primary-trans !important;
+}
+.is-secondary{
+  background: $info-trans !important;
+}

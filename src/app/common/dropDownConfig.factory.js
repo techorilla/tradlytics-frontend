@@ -13,7 +13,7 @@
       .factory('dropDownConfig', dropDownConfig);
 
   /* @ngInject */
-  function dropDownConfig(authentication, businessPartner, utilities, settings, apiEndPoints, crud, read, appConstants){
+  function dropDownConfig(Restangular, businessPartner, utilities, settings, apiEndPoints, crud, read, appConstants){
     return {
 
       getBasicDropDownConfig: getBasicDropDownConfig,
@@ -41,14 +41,47 @@
       prepareContactNumberTypeDropDown: prepareContactNumberTypeDropDown,
       preparePackagingConfig: preparePackagingConfig,
       prepareCommissionTypeConfig: prepareCommissionTypeConfig,
-      prepareInternationalTradeConfig: prepareInternationalTradeConfig,
 
       prepareShippingLineConfig: prepareShippingLineConfig,
       prepareShippingPortConfig: prepareShippingPortConfig,
       prepareShippingVesselConfig: prepareShippingVesselConfig,
-      prepareWarehouseDropDown: prepareWarehouseDropDown
+      prepareWarehouseDropDown: prepareWarehouseDropDown,
+      prepareInternationalFileIdAutoComplete: prepareInternationalFileIdAutoComplete
 
     };
+
+    function prepareInternationalFileIdAutoComplete(fileIdConfig, fileIdOptions){
+
+      function fileItem(item, escape) {
+        return '<div>' +
+            '<span class="dropdownLabel">' + item.fileId + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ (item.contractId ? item.contractId : 'NA') + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ (item.blNo ? item.blNo : 'NA') + '</span>' +
+            '</div>';
+      }
+
+      var config = {
+        maxItems: 1,
+        valueField: 'fileId',
+        sortField: 'fileId',
+        searchField: ['fileId', 'contractId', 'blNo'],
+        render: {
+          item: fileItem,
+          option: fileItem
+        },
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(fileIdOptions.list, function(line) { return line.fileId == value; });
+          fileIdOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        }
+
+      };
+      utilities.cloneIntoEmptyObject(fileIdConfig, config);
+      settings.dropDownAPI.customGET(apiEndPoints.dropDown.transaction).then(function (response){
+        return utilities.cloneIntoEmptyObject(fileIdOptions, response.transactionList);
+      });
+    }
 
 
     function prepareShippingVesselConfig(){
@@ -123,53 +156,6 @@
       });
     }
 
-    function prepareInternationalTradeConfig(transactionFileConfig, transactionFileOption){
-
-      function getTransactionFileItem(){
-
-      }
-
-      function getTransactionFileOption(){
-
-      }
-
-      function getInternationalTradeItems(query, callback){
-        if(query.length!==3){
-          return callback();
-        }
-        $.ajax({
-          url: appConstants.HOST+'/ransaction/list/dropdown/',
-          type: 'GET',
-          dataType: 'json',
-          data: {
-            q: query,
-            page_limit: 10
-          },
-          error: function() {
-            callback();
-          },
-          success: function(res) {
-            callback(res.transactionList);
-          }
-        });
-
-      }
-
-      var config = {
-        valueField: 'id',
-        searchField: ['fileNo'],
-        maxItems:1,
-        create: false,
-        persist: false,
-        render: {
-          item: getTransactionFileItem,
-          option: getTransactionFileOption
-        },
-        load:getInternationalTradeItems
-      };
-
-      utilities.cloneIntoEmptyObject(transactionFileConfig, config);
-    }
 
     function preparePackagingConfig(packagingConfig, packagingOption){
       utilities.cloneIntoEmptyObject(packagingConfig, getBasicDropDownConfig());

@@ -37,7 +37,11 @@
     background: $my-gray-2;
     overflow: hidden;
     padding-bottom: 20px;
-
+    margin-bottom: 20px;
+    .countryFlag{
+      float: left;
+      margin-right: 10px;
+    }
     .with-line{
       font-size: 9px;
       border-bottom: 1px solid $border-light;
@@ -48,6 +52,9 @@
       font-size: 14px;
       color: $primary;
       text-overflow: hidden;
+    }
+    .number-space{
+      padding-bottom: 20px;
     }
   }
 }
