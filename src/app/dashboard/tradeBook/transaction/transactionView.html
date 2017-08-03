@@ -493,7 +493,7 @@
                                         <h3 class="with-line">Transit Ports</h3>
                                         <div class="port-transit" ng-if="vm.transaction.shipment.shipped.transitPorts.length===0">NA</div>
                                         <div class="port-transit" ng-if="vm.transaction.shipment.shipped.transitPorts.length!==0"
-                                             ng-repeat="port in vm.transaction.shipment.shipped.transitPorts">{{port.lo_code + ' - ' + port.name + ' - ' + port.country}}</div>
+                                             ng-repeat="port in vm.transaction.shipment.shipped.transitPorts | orderBy : '-date'">{{port.lo_code + ' - ' + port.name + ' - ' + port.country + ' - ' + ( port.date | date: vm.appFormats.FullDate2)}}</div>
                                     </div>
 
 
@@ -506,7 +506,6 @@
 
                                 <div class="form" ng-if="vm.showShippedForm">
                                     <form name="vm.shippedForm" novalidate>
-
 
                                         <div class="col-md-12 col-xs-12">
                                             <div class="form-group">

@@ -52,6 +52,12 @@
       font-size: 14px;
       color: $primary;
       text-overflow: hidden;
+      min-height: 35px;
+    }
+    .name{
+      position: absolute;
+      top: 80px;
+      left: 55px;
     }
     .number-space{
       padding-bottom: 20px;

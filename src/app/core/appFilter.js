@@ -16,6 +16,17 @@
         .filter('range', range)
         .filter('secondsToDateTime', secondsToDateTime)
         .filter('utcToLocal', utcToLocal)
+        .filter('latLong', function(){
+            return function(input){
+                input = input.split(' ');
+                var value = parseFloat(input[0]);
+                var multiplier = 1;
+                if (input[1] == 'S' || input[1] =='W'){
+                    multiplier = -1;
+                }
+                return value*multiplier
+            }
+        })
         .filter('plusOrMinus', function(){
             return function(input){
                 input = input ? input : 0;
