@@ -628,7 +628,12 @@
                                         <h3 class="with-line">B/L No.</h3>
                                         <div class="number">{{vm.transaction.shipment.arrivedAtPort.blNo ? vm.transaction.shipment.arrivedAtPort.blNo : 'NA'}}</div>
                                     </div>
-                                    <div class="col-xs-12 col-md-12">
+                                    <div class="col-xs-12 col-md-6">
+                                        <h3 class="with-line">Date Arrived</h3>
+                                        <div class="number">{{vm.transaction.shipment.arrivedAtPort.dateArrived ? (vm.transaction.shipment.arrivedAtPort.dateArrived  | date: vm.appFormats.FullDate2) : 'NA'}}</div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
                                         <h3 class="with-line">Quantity Shipped</h3>
                                         <div class="number">{{vm.transaction.shipment.arrivedAtPort.quantityShipped ? (vm.transaction.shipment.arrivedAtPort.quantityShipped | number : '2') + ' MT' : 'NA'}}</div>
                                     </div>
@@ -648,18 +653,18 @@
 
                                     <div class="col-xs-12 col-md-12">
                                         <h3 class="with-line">Containers <span class="count" ng-bind="vm.transaction.shipment.arrivedAtPort.containers.length"></span></h3>
-                                        <div class="port-transit" ng-if="vm.transaction.shipment.arrivedAtPort.containers.length===0">NA</div>
+                                        <div class="number" ng-if="vm.transaction.shipment.arrivedAtPort.containers.length===0">NA</div>
                                         <div class="port-transit" ng-if="vm.transaction.shipment.arrivedAtPort.containers.length!==0"
                                              ng-repeat="container in vm.transaction.shipment.arrivedAtPort.containers"> Container No. {{ container.containerNo}}</div>
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
                                         <h3 class="with-line">Port of Loading</h3>
-                                        <div class="number">{{vm.transaction.shipment.arrivedAtPort.loadingPort.id ? vm.transaction.shipment.arrivedAtPort.loadingPort.name : 'NA'}}</div>
+                                        <div class="number">{{vm.transaction.shipment.arrivedAtPort.loadingPort.id ? (vm.transaction.shipment.arrivedAtPort.loadingPort.name + ', ' + vm.transaction.shipment.arrivedAtPort.loadingPort.country)  : 'NA'}}</div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <h3 class="with-line">Port of Destination</h3>
-                                        <div class="number">{{vm.transaction.shipment.arrivedAtPort.destinationPort.id ? vm.transaction.shipment.arrivedAtPort.destinationPort.name : 'NA'}}</div>
+                                        <div class="number">{{vm.transaction.shipment.arrivedAtPort.destinationPort.id ? (vm.transaction.shipment.arrivedAtPort.destinationPort.name + ', ' +  vm.transaction.shipment.arrivedAtPort.destinationPort.country) : 'NA'}}</div>
                                     </div>
 
                                 </div>
@@ -676,6 +681,17 @@
                                                           class="form-control"
                                                           ng-model="vm.transaction.shipment.arrivedAtPort.blNo"
                                                           placeholder="Enter BL No." />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="with-line">Date Arrived</label>
+                                                <date-picker-input
+                                                        blank="true"
+                                                        date="vm.transaction.shipment.arrivedAtPort.dateArrived"
+                                                        name="date">
+                                                </date-picker-input>
                                             </div>
                                         </div>
 
