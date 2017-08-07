@@ -19,9 +19,9 @@
                 seller="true"
                 date-picker="vm.dateRange"
                 on-date-change="vm.onDateRangeChanged(dateRange)"
-                on-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList)"
-                on-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList)"
-                on-products-selected-changed="vm.onProductsSelectedChanged(selectedList)">
+                on-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList, initialized)"
+                on-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList, initialized)"
+                on-products-selected-changed="vm.onProductsSelectedChanged(selectedList, initialized)">
         </filter-bar>
         <div ba-panel ba-panel-class="with-scroll min-height-500px" ng-show="!vm.showForm">
             <div class="row table-options">
@@ -30,6 +30,11 @@
                     <div class="number box">{{vm.totalQuantity}} FCL</div>
                 </div>
                 <div class="col-md-6 button-bar">
+                    <button class="btn btn-xs" data-toggle="modal"
+                            ng-class="{'btn-success': !vm.hidePaging, 'btn-danger': vm.hidePaging}"
+                            ng-click="vm.unpagedView(vm.allManifestList, vm.hidePaging)">
+                        <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Unpaged View
+                    </button>
                     <button class="btn excel-btn btn-xs" data-toggle="modal"
                             ng-click="vm.exportToExcel(vm.allManifestList)">
                         <i class="fa fa-file-excel-o" aria-hidden="true"></i> &nbsp; Export to Excel
@@ -87,15 +92,19 @@
                     </tbody>
                 </table>
             </div>
-            <ul ng-show="vm.totalItems > 0" uib-pagination
-                ng-change="vm.pageChanged()"
-                total-items="vm.totalItems"
-                ng-model="vm.currentPage"
-                max-size="vm.itemsPerPage"
-                class="pagination-sm push-left"
-                boundary-link-numbers="true"
-                rotate="false">
-            </ul>
+
+            <div ng-show="!vm.hidePaging ">
+                <ul ng-show="vm.totalItems > 0" uib-pagination
+                    ng-change="vm.pageChanged()"
+                    total-items="vm.totalItems"
+                    ng-model="vm.currentPage"
+                    max-size="vm.itemsPerPage"
+                    class="pagination-sm push-left"
+                    boundary-link-numbers="true"
+                    rotate="false">
+                </ul>
+            </div>
+
 
 
 

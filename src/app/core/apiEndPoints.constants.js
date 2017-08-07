@@ -150,7 +150,14 @@
             transaction: 'transaction',
             warehouseProductReport: 'warehouse_product_report',
             warehouseBusinessReport: 'warehouse_business_report'
-
+        },
+        localTrade:{
+            main:'local_trade',
+            trade: 'trade',
+            tradeStatus: 'trade/status',
+            tradeList:'trade/list',
+            dashboard: 'dashboard',
+            deliverySlip: 'delivery_slip'
         }
 
     };

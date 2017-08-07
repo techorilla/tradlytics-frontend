@@ -1,6 +1,30 @@
 <div class="row ">
     <div class="col-md-12">
-        <div ba-panel ba-panel-title="Trade Book" ba-panel-class="with-scroll">
+        <div ba-panel ba-panel-class="with-scroll">
+            <div class="row table-options">
+                <div class="col-md-6 manifest-quantity">
+                    <div class="box title">Total Quantity</div>
+                    <div class="number box">{{totalQuantity | number : '2'}} MT</div>
+                </div>
+                <div class="col-md-6 button-bar">
+                    <button class="btn btn-xs" data-toggle="modal"
+                            ng-class="{'btn-success': !hidePaging, 'btn-danger': hidePaging}"
+                            ng-click="unpagedView(hidePaging)">
+                        <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Unpaged View
+                    </button>
+
+                    <!--<button class="btn excel-btn btn-xs" data-toggle="modal"-->
+                            <!--ng-click="exportToExcel(vm.allManifestList)">-->
+                        <!--<i class="fa fa-file-excel-o" aria-hidden="true"></i> &nbsp; Export to Excel-->
+                    <!--</button>-->
+
+
+                    <!--<button class="btn pdf-btn btn-xs" data-toggle="modal"-->
+                            <!--ng-click="exportToPDF(vm.allManifestList)">-->
+                        <!--<i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Export to PDF-->
+                    <!--</button>-->
+                </div>
+            </div>
             <div class="horizontal-scroll-table-wrapper">
                 <table class="table table-striped">
 
@@ -205,7 +229,7 @@
                 </table>
             </div>
 
-            <div>
+            <div ng-show="!hidePaging ">
                 <ul ng-show="listData.length > 0" uib-pagination
                     ng-change="pageChanged(currentPage)"
                     total-items="listData.length"

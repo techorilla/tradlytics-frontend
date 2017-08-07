@@ -75,6 +75,22 @@
                     goBack: true
                 }
             })
+            .state('dashboard.inventory.warehousesLotReport',{
+                url: '/warehouses',
+                title: 'Warehouses Lot Report',
+                views:{
+                    'content@dashboard.inventory':{
+                        templateUrl:'app/dashboard/inventory/warehouseLotReport.html',
+                        controller:'Wareh as vm'
+                    }
+                },
+                resolve:{
+
+                },
+                pageHeader:{
+                    goBack: true
+                }
+            })
             .state('dashboard.inventory.warehousesForm',{
                 url: '/warehouse/:id',
                 title: 'Warehouses',

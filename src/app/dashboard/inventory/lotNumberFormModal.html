@@ -1,0 +1,44 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel" ng-bing="title">Transaction Completion</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <form name="completionForm" novalidate>
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-model="completeObj.complete">
+                                    <span>Complete</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xs-12" ng-show="completeObj.complete">
+                        <div class="form-group">
+                            <label class="with-line">Washout Date</label>
+                            <date-picker-input date="completeObj.completionDate" blank="false" name="washoutDate">
+                            </date-picker-input>
+                            <ng-messages for="washOutForm.washoutDate.$error"
+                                         ng-show='(washOutForm.$submitted || washOutForm.washoutDate.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter washout date.</ng-message>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+            </form>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button type="button"
+                class="btn btn-primary"
+                ng-click="changeCompletion(completeObj)">Complete Transaction</button>
+    </div>
+</div>

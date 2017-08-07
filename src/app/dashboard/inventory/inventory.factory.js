@@ -36,6 +36,8 @@
 
         };
 
+
+
         function getWarehouseProductReport(warehouseId){
             return inventoryAPI.customGET(apiEndPoints.inventory.warehouseProductReport, {
                     warehouseId: warehouseId
@@ -182,6 +184,23 @@
                         return warehouseQuantity;
                     }
 
+                }
+            });
+        }
+
+        function getWarehouseLotReport(warehouseId){
+            var modelsInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/dashboard/inventory/lotNumberFormModal.html',
+                controller: function($scope, warehouseId, $state){
+
+                },
+                size: 'lg',
+                backdrop: 'static',
+                resolve:{
+                    warehouseId: function(){
+                        return warehouseId;
+                    }
                 }
             });
         }

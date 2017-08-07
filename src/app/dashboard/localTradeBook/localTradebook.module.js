@@ -42,6 +42,13 @@
                         templateUrl:'app/dashboard/localTradeBook/transaction/localTradebookForm.html',
                         controller:'LocalTradeBookForm as vm'
                     }
+                },
+                resolve: {
+                    localTrade : function(localTradeBook, $stateParams){
+                        if($stateParams.id==='new'){
+                            return localTradeBook.getNewLocalTrade();
+                        }
+                    }
                 }
             })
             .state('dashboard.localTransactionView',{

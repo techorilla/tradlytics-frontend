@@ -18,7 +18,9 @@
             scope:{
                 date: '=',
                 name: '@',
-                blank: '='
+                blank: '=',
+                required: '=?',
+                position: '@?'
 
             }
         };
@@ -26,7 +28,8 @@
 
     function link(scope, elem, attrs){
        scope.isOpen = false;
-
+       scope.required = (scope.required === undefined) ? true : scope.required;
+       scope.position = (scope.position === undefined) ? 'bottom-left': scope.position;
        if(!scope.date && !scope.blank){
            scope.date = new Date();
        }

@@ -4,9 +4,9 @@
            name="{{name}}"
            ng-model="date" is-open="isOpen"
            datepicker-options="dateOptions"
-           ng-required="true"
+           ng-required="{{required}}"
            close-text="Close"
-           popup-placement="bottom-left"
+           popup-placement="{{position}}"
            alt-input-formats="altInputFormats" />
 
     <span class="input-group-btn">

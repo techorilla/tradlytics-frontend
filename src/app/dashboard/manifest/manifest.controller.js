@@ -9,6 +9,8 @@
         _init();
 
         function _init(){
+            vm.hidePaging = false;
+            vm.unpagedView = unpagedView;
             vm.currentPage = 1;
             vm.itemsPerPage = 10;
             vm.appConstants = appConstants;
@@ -66,11 +68,17 @@
             setPagingData(vm.currentPage, vm.allManifestList, vm.itemsPerPage);
         }
 
+        function unpagedView(list, flag){
+            vm.hidePaging = !flag;
+            vm.displayList = (vm.hidePaging) ? list : vm.pagedData;
+
+        }
+
         function setPagingData(page, list, itemsPerPage) {
             vm.totalItems = list.length;
             vm.currentPage = page;
-            var pagedData = list.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-            vm.displayList = pagedData;
+            vm.pagedData = list.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+            vm.displayList = vm.pagedData;
         }
 
 
@@ -87,7 +95,9 @@
             });
             vm.allManifestList = $filter('selectedRows')(vm.allManifestItems, vm.manifestItemsToRemove, 'id');
             vm.totalQuantity = _.sumBy(vm.allManifestList, function(item) { return item.quantity; });
-            setPagingData(vm.currentPage, vm.allManifestList, vm.itemsPerPage);
+            if(!vm.hidePaging){
+                setPagingData(vm.currentPage, vm.allManifestList, vm.itemsPerPage);
+            }
         }
 
         function onBuyersSelectedChanged(selectedList, initialized){

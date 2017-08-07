@@ -7,7 +7,7 @@
         .directive('tradeTable', tradeTable);
 
     /* @ngInject */
-    function tradeTable(appConstants, tradeBook, toastr, appFormats, utilities, loaderModal) {
+    function tradeTable($rootScope, appConstants, tradeBook, toastr, appFormats, utilities, loaderModal, documentExporter) {
         return {
             link: link,
             restrict: 'E',
@@ -110,14 +110,34 @@
             function sortTable(sortType, column){
                 column.reverse = column.reverse ? true : false;
                 scope.sortType = sortType;
-                var tableData = utilities.sortTableBySortType(scope.listData, sortType, !column.reverse);
-                scope.setPagingData(scope.currentPage, tableData, scope.itemsPerPage);
+                scope.tableData = utilities.sortTableBySortType(scope.listData, sortType, !column.reverse);
+                if(!scope.hidePaging){
+                    scope.setPagingData(scope.currentPage, scope.tableData, scope.itemsPerPage);
+                }
+                else{
+                    scope.displayList = scope.tableData;
+                }
                 column.reverse = !column.reverse;
             }
 
             function _init(){
+                scope.totalQuantity = 0.00;
+                scope.hidePaging = false;
+                if(scope.type==='arrivedList'){
+                    $rootScope.headerTitle = 'International Trades';
+                    $rootScope.headerSubTitle = 'Arrived At Port';
+                }
+                if(scope.type==='expectedArrival'){
+                    $rootScope.headerTitle = 'International Trades';
+                    $rootScope.headerSubTitle = 'Expected Arrival';
+                }
+                if(scope.type==='expiredShipment'){
+                    $rootScope.headerTitle = 'International Trades';
+                    $rootScope.headerSubTitle = 'Expired Shipment';
+                }
                 scope.searchTransactionByFileID = '';
                 scope.displayList = [];
+                scope.tableData = [];
                 scope.appConstants = appConstants;
                 scope.appFormats = appFormats;
                 scope.currentPage = 1;
@@ -145,22 +165,39 @@
                 scope.sortTable = sortTable;
 
                 scope.pageChanged = function(page){
-                    scope.setPagingData(page, scope.listData, scope.itemsPerPage);
+                    scope.setPagingData(page, scope.tableData, scope.itemsPerPage);
                 };
 
                 scope.setPagingData = function(page, list, itemsPerPage) {
                     scope.totalItems = list.length;
                     scope.currentPage = page;
-                    var pagedData = list.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-                    scope.displayList = pagedData;
+                    scope.pagedData = list.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+                    scope.displayList = scope.pagedData;
                 };
+
+                function calculateTotalQuantity(list){
+                    return _.sumBy(list, function(trade){
+                        return trade.quantity;
+                    });
+                }
 
                 scope.$watch('listData', function(newVal, oldVal){
                     if(newVal.length > 0) {
-                        var tableData = utilities.sortTableBySortType(newVal, scope.sortType, true);
-                        scope.setPagingData(scope.currentPage, tableData, scope.itemsPerPage);
+                        scope.tableData = utilities.sortTableBySortType(newVal, scope.sortType, true);
+                        scope.setPagingData(scope.currentPage, scope.tableData, scope.itemsPerPage);
+                        scope.totalQuantity = calculateTotalQuantity(newVal)
                     }
                 });
+
+                scope.exportToExcel = function(manifestList, dateRange){
+                    documentExporter.getTableInExcelSheet(angular.copy(vm.columnHeader), angular.copy(vm.columnKeys), manifestList, '');
+                };
+
+                scope.unpagedView = function(flag){
+                    scope.hidePaging = !flag;
+                    scope.displayList = (scope.hidePaging) ? scope.tableData : scope.pagedData;
+
+                }
             }
 
         }

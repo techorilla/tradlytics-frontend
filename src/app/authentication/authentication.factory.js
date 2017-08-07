@@ -76,6 +76,7 @@
                 'password': password
             }).then(function(response){
                 userData.data = response['userData'];
+
                 $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
                 $http.defaults.headers.put['X-CSRFToken'] = $cookies.get('csrftoken');
                 var lastPage = localStorageService.get('lastState');
