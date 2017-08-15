@@ -6,7 +6,8 @@
 
                 <div class="trade-count">
                         <div ba-panel>
-                            <div class="col-md-3 item">
+
+                            <div class="col-md-2 col-md-offset-1 item ">
                                 <div class="chart" id="chart1" rel="{{ ::vm.dashboardColors.colors.success }}" data-percent="{{vm.dashboardData.tradesCount.percentageCompleted}}"> <span class="percent"></span> </div>
                                 <div class="description col-xs-12">
                                     <div class="title">Total Trades</div>
@@ -16,7 +17,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 item">
+                            <div class="col-md-2 item">
                                 <div class="chart" id="chart1" rel="{{ ::vm.dashboardColors.colors.warning }}" data-percent="{{vm.dashboardData.washoutCount.washoutPercentage}}"> <span class="percent"></span> </div>
                                 <div class="description col-xs-12">
                                     <div class="title">Washout at X</div>
@@ -26,7 +27,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 item">
+                            <div class="col-md-2 item">
                                 <div class="chart" id="chart1" rel="{{ ::vm.dashboardColors.colors.primary }}" data-percent="{{vm.dashboardData.contractCount.percentageOwnContractCount}}"> <span class="percent"></span> </div>
                                 <div class="description col-xs-12">
                                     <div class="title">Self Contract</div>
@@ -38,7 +39,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 item">
+                            <div class="col-md-2 item">
                                 <div class="chart" id="chart1" rel="{{ ::vm.dashboardColors.colors.info }}" data-percent="{{vm.dashboardData.commissionCount.percentagePercentageCommission}}"> <span class="percent"></span> </div>
                                 <div class="description col-xs-12">
                                     <div class="title">Fixed Commission</div>
@@ -48,8 +49,15 @@
                                 </div>
                             </div>
 
-
-
+                            <div class="col-md-2 item">
+                                <div class="chart" id="chart1" rel="{{ ::vm.dashboardColors.colors.danger }}" data-percent="{{vm.dashboardData.subTrades.secondaryTradePercentage}}"> <span class="percent"></span> </div>
+                                <div class="description col-xs-12">
+                                    <div class="title">Partial Shipments</div>
+                                    <div class="description-stats">{{::vm.dashboardData.subTrades.partialShipmentCount}}</div>
+                                    <div class="title">Secondary Transactions</div>
+                                    <div class="description-stats danger">{{::vm.dashboardData.subTrades.secondaryTradeCount}}</div>
+                                </div>
+                            </div>
 
                         </div>
                 </div>

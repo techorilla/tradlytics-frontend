@@ -47,7 +47,6 @@
             vm.onProductsSelectedChanged = onProductsSelectedChanged;
             vm.onTranStatusSelectedChanged = onTranStatusSelectedChanged;
             vm.filterChanged = filterChanged;
-            vm.getTradeBookExcel = getTradeBookExcel;
             onDateRangeChanged(vm.dateRange, true);
 
             vm.headingclass = ['dateColumn','fileId','dropDownCol2','dropDownCol2','','','dropDownCol2','','dateColumn2','dateColumn',''];
@@ -63,11 +62,6 @@
         }
 
 
-
-        function getTradeBookExcel(headings, dataObject){
-            var filteredData = $filter('selectedRows')(vm.allTransactions,vm.tranToRemove,'tr_transactionID');
-            documentExporter.getTableInExcelSheet(headings, filteredData, vm.headingAssociation, 'tradeBook');
-        }
 
         function onDateRangeChanged(dateRange, firstTime){
             loaderModal.open();

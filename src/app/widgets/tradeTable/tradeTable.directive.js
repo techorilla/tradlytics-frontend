@@ -23,6 +23,7 @@
 
         function link(scope){
             _init();
+
             scope.toggleNotes = function(row){
                 if(row.showNotes){
                     row.showNotes = false;
@@ -189,8 +190,24 @@
                     }
                 });
 
-                scope.exportToExcel = function(manifestList, dateRange){
-                    documentExporter.getTableInExcelSheet(angular.copy(vm.columnHeader), angular.copy(vm.columnKeys), manifestList, '');
+                scope.exportToPDF = function(tradeList, columnHeader){
+                    var header = _.filter(columnHeader, function(header) { return (header.sort !== null); });
+                    var heading = _.map(header, 'name');
+                    var heading = _.forEach(heading, function(value, key){
+                        heading[key] = utilities.stripHtml(value);
+                    });
+                    var keys = _.map(header, 'sort');
+                    documentExporter.printPDF(angular.copy(heading), angular.copy(keys), tradeList);
+                };
+
+                scope.exportToExcel = function(tradeList, columnHeader){
+                    var header = _.filter(columnHeader, function(header) { return (header.sort !== null); });
+                    var heading = _.map(header, 'name');
+                    var keys = _.map(header, 'sort');
+                    var heading = _.forEach(heading, function(value, key){
+                        heading[key] = utilities.stripHtml(value);
+                    });
+                    documentExporter.getTableInExcelSheet(angular.copy(heading), angular.copy(keys), tradeList, scope.type);
                 };
 
                 scope.unpagedView = function(flag){

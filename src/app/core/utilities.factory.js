@@ -55,8 +55,18 @@
             manageTextOverFlow: manageTextOverFlow,
             evalMathExpressionInString: evalMathExpressionInString,
 
-            sortTableBySortType: sortTableBySortType
+            sortTableBySortType: sortTableBySortType,
+            stripHtml: stripHtml
         };
+
+        function stripHtml(html){
+            // Create a new div element
+            var temporalDivElement = document.createElement("div");
+            // Set the HTML content with the providen
+            temporalDivElement.innerHTML = html;
+            // Retrieve the text property of the element (cross-browser support)
+            return temporalDivElement.textContent || temporalDivElement.innerText || "";
+        }
 
         function evalMathExpressionInString(str){
             var expression = str.replace(/[^0-9.*+-]/g, "")

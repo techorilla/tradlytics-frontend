@@ -13,8 +13,8 @@
         .controller('LocalTradeBookForm', LocalTradeBookForm);
 
     /* @ngInject */
-    function LocalTradeBookForm(tradeBook, dropDownConfig, appFormats, utilities, $filter,
-                                loaderModal, authentication, $stateParams, localTrade) {
+    function LocalTradeBookForm(tradeBook, dropDownConfig, $state, paymentTerms, toastr,
+                                loaderModal, authentication, $stateParams, localTrade, localTradeBook) {
         var vm = this;
         _init();
 
@@ -32,7 +32,7 @@
             vm.currency = vm.userData.data.currency;
             vm.internationalTradeConfig = {};
             vm.internationalTradeOptions = {};
-
+            vm.paymentTerms = paymentTerms;
 
             dropDownConfig.prepareBusinessDropDown(vm.buyerConfig, vm.buyerOptions, 'Local Buyer');
             dropDownConfig.prepareBusinessDropDown(vm.sellerConfig, vm.sellerOptions, 'Local Seller');
@@ -42,10 +42,31 @@
 
             vm.localTransaction = localTrade;
             vm.saveLocalTrade = saveLocalTrade;
+            vm.cancel = cancel;
         }
 
-        function saveLocalTrade(localTradeForm, localTrade){
-            console.log(localTradeForm.$valid);
+        function saveLocalTradeCallBack(res){
+            if(res.success){
+                toastr.success(res.message, 'Success');
+                $state.go('dashboard.localTradeBook');
+            }
+            else{
+                toastr.error(res.message, 'Error');
+            }
+
+        }
+
+        function cancel(){
+            $state.go('dashboard.localTradeBook');
+        }
+
+        function saveLocalTrade(localTradeForm, trade){
+            if(vm.isNew){
+                localTradeBook.addLocalTrade(trade).then(saveLocalTradeCallBack);
+            }
+            else{
+                localTradeBook.updateLocalTrade(trade).then(saveLocalTradeCallBack);
+            }
         }
     }
 })();

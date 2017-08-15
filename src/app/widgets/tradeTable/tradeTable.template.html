@@ -13,16 +13,16 @@
                         <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Unpaged View
                     </button>
 
-                    <!--<button class="btn excel-btn btn-xs" data-toggle="modal"-->
-                            <!--ng-click="exportToExcel(vm.allManifestList)">-->
-                        <!--<i class="fa fa-file-excel-o" aria-hidden="true"></i> &nbsp; Export to Excel-->
-                    <!--</button>-->
+                    <button class="btn excel-btn btn-xs" data-toggle="modal"
+                            ng-click="exportToExcel(tableData, columnHeader)">
+                        <i class="fa fa-file-excel-o" aria-hidden="true"></i> &nbsp; Export to Excel
+                    </button>
 
 
-                    <!--<button class="btn pdf-btn btn-xs" data-toggle="modal"-->
-                            <!--ng-click="exportToPDF(vm.allManifestList)">-->
-                        <!--<i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Export to PDF-->
-                    <!--</button>-->
+                    <button class="btn pdf-btn btn-xs" data-toggle="modal"
+                            ng-click="exportToPDF(tableData, columnHeader)">
+                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Export to PDF
+                    </button>
                 </div>
             </div>
             <div class="horizontal-scroll-table-wrapper">
@@ -154,6 +154,30 @@
                         </td>
                         <td>{{row.quantity  | number: 2}}</td>
                         <td>{{row.price  | number: 2}}</td>
+
+                    </tr>
+
+                    <tr ng-if="type==='localTradeBook'">
+                        <td ng-click="toggleNotes(row)">
+                            <i class="fa fa-plus-square cursor-pointer" aria-hidden="true" ng-if="!row.showNotes"></i>
+                            <i class="fa fa-minus-square cursor-pointer" aria-hidden="true" ng-if="row.showNotes"></i>
+                        </td>
+                        <td  class="titled date">{{row.date | date:appFormats.Date}}</td>
+                        <td><a class="titled" ui-sref="dashboard.localTransactionView({fileId:row.fileNo})">{{row.fileNo}}</a></td>
+                        <td><a ng-if="row.internationalFileNo" class="titled"
+                               ui-sref="dashboard.transactionView({id:row.internationalFileNo})">{{row.internationalFileNo}}</a><span ng-if="!row.internationalFileNo">NA</span></td>
+                        <td class="business titled" ng-bind="row.buyerName  + ' | ' + (row.buyerCountry  ? row.buyerCountry : 'No Origin')">
+                        </td>
+                        <td class="product">{{row.productName}}</td>
+                        <td>{{row.productOriginName}}</td>
+
+                        <td>{{row.quantity  | number: 2}}</td>
+
+                        <td>{{row.price  | number: 2}}</td>
+                        <td class="business titled" ng-bind="row.sellerName + ' | ' + (row.sellerCountry  ? row.sellerCountry : 'No Origin') ">
+                        </td>
+                        <td  class="titled date">{{row.deliveryDueDate | date:appFormats.Date}}</td>
+                        <td  class="titled date">{{row.fundsDueDate | date:appFormats.Date}}</td>
 
                     </tr>
 

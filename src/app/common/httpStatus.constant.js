@@ -168,6 +168,8 @@
     SHIPPER: 'Shipper',
     BROKER: 'Broker',
     LOCAL_TRADER:'Local Trader',
+    LOCAL_BUYER: 'Local Buyer',
+    LOCAL_SELLER: 'Local Seller',
     TRANSACTION_STATUS: 'Transaction_Status',
     COUNTRY: 'Country',
     ORIGIN: 'Origin',

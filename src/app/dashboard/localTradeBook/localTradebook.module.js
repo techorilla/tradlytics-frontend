@@ -48,15 +48,31 @@
                         if($stateParams.id==='new'){
                             return localTradeBook.getNewLocalTrade();
                         }
+                        else{
+                            return localTradeBook.getTransactionDetail($stateParams.id, false).then(function(res){
+                                return res.localTrade;
+                            })
+                        }
                     }
                 }
             })
             .state('dashboard.localTransactionView',{
-                url:'localTransactionView',
-                view:{
+                url:'/localTradeView/:fileId',
+                title: 'Local Trade',
+                views:{
                     'content@dashboard':{
                         templateUrl: 'app/dashboard/localTradeBook/transaction/localTransactionView.html',
                         controller: 'LocalTradeBookView as vm'
+                    }
+                },
+                resolve: {
+                    localTrade : function(localTradeBook, $stateParams, loaderModal){
+                        loaderModal.open();
+                        return localTradeBook.getTransactionDetail($stateParams.fileId, false)
+                            .then(function(res){
+                                loaderModal.close();
+                                return res.localTrade;
+                            })
                     }
                 }
             });

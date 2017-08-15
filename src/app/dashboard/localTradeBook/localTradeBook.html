@@ -1,1 +1,16 @@
-<div>Local Trade Book</div>
+<filter-bar
+        date-picker-needed="true"
+        page="localTradeBook"
+        local-buyer="true"
+        local-seller="true"
+        product-items="true"
+        date-picker="vm.dateRange"
+        on-date-change="vm.onDateRangeChanged(dateRange)"
+        on-local-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList, initialized)"
+        on-local-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList, initialized)"
+        on-product-item-selected-changed="vm.onProductsSelectedChanged(selectedList, initialized)">
+</filter-bar>
+
+<trade-table type="localTradeBook" column-header="vm.columnHeader" list-data="vm.allTransactions" items-per-page="10">
+
+</trade-table>

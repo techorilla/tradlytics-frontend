@@ -28,7 +28,7 @@
 
     function link(scope, elem, attrs){
        scope.isOpen = false;
-       scope.required = (scope.required === undefined) ? true : scope.required;
+       scope.required = (scope.required === undefined) ? false : scope.required;
        scope.position = (scope.position === undefined) ? 'bottom-left': scope.position;
        if(!scope.date && !scope.blank){
            scope.date = new Date();

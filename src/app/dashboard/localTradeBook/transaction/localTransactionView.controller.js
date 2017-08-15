@@ -13,12 +13,25 @@
         .controller('LocalTradeBookView', LocalTradeBookView);
 
     /* @ngInject */
-    function LocalTradeBookView(tradeBook, documentExporter, appFormats, utilities, $filter, loaderModal) {
+    function LocalTradeBookView(localTrade, documentExporter, appFormats, appConstants, $state, $filter, loaderModal) {
         var vm = this;
         _init();
 
         function _init(){
+            vm.transaction = localTrade;
+            vm.appFormats = appFormats;
+            vm.appConstants = appConstants;
+            vm.addingDocument = false;
+            vm.editTransactionDetails = editTransactionDetails;
+            console.log('hello')
 
+
+        }
+
+        function editTransactionDetails(fileNo){
+            $state.go('dashboard.localTransactionForm', {
+                'id': fileNo
+            });
         }
     }
 })();

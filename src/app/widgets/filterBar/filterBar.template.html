@@ -14,12 +14,23 @@
                        ng-model="datePicker" />
             </div>
         </div>
+        <custom-filter on-selected-values-changed="onLocalBuyerSelectedChanged({selectedList:selectedList, initialized: initialized})"
+                       page="{{page}}"
+                       ng-if="localBuyer"
+                       title="Local Buyer"
+                       end-point="{{apiEndPoints.dropDown.business}}" filterSubType="{{appTabFilter.LOCAL_BUYER}}">
+        </custom-filter>
+        <custom-filter on-selected-values-changed="onLocalSellerSelectedChanged({selectedList:selectedList, initialized: initialized})"
+                       page="{{page}}"
+                       ng-if="localSeller"
+                       title="Local Seller"
+                       end-point="{{apiEndPoints.dropDown.business}}" filterSubType="{{appTabFilter.LOCAL_BUYER}}">
+        </custom-filter>
         <custom-filter on-selected-values-changed="onBuyersSelectedChanged({selectedList:selectedList, initialized: initialized})"
                        page="{{page}}"
                        ng-if="buyer"
                        title="Buyer"
                        end-point="{{apiEndPoints.dropDown.business}}" filterSubType="{{appTabFilter.BUYER}}">
-
         </custom-filter>
         <custom-filter on-selected-values-changed="onProductItemSelectedChanged({selectedList:selectedList, initialized: initialized})"
                        page="{{page}}"

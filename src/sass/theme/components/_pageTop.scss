@@ -23,15 +23,17 @@
       padding: 20px 10px 20px 20px;
       cursor: pointer;
       height: 60px;
-
       &:hover{
-        background: $body-bg;
+        font-size: 16px;
+        height: 70px;
+        background: $drop-down-hover;
+        font-weight: $font-ultraBold;
         .detail{
           .label{
-            color: $text-color;
+            color: $primary;
           }
           .value{
-            color: $text-color;
+            color: $sidebar-text;
           }
         }
 

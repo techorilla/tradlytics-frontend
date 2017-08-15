@@ -8,7 +8,7 @@
                         <div class="form-group col-md-4 clearfix">
                             <label class="with-line control-label">Date</label>
                             <div class="">
-                                <date-picker-input date="vm.localTransaction.date" name="date">
+                                <date-picker-input date="vm.localTransaction.date" name="date" required="true">
                                 </date-picker-input>
                                 <ng-messages for="vm.localTransactionForm.date.$error"
                                              ng-show='(vm.localTransactionForm.$submitted || vm.localTransactionForm.date.$dirty)' role="alert">
@@ -31,6 +31,8 @@
                                 <ng-messages for="vm.localTransactionForm.buyer.$error"
                                              ng-if='(vm.localTransactionForm.$submitted || vm.localTransactionForm.buyer.$dirty)'>
                                     <div ng-message="required" class="errorValidation">Please select Buyer</div>
+
+                                    <div class="errorValidation" ng-message="validator">Buyer and Seller can not be same</div>
                                 </ng-messages>
                             </div>
                         </div>
@@ -50,6 +52,7 @@
                                 <ng-messages for="vm.localTransactionForm.seller.$error"
                                              ng-if='(vm.localTransactionForm.$submitted || vm.localTransactionForm.seller.$dirty)'>
                                     <div ng-message="required" class="errorValidation">Please select seller.</div>
+                                    <div class="errorValidation" ng-message="validator">Buyer and Seller can not be same</div>
                                 </ng-messages>
                             </div>
                         </div>
@@ -156,17 +159,30 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-4 clearfix">
+                        <div class="form-group col-md-4">
                             <label class="with-line control-label"><span class="titled">Delivery Due</span> Date</label>
                             <div class="">
-                                <date-picker-input date="vm.localTransaction.deliveryDueDate" name="date">
+                                <date-picker-input date="vm.localTransaction.deliveryDueDate" name="deliveryDueDate" required="true">
                                 </date-picker-input>
-                                <ng-messages for="vm.localTransactionForm.date.$error"
-                                             ng-show='(vm.localTransactionForm.$submitted || vm.localTransactionForm.date.$dirty)' role="alert">
+                                <ng-messages for="vm.localTransactionForm.deliveryDueDate.$error"
+                                             ng-show='(vm.localTransactionForm.$submitted || vm.localTransactionForm.deliveryDueDate.$dirty)' role="alert">
                                     <ng-message class="errorValidation" when="required">Please enter local trade date.</ng-message>
                                 </ng-messages>
                             </div>
                         </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="with-line control-label"><span class="titled">Funds Due</span> Date</label>
+                            <div class="">
+                                <date-picker-input date="vm.localTransaction.fundsDueDate" name="fundsDueDate" required="true">
+                                </date-picker-input>
+                                <ng-messages for="vm.localTransactionForm.fundsDueDate.$error"
+                                             ng-show='(vm.localTransactionForm.$submitted || vm.localTransactionForm.fundsDueDate.$dirty)' role="alert">
+                                    <ng-message class="errorValidation" when="required">Please enter funds due date.</ng-message>
+                                </ng-messages>
+                            </div>
+                        </div>
+
 
                         <div class="form-group col-md-4">
                             <label class="with-line control-label">International <span class="titled">File ID</span></label>
@@ -205,23 +221,28 @@
                                 <div class="col-md-4">
                                     <label class="radio-inline custom-radio nowrap">
                                         <input type="radio" name="inlineRadioOptions"
-                                               ng-model="vm.localTransaction.paymentTerms" id="advance" value="advance">
+                                               ng-model="vm.localTransaction.paymentTerm" id="advance"
+                                               value="{{vm.paymentTerms.ADVANCE}}">
                                         <span>Advance</span>
                                     </label>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="radio-inline custom-radio nowrap">
-                                        <input type="radio" name="inlineRadioOptions" ng-model="vm.localTransaction.paymentTerms"
+                                        <input type="radio" name="inlineRadioOptions"
+                                               value="{{vm.paymentTerms.PRODUCT_DELIVERY}}"
+                                               ng-model="vm.localTransaction.paymentTerm"
                                                id="productDelivery" value="productDelivery">
                                         <span>On Product Delivery</span>
                                     </label>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="radio-inline custom-radio nowrap">
-                                        <input type="radio" name="inlineRadioOptions" ng-model="vm.localTransaction.paymentTerms"
+                                        <input type="radio" name="inlineRadioOptions"
+                                               value="{{vm.paymentTerms.ON_DATE}}"
+                                               ng-model="vm.localTransaction.paymentTerm"
                                                id="On Date" value="onDate">
                                         <span>On Specified Date</span>
-                                        <div class="form-group" ng-show="vm.localTransaction.paymentTerms==='onDate'">
+                                        <div class="form-group" ng-show="vm.localTransaction.paymentTerms===vm.paymentTerms.ON_DATE">
                                             <date-picker-input position="top-left" date="vm.localTransaction.paymentDate" name="paymentDate">
                                             </date-picker-input>
                                         </div>
