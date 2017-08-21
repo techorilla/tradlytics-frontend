@@ -1,0 +1,161 @@
+<div class="commissionCard">
+    <div class="detail-heading">Dispute
+        <button class="btn-xs btn btn-warning" ng-show="!trade.dispute.isDisputed && !showForm" ng-click="showDisputeForm()">Dispute Trade</button>
+        <button class="btn-xs btn btn-success" ng-show="trade.dispute.isDisputed && !showForm" ng-click="saveDisputeDetails(disputeForm, trade,false)">Remove Dispute</button>
+        <button class="btn-xs btn btn-primary" ng-show="trade.dispute.isDisputed && !showForm" ng-click="showDisputeForm('edit')">Edit</button>
+    </div>
+    <div class="content">
+        <div ng-if="!trade.dispute.isDisputed && !showForm" class="col-md-12 col-xs-12 detail">
+            <div class="heading-2">Status</div>
+            <div class="value">Undisputed Transaction</div>
+        </div>
+
+
+
+        <div  ng-if="trade.dispute.isDisputed && !showForm" class="col-md-12 col-xs-12 detail">
+
+            <div class="detail col-md-12">
+                <div class="heading-2">Disputed On</div>
+                <div class="value">{{trade.dispute.disputeDate  | date: appFormats.FullDate2}} </div>
+            </div>
+
+            <div class="detail col-md-12">
+                <div class="heading-2">Trade Dispute</div>
+                <div class="value"><i class="fa fa-check"
+                                      ng-class="{'success': trade.dispute.qualityComplain,
+                               'negative': !trade.dispute.qualityComplain}"
+                                      aria-hidden="true"></i> Quality Complain</div>
+                <div class="value"><i class="fa fa-check"
+                                      ng-class="{'success': trade.dispute.weightShortage,
+                               'negative': !trade.dispute.weightShortage}"
+                                      aria-hidden="true"></i> Weight Shortage</div>
+                <div class="value"><i class="fa fa-check"
+                                      ng-class="{'success': trade.dispute.other,
+                               'negative': !trade.dispute.other}"
+                                      aria-hidden="true"></i> Other</div>
+            </div>
+
+
+            <div class="detail col-md-12">
+                <div class="heading-2">Details</div>
+                <div class="value">{{trade.dispute.details ?  trade.dispute.details : 'NA'}} </div>
+            </div>
+
+            <div class="detail col-md-12">
+                <div class="heading-2">Dispute Resolved</div>
+                <div class="value">{{trade.dispute.disputeResolved ? 'Dispute Resolved On ' + (trade.dispute.disputeResolvedDate | date: appFormats.FullDate2) : 'No'}} </div>
+            </div>
+
+
+        </div>
+
+        <div ng-if="showForm"  class="col-md-12 col-xs-12">
+            <form name="disputeForm" novalidate>
+
+                <div class="row">
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Dispute Date</label>
+                            <date-picker-input date="trade.dispute.disputeDate" required="true" name="washoutDate">
+                            </date-picker-input>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-model="trade.dispute.qualityComplain">
+                                    <span>Quality Complain</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-model="trade.dispute.weightShortage">
+                                    <span>Weight Shortage</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-model="trade.dispute.other">
+                                    <span>Other</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line control-label">Details</label>
+                            <textarea
+                                    ng-model="trade.dispute.details"
+                                    class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-model="trade.dispute.disputeResolved">
+                                    <span>Dispute Resolved</span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Dispute Resolved Date</label>
+                            <date-picker-input
+                                    required="false"
+                                    date="trade.dispute.disputeResolvedDate" blank="true" name="disputeResolvedDate">
+                            </date-picker-input>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="form-group">
+                        <button type="submit"
+                                ng-click="saveDisputeDetails(disputeForm, trade, true)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i> Save Dispute Details
+                        </button>
+
+                        <button type="button" ng-click="cancelDisputingTrade()"
+                                class="btn btn-danger btn-with-icon save-profile">
+                            <i class="ion-android-cancel"></i>Cancel
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

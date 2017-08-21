@@ -34,7 +34,7 @@
             vm.selectedOrigin = [];
             vm.bpToRemove = [];
             vm.searchBusinessPartner = '';
-
+            vm.goToBusinessReport = goToBusinessReport;
             vm.allBusiness = allBusiness.list;
             vm.allBusinessCount = allBusiness.count;
             console.log(allBusiness);
@@ -270,6 +270,10 @@
                     row[attr] = true;
                 }
             }
+        }
+
+        function goToBusinessReport(businessId){
+            $state.go('dashboard.businessPartner.report', {'id': businessId})
         }
 
 

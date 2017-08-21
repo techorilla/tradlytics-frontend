@@ -27,7 +27,8 @@
       templateUrl: 'app/widgets/pieChart/pieChart.template.html',
       scope: {
         id: '@',
-        data: '='
+        data: '=',
+        valueField: '@'
       },
       replace: true
     };
@@ -79,7 +80,7 @@
             ]
           },
           dataProvider: scope.data,
-          valueField: 'totalQuantity',
+          valueField: scope.valueField,
           titleField: 'transaction__product__name',
           export: {
             enabled: true

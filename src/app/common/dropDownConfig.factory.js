@@ -46,22 +46,78 @@
       prepareShippingPortConfig: prepareShippingPortConfig,
       prepareShippingVesselConfig: prepareShippingVesselConfig,
       prepareWarehouseDropDown: prepareWarehouseDropDown,
-      prepareInternationalFileIdAutoComplete: prepareInternationalFileIdAutoComplete
+      prepareInternationalFileIdAutoComplete: prepareInternationalFileIdAutoComplete,
+      prepareLocalTradeConfig: prepareLocalTradeConfig,
+
+      prepareTimeDrillOptions: prepareTimeDrillOptions
 
     };
 
-    function prepareInternationalFileIdAutoComplete(fileIdConfig, fileIdOptions){
+    function prepareTimeDrillOptions(timeDrillConfig, timeDrillOptions){
+      function getTimeDrillOptions(){
+        return [
+          {text:'By Day', value: 'day', order:1},
+          {text:'By Week', value:'week', order:2},
+          {text:'By Month', value:'month', order:3},
+          {text:'By Year', value:'year', order:4}
+        ];
+      }
+      utilities.cloneIntoEmptyObject(timeDrillConfig, getBasicDropDownConfig());
+      timeDrillOptions['onItemRemove'] = function(value, obj){
+        var selectizeDropDown = this;
+        var removedOption = _.find(timeDrillOptions, function(opt) { return opt.value == value; });
+        timeDrillOptions.list.push(removedOption);
+        selectizeDropDown.refreshItems();
+      };
+      utilities.cloneIntoEmptyObject(timeDrillOptions, getTimeDrillOptions());
+    }
+
+    function prepareInternationalFileIdAutoComplete(fileIdConfig, fileIdOptions, multiple){
 
       function fileItem(item, escape) {
         return '<div>' +
             '<span class="dropdownLabel">' + item.fileId + '</span>' +
             '<span class="dropdownCaption">' + ' | '+ (item.contractId ? item.contractId : 'NA') + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.buyerName + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.sellerName + '</span>' +
             '<span class="dropdownCaption">' + ' | '+ (item.blNo ? item.blNo : 'NA') + '</span>' +
             '</div>';
       }
 
       var config = {
-        maxItems: 1,
+        valueField: 'fileId',
+        sortField: 'fileId',
+        searchField: ['fileId', 'contractId', 'blNo', 'buyerName', 'sellerName'],
+        render: {
+          item: fileItem,
+          option: fileItem
+        },
+        onItemRemove: function(value, obj){
+          var selectizeDropDown = this;
+          var removedOption = _.find(fileIdOptions.list, function(line) { return line.fileId == value; });
+          fileIdOptions.list.push(removedOption);
+          selectizeDropDown.refreshItems();
+        }
+      };
+      if(!multiple){
+        config['maxItems'] = 1
+      }
+      utilities.cloneIntoEmptyObject(fileIdConfig, config);
+      settings.dropDownAPI.customGET(apiEndPoints.dropDown.transaction).then(function (response){
+        return utilities.cloneIntoEmptyObject(fileIdOptions, response.transactionList);
+      });
+    }
+
+    function prepareLocalTradeConfig(localTradeConfig, localTradeOptions, multiple){
+      function fileItem(item, escape) {
+        return '<div>' +
+            '<span class="dropdownLabel">' + item.fileId + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.contractId + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.buyerName + '</span>' +
+            '<span class="dropdownCaption">' + ' | '+ item.sellerName + '</span>' +
+            '</div>';
+      }
+      var config = {
         valueField: 'fileId',
         sortField: 'fileId',
         searchField: ['fileId', 'contractId', 'blNo'],
@@ -77,9 +133,12 @@
         }
 
       };
-      utilities.cloneIntoEmptyObject(fileIdConfig, config);
-      settings.dropDownAPI.customGET(apiEndPoints.dropDown.transaction).then(function (response){
-        return utilities.cloneIntoEmptyObject(fileIdOptions, response.transactionList);
+      if(!multiple){
+        config['maxItems'] = 1
+      }
+      utilities.cloneIntoEmptyObject(localTradeConfig, config);
+      settings.dropDownAPI.customGET(apiEndPoints.dropDown.localTrade).then(function (response){
+        return utilities.cloneIntoEmptyObject(localTradeOptions, response.transactionList);
       });
     }
 
@@ -129,7 +188,7 @@
         return '<div>' +
             '<span class="dropdownLabel">' + item.name + '</span>' +
             '<span class="dropdownCaption">' + ' | '+ item.codeName  + '</span>'
-            '</div>';
+        '</div>';
       }
 
       var dropDown = {
@@ -193,7 +252,6 @@
             return utilities.cloneIntoEmptyObject(contactTypeOptions, response.list);
           });
     }
-
 
     function getBusinessItem(item, escape){
       var country = (!item.country) ? 'No Origin' : item.country;
@@ -343,7 +401,8 @@
     }
 
 
-    function prepareProductItemDropDown(productItemConfig, productItemOptions){
+    function prepareProductItemDropDown(productItemConfig, productItemOptions, pricingOnWebsiteOnly){
+      pricingOnWebsiteOnly = pricingOnWebsiteOnly ? pricingOnWebsiteOnly : false;
       var dropDown = {
         onItemRemove: function(value, obj){
           var selectizeDropDown = this;
@@ -363,9 +422,10 @@
         }
       };
       utilities.cloneIntoEmptyObject(productItemConfig, dropDown);
-      return settings.dropDown[crud.READ](apiEndPoints.dropDown.productItem).then(function (response){
-        return utilities.cloneIntoEmptyObject(productItemOptions, response.list);
-      });
+      return settings.dropDown[crud.READ](apiEndPoints.dropDown.productItem, {'pricingOnWebsiteOnly': pricingOnWebsiteOnly})
+          .then(function (response){
+            return utilities.cloneIntoEmptyObject(productItemOptions, response.list);
+          });
     }
 
 

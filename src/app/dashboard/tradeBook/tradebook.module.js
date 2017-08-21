@@ -31,8 +31,7 @@
                         {
                             text: 'Trade Book',
                             state: 'dashboard.tradeBook'
-                        },
-
+                        }
                     ]
                 },
                 views:
@@ -116,7 +115,22 @@
                 pageHeader:{
                     subTitle: 'File No',
                     goBack: true
+                }
+            })
+            .state('dashboard.internationalTradeAnalytics', {
+                url:'/tradeAnalytics',
+                title: 'Business Analytics',
+                views:{
+                    'content@dashboard':{
+                        templateUrl:'app/dashboard/tradeBook/businessAnalytics/businessAnalytics.html',
+                        controller: 'TradeBusinessAnalytics as vm'
+                    }
                 },
+                pageHeader:{
+                    title: 'International Trade',
+                    subTitle: 'Business Analytics',
+                    goBack: true
+                }
             })
             .state('dashboard.transactionList', {
                 url:'/tradeReport/:reportType',

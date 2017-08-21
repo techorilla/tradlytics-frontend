@@ -7,14 +7,14 @@
         .controller('TradeDashboard', TradeDashboard);
 
     /* @ngInject */
-    function TradeDashboard(tradeBook, dashboardData, baConfig, $timeout, $filter, loaderModal) {
+    function TradeDashboard(tradeBook, dashboardData, baConfig, $timeout, $filter, authentication) {
         var vm = this;
         _init();
 
         function _init(){
             vm.dashboardData = dashboardData;
             vm.dashboardColors = baConfig;
-
+            vm.hasBusinessAnalytics =
             vm.multiBarData = {
                 labels: ['1 Year', '6 Months', '30 Days', '7 Days'],
                 series: [

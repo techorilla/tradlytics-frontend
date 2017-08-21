@@ -43,7 +43,7 @@
         function dropDownRead(endPoint, query, tabFilter){
             if(typeof query === 'object' ){
                 return dropDownAPI.customGET(endPoint, query, {
-                    tabFilter:tabFilter,
+                    tabFilter:tabFilter
                 })
             }
             else{

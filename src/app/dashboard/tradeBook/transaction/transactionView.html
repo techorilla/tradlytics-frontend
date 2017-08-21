@@ -18,7 +18,12 @@
         <div class="row transactionNo">
             <div class="col-xs-12 col-md-12">
                 </br>
-                <button class="btn btn-xs btn-success pull-right" ng-click="vm.editTransactionDetails(vm.transaction.basic.fileNo)">Edit</button>
+                <button class="btn btn-xs btn-success pull-right"
+                        style="margin-left: 10px"
+                        ng-click="vm.editTransactionDetails(vm.transaction.basic.fileNo)">Edit</button>
+                <!--<button class="btn btn-xs btn-warning pull-right"-->
+                        <!--ng-if="!vm.transaction.isDisputed"-->
+                        <!--ng-click="vm.disputeTrade(vm.transaction.basic.fileNo)">Trade Dispute</button>-->
             </div>
 
             <div class="col-xs-12 col-md-1">
@@ -193,43 +198,18 @@
             <div class="col-md-12">
                 <div class="row wizard-containers">
                     <div class="row">
-                        <!--<business-card-->
-                                <!--business="vm.transaction.basic.buyer"-->
-                                <!--business-type="Buyer">-->
+                        <div class="col-md-4 col-xs-12">
+                            <trade-wash-out-card trade="vm.transaction">
+                            </trade-wash-out-card>
+                            <br/>
+                            <trade-dispute-card trade="vm.transaction">
+                            </trade-dispute-card>
+                        </div>
 
-                        <!--</business-card>-->
-
-                        <!--<business-card-->
-                                <!--business="vm.transaction.basic.seller"-->
-                                <!--business-type="Seller">-->
-
-                        <!--</business-card>-->
-
-                        <!--<business-card-->
-                                <!--business="vm.transaction.basic.contractualBuyer"-->
-                                <!--business-type="Contractual Buyer">-->
-
-                        <!--</business-card>-->
-
-                        <!--<product-card product-item="vm.transaction.basic.productItem"></product-card>-->
-
-                        <!--<business-card-->
-                                <!--business="vm.transaction.basic.commission.buyerBroker"-->
-                                <!--business-type="Buyer Broker"></business-card>-->
-
-                        <!--<business-card-->
-                                <!--business="vm.transaction.basic.commission.sellerBroker"-->
-                                <!--business-type="Seller Broker">-->
-
-                        <!--</business-card>-->
-
-                        <trade-wash-out-card trade="vm.transaction">
-
-                        </trade-wash-out-card>
-
-                        <commission-card commission="vm.transaction.commission">
-
-                        </commission-card>
+                        <div class="col-md-8 col-xs-12">
+                            <commission-card commission="vm.transaction.commission">
+                            </commission-card>
+                        </div>
 
                     </div>
                 </div>
@@ -549,7 +529,8 @@
                                             <div class="form-group">
                                                 <label class="with-line">Date Shipped</label>
                                                 <date-picker-input
-                                                        blank="true"
+                                                        blank="false"
+
                                                         date="vm.transaction.shipment.shipped.shippedOn"
                                                         name="date">
                                                 </date-picker-input>
@@ -561,7 +542,8 @@
                                             <div class="form-group">
                                                 <label class="with-line">Expected Arrival</label>
                                                 <date-picker-input
-                                                        blank="true"
+                                                        blank="false"
+
                                                         date="vm.transaction.shipment.shipped.expectedArrival"
                                                         name="date">
                                                 </date-picker-input>
@@ -668,7 +650,7 @@
 
                                 </div>
 
-                                <div class="form" ng-show="vm.showArrivedAtPort">
+                                <div class="form" ng-if="vm.showArrivedAtPort">
                                     <form name="vm.arrivedAtPortForm" novalidate>
 
 
@@ -687,7 +669,8 @@
                                             <div class="form-group">
                                                 <label class="with-line">Date Arrived</label>
                                                 <date-picker-input
-                                                        blank="true"
+                                                        required="false"
+                                                        blank="false"
                                                         date="vm.transaction.shipment.arrivedAtPort.dateArrived"
                                                         name="date">
                                                 </date-picker-input>

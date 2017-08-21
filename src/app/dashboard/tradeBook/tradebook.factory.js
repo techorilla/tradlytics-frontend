@@ -47,14 +47,25 @@
 
 
             getCommissionCashFlow: getCommissionCashFlow,
-            getTradebookDashbordData: getTradebookDashbordData,
+            getTradebookDashbordData: getTradebookDashboardData,
+            getTradeBusinessAnalytics: getTradeBusinessAnalytics,
 
-            openTradeBookModal: openTradeBookModal
+            openTradeBookModal: openTradeBookModal,
+            saveDisputeData: saveDisputeData
 
 
         };
 
-        function getTradebookDashbordData(){
+        function saveDisputeData(disputeData, fileId, activate){
+            var disputeDataPost = angular.extend(disputeData, {
+                'fileId': fileId,
+                'activate': activate
+            });
+            console.log(disputeDataPost);
+            return transactionAPI.customPOST(disputeDataPost, apiEndPoints.transaction.dispute);
+        }
+
+        function getTradebookDashboardData(){
             return transactionAPI.customGET(apiEndPoints.transaction.dashboard)
         }
 
@@ -62,6 +73,11 @@
             return transactionAPI.customGET(apiEndPoints.transaction.cashFlow, {
                 'fileId': fileId
             })
+        }
+
+        function getTradeBusinessAnalytics(dateRange){
+            var dateRangeCopy = angular.copy(dateRange);
+            return transactionAPI.customGET(apiEndPoints.transaction.analytics, dateRangeCopy);
         }
 
         function updateShippedInfo(dataObj, transactionId){
@@ -81,12 +97,13 @@
         function updateApprobationReceivedInfo(dataObj, transactionId){
             return transactionAPI.customPUT({
                 'dataObj':dataObj,
-                'transactionId': transactionId,
+                'transactionId': transactionId
 
             }, apiEndPoints.transaction.approbationReceivedInfo);
         }
 
         function updateArrivedAtPortInfo(dataObj, transactionId, earnedCommission){
+            console.log(dataObj);
             return transactionAPI.customPUT({
                 'dataObj':dataObj,
                 'transactionId': transactionId,

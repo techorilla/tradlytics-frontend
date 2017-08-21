@@ -1,7 +1,7 @@
 <aside class="al-sidebar" ng-swipe-right="$baSidebarService.setMenuCollapsed(false)" ng-swipe-left="$baSidebarService.setMenuCollapsed(true)"
        ng-mouseleave="hoverElemTop=selectElemTop">
   <ul class="al-sidebar-list" slimscroll="{height: '{{menuHeight}}px'}" slimscroll-watch="menuHeight" >
-    <li ng-repeat="item in ::menuItems" class="al-sidebar-list-item"
+    <li ng-repeat="item in menuItems | orderBy : 'priority' : false" class="al-sidebar-list-item"
         ng-class="::{'with-sub-menu': item.subMenu}" ui-sref-active="selected"
         ba-sidebar-toggling-item="item">
 
@@ -16,7 +16,7 @@
            ng-if="::item.subMenu"></b>
       </a>
 
-      <ul ng-if="::item.subMenu" class="al-sidebar-sublist"
+      <ul ng-if="item.subMenu" class="al-sidebar-sublist"
           ng-class="{'slide-right': item.slideRight}"
           ba-ui-sref-toggling-submenu>
         <li ng-repeat="subitem in ::item.subMenu" ng-class="::{'with-sub-menu': subitem.subMenu}" ui-sref-active="selected"

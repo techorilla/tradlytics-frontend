@@ -54,7 +54,7 @@
                         <td ng-if="row.tr_transactionID"><a ui-sref="shell.tradeBook.Transaction({tran:row.tr_transactionID})">{{row.tr_date | date:vm.vm.appFormats.Date}}</a></td><td ng-if="!row.tr_transactionID">No Transaction Done</td>
                         <td>
                             <div class="buttons">
-                                <button class="btn btn-success editable-table-button btn-xs" ng-click="removeUser($index)">Report</button>
+                                <button class="btn btn-success editable-table-button btn-xs" ng-click="vm.goToBusinessReport(business.bpId)">Report</button>
                                 <button class="btn btn-primary editable-table-button btn-xs" ng-click="vm.editBusinessPartner(business)">Edit</button>
                                 <button ng-if="vm.deleteRights" class="btn btn-warning editable-table-button btn-xs" ng-click="vm.deleteBusinessPartner(business)">Delete</button>
                             </div>

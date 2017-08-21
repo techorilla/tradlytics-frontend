@@ -40,7 +40,8 @@
             contactPerson:'contact_person',
             contactNumber:'contact_number',
             product:'product',
-            self: 'self'
+            self: 'self',
+            report: 'report'
         },
         dashboard: {
             main:'dashboard',
@@ -51,6 +52,7 @@
         transaction:{
             main:'transactions',
             dashboard: 'dashboard',
+            businessAnalytics: 'businessAnalytics',
             list: 'list',
             basic: 'basic',
             commission: 'commission',
@@ -65,7 +67,8 @@
             arrivedAtPortInfo: 'arrived_at_port_info',
             notShippedInfo: 'not_shipped_info',
             shippedInfo: 'shipped_info',
-            approbationReceivedInfo: 'approbation_received_info'
+            approbationReceivedInfo: 'approbation_received_info',
+            dispute: 'dispute'
 
         },
         shipping:{
@@ -110,7 +113,8 @@
             ports: 'ports',
             vessel: 'vessel',
             warehouses: 'warehouses',
-            transaction: 'transaction'
+            transaction: 'transaction',
+            localTrade: 'localTransaction'
         },
         product: 'product',
         productTags:'product_tags',

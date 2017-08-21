@@ -65,17 +65,21 @@
             </div>
 
 
-            <div class="col-md-10 chartist">
-                <div ba-panel  ba-panel-class="with-scroll">
-                    <div class="row">
-                        <div id="multi-bar" class="ct-chart"></div>
+
+
+            <div class="col-md-12">
+
+                <div ba-panel class="number-count col-md-3">
+                    <div class="description">
+                        <div class="title">Un Resolved Trade Disputes</div>
+                        <div class="big-number" ng-bind="vm.dashboardData.tradeDisputeCount"></div>
+                        <div class="button-row">
+                            <button ng-click="vm.showTrades('tradeDispute', 'Un Resolved Trade Disputes')" class="btn btn-xs btn-danger">Show Trades</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="col-md-2 pull-right">
-                <div ba-panel class="number-count">
+                <div ba-panel class="number-count col-md-3">
                     <div class="description">
                         <div class="title">Arrived But Not Completed</div>
                         <div class="big-number" ng-bind="vm.dashboardData.arrivedNotCompletedCount"></div>
@@ -85,7 +89,7 @@
                     </div>
                 </div>
 
-                <div ba-panel class="number-count">
+                <div ba-panel class="number-count col-md-3">
                     <div class="description">
                         <div class="title">Expected Arrival</div>
                         <div class="big-number" ng-bind="vm.dashboardData.expectedArrivalCount"></div>
@@ -96,13 +100,20 @@
                 </div>
 
 
-                <div ba-panel class="number-count">
+                <div ba-panel class="number-count col-md-3">
                     <div class="description">
                         <div class="title">Shipment Expiration</div>
                         <div class="big-number" ng-bind="vm.dashboardData.notShippedCount"></div>
                         <div class="button-row">
                             <button ng-click="vm.showTrades('expiredShipment', 'Shipment Expired At Port')" class="btn btn-xs btn-danger">Show Trades</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 chartist">
+                <div ba-panel  ba-panel-class="with-scroll">
+                    <div class="row">
+                        <div id="multi-bar" class="ct-chart"></div>
                     </div>
                 </div>
             </div>

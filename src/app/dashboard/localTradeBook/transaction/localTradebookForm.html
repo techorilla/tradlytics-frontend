@@ -198,6 +198,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group col-md-4">
+                            <label class="with-line control-label">Local <span class="titled">File ID</span></label>
+                            <div class="">
+                                <selectize
+                                        ng-required="false"
+                                        name="internationalFileId"
+                                        placeholder="Local File Id"
+                                        config="vm.localTradeConfig"
+                                        options='vm.localTradeOptions.list'
+                                        ng-model="vm.localTransaction.localFileId">
+                                </selectize>
+                            </div>
+                        </div>
+
 
                         <div class="form-group col-md-12 clearfix">
                             <label class="with-line control-label">Other Information</label>

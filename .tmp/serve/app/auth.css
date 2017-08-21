@@ -1363,7 +1363,7 @@ tags-input .autocomplete .suggestion-item {
       color: #008074; }
   .auth-block .control-label {
     padding-top: 11px;
-    color: #3b3736; }
+    color: #313235; }
   .auth-block .form-group {
     margin-bottom: 12px;
     margin-top: 10px; }
@@ -1406,7 +1406,7 @@ a.forgot-pass {
     width: 30%;
     white-space: nowrap;
     padding: 0 24px;
-    color: #3b3736; }
+    color: #313235; }
     .auth-sep > span > span {
       margin-top: -12px;
       display: block; }

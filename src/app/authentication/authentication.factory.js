@@ -19,7 +19,7 @@
 
 
     function authentication(Restangular, apiEndPoints, $state, $http, $cookies, toastr, httpStatus, utilities,
-                            $auth, localStorageService, loaderModal){
+                            $auth, localStorageService, loaderModal, baSidebarService){
         var authAPI = Restangular.all(apiEndPoints.authentication.basic);
         var loginApi = Restangular.all(apiEndPoints.login);
         var logOutApi = Restangular.all(apiEndPoints.logout);
@@ -31,7 +31,9 @@
             getUserData: getUserData,
             setUserData: setUserData,
             getUserBusinessId: getUserBusinessId,
-            authenticate: authenticate
+            authenticate: authenticate,
+            currentUserIsSuperUser: currentUserIsSuperUser,
+            hasBusinessAnalyticsAccess: hasBusinessAnalyticsAccess
         };
 
         function authenticate(provider, callback){
@@ -56,6 +58,14 @@
             return getUserData().data.businessId
         }
 
+        function hasBusinessAnalyticsAccess(){
+            return getUserData().data.rights.businessAnalytics
+        }
+
+        function currentUserIsSuperUser(){
+            return getUserData().data.isSuperuser
+        }
+
         function getUserData(update){
             if(_.isEmpty(userData) || update){
                 return loginApi.customGET().then(function(response){
@@ -68,6 +78,44 @@
 
         function setUserData(data){
             userData.data = data;
+            var userManagement = data.rights.userManagement;
+            var businessAnalytics = data.rights.businessAnalytics;
+            if(userManagement){
+                baSidebarService.addStaticItem({
+                    title: 'User Management',
+                    icon: 'ion-android-contacts',
+                    stateRef: 'dashboard.user.list'
+                });
+            }
+            if(!businessAnalytics){
+                baSidebarService.addStaticItem({
+                    title: 'Trade Book',
+                    icon: 'ion-social-usd',
+                    stateRef: 'dashboard.tradeDashboard',
+                    priority: 7
+                });
+            }
+            else{
+                baSidebarService.addStaticItem({
+                    title: 'Trade Book',
+                    icon: 'ion-social-usd',
+                    priority: 7,
+                    subMenu: [
+                        {
+                            title: 'Dashboard',
+                            stateRef: 'dashboard.tradeDashboard'
+                        },
+                        {
+                            title: 'Business Analytics',
+                            stateRef: 'dashboard.internationalTradeAnalytics'
+                        },
+                        {
+                            title: 'Trade Book',
+                            stateRef: 'dashboard.tradeBook'
+                        }
+                    ]
+                });
+            }
         }
 
         function login(form, username, password){
@@ -75,8 +123,7 @@
                 'username':username,
                 'password': password
             }).then(function(response){
-                userData.data = response['userData'];
-
+                setUserData(response['userData']);
                 $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
                 $http.defaults.headers.put['X-CSRFToken'] = $cookies.get('csrftoken');
                 var lastPage = localStorageService.get('lastState');

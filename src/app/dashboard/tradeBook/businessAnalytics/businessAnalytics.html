@@ -1,0 +1,30 @@
+<filter-bar
+        date-picker-needed="true"
+        page="tradeBook"
+        buyer="true"
+        seller="true"
+        product-items="true"
+        date-picker="vm.dateRange"
+        on-date-change="vm.onDateRangeChanged(dateRange)"
+        on-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList, initialized)"
+        on-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList, initialized)"
+        on-product-item-selected-changed="vm.onProductsSelectedChanged(selectedList, initialized)">
+</filter-bar>
+
+<div ba-panel>
+
+
+</div>
+
+
+<div ba-panel>
+    <div class="col-md-12">
+        <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
+    </div>
+    <div class="col-md-12">
+        <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
+    </div>
+    <div class="col-md-12">
+        <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
+    </div>
+</div>

@@ -22,11 +22,33 @@
             getFile: getFile,
             openProductSpecificationModal: openProductSpecificationModal,
             openTransactionCashFlowModal: openTransactionCashFlowModal,
-            openTransactionCompleteModel: openTransactionCompleteModel
+            openTransactionCompleteModel: openTransactionCompleteModel,
+            openLocalTransactionPaymentModal: openLocalTransactionPaymentModal
         };
 
 
         ////////////////////
+
+
+
+
+        function openLocalTransactionPaymentModal(fileId){
+            var modalInstance = $uibModal.open({
+                animation:true,
+                templateUrl: modalTemplates.TRADE_PAYMENT_FLOW,
+                controller: function($scope, fileId, authentication){
+                    $scope.userData = authentication.getUserData();
+                    $scope.currency = $scope.userData.data.currency;
+                },
+                size: 'lg',
+                backdrop: 'static',
+                resolve:{
+                    fileId: function(){
+                        return fileId
+                    }
+                }
+            });
+        }
 
         function openTransactionCashFlowModal(fileId){
             var modalInstance = $uibModal.open({

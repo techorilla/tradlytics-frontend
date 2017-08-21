@@ -152,7 +152,7 @@
 
       <h3 class="with-line">Send Email Notifications</h3>
 
-      <div class="notification row clearfix">
+      <div class="notification row clearfix"  ng-if="vm.isCurrentUserSuperUser">
         <div class="col-sm-6">
           <div class="form-group row clearfix">
             <label class="col-xs-8">When a new transaction is added</label>
@@ -202,47 +202,50 @@
         </div>
       </div>
 
-      <h3 class="with-line">User Access Right</h3>
+      <div ng-if="vm.isCurrentUserSuperUser">
+        <h3 class="with-line">User Access Right</h3>
 
-      <div class="notification row clearfix">
-        <div class="col-sm-6">
+        <div class="notification row clearfix">
+          <div class="col-sm-6">
 
-          <div class="form-group row clearfix">
-            <label class="col-xs-8">Business Commission</label>
+            <div class="form-group row clearfix">
+              <label class="col-xs-8">Business Commission</label>
 
-            <div class="col-xs-4">
-              <switch color="primary" ng-model="vm.userProfile.rights.businessCommission"></switch>
+              <div class="col-xs-4">
+                <switch color="primary" ng-model="vm.userProfile.rights.businessCommission"></switch>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row clearfix">
-            <label class="col-xs-8">Business Analytics</label>
+            <div class="form-group row clearfix">
+              <label class="col-xs-8">Business Analytics</label>
 
-            <div class="col-xs-4">
-              <switch color="primary" ng-model="vm.userProfile.rights.businessAnalytics"></switch>
+              <div class="col-xs-4">
+                <switch color="primary" ng-model="vm.userProfile.rights.businessAnalytics"></switch>
+              </div>
             </div>
+
           </div>
+          <div class="col-sm-6">
+            <div class="form-group row clearfix">
+              <label class="col-xs-8">Warehouse Module</label>
 
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group row clearfix">
-            <label class="col-xs-8">Warehouse Module</label>
-
-            <div class="col-xs-4">
-              <switch color="primary" ng-model="vm.userProfile.rights.warehouseModule"></switch>
+              <div class="col-xs-4">
+                <switch color="primary" ng-model="vm.userProfile.rights.warehouseModule"></switch>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row clearfix">
-            <label class="col-xs-8">User Management</label>
+            <div class="form-group row clearfix">
+              <label class="col-xs-8">User Management</label>
 
-            <div class="col-xs-4">
-              <switch color="primary" ng-model="vm.userProfile.rights.userManagement"></switch>
+              <div class="col-xs-4">
+                <switch color="primary" ng-model="vm.userProfile.rights.userManagement"></switch>
+              </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
+
 
 
       <button type="submit"

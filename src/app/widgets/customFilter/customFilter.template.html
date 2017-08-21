@@ -53,8 +53,8 @@
                            type="checkbox" ng-model="value.selected">
                     <span class="dg-value filterHeading">{{value.name}}</span>
                 </li>
-                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'text'" ng-if="(endPoint===apiEndPoints.dropDown.transactionStatus)">
-                    <input ng-change="onSingleSelectChange(value,value.selected,'id')" type="checkbox" ng-model="value.selected">
+                <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'" ng-if="(endPoint===apiEndPoints.dropDown.transactionStatus)">
+                    <input ng-change="onSingleSelectChange(value,value.selected,'name')" type="checkbox" ng-model="value.selected">
                     <span class="dg-value singleFilterHeading titled-text">{{value.name}}</span>
                 </li>
                 <li ng-repeat="value in dropDownValues | selectFilterDropDown:  textFilter:'name'" ng-if="(endPoint===apiEndPoints.dropDown.bpType)">

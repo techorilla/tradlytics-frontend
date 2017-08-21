@@ -32,13 +32,16 @@
             vm.currency = vm.userData.data.currency;
             vm.internationalTradeConfig = {};
             vm.internationalTradeOptions = {};
+            vm.localTradeConfig = {};
+            vm.localTradeOptions = {};
             vm.paymentTerms = paymentTerms;
 
             dropDownConfig.prepareBusinessDropDown(vm.buyerConfig, vm.buyerOptions, 'Local Buyer');
             dropDownConfig.prepareBusinessDropDown(vm.sellerConfig, vm.sellerOptions, 'Local Seller');
             dropDownConfig.prepareProductItemDropDown(vm.productItemConfig, vm.productItemOptions);
             dropDownConfig.preparePriceMetricConfig(vm.quantityMetricConfig, vm.quantityMetricOptions);
-            dropDownConfig.prepareInternationalFileIdAutoComplete(vm.internationalTradeConfig, vm.internationalTradeOptions);
+            dropDownConfig.prepareInternationalFileIdAutoComplete(vm.internationalTradeConfig, vm.internationalTradeOptions, true);
+            dropDownConfig.prepareLocalTradeConfig(vm.localTradeConfig, vm.localTradeOptions, true);
 
             vm.localTransaction = localTrade;
             vm.saveLocalTrade = saveLocalTrade;

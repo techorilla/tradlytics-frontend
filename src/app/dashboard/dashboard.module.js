@@ -27,15 +27,16 @@
 
     /** @ngInject */
     function routeConfig($stateProvider, baSidebarServiceProvider){
-
         baSidebarServiceProvider.addStaticItem({
             title: 'Dashboard',
+            priority: 1,
             icon: 'ion-ios-pulse-strong',
             stateRef: 'dashboard.main'
         });
         baSidebarServiceProvider.addStaticItem({
             title: 'Products',
             icon: 'ion-bag',
+            priority: 2,
             subMenu: [
                 {
                     title: 'Categories',
@@ -59,60 +60,67 @@
 
         baSidebarServiceProvider.addStaticItem({
             title: 'Manifest',
+            priority: 3,
             icon: 'ion-android-clipboard',
             stateRef: 'dashboard.manifestDashboard'
         });
 
         baSidebarServiceProvider.addStaticItem({
             title: 'Pricing',
+            priority: 4,
             icon: 'ion-arrow-graph-up-right',
             stateRef: 'dashboard.pricing.dashboard'
         });
         baSidebarServiceProvider.addStaticItem({
-            title: 'Inventory',
-            icon: 'ion-clipboard',
-            stateRef: 'dashboard.inventory.dashboard'
-        });
-        baSidebarServiceProvider.addStaticItem({
-            title: 'Trade Book',
-            icon: 'ion-social-usd',
-            stateRef: 'dashboard.tradeDashboard'
-        });
-        baSidebarServiceProvider.addStaticItem({
-            title: 'Local Trade Book',
-            icon: 'ion-social-usd',
-            stateRef: 'dashboard.localTradeBook'
-        });
-        baSidebarServiceProvider.addStaticItem({
             title: 'Business Partner',
+            priority: 5,
             icon: 'ion-ios-people',
             stateRef: 'dashboard.businessPartner'
         });
         baSidebarServiceProvider.addStaticItem({
-            title: 'User Management',
-            icon: 'ion-android-contacts',
-            stateRef: 'dashboard.user.list'
+            title: 'Inventory',
+            priority: 6,
+            icon: 'ion-clipboard',
+            stateRef: 'dashboard.inventory.dashboard'
         });
+        // baSidebarServiceProvider.addStaticItem({
+        //     title: 'Trade Book',
+        //     icon: 'ion-social-usd',
+        //     stateRef: 'dashboard.tradeDashboard'
+        // });
+        baSidebarServiceProvider.addStaticItem({
+            title: 'Local Trade Book',
+            priority: 8,
+            icon: 'ion-social-usd',
+            stateRef: 'dashboard.localTradeBook'
+        });
+
+
         baSidebarServiceProvider.addStaticItem({
             title: 'Accounts',
+            priority: 9,
             icon: 'ion-calculator',
             stateRef: 'dashboard.accounts.main'
         });
         baSidebarServiceProvider.addStaticItem({
             title: 'Website',
+            priority: 10,
             icon: 'ion-ios-monitor',
             stateRef: 'dashboard.website'
         });
         baSidebarServiceProvider.addStaticItem({
             title: 'Shipment',
+            priority: 11,
             icon: 'ion-android-boat',
             stateRef: 'dashboard.shipping'
         });
         baSidebarServiceProvider.addStaticItem({
             title: 'Document Creator',
+            priority: 12,
             icon: 'ion-android-document',
             stateRef: 'dashboard.documentCreator'
         });
+
         // baSidebarServiceProvider.addStaticItem({
         //     title: 'Settings',
         //     icon: 'ion-android-settings',

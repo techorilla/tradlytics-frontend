@@ -20,7 +20,8 @@
                 name: '@',
                 blank: '=',
                 required: '=?',
-                position: '@?'
+                position: '@?',
+                utc: '=?'
 
             }
         };
@@ -28,6 +29,9 @@
 
     function link(scope, elem, attrs){
        scope.isOpen = false;
+       var date = new Date();
+       scope.timezone = (scope.utc) ? {'timezone': 'utc'} : {'timezone' : ((date.getTimezoneOffset() / 60) * -100)};
+       console.log(scope.timezone);
        scope.required = (scope.required === undefined) ? false : scope.required;
        scope.position = (scope.position === undefined) ? 'bottom-left': scope.position;
        if(!scope.date && !scope.blank){
@@ -40,5 +44,7 @@
        scope.open = function(){
            scope.isOpen = !scope.isOpen;
        }
+
+
     }
 })();

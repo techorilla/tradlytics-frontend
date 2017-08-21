@@ -1,0 +1,51 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel" ng-bing="title">Local Payment</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <form name="localPaymentForm" novalidate>
+                <div class="form-group col-md-12 clearfix">
+                    <label class="with-line control-label">Payment Amount <span class="titled">{{businessCurrency}}</span></label>
+                    <div class="">
+                        <input
+                                required
+                                ng-pattern="/^[0-9.]+$/i"
+                                ng-model="vm.localTransaction.quantity"
+                                class="form-control"
+                                name="quantity"
+                                placeholder="Quantity"/>
+
+                        <ng-messages for="vm.localTransactionForm.quantity.$error"
+                                     ng-show='(vm.localTransactionForm.$submitted || vm.localTransactionForm.quantity.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter quantity value.</ng-message>
+                            <ng-message class="errorValidation" when="pattern">Quantity can only have numbers.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xs-12" ng-show="completeObj.complete">
+                    <div class="form-group">
+                        <label class="with-line">Completion Date</label>
+                        <date-picker-input date="payment.paymentDate" blank="false" name="washoutDate">
+                        </date-picker-input>
+                        <ng-messages for="washOutForm.washoutDate.$error"
+                                     ng-show='(washOutForm.$submitted || washOutForm.washoutDate.$dirty)' role="alert">
+                            <ng-message class="errorValidation" when="required">Please enter washout date.</ng-message>
+                        </ng-messages>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button type="button"
+                class="btn btn-primary"
+                ng-click="changeCompletion(completeObj)">Complete Transaction</button>
+    </div>
+</div>

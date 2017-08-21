@@ -15,6 +15,7 @@
         _init();
 
         function _init(){
+            vm.isCurrentUserSuperUser = authentication.currentUserIsSuperUser();
             vm.locationConfig = {};
             vm.locationOptions = {};
             vm.designationOptions = {};

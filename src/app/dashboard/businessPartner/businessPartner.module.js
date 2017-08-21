@@ -45,6 +45,23 @@
                     }
                 }
             })
+            .state('dashboard.businessPartner.report', {
+                url:'/report/:id',
+                views:{
+                    'content@dashboard':{
+                        templateUrl: 'app/dashboard/businessPartner/report/businessReport.html',
+                        controller: 'BusinessReport as vm'
+                    }
+                },
+                resolve:{
+                    'businessReport': function(businessPartner, $stateParams){
+                        return businessPartner.getBusinessReport($stateParams.id).then(function(res){
+                            return res.businessReport;
+                        })
+                    }
+                }
+
+            })
             .state('dashboard.businessPartner.form', {
                 url:'/form/:id',
                 views:{

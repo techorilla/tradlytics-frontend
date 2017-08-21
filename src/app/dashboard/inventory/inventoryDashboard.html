@@ -1,15 +1,15 @@
 <div class="row">
 
     <div class="col-md-4" ba-panel ba-panel-title="All Warehouse Products Stock">
-        <pie-chart id="allWarehouses" data="vm.dashboardData.allWarehousesProduct"></pie-chart>
+        <pie-chart id="allWarehouses" value-field="totalQuantity" data="vm.dashboardData.allWarehousesProduct"></pie-chart>
     </div>
 
     <div class="col-md-4" ba-panel  ba-panel-title="Self Warehouse Products Stock">
-        <pie-chart id="selfWarehouses" data="vm.dashboardData.ownWarehouseProduct"></pie-chart>
+        <pie-chart id="selfWarehouses" value-field="totalQuantity" data="vm.dashboardData.ownWarehouseProduct"></pie-chart>
     </div>
 
     <div class="col-md-4" ba-panel  ba-panel-title="Business Products Stock">
-        <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
+        <pie-chart id="bpProduct" value-field="totalQuantity" data="vm.dashboardData.businessProductReport"></pie-chart>
     </div>
 
 

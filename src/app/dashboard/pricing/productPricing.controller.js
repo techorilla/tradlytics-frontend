@@ -29,7 +29,7 @@
             vm.selectedProductID = [];
             vm.time = new Date();
             dropDownConfig.prepareShipmentMonthDropDown(vm.shipmentMonthConfig, vm.shipmentMonthOptions);
-            dropDownConfig.prepareProductItemDropDown(vm.productItemConfig, vm.productItemOptions);
+            dropDownConfig.prepareProductItemDropDown(vm.productItemConfig, vm.productItemOptions, true);
             dropDownConfig.preparePriceMarketDropDown(vm.priceMarketConfig, vm.priceMarketOptions, onPriceMarketChange);
             dropDownConfig.preparePriceMetricConfig(vm.priceMetricConfig, vm.priceMetricOptions);
             vm.openDatePicker = function() {

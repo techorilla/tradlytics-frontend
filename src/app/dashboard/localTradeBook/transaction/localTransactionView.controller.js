@@ -23,9 +23,33 @@
             vm.appConstants = appConstants;
             vm.addingDocument = false;
             vm.editTransactionDetails = editTransactionDetails;
-            console.log('hello')
+            vm.changeCompleteStatus = changeCompleteStatus;
+            vm.addLocalPayment = addLocalPayment;
 
 
+        }
+
+        function changeCompleteStatus(completeObj, transactionId){
+            deModal.openTransactionCompleteModel(completeObj, transactionId, function(completeObj){
+                loaderModal.open();
+                tradeBook.changeCompleteStatus(transactionId, completeObj).then(function(res){
+                    if(res.success){
+                        vm.transaction = res.transactionObj;
+                        toastr.success(res.message)
+                    }
+                    else{
+                        toastr.error(res.message);
+                    }
+                    loaderModal.close();
+                });
+
+            });
+
+        }
+
+
+        function addLocalPayment(fileNo){
+            deModal.openLocalTransactionPaymentModal(fileNo)
         }
 
         function editTransactionDetails(fileNo){

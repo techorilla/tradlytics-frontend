@@ -31,3 +31,33 @@
   }
 
 }
+
+.uib-daypicker{
+  thead{
+    tr{
+      th{
+        .btn{
+          background: $my-gray-2 !important;
+        }
+      }
+    }
+  }
+  th, .uib-title, .uib-right, .uib-left{
+    background: $my-gray-2 !important;
+    button{
+
+    }
+  }
+  .uib-day{
+
+    button{
+      background: $my-gray-2 !important;
+      .text-info{
+        color: $gray !important;
+      }
+      color: $sidebar-text !important;
+    }
+
+  }
+}
+

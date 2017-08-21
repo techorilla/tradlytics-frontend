@@ -57,10 +57,16 @@
             getNewBusinessContactPersonObj: getNewBusinessContactPersonObj,
 
             saveBusinessSettings: saveBusinessSettings,
-            getBusinessSettings: getBusinessSettings
+            getBusinessSettings: getBusinessSettings,
+            getBusinessReport: getBusinessReport
 
 
         };
+
+        function getBusinessReport(businessId){
+            console.log(businessId);
+            return bpAPI.one(apiEndPoints.bp.report, businessId).customGET();
+        }
 
         function getBusinessPartnerListIndex(){
             return businessPartnerListIndex.index;

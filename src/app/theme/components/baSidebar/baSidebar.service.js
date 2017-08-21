@@ -19,6 +19,10 @@
       function _factory() {
         var isMenuCollapsed = shouldMenuBeCollapsed();
 
+        this.addStaticItem = function() {
+          staticMenuItems.push.apply(staticMenuItems, arguments);
+        };
+
         this.getMenuItems = function() {
           var states = defineMenuItemStates();
           var menuItems = states.filter(function(item) {
