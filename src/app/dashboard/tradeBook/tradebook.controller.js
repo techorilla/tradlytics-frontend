@@ -84,6 +84,7 @@
                     removeTransaction = removeTransaction ||((vm.selectedSellerID.indexOf(transaction.sellerId))<=-1);
                     removeTransaction = removeTransaction || (vm.selectedProductID.indexOf(transaction.productItemId)<=-1);
                     removeTransaction = removeTransaction || (vm.selectedTranStatus.indexOf(transaction.status)<=-1);
+                    console.log(transaction.status)
                     if(removeTransaction){
                         vm.tranToRemove.push(transaction.id);
                     }
@@ -119,10 +120,13 @@
             }
         }
 
-        function onTranStatusSelectedChanged(selectedList){
+        function onTranStatusSelectedChanged(selectedList, initialized){
             vm.selectedTranStatus = _.map(selectedList, 'name');
-            console.log(vm.selectedTranStatus);
-            filterChanged();
+            if(!initialized){
+                filterChanged(vm.allTransactions);
+            }
+
+
         }
 
     }
