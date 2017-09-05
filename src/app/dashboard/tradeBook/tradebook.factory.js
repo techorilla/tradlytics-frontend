@@ -103,7 +103,6 @@
         }
 
         function updateArrivedAtPortInfo(dataObj, transactionId, earnedCommission){
-            console.log(dataObj);
             return transactionAPI.customPUT({
                 'dataObj':dataObj,
                 'transactionId': transactionId,

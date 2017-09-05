@@ -12,6 +12,10 @@
       staticMenuItems.push.apply(staticMenuItems, arguments);
     };
 
+    this.itemAlreadyInItems = function(item){
+      return (staticMenuItems.indexOf(item) > -1);
+    };
+
     /** @ngInject */
     this.$get = function($state, layoutSizes) {
       return new _factory();
@@ -21,6 +25,10 @@
 
         this.addStaticItem = function() {
           staticMenuItems.push.apply(staticMenuItems, arguments);
+        };
+
+        this.itemAlreadyInItems = function(item){
+          return (staticMenuItems.indexOf(item) > -1);
         };
 
         this.getMenuItems = function() {

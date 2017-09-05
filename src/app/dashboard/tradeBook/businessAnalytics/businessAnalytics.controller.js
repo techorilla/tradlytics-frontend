@@ -51,7 +51,7 @@
 
             vm.seriesBarCharts = ['Quantity (MT)','Volume ($)','Net Commission ($)'];
             vm.dataBarChars = undefined;
-            vm.timeDrillChanged = timeDrillChanged;
+            // vm.timeDrillChanged = timeDrillChanged;
             vm.onDateRangeChanged(vm.dateRange);
             vm.sellerList = [];
             vm.buyerList = [];
@@ -102,87 +102,6 @@
             });
 
         }
-
-
-
-        function timeDrillChanged(timeDrill,allTransactions){
-            if(allTransactions.length!==0){
-                vm.showTradeBarCharts = false;
-                var minDate = _.minBy(allTransactions,'transactionDate').transactionDate;
-                var maxDate = _.maxBy(allTransactions,'transactionDate').transactionDate;
-                if(timeDrill === 'day'){
-                    vm.dateLabels = navigation.getDateRangeArray(minDate,maxDate);
-                    vm.dataBarChars = [[],[],[]];
-                    angular.forEach(vm.dateLabels,function(date,key){
-                        vm.dateLabels[key] = $filter('date')(date, appFormats.Date);
-                        var tranInDate = _.filter(allTransactions,function(tran){
-                            return vm.dateLabels[key] === $filter('date')(tran.transactionDate, appFormats.Date);
-                        });
-                        analytics.getBarChartValuesOnTimeDrillChanged(vm.dataBarChars,tranInDate);
-
-
-
-                    });
-                }
-                if(timeDrill === 'year'){
-                    vm.dateLabels = navigation.getYearsInDateRange(minDate,maxDate);
-                    vm.dataBarChars = [[],[],[]];
-                    angular.forEach(vm.dateLabels,function(year,key){
-                        var tranInDate = _.filter(allTransactions,function(tran){
-                            return year === ((new Date(tran.transactionDate)).getFullYear());
-                        });
-                        analytics.getBarChartValuesOnTimeDrillChanged(vm.dataBarChars,tranInDate);
-
-                    });
-
-                }
-                if(timeDrill === 'month'){
-                    vm.dateLabels = navigation.getMonthsInDateRange(minDate,maxDate);
-                    vm.dataBarChars = [[],[],[]];
-                    angular.forEach(vm.dateLabels,function(month,key){
-                        if(key <= vm.dateLabels.length-2){
-                            var sMonth = new Date(month);
-                            var eMonth = new Date(vm.dateLabels[parseInt(key)+1]);
-                            var tranInDate = _.filter(allTransactions,function(tran){
-                                var tranDate = new Date(tran.transactionDate);
-                                return ((tranDate >= sMonth) && (tranDate < eMonth));
-                            });
-                            vm.dateLabels[key] = navigation.getMonthTitle(sMonth);
-                            analytics.getBarChartValuesOnTimeDrillChanged(vm.dataBarChars,tranInDate);
-                        }
-
-                    });
-                    vm.dateLabels.splice(vm.dateLabels.length-1,1);
-                }
-                if(timeDrill === 'week'){
-                    vm.dateLabels = navigation.getWeeksInDateRange(minDate,maxDate);
-                    vm.dataBarChars = [[],[],[]];
-                    angular.forEach(vm.dateLabels,function(week,key){
-                        if(key <= vm.dateLabels.length-2){
-                            var sWeek = new Date(week);
-                            var eWeek = new Date(vm.dateLabels[parseInt(key)+1]);
-                            var tranInDate = _.filter(allTransactions,function(tran){
-                                var tranDate = new Date(tran.transactionDate);
-                                tranDate = new Date( tranDate.getFullYear()+'-'+(tranDate.getMonth()+1)+'-'+tranDate.getDate());
-                                return ((tranDate >= sWeek) && (tranDate <= eWeek));
-                            });
-                            vm.dateLabels[key] = navigation.getWeekTitle(sWeek,eWeek);
-                            analytics.getBarChartValuesOnTimeDrillChanged(vm.dataBarChars,tranInDate);
-                        }
-
-                    });
-                    vm.dateLabels.splice(vm.dateLabels.length-1,1);
-
-                }
-
-                vm.showTradeBarCharts = true;
-            }
-            else{
-                vm.showTradeBarCharts = false;
-            }
-        }
-
-
 
         function filterChanged(){
             vm.tranToRemove = [];

@@ -68,7 +68,8 @@
             notShippedInfo: 'not_shipped_info',
             shippedInfo: 'shipped_info',
             approbationReceivedInfo: 'approbation_received_info',
-            dispute: 'dispute'
+            dispute: 'dispute',
+            analytics: 'businessAnalytics'
 
         },
         shipping:{

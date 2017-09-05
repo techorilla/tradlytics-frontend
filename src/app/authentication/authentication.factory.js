@@ -24,6 +24,40 @@
         var loginApi = Restangular.all(apiEndPoints.login);
         var logOutApi = Restangular.all(apiEndPoints.logout);
         var userData = {};
+        var sideBarDynamic = {
+            userManagement: {
+                title: 'User Management',
+                icon: 'ion-android-contacts',
+                stateRef: 'dashboard.user.list'
+            },
+            simpleTradeBook: {
+                title: 'Trade Book',
+                icon: 'ion-social-usd',
+                stateRef: 'dashboard.tradeDashboard',
+                priority: 7
+            },
+            optionTradeBook:{
+                title: 'Trade Book',
+                icon: 'ion-social-usd',
+                priority: 7,
+                subMenu: [
+                    {
+                        title: 'Dashboard',
+                        stateRef: 'dashboard.tradeDashboard'
+                    },
+                    {
+                        title: 'Business Analytics',
+                        stateRef: 'dashboard.internationalTradeAnalytics'
+                    },
+                    {
+                        title: 'Trade Book',
+                        stateRef: 'dashboard.tradeBook'
+                    }
+                ]
+            }
+
+
+        }
 
         return {
             login: login,
@@ -88,33 +122,16 @@
                 });
             }
             if(!businessAnalytics){
-                baSidebarService.addStaticItem({
-                    title: 'Trade Book',
-                    icon: 'ion-social-usd',
-                    stateRef: 'dashboard.tradeDashboard',
-                    priority: 7
-                });
+                var alreadyAdded = baSidebarService.itemAlreadyInItems(sideBarDynamic['simpleTradeBook']);
+                if(!alreadyAdded){
+                    baSidebarService.addStaticItem(sideBarDynamic['simpleTradeBook']);
+                }
             }
             else{
-                baSidebarService.addStaticItem({
-                    title: 'Trade Book',
-                    icon: 'ion-social-usd',
-                    priority: 7,
-                    subMenu: [
-                        {
-                            title: 'Dashboard',
-                            stateRef: 'dashboard.tradeDashboard'
-                        },
-                        {
-                            title: 'Business Analytics',
-                            stateRef: 'dashboard.internationalTradeAnalytics'
-                        },
-                        {
-                            title: 'Trade Book',
-                            stateRef: 'dashboard.tradeBook'
-                        }
-                    ]
-                });
+                var alreadyAdded = baSidebarService.itemAlreadyInItems(sideBarDynamic['optionTradeBook']);
+                if(!alreadyAdded){
+                    baSidebarService.addStaticItem(sideBarDynamic['optionTradeBook']);
+                }
             }
         }
 
