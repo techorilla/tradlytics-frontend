@@ -147,6 +147,17 @@
                         ng-click="vm.changeCompleteStatus(vm.transactionId.completeObj, vm.transactionId)">Complete</button>
             </div>
 
+
+            <div class="col-xs-12 col-md-4">
+                <h3 class="with-line">Associated Local Trade</h3>
+                <div></div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <h3 class="with-line">Associated Internation Trades</h3>
+                <div></div>
+            </div>
+
             <div class="col-xs-12 col-md-4" ng-if="vm.transaction.onOurContract">
                 <h3 class="with-line">Invoice</h3>
                 <button class="btn btn-xs btn-success pull-left cursor-pointer"

@@ -112,7 +112,7 @@
       function fileItem(item, escape) {
         return '<div>' +
             '<span class="dropdownLabel">' + item.fileId + '</span>' +
-            '<span class="dropdownCaption">' + ' | '+ item.contractId + '</span>' +
+            '<span class="dropdownCaption" ng-if="item.contractId">' + ' | '+ item.contractId + '</span>' +
             '<span class="dropdownCaption">' + ' | '+ item.buyerName + '</span>' +
             '<span class="dropdownCaption">' + ' | '+ item.sellerName + '</span>' +
             '</div>';

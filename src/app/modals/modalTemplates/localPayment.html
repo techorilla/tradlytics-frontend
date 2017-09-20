@@ -17,7 +17,7 @@
                                 ng-model="vm.localTransaction.quantity"
                                 class="form-control"
                                 name="quantity"
-                                placeholder="Quantity"/>
+                                placeholder="Payment Amount"/>
 
                         <ng-messages for="vm.localTransactionForm.quantity.$error"
                                      ng-show='(vm.localTransactionForm.$submitted || vm.localTransactionForm.quantity.$dirty)' role="alert">
@@ -26,17 +26,7 @@
                         </ng-messages>
                     </div>
                 </div>
-                <div class="col-md-12 col-xs-12" ng-show="completeObj.complete">
-                    <div class="form-group">
-                        <label class="with-line">Completion Date</label>
-                        <date-picker-input date="payment.paymentDate" blank="false" name="washoutDate">
-                        </date-picker-input>
-                        <ng-messages for="washOutForm.washoutDate.$error"
-                                     ng-show='(washOutForm.$submitted || washOutForm.washoutDate.$dirty)' role="alert">
-                            <ng-message class="errorValidation" when="required">Please enter washout date.</ng-message>
-                        </ng-messages>
-                    </div>
-                </div>
+                 
 
             </form>
         </div>

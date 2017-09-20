@@ -13,7 +13,7 @@
         .controller('LocalTradeBookView', LocalTradeBookView);
 
     /* @ngInject */
-    function LocalTradeBookView(localTrade, documentExporter, appFormats, appConstants, $state, $filter, loaderModal) {
+    function LocalTradeBookView(localTrade, documentExporter, appFormats, appConstants, $state, deModal, loaderModal) {
         var vm = this;
         _init();
 

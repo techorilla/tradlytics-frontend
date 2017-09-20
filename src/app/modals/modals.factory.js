@@ -35,12 +35,12 @@
         function openLocalTransactionPaymentModal(fileId){
             var modalInstance = $uibModal.open({
                 animation:true,
-                templateUrl: modalTemplates.TRADE_PAYMENT_FLOW,
+                templateUrl: modalTemplates.LOCAL_PAYMENT,
                 controller: function($scope, fileId, authentication){
                     $scope.userData = authentication.getUserData();
                     $scope.currency = $scope.userData.data.currency;
                 },
-                size: 'lg',
+                size: 'sm',
                 backdrop: 'static',
                 resolve:{
                     fileId: function(){
