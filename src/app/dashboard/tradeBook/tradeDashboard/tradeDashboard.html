@@ -105,7 +105,8 @@
                         <div class="title">Shipment Expiration</div>
                         <div class="big-number" ng-bind="vm.dashboardData.notShippedCount"></div>
                         <div class="button-row">
-                            <button ng-click="vm.showTrades('expiredShipment', 'Shipment Expired At Port')" class="btn btn-xs btn-danger">Show Trades</button>
+                            <button ng-click="vm.showTrades('next30DaysExpiration', 'Next 30 Days')" class="btn btn-xs btn-warning">In Next 30 Days</button>
+                            <button ng-click="vm.showTrades('expiredShipment', 'Shipment Expired At Port')" class="btn btn-xs btn-danger">Expired</button>
                         </div>
                     </div>
                 </div>
