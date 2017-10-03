@@ -50,6 +50,7 @@
                 'Buyer',
                 'Seller',
                 'Product',
+                'Origin (Seller Country)',
                 'Quantity(FCL)',
                 'Container No.'
             ];
@@ -58,6 +59,7 @@
                 'buyerName',
                 'sellerName',
                 'productName',
+                'sellerCountry',
                 'quantity',
                 'containerNo'
             ];

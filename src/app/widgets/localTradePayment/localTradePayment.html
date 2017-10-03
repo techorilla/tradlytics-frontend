@@ -1,0 +1,167 @@
+<div class="commissionCard">
+    <div class="detail-heading"> Transaction Payments
+        <button class="btn-xs btn btn-warning" ng-show="!trade.washOut.isWashout && !showForm"
+                ng-click="showWashOutForm('add')">Delivery Dispatched</button>
+        <button class="btn-xs btn btn-warning" ng-show="!trade.washOut.isWashout && !showForm"
+                ng-click="showWashOutForm('add')">Delivery Dispatched</button>
+    </div>
+    <div class="content">
+        <div  class="col-md-12 col-xs-12 detail">
+            <div class="detail col-md-6">
+                <div class="heading-2">Delivery Due Date.</div>
+                <div class="value" ng-bind="(trade.washOut.initialCommissionPayable) ? 'Yes': 'No'"></div>
+            </div>
+
+            <div class="detail col-md-6">
+                <div class="heading-2">Delivery Order Issued</div>
+                <div class="value">{{trade.washOut.washoutDate | date: vm.appFormats.FullDate2}}</div>
+            </div>
+
+            <div class="detail col-md-6">
+                <div class="heading-2">Delivery Order Number</div>
+                <div class="value">{{trade.washOut.washoutDueDate | date: vm.appFormats.FullDate2}} </div>
+            </div>
+
+
+            <div class="detail col-md-6">
+                <div class="heading-2">Delivery Challan</div>
+                <div class="value"><span class="currency">USD</span> {{trade.washOut.sellerWashoutPrice}}</div>
+            </div>
+
+            <div class="detail col-md-6">
+                <div class="heading-2">Actual Weight</div>
+                <div class="value"><span class="currency">USD</span> {{trade.washOut.buyerWashoutPrice}} </div>
+            </div>
+
+
+            <div class="detail col-md-6">
+                <div class="heading-2">Actual Amount</div>
+                <div class="value"><span class="currency">USD</span> {{trade.washOut.brokerDifference}}</div>
+            </div>
+
+            <div class="detail col-md-6">
+                <div class="heading-2">Delivery Slip
+                    <button style="margin-top: -5px;" class="btn btn-xs btn-primary pull-right">Add Slip</button>
+                </div>
+                <div class="value"><span class="currency">USD</span> {{trade.washOut.totalDifference}}</div>
+            </div>
+
+            <div class="detail col-md-12">
+                <button class="btn btn-xs btn-success" ng-click="vm.createWashoutInvoice()">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i> Delivery Reached
+                </button>
+            </div>
+
+
+        </div>
+
+        <div ng-show="showForm"  class="col-md-12 col-xs-12">
+            <form name="transactionDelivery" novalidate>
+
+                <div class="row">
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="checkboxSuccess"
+                                           ng-model="trade.washOut.initialCommissionPayable">
+                                    <span>Initial Commission Payable</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Washout Date</label>
+                            <date-picker-input date="trade.washOut.washoutDate" blank="false" name="washoutDate">
+                            </date-picker-input>
+                            <ng-messages for="washOutForm.washoutDate.$error"
+                                         ng-show='(washOutForm.$submitted || washOutForm.washoutDate.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter washout date.</ng-message>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Washout Due Date</label>
+                            <date-picker-input date="trade.washOut.washoutDueDate" blank="false" name="washoutDueDate">
+                            </date-picker-input>
+                            <ng-messages for="washOutForm.washoutDueDate.$error"
+                                         ng-show='(washOutForm.$submitted || washOutForm.washoutDueDate.$dirty)' role="alert">
+                                <ng-message class="errorValidation" when="required">Please enter washout due date.</ng-message>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Washout Seller Price in <span class="titled">USD</span></label>
+                            <input type="text"
+                                   ng-model="trade.washOut.sellerWashoutPrice"
+                                   ng-required="true"
+                                   name="sellerWashoutPrice"
+                                   class="form-control" id="sellerWashoutPrice" placeholder="Washout Price in USD">
+                            <ng-messages for="washOutForm.sellerWashoutPrice.$error"
+                                         ng-if='(washOutForm.$submitted || washOutForm.sellerWashoutPrice.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter a washout price.</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Washout Buyer Price in <span class="titled">USD</span></label>
+                            <input type="text"
+                                   ng-model="trade.washOut.buyerWashoutPrice"
+                                   ng-required="true"
+                                   name="buyerWashoutPrice"
+                                   class="form-control" id="loCode" placeholder="Washout Price in USD">
+                            <ng-messages for="washOutForm.buyerWashoutPrice.$error"
+                                         ng-if='(washOutForm.$submitted || washOutForm.buyerWashoutPrice.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter a washout price.</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="with-line">Washout Difference <span class="titled">USD</span></label>
+                            <input type="text"
+                                   ng-model="trade.washOut.brokerDifference"
+                                   ng-required="true"
+                                   name="difference"
+                                   class="form-control" id="difference" placeholder="Washout Difference in USD">
+                            <ng-messages for="washOutForm.washOutValue.$error"
+                                         ng-if='(washOutForm.$submitted || washOutForm.washOutValue.$dirty)'>
+                                <div ng-message="required" class="errorValidation">Please enter a washout difference</div>
+                            </ng-messages>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <button type="submit"
+                                ng-click="saveWashOutDetails(washOutForm, trade, true, trade.washOut, true)"
+                                class="btn btn-primary btn-with-icon save-profile">
+                            <i class="ion-android-checkmark-circle"></i> {{trade.washOut.isWashout ? 'Updated Washout value' : 'Washout Transaction'}}
+                        </button>
+
+                        <button type="button" ng-click="cancelWashingOut()"
+                                class="btn btn-danger btn-with-icon save-profile">
+                            <i class="ion-android-cancel"></i>Cancel
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
