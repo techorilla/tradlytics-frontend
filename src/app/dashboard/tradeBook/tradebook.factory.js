@@ -76,8 +76,11 @@
         }
 
         function getTradeBusinessAnalytics(dateRange){
-            var dateRangeCopy = angular.copy(dateRange);
-            return transactionAPI.customGET(apiEndPoints.transaction.analytics, dateRangeCopy);
+            var data = angular.copy(dateRange);
+            data = angular.extend(data, {
+                'pageType': 'businessAnalytics'
+            });
+            return transactionAPI.customGET(apiEndPoints.transaction.analytics, data);
         }
 
         function updateShippedInfo(dataObj, transactionId){

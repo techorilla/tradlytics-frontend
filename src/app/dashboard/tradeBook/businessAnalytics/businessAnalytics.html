@@ -5,26 +5,45 @@
         seller="true"
         product-items="true"
         date-picker="vm.dateRange"
-        on-date-change="vm.onDateRangeChanged(dateRange)"
+        on-date-change="vm.onDateRangeChanged(dateRange, false)"
         on-buyers-selected-changed="vm.onBuyersSelectedChanged(selectedList, initialized)"
         on-sellers-selected-changed="vm.onSellersSelectedChanged(selectedList, initialized)"
         on-product-item-selected-changed="vm.onProductsSelectedChanged(selectedList, initialized)">
 </filter-bar>
+<div class="tradeDashboard">
+    <div ba-panel>
+        <div ba-panel class="number-count col-lg-4 col-sm-12">
+            <div class="description">
+                <div class="title">Quantity</div>
+                <div class="big-number" ng-bind=""></div>
+            </div>
+        </div>
+        <div ba-panel class="number-count col-lg-4 col-sm-12">
+            <div class="description">
+                <div class="title">Volume</div>
+                <div class="big-number" ng-bind=""></div>
+            </div>
+        </div>
+        <div ba-panel class="number-count col-lg-4 col-sm-12">
+            <div class="description">
+                <div class="title">Expected Commission</div>
+                <div class="big-number" ng-bind=""></div>
+            </div>
+        </div>
+    </div>
 
-<div ba-panel>
-
-
+    <div ba-panel>
+        <div class="col-md-12">
+            <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
+        </div>
+        <div class="col-md-12">
+            <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
+        </div>
+        <div class="col-md-12">
+            <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
+        </div>
+    </div>
 </div>
 
 
-<div ba-panel>
-    <div class="col-md-12">
-        <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
-    </div>
-    <div class="col-md-12">
-        <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
-    </div>
-    <div class="col-md-12">
-        <pie-chart id="bpProduct" data="vm.dashboardData.businessProductReport"></pie-chart>
-    </div>
-</div>
+

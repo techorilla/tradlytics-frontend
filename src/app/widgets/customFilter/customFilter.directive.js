@@ -42,6 +42,7 @@
     function link(scope, elem, attrs){
       scope.dropDownValues = [];
       scope.intialized = true;
+      console.log('is loading False');
       function onFilterSuccessCallBack(response){
         scope.appConstants = appConstants;
         scope.apiEndPoints = apiEndPoints;
@@ -53,7 +54,7 @@
         scope.dropDownValues = angular.copy(scope.allSelected);
         scope.selectedValues = angular.copy(scope.dropDownValues);
         scope.onSelectedValuesChanged({selectedList:scope.selectedValues, initialized: scope.intialized});
-
+        console.log('is loading False');
         scope.isLoading = false;
         scope.intialized = false;
       }

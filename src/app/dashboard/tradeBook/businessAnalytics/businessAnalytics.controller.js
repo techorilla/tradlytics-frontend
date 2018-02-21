@@ -76,9 +76,9 @@
         }
 
 
-        function onDateRangeChanged(dateRange){
+        function onDateRangeChanged(dateRange, firstTime){
             // vm.getProductSalesAnalytics(dateRange);
-            vm.getTransactionAnalytics(dateRange);
+            vm.getTransactionAnalytics(dateRange, firstTime);
         }
 
         // function getProductSalesAnalytics(dateRange){
@@ -95,27 +95,35 @@
 
 
 
-        function getTransactionAnalytics(dateRange){
+        function getTransactionAnalytics(dateRange, firstTime){
             tradeBook.getTradeBusinessAnalytics(dateRange).then(function(res){
                 vm.allTransactions = res.data.transactions;
-                filterChanged();
+                filterChanged(firstTime);
             });
 
         }
 
-        function filterChanged(){
-            vm.tranToRemove = [];
-            angular.forEach(vm.allTransactions,function(transaction,key){
-                var removeTransaction = false;
-                removeTransaction = (vm.selectedBuyerID.indexOf(transaction.tr_bpBuyerID)<=-1);
-                removeTransaction = removeTransaction ||((vm.selectedSellerID.indexOf(transaction.tr_bpSellerID))<=-1);
-                removeTransaction = removeTransaction || (vm.selectedProductID.indexOf(transaction.tr_productID)<=-1);
-                removeTransaction = removeTransaction || (vm.selectedCountries.indexOf(transaction.origin)<=-1);
-                if(removeTransaction){
-                    vm.tranToRemove.push(transaction.tr_transactionID);
-                }
-            });
-            var filteredData = $filter('selectedRows')(vm.allTransactions,vm.tranToRemove,'tr_transactionID');
+        function filterChanged(firstTime){
+            var filteredData = [];
+            if(!firstTime){
+                vm.tranToRemove = [];
+                angular.forEach(vm.allTransactions,function(transaction,key){
+                    var removeTransaction = false;
+                    removeTransaction = (vm.selectedBuyerID.indexOf(transaction.tr_bpBuyerID)<=-1);
+                    removeTransaction = removeTransaction ||((vm.selectedSellerID.indexOf(transaction.tr_bpSellerID))<=-1);
+                    removeTransaction = removeTransaction || (vm.selectedProductID.indexOf(transaction.tr_productID)<=-1);
+                    removeTransaction = removeTransaction || (vm.selectedCountries.indexOf(transaction.origin)<=-1);
+                    if(removeTransaction){
+                        vm.tranToRemove.push(transaction.tr_transactionID);
+                    }
+                });
+                filteredData = $filter('selectedRows')(vm.allTransactions,vm.tranToRemove,'tr_transactionID');
+            }
+            else{
+                filteredData =  vm.allTransactions;
+            }
+
+
             calculateAnalytics(filteredData);
             timeDrillChanged(vm.timeDrillBy,filteredData);
         }
