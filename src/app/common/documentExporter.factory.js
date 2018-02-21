@@ -239,6 +239,7 @@
 
 
     function exportCsv(JSONData, ShowLabel, csvFileName) {
+      // console.log(ShowLabel, csvFileName);
       //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
       var arrData = typeof JSONData !== 'object' ? JSON.parse(JSONData) : JSONData;
 
@@ -282,38 +283,24 @@
       if (CSV === '') {
         return;
       }
-
       //Generate a file name
       var fileName = csvFileName + '.csv';
       //this will remove the blank-spaces from the title and replace it with an underscore
       //fileName += ReportTitle.replace(/ /g,"_");
 
-      // Check if Internet Explorer.
-      var isIE = false;
-      if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
-        isIE = true;
-      }
-
-      if (isIE) {
-        var blob = new Blob([CSV]);
+      var blob = new Blob([CSV]);
+      if (window.navigator.msSaveOrOpenBlob)  // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
         window.navigator.msSaveBlob(blob, fileName);
-      } else {
-        //Initialize file format you want csv or xls
-        var uri = 'data:text/csv;charset=utf-8,' + encodeURI(CSV);
-
-        //this trick will generate a temp <a /> tag
-        var link = document.createElement('a');
-        link.href = uri;
-
-        //link.style = "visibility:hidden";
-        link.download = fileName;
-
-        //this part will append the anchor tag and remove it after automatic click
-        document.body.appendChild(link);
+      else
+      {
+        var a = window.document.createElement("a");
+        a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+        a.download = fileName;
+        document.body.appendChild(a);
         $timeout(function(){
-          link.click();
-        });
-        document.body.removeChild(link);
+          a.click();
+        }); // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+        document.body.removeChild(a);
       }
     }
   }
